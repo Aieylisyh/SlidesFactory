@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "_guide": {
+    "说明": "修改后需重启 quiz-ws-relay.js 生效。占位符：{name} 玩家昵称，{wins} 或 {streak} 均为累计答对次数（本场总分）。",
+    "streakPrefix": "胜利里程碑广播固定前缀，会自动拼在 streaks[].message 前面",
+    "streaks": "数组每项的 streak 为累计答对阈值；玩家总分恰好达到该值时全场广播一次（每档每人仅一次，答错不影响累计）",
+    "firstBlood": "玩家在本场第一次答对时触发，每人仅一次",
+    "join": "新玩家扫码登记首次加入房间时触发"
+  },
+  "streakPrefix": "已经累计胜利{wins}次，",
+  "streaks": [
+    {
+      "streak": 3,
+      "message": "{name} 达成了3胜！",
+      "trigger": "累计答对达到 3 题时触发（不要求连对）"
+    },
+    {
+      "streak": 5,
+      "message": "{name} 已经暴走，停不下来了！",
+      "trigger": "累计答对达到 5 题时触发（不要求连对）"
+    },
+    {
+      "streak": 8,
+      "message": "{name} 已经无人能敌！",
+      "trigger": "累计答对达到 8 题时触发（不要求连对）"
+    },
+    {
+      "streak": 10,
+      "message": "{name} 和神一样！",
+      "trigger": "累计答对达到 10 题时触发（不要求连对）"
+    },
+    {
+      "streak": 12,
+      "message": "{name} 超神了！谁与争锋？！",
+      "trigger": "累计答对达到 12 题时触发（不要求连对）"
+    }
+  ],
+  "firstBlood": {
+    "message": "{name} 拿下首杀！",
+    "trigger": "该玩家第一次答对任意一题时触发（每人仅一次，优先于胜利里程碑广播）"
+  },
+  "join": {
+    "message": "{name} 加入了战场！",
+    "trigger": "新玩家首次登记加入本房间时触发（重连不重复广播）"
+  }
+}

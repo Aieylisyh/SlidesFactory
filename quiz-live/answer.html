@@ -26,7 +26,7 @@
 
             <div class="ql-broadcast-viewport">
 
-                <span class="ql-broadcast-track ql-broadcast-idle" data-broadcast-track>等待连杀广播…</span>
+                <span class="ql-broadcast-track ql-broadcast-idle" data-broadcast-track>等待战场广播…</span>
 
             </div>
 
@@ -79,9 +79,7 @@
                 <h2 style="margin:0 0 8px;font-size:1.1rem;">选择挑战类别</h2>
 
                 <p style="margin:0 0 20px;color:var(--ql-muted);font-size:0.88rem;line-height:1.6;">
-
-                    题目随机排序，答完立即显示对错。连对 3 / 6 / 10 / 15 题将触发全场广播！
-
+                    每局随机 12 题，选好答案后点「确定」提交。累计答对 3 / 6 / 10 / 15 题将触发全场广播！
                 </p>
 
                 <div class="ql-category-grid" data-category-grid></div>
@@ -91,28 +89,27 @@
 
 
             <!-- 3 答题 -->
-
             <section class="ql-panel ql-hidden" data-view="quiz">
-
-                <div class="ql-status-bar">
-
-                    <span data-question-index>第 1 题</span>
-
-                    <span data-category-label></span>
-
+                <div class="ql-quiz-progress">
+                    <div class="ql-quiz-progress-head">
+                        <span class="ql-quiz-progress-label">答题进度</span>
+                    </div>
+                    <div class="ql-quiz-progress-track">
+                        <div class="ql-quiz-progress-fill" data-progress-fill style="width:0%"></div>
+                    </div>
                 </div>
-
                 <p class="ql-question-text" data-question-text></p>
 
                 <div class="ql-options" data-options></div>
-
+                <button type="button" class="ql-btn" data-confirm-btn disabled style="margin-top:16px;">确定</button>
                 <div class="ql-feedback ql-hidden" data-feedback></div>
-
-                <button type="button" class="ql-btn ql-hidden" data-next-btn style="margin-top:16px;">下一题</button>
+                <button type="button" class="ql-btn ql-btn--ghost ql-hidden" data-next-btn style="margin-top:10px;">下一题</button>
 
             </section>
 
         </main>
+
+        <button type="button" class="ql-float-back ql-hidden" data-float-back aria-label="返回重选题目">返回</button>
 
     </div>
 
