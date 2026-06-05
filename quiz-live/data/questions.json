@@ -1,4 +1,12 @@
 {
+  "title": "趣味常识挑战",
+  "categoryMeta": {
+    "游戏常识": { "short": "游戏", "icon": "🎮", "theme": "game" },
+    "动画常识": { "short": "动画", "icon": "🎬", "theme": "anime" },
+    "留学知识": { "short": "留学", "icon": "✈️", "theme": "study" },
+    "做菜常识": { "short": "做菜", "icon": "🍳", "theme": "cooking" },
+    "艺术史": { "short": "艺术史", "icon": "🎨", "theme": "art" }
+  },
   "quizzes": [
     {
       "category": "游戏常识",

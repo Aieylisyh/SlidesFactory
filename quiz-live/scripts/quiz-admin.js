@@ -14,7 +14,9 @@
             qr: root.querySelector('[data-qr-canvas]'),
             qrWarn: root.querySelector('[data-qr-warn]'),
             answerUrl: root.querySelector('[data-answer-url]'),
-            scoreBody: root.querySelector('[data-score-body]')
+            scoreBody: root.querySelector('[data-score-body]'),
+            onlineCount: root.querySelector('[data-online-count]'),
+            recentBroadcasts: root.querySelector('[data-recent-broadcasts]')
         };
 
         this.syncUrl();
@@ -65,13 +67,52 @@
     };
 
     QuizAdminApp.prototype.onMessage = function (msg) {
+        if (msg.type === 'room_broadcast') {
+            this.prependRecentBroadcast({
+                kind: msg.kind,
+                name: msg.name,
+                message: msg.message,
+                at: Date.now()
+            });
+            return;
+        }
         if (msg.type !== 'state') return;
         this.state = msg;
         this.render(msg);
     };
 
+    QuizAdminApp.prototype.prependRecentBroadcast = function (entry) {
+        var list = (this.state && this.state.recentBroadcasts) ? this.state.recentBroadcasts.slice() : [];
+        list.unshift(entry);
+        if (list.length > 3) list = list.slice(0, 3);
+        if (this.state) this.state.recentBroadcasts = list;
+        this.renderRecentBroadcasts(list);
+    };
+
     QuizAdminApp.prototype.render = function (state) {
         this.renderScoreTable(state.participants || []);
+        this.renderOnlineCount(state.onlineCount);
+        this.renderRecentBroadcasts(state.recentBroadcasts || []);
+    };
+
+    QuizAdminApp.prototype.renderOnlineCount = function (count) {
+        if (this.els.onlineCount) {
+            this.els.onlineCount.textContent = String(count == null ? 0 : count);
+        }
+    };
+
+    QuizAdminApp.prototype.renderRecentBroadcasts = function (items) {
+        if (!this.els.recentBroadcasts) return;
+        if (!items.length) {
+            this.els.recentBroadcasts.innerHTML = '<li class="ql-admin-broadcasts-empty">暂无广播</li>';
+            return;
+        }
+        this.els.recentBroadcasts.innerHTML = items.map(function (item) {
+            var time = item.at ? new Date(item.at).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '';
+            return '<li class="ql-admin-broadcast-item">' +
+                '<span class="ql-admin-broadcast-time">' + time + '</span>' +
+                '<span class="ql-admin-broadcast-msg">' + (item.message || '') + '</span></li>';
+        }).join('');
     };
 
     QuizAdminApp.prototype.renderScoreTable = function (participants) {

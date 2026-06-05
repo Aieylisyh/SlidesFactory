@@ -22,15 +22,14 @@ var questionBank = { title: '趣味常识挑战', quizzes: [] };
 
 var DEFAULT_BROADCAST_CONFIG = {
     streakPrefix: '已经累计胜利{wins}次，',
-    streaks: [
-        { streak: 3, message: '{name} 正在大杀特杀！' },
-        { streak: 6, message: '{name} 已经暴走，停不下来了！' },
-        { streak: 10, message: '{name} 已经无人能敌！' },
-        { streak: 15, message: '{name} 超神了！谁与争锋？！' }
-    ],
+    streaks: [],
     firstBlood: { message: '{name} 拿下首杀！' },
     join: { message: '{name} 加入了战场！' }
 };
+
+var ANSWER_MIN_INTERVAL_MS = 300;
+
+var broadcastConfigCache = { mtime: 0, config: null };
 
 function applyTemplate(tpl, vars) {
     var out = String(tpl || '');
@@ -67,7 +66,7 @@ function normalizeBroadcastConfig(raw) {
     return base;
 }
 
-function loadBroadcastConfig() {
+function loadBroadcastConfigFromDisk() {
     try {
         return normalizeBroadcastConfig(JSON.parse(fs.readFileSync(BROADCAST_CONFIG_PATH, 'utf8')));
     } catch (e) {
@@ -76,23 +75,38 @@ function loadBroadcastConfig() {
     }
 }
 
-var broadcastConfig = loadBroadcastConfig();
+function getBroadcastConfig() {
+    try {
+        var stat = fs.statSync(BROADCAST_CONFIG_PATH);
+        if (!broadcastConfigCache.config || stat.mtimeMs !== broadcastConfigCache.mtime) {
+            broadcastConfigCache.config = loadBroadcastConfigFromDisk();
+            broadcastConfigCache.mtime = stat.mtimeMs;
+            console.log('[quiz-relay] broadcast-config reloaded, tiers:', getWinTiers(broadcastConfigCache.config).join(', '));
+        }
+        return broadcastConfigCache.config;
+    } catch (e) {
+        if (!broadcastConfigCache.config) broadcastConfigCache.config = loadBroadcastConfigFromDisk();
+        return broadcastConfigCache.config;
+    }
+}
 
 function getWinTiers(config) {
     return (config.streaks || []).map(function (s) { return s.streak; });
 }
 
 function formatWinBroadcastMessage(name, wins) {
-    var entry = (broadcastConfig.streaks || []).find(function (s) { return s.streak === wins; });
+    var config = getBroadcastConfig();
+    var entry = (config.streaks || []).find(function (s) { return s.streak === wins; });
     var bodyTpl = entry ? entry.message : '{name} 累计胜利 {wins} 次！';
     var vars = templateVars(name, wins);
     var body = applyTemplate(bodyTpl, vars);
-    var prefix = applyTemplate(broadcastConfig.streakPrefix || '已经累计胜利{wins}次，', vars);
+    var prefix = applyTemplate(config.streakPrefix || '已经累计胜利{wins}次，', vars);
     return prefix + body;
 }
 
 function formatEventMessage(blockKey, name) {
-    var block = broadcastConfig[blockKey] || DEFAULT_BROADCAST_CONFIG[blockKey];
+    var config = getBroadcastConfig();
+    var block = config[blockKey] || DEFAULT_BROADCAST_CONFIG[blockKey];
     return applyTemplate(block.message, templateVars(name, 0));
 }
 
@@ -118,7 +132,8 @@ function createRoom(roomId) {
         id: roomId,
         participants: new Map(),
         sockets: { admin: null, screen: null, audience: new Set() },
-        nextParticipantNum: 1
+        nextParticipantNum: 1,
+        recentBroadcasts: []
     };
 }
 
@@ -172,13 +187,16 @@ function participantList(room) {
 }
 
 function buildState(room) {
+    var participants = participantList(room);
     return {
         type: 'state',
         room: room.id,
         title: questionBank.title || '趣味常识挑战',
         categories: (questionBank.quizzes || []).map(function (q) { return q.category; }),
         totalQuestions: totalQuestionCount(),
-        participants: participantList(room)
+        participants: participants,
+        onlineCount: participants.filter(function (p) { return p.online; }).length,
+        recentBroadcasts: (room.recentBroadcasts || []).slice(0, 3)
     };
 }
 
@@ -201,7 +219,21 @@ function broadcastWinMilestone(room, participant, wins) {
     broadcastRoomEvent(room, 'streak', participant.name, formatWinBroadcastMessage(participant.name, wins));
 }
 
+function pushRecentBroadcast(room, entry) {
+    if (!room.recentBroadcasts) room.recentBroadcasts = [];
+    room.recentBroadcasts.unshift(entry);
+    if (room.recentBroadcasts.length > 3) {
+        room.recentBroadcasts = room.recentBroadcasts.slice(0, 3);
+    }
+}
+
 function broadcastRoomEvent(room, kind, name, message) {
+    pushRecentBroadcast(room, {
+        kind: kind,
+        name: name || '',
+        message: message,
+        at: Date.now()
+    });
     broadcast(room, {
         type: 'room_broadcast',
         kind: kind,
@@ -269,6 +301,16 @@ function handleSelfAnswer(room, client, msg) {
     var p = room.participants.get(msg.clientId);
     if (!p) return;
 
+    var now = Date.now();
+    if (p.lastAnswerAt && now - p.lastAnswerAt < ANSWER_MIN_INTERVAL_MS) return;
+
+    var qKey = String(msg.category || '') + ':' + String(msg.questionId || '');
+    if (!p.answeredQuestions) p.answeredQuestions = {};
+    if (p.answeredQuestions[qKey]) return;
+
+    p.lastAnswerAt = now;
+    p.answeredQuestions[qKey] = !!msg.correct;
+
     if (msg.correct) {
         p.score += 1;
         p.streak += 1;
@@ -278,7 +320,7 @@ function handleSelfAnswer(room, client, msg) {
             p.hasFirstBlood = true;
             var fbName = p.name || '某位选手';
             broadcastRoomEvent(room, 'first_blood', fbName, formatEventMessage('firstBlood', fbName));
-        } else if (getWinTiers(broadcastConfig).indexOf(p.score) !== -1) {
+        } else if (getWinTiers(getBroadcastConfig()).indexOf(p.score) !== -1) {
             broadcastWinMilestone(room, p, p.score);
         }
     } else {
@@ -335,6 +377,7 @@ function handleMessage(client, raw) {
                 streak: 0,
                 bestStreak: 0,
                 hasFirstBlood: false,
+                answeredQuestions: {},
                 online: true
             };
             room.participants.set(cid, existing);
@@ -461,5 +504,5 @@ server.listen(PORT, '0.0.0.0', function () {
     console.log('[quiz-relay] WebSocket listening on ws://0.0.0.0:' + PORT);
     console.log('[quiz-relay] Categories:', (questionBank.quizzes || []).map(function (q) { return q.category; }).join(', '));
     console.log('[quiz-relay] Questions loaded:', totalQuestionCount());
-    console.log('[quiz-relay] Win milestones:', getWinTiers(broadcastConfig).join(', '));
+    console.log('[quiz-relay] Win milestones:', getWinTiers(getBroadcastConfig()).join(', '));
 });

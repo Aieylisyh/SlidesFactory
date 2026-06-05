@@ -14,14 +14,6 @@
 
 
 
-    var CATEGORY_LABELS = {
-        '游戏常识': { short: '游戏', icon: '🎮', theme: 'game' },
-        '动画常识': { short: '动画', icon: '🎬', theme: 'anime' },
-        '留学知识': { short: '留学', icon: '✈️', theme: 'study' },
-        '做菜常识': { short: '做菜', icon: '🍳', theme: 'cooking' },
-        '艺术史': { short: '艺术史', icon: '🎨', theme: 'art' }
-    };
-
     var QUIZ_DRAW_COUNT = 10;
 
 
@@ -135,6 +127,7 @@
         this.registerConfig = null;
 
         this.quizzes = [];
+        this.categoryMeta = {};
 
         this.currentCategory = null;
 
@@ -147,6 +140,7 @@
         this.submitted = false;
 
         this.deckTitle = '趣味常识挑战';
+        this.wsWasConnected = false;
 
 
 
@@ -173,6 +167,8 @@
             title: root.querySelector('[data-quiz-title]'),
 
             form: root.querySelector('[data-register-form]'),
+            continueBtn: root.querySelector('[data-continue-btn]'),
+            reconnectBanner: root.querySelector('[data-reconnect-banner]'),
 
             categoryGrid: root.querySelector('[data-category-grid]'),
             progressFill: root.querySelector('[data-progress-fill]'),
@@ -239,6 +235,12 @@
 
         }
 
+        if (this.els.continueBtn) {
+            this.els.continueBtn.addEventListener('click', function () {
+                self.onContinue();
+            });
+        }
+
         if (this.els.confirmBtn) {
 
             this.els.confirmBtn.addEventListener('click', function () {
@@ -274,21 +276,57 @@
 
 
         self.registerConfig = global.QuizRegisterConfig.normalize(null);
-
         global.QuizRegisterConfig.renderForm(panel, self.registerConfig);
-
-
+        global.QuizRegisterConfig.applyCachedProfile(self.els.form, self.registerConfig);
+        self.updateContinueUi();
 
         global.QuizRegisterConfig.load()
-
             .then(function (config) {
-
                 self.registerConfig = config;
-
                 global.QuizRegisterConfig.renderForm(panel, config);
-
+                global.QuizRegisterConfig.applyCachedProfile(self.els.form, config);
+                self.updateContinueUi();
             });
 
+    };
+
+    QuizAnswerApp.prototype.updateContinueUi = function () {
+        var btn = this.els.continueBtn;
+        if (!btn || typeof global.QuizRegisterConfig === 'undefined') return;
+        var cached = global.QuizRegisterConfig.loadProfileCache();
+        var name = cached && cached.name;
+        if (name && !this.participantId) {
+            btn.textContent = '以 ' + name + ' 继续';
+            btn.classList.remove('ql-hidden');
+        } else {
+            btn.classList.add('ql-hidden');
+        }
+    };
+
+    QuizAnswerApp.prototype.onContinue = function () {
+        if (typeof global.QuizRegisterConfig === 'undefined') return;
+        var cached = global.QuizRegisterConfig.loadProfileCache();
+        if (!cached || !cached.name) return;
+        var cfg = this.registerConfig || global.QuizRegisterConfig.normalize(null);
+        var err = global.QuizRegisterConfig.validate(cached, cfg);
+        if (err) {
+            alert(err);
+            return;
+        }
+        global.QuizRegisterConfig.saveProfileCache(cached);
+        this.ws.send(global.QuizProtocol.makeRegister(this.clientId, cached));
+    };
+
+    QuizAnswerApp.prototype.getCategoryMeta = function (category) {
+        var quiz = this.quizzes.find(function (q) { return q.category === category; });
+        var fromQuiz = quiz ? {
+            short: quiz.short,
+            icon: quiz.icon,
+            theme: quiz.theme
+        } : null;
+        var fromMap = (this.categoryMeta || {})[category];
+        var base = { short: category, icon: '📚', theme: 'default' };
+        return Object.assign(base, fromMap || {}, fromQuiz || {});
     };
 
 
@@ -304,6 +342,7 @@
             .then(function (data) {
 
                 self.quizzes = data.quizzes || [];
+                self.categoryMeta = data.categoryMeta || {};
                 if (data.title) self.deckTitle = data.title;
                 self.syncHeaderTitle();
 
@@ -337,15 +376,31 @@
 
             onStatus: function (s) { self.onWsStatus(s); },
 
+            onReconnect: function () { self.onWsReconnected(); },
+
             onMessage: function (m) { self.onMessage(m); }
 
         });
 
     };
 
+    QuizAnswerApp.prototype.setReconnectBanner = function (visible) {
+        if (!this.els.reconnectBanner) return;
+        this.els.reconnectBanner.classList.toggle('ql-hidden', !visible);
+    };
 
+    QuizAnswerApp.prototype.onWsReconnected = function () {
+        this.setReconnectBanner(false);
+    };
 
     QuizAnswerApp.prototype.onWsStatus = function (status) {
+
+        if (status === 'connected') {
+            this.wsWasConnected = true;
+            this.setReconnectBanner(false);
+        } else if (this.wsWasConnected && (status === 'connecting' || status === 'disconnected' || status === 'error')) {
+            this.setReconnectBanner(true);
+        }
 
         if (!this.els.statusDot) return;
 
@@ -398,6 +453,7 @@
             this.renderCategories();
 
             this.showView('category');
+            this.updateContinueUi();
 
             return;
 
@@ -440,6 +496,7 @@
                     this.renderCategories();
 
                     this.showView('category');
+                    this.updateContinueUi();
 
                 }
 
@@ -466,15 +523,11 @@
         var err = global.QuizRegisterConfig.validate(profile, cfg);
 
         if (err) {
-
             alert(err);
-
             return;
-
         }
 
-
-
+        global.QuizRegisterConfig.saveProfileCache(profile);
         this.ws.send(global.QuizProtocol.makeRegister(this.clientId, profile));
 
     };
@@ -491,7 +544,7 @@
 
         this.quizzes.forEach(function (quiz) {
 
-            var meta = CATEGORY_LABELS[quiz.category] || { short: quiz.category, icon: '📚', theme: 'default' };
+            var meta = self.getCategoryMeta(quiz.category);
 
             var drawCount = Math.min(QUIZ_DRAW_COUNT, (quiz.questions || []).length);
             var theme = meta.theme || 'default';
@@ -523,7 +576,7 @@
 
     QuizAnswerApp.prototype.getCategoryTitle = function () {
         if (!this.currentCategory) return this.deckTitle;
-        var meta = CATEGORY_LABELS[this.currentCategory] || { short: this.currentCategory };
+        var meta = this.getCategoryMeta(this.currentCategory);
         return meta.short;
     };
 
@@ -665,13 +718,12 @@
 
         if (this.submitted || !this.selectedChoice) return;
 
+        if (this.els.confirmBtn) this.els.confirmBtn.disabled = true;
+        this.submitted = true;
+
         var q = this.questionQueue[this.currentIndex];
 
         if (!q) return;
-
-
-
-        this.submitted = true;
 
         var choice = this.selectedChoice;
 
@@ -723,17 +775,20 @@
 
         this.updateProgress(this.currentIndex + 1);
 
-        this.ws.send(global.QuizProtocol.makeSelfAnswer(
-
+        var sent = this.ws.send(global.QuizProtocol.makeSelfAnswer(
             this.currentCategory,
-
             q.id,
-
             correct,
-
             this.clientId
-
         ));
+        if (!sent) {
+            this.submitted = false;
+            if (this.els.confirmBtn) {
+                this.els.confirmBtn.disabled = false;
+                this.els.confirmBtn.classList.remove('ql-hidden');
+            }
+            alert('网络未连接，请稍后重试');
+        }
 
     };
 
@@ -760,6 +815,7 @@
 
 
     QuizAnswerApp.prototype.onFloatBack = function () {
+        if (!confirm('确定返回重选类别？当前答题进度将丢失。')) return;
         this.currentCategory = null;
         this.questionQueue = [];
         this.currentIndex = 0;

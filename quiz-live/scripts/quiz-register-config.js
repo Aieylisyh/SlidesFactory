@@ -6,6 +6,7 @@
     'use strict';
 
     var CONFIG_URL = 'data/register-config.json';
+    var PROFILE_CACHE_KEY = 'quiz-live-profile-cache';
     var DEFAULT_CONFIG = {
         version: 1,
         title: '扫码参与 · 填写信息',
@@ -184,8 +185,44 @@
         return profile.name || '观众';
     }
 
+    function loadProfileCache() {
+        try {
+            var raw = localStorage.getItem(PROFILE_CACHE_KEY);
+            if (!raw) return {};
+            var data = JSON.parse(raw);
+            return data && typeof data === 'object' ? data : {};
+        } catch (e) {
+            return {};
+        }
+    }
+
+    function saveProfileCache(profile) {
+        if (!profile || typeof profile !== 'object') return;
+        var out = {};
+        Object.keys(profile).forEach(function (key) {
+            var val = String(profile[key] == null ? '' : profile[key]).trim();
+            if (val) out[key] = val.slice(0, 64);
+        });
+        if (!Object.keys(out).length) return;
+        try {
+            localStorage.setItem(PROFILE_CACHE_KEY, JSON.stringify(out));
+        } catch (e) { /* ignore quota / private mode */ }
+    }
+
+    function applyCachedProfile(form, config) {
+        if (!form) return;
+        var cached = loadProfileCache();
+        getEnabledFields(config).forEach(function (field) {
+            var val = cached[field.id];
+            if (!val) return;
+            var input = form.querySelector('[name="' + field.id + '"]');
+            if (input) input.value = val;
+        });
+    }
+
     global.QuizRegisterConfig = {
         CONFIG_URL: CONFIG_URL,
+        PROFILE_CACHE_KEY: PROFILE_CACHE_KEY,
         DEFAULT_CONFIG: DEFAULT_CONFIG,
         load: loadRegisterConfig,
         normalize: normalizeConfig,
@@ -193,6 +230,9 @@
         renderForm: renderRegisterForm,
         collectProfile: collectProfile,
         validate: validateProfile,
-        getDisplayName: getDisplayName
+        getDisplayName: getDisplayName,
+        loadProfileCache: loadProfileCache,
+        saveProfileCache: saveProfileCache,
+        applyCachedProfile: applyCachedProfile
     };
 })(typeof window !== 'undefined' ? window : global);

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "_guide": {
-    "说明": "修改后需重启 quiz-ws-relay.js 生效。占位符：{name} 玩家昵称，{wins} 或 {streak} 均为累计答对次数（本场总分）。",
+    "说明": "保存后 relay 会在下次答题/广播时自动热加载（无需重启）。占位符：{name} 玩家昵称，{wins} 或 {streak} 均为累计答对次数（本场总分）。",
     "streakPrefix": "胜利里程碑广播固定前缀，会自动拼在 streaks[].message 前面",
     "streaks": "数组每项的 streak 为累计答对阈值；玩家总分恰好达到该值时全场广播一次（每档每人仅一次，答错不影响累计）",
     "firstBlood": "玩家在本场第一次答对时触发，每人仅一次",

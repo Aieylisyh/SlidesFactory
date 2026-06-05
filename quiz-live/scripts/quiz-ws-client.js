@@ -11,8 +11,10 @@
         this.clientId = options.clientId || null;
         this.onMessage = options.onMessage || function () {};
         this.onStatus = options.onStatus || function () {};
+        this.onReconnect = options.onReconnect || function () {};
         this.ws = null;
         this.closed = false;
+        this.wasConnected = false;
         this.retryMs = 800;
         this.maxRetryMs = 8000;
         this._connect();
@@ -31,10 +33,13 @@
         }
 
         self.ws.onopen = function () {
+            var isReconnect = self.wasConnected;
             self.retryMs = 800;
+            self.wasConnected = true;
             self.onStatus('connected');
             self.send(global.QuizProtocol.makeHello(self.role, self.room, self.clientId));
             self.send(global.QuizProtocol.makeRequestState());
+            if (isReconnect) self.onReconnect();
         };
 
         self.ws.onmessage = function (evt) {
