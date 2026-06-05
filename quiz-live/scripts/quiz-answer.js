@@ -20,7 +20,7 @@
         '留学知识': { short: '留学常识', icon: '✈️' }
     };
 
-    var QUIZ_DRAW_COUNT = 12;
+    var QUIZ_DRAW_COUNT = 10;
 
 
 

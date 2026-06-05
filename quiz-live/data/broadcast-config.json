@@ -20,19 +20,19 @@
       "trigger": "累计答对达到 5 题时触发（不要求连对）"
     },
     {
-      "streak": 8,
+      "streak": 7,
       "message": "{name} 已经无人能敌！",
+      "trigger": "累计答对达到 7 题时触发（不要求连对）"
+    },
+    {
+      "streak": 8,
+      "message": "{name} 和神一样！",
       "trigger": "累计答对达到 8 题时触发（不要求连对）"
     },
     {
       "streak": 10,
-      "message": "{name} 和神一样！",
-      "trigger": "累计答对达到 10 题时触发（不要求连对）"
-    },
-    {
-      "streak": 12,
       "message": "{name} 超神了！谁与争锋？！",
-      "trigger": "累计答对达到 12 题时触发（不要求连对）"
+      "trigger": "累计答对达到 10 题时触发（不要求连对）"
     }
   ],
   "firstBlood": {
