@@ -10,6 +10,7 @@
 | 项目结构与多站点 | [monorepo.md](monorepo.md) · [sites/README.md](../sites/README.md) |
 | 主 deck 页序（内容） | [outline.md](../outline.md) · [guides/OUTLINE_GUIDE.md](../guides/OUTLINE_GUIDE.md) |
 | 样式 hub | [style_guide.css](../style_guide.css) · [styles/style-guide/README.md](../styles/style-guide/README.md) |
+| quiz-live | [guides/QUIZ_LIVE_GUIDE.md](../guides/QUIZ_LIVE_GUIDE.md) · `styles/style-guide/11-quiz-live.css` |
 | Agent 规则 | [.cursorrules](../.cursorrules) |
 
 ## Co-located 文档（未迁入 guides/）

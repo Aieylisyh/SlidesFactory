@@ -389,8 +389,9 @@ Reveal 内置 `.progress` 轨道 + 独立模块 `shared/scripts/slide-progress.j
 | `styles/style-guide/08-segment-arrow-share.css` | 分段箭头、议程/成长性箭头布局、share lock |
 | `styles/style-guide/09-deck-light-extension.css` | 主 deck 浅色主题（`html.deck-light`） |
 | `styles/style-guide/10-portrait-adapt.css` | 竖屏通用覆盖（`html.deck-portrait`）、横屏提示条 |
+| `styles/style-guide/11-quiz-live.css` | **quiz-live 独立站点**（`.ql-*` / `--ql-*`）；经 `quiz-live/css/quiz-live.css` 加载，**不** import 入主 deck hub |
 
-完整检索表：[`../styles/style-guide/README.md`](../styles/style-guide/README.md)。Monorepo：[`../docs/monorepo.md`](../docs/monorepo.md)。
+完整检索表：[`../styles/style-guide/README.md`](../styles/style-guide/README.md)。Monorepo：[`../docs/monorepo.md`](../docs/monorepo.md)。quiz-live 说明：[`QUIZ_LIVE_GUIDE.md`](QUIZ_LIVE_GUIDE.md)。
 
 ---
 

@@ -23,6 +23,7 @@
 | [SHARE_GUIDE.md](SHARE_GUIDE.md) | 分享锁与 `share-pages.json` |
 | [BILIBILI_EMBED_GUIDE.md](BILIBILI_EMBED_GUIDE.md) | B 站站外播放器嵌入 |
 | [IMAGE_COMPRESSION_GUIDE.md](IMAGE_COMPRESSION_GUIDE.md) | 图片压缩标准与脚本 |
+| [QUIZ_LIVE_GUIDE.md](QUIZ_LIVE_GUIDE.md) | quiz-live 暖场自答抢答（三端 + 配置 + 样式） |
 
 ## 远程翻页
 

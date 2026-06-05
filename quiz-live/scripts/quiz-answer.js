@@ -141,6 +141,8 @@
 
         this.deckTitle = '趣味常识挑战';
         this.wsWasConnected = false;
+        this.activeView = 'register';
+        this.participants = [];
 
 
 
@@ -149,6 +151,8 @@
             register: root.querySelector('[data-view="register"]'),
 
             category: root.querySelector('[data-view="category"]'),
+
+            leaderboard: root.querySelector('[data-view="leaderboard"]'),
 
             quiz: root.querySelector('[data-view="quiz"]')
 
@@ -171,6 +175,10 @@
             reconnectBanner: root.querySelector('[data-reconnect-banner]'),
 
             categoryGrid: root.querySelector('[data-category-grid]'),
+            leaderboardOpen: root.querySelector('[data-leaderboard-open]'),
+            leaderboardBack: root.querySelector('[data-leaderboard-back]'),
+            leaderboardBody: root.querySelector('[data-leaderboard-body]'),
+            leaderboardOnline: root.querySelector('[data-leaderboard-online]'),
             progressFill: root.querySelector('[data-progress-fill]'),
             questionText: root.querySelector('[data-question-text]'),
             options: root.querySelector('[data-options]'),
@@ -261,6 +269,16 @@
                 self.onFloatBack();
             });
         }
+        if (this.els.leaderboardOpen) {
+            this.els.leaderboardOpen.addEventListener('click', function () {
+                self.onOpenLeaderboard();
+            });
+        }
+        if (this.els.leaderboardBack) {
+            this.els.leaderboardBack.addEventListener('click', function () {
+                self.onLeaderboardBack();
+            });
+        }
     };
 
 
@@ -318,15 +336,16 @@
     };
 
     QuizAnswerApp.prototype.getCategoryMeta = function (category) {
-        var quiz = this.quizzes.find(function (q) { return q.category === category; });
-        var fromQuiz = quiz ? {
-            short: quiz.short,
-            icon: quiz.icon,
-            theme: quiz.theme
-        } : null;
-        var fromMap = (this.categoryMeta || {})[category];
         var base = { short: category, icon: '📚', theme: 'default' };
-        return Object.assign(base, fromMap || {}, fromQuiz || {});
+        var fromMap = (this.categoryMeta || {})[category] || {};
+        var merged = Object.assign({}, base, fromMap);
+        var quiz = this.quizzes.find(function (q) { return q.category === category; });
+        if (quiz) {
+            if (quiz.short) merged.short = quiz.short;
+            if (quiz.icon) merged.icon = quiz.icon;
+            if (quiz.theme) merged.theme = quiz.theme;
+        }
+        return merged;
     };
 
 
@@ -428,6 +447,19 @@
 
 
 
+    QuizAnswerApp.prototype.resetParticipantSession = function () {
+        this.participantId = null;
+        this.nickname = '';
+        this.currentCategory = null;
+        this.questionQueue = [];
+        this.currentIndex = 0;
+        if (this.els.participantBadge) {
+            this.els.participantBadge.textContent = '未登记';
+        }
+        this.showView('register');
+        this.updateContinueUi();
+    };
+
     QuizAnswerApp.prototype.onBroadcast = function (msg) {
 
         this.broadcast.enqueue(msg);
@@ -459,6 +491,14 @@
 
         }
 
+        if (msg.type === 'participant_cleared') {
+
+            this.resetParticipantSession();
+
+            return;
+
+        }
+
         if (msg.type === 'room_broadcast' || msg.type === 'streak_broadcast') {
 
             this.onBroadcast(msg);
@@ -471,7 +511,13 @@
 
             if (msg.title) this.deckTitle = msg.title;
 
+            this.participants = msg.participants || [];
+
             this.syncHeaderTitle();
+
+            if (this.activeView === 'leaderboard') {
+                this.renderLeaderboard(this.participants, msg.onlineCount);
+            }
 
             if (!this.participantId) {
 
@@ -534,6 +580,41 @@
 
 
 
+    QuizAnswerApp.prototype.renderLeaderboard = function (participants, onlineCount) {
+        if (this.els.leaderboardOnline) {
+            var online = onlineCount;
+            if (online == null) {
+                online = (participants || []).filter(function (p) { return p.online; }).length;
+            }
+            this.els.leaderboardOnline.textContent = String(online);
+        }
+        if (!this.els.leaderboardBody) return;
+        var rows = (participants || []).slice().sort(function (a, b) {
+            return b.score - a.score || (b.bestStreak || 0) - (a.bestStreak || 0);
+        });
+        this.els.leaderboardBody.innerHTML = rows.map(function (p) {
+            return '<tr class="' + (p.online ? '' : 'is-offline') + '">' +
+                '<td>' + p.id + '</td>' +
+                '<td>' + (p.name || '—') + '</td>' +
+                '<td>' + (p.score || 0) + '</td>' +
+                '<td>' + (p.streak || 0) + '</td>' +
+                '<td>' + (p.bestStreak || 0) + '</td>' +
+                '<td>' + (p.online ? '在线' : '离线') + '</td></tr>';
+        }).join('') || '<tr><td colspan="6">暂无参与者</td></tr>';
+    };
+
+    QuizAnswerApp.prototype.onOpenLeaderboard = function () {
+        this.showView('leaderboard');
+        this.renderLeaderboard(this.participants);
+        if (this.ws) {
+            this.ws.send(global.QuizProtocol.makeRequestState());
+        }
+    };
+
+    QuizAnswerApp.prototype.onLeaderboardBack = function () {
+        this.showView('category');
+    };
+
     QuizAnswerApp.prototype.renderCategories = function () {
 
         if (!this.els.categoryGrid) return;
@@ -582,10 +663,12 @@
 
     QuizAnswerApp.prototype.syncHeaderTitle = function () {
         if (!this.els.title) return;
-        var inQuiz = this.views.quiz && !this.views.quiz.classList.contains('ql-hidden');
-        this.els.title.textContent = inQuiz && this.currentCategory
-            ? this.getCategoryTitle()
-            : this.deckTitle;
+        if (this.activeView === 'leaderboard') {
+            this.els.title.textContent = '排行榜';
+            return;
+        }
+        var inQuiz = this.activeView === 'quiz' && this.currentCategory;
+        this.els.title.textContent = inQuiz ? this.getCategoryTitle() : this.deckTitle;
     };
 
     QuizAnswerApp.prototype.startCategory = function (category) {
@@ -823,6 +906,7 @@
     };
 
     QuizAnswerApp.prototype.showView = function (name) {
+        this.activeView = name;
         Object.keys(this.views).forEach(function (key) {
             if (this.views[key]) {
                 this.views[key].classList.toggle('ql-hidden', key !== name);

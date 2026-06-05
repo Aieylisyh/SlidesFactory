@@ -29,7 +29,11 @@
 | 入口 | `/quiz-live/admin.html`（控台） |
 | 观众 | `/quiz-live/answer.html?room=房间码` |
 | 大屏 | `/quiz-live/screen.html?room=房间码` |
+| 样式 | `quiz-live/css/quiz-live.css` → [`styles/style-guide/11-quiz-live.css`](../styles/style-guide/11-quiz-live.css) |
+| 脚本 | `quiz-live/scripts/*` |
 | 题库 | `quiz-live/data/questions.json` |
+| 广播 | `quiz-live/data/broadcast-config.json` |
+| 登记 | `quiz-live/data/register-config.json` |
 | 中继 | `node quiz-live/scripts/quiz-ws-relay.js`（端口 8082） |
 | 启动 | `quiz-live/start-quiz-server.bat` |
 | 文档 | [`guides/QUIZ_LIVE_GUIDE.md`](../guides/QUIZ_LIVE_GUIDE.md) |

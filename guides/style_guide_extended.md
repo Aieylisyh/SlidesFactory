@@ -381,11 +381,25 @@ Canvas 脚本（`grid-morph.js`、`surround-mesh-grid.js`）中的 `rgba(200,36,
 
 ---
 
+## 10. quiz-live 组件（独立站点）
 
+> 完整说明见 [`QUIZ_LIVE_GUIDE.md`](QUIZ_LIVE_GUIDE.md)。样式源：**`styles/style-guide/11-quiz-live.css`**（前缀 `.ql-*`，token `--ql-*`）。
+
+| 类名 / token | 用途 |
+|--------------|------|
+| `--ql-accent` / `--ql-accent-light` | 品牌粉主色（对齐 SFK magenta） |
+| `.ql-app` / `.ql-header` / `.ql-panel` | 观众端布局 |
+| `.ql-btn` / `.ql-btn--ghost` / `.ql-btn--danger` | 主按钮 / 次要 / 删除 |
+| `.ql-category-grid` / `.ql-category-btn--{theme}` | 选题 2 列网格 |
+| `.ql-quiz-progress-*` / `.ql-option` / `.ql-feedback` | 答题进度与选项 |
+| `.ql-broadcast` / `.ql-broadcast-track` | 顶部滚屏广播 |
+| `.ql-leaderboard-*` / `.ql-score-table` | 观众排行榜 / 控台得分表 |
+| `.ql-admin-layout` / `.ql-room-code` | 主持控台 |
+| `.ql-screen` / `.ql-participant-chip` | 大屏展示 |
+
+---
 
 ## 9. 维护约定
-
-
 
 1. 新增**可复用**类 → 对应 `styles/style-guide/*.css` 分片 + 更新本文件  
 
@@ -395,6 +409,7 @@ Canvas 脚本（`grid-morph.js`、`surround-mesh-grid.js`）中的 `rgba(200,36,
 
 4. 已完成模块「往届优秀学员就业案例」的 slide **勿改**，除非用户明确要求  
 
-5. 改 JS/CSS 后更新 `index.html` 中 `?v=` 缓存参数
+5. 改 JS/CSS 后更新 `index.html` 中 `?v=` 缓存参数  
 
+6. **quiz-live** 站点类名 / token → `styles/style-guide/11-quiz-live.css` + `guides/QUIZ_LIVE_GUIDE.md`（不经主 deck hub）
 

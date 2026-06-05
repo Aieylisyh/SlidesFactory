@@ -410,15 +410,41 @@ function handleMessage(client, raw) {
     }
 }
 
+function notifyParticipantCleared(room, clientId) {
+    room.sockets.audience.forEach(function (ws) {
+        if (!clientId || ws._clientId === clientId) {
+            ws.send(JSON.stringify({ type: 'participant_cleared' }));
+        }
+    });
+}
+
 function handleAdmin(room, msg, adminClient) {
     switch (msg.action) {
         case 'reset_room': {
             var adminWs = adminClient || room.sockets.admin;
             var screenWs = room.sockets.screen;
+            var audience = room.sockets.audience;
             rooms.set(room.id, createRoom(room.id));
             room = getRoom(room.id);
             room.sockets.admin = adminWs;
             room.sockets.screen = screenWs;
+            audience.forEach(function (ws) {
+                ws.send(JSON.stringify({ type: 'participant_cleared' }));
+            });
+            break;
+        }
+        case 'delete_participant': {
+            var targetId = msg.clientId;
+            if (!targetId || !room.participants.has(targetId)) return;
+            room.participants.delete(targetId);
+            notifyParticipantCleared(room, targetId);
+            break;
+        }
+        case 'clear_all_data': {
+            room.participants.clear();
+            room.nextParticipantNum = 1;
+            room.recentBroadcasts = [];
+            notifyParticipantCleared(room, null);
             break;
         }
         default:

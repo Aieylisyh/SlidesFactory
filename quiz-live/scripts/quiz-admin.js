@@ -57,13 +57,35 @@
         var self = this;
         this.root.querySelectorAll('[data-admin-action]').forEach(function (btn) {
             btn.addEventListener('click', function () {
-                self.onAction(btn.getAttribute('data-admin-action'));
+                var action = btn.getAttribute('data-admin-action');
+                if (action === 'clear_all_data') {
+                    if (!confirm('确定清除本房间全部选手数据？此操作不可撤销。')) return;
+                }
+                self.onAction(action);
             });
         });
+        if (this.els.scoreBody) {
+            this.els.scoreBody.addEventListener('click', function (e) {
+                var btn = e.target.closest('[data-delete-participant]');
+                if (!btn) return;
+                self.onDeleteParticipant(btn.getAttribute('data-delete-participant'));
+            });
+        }
     };
 
-    QuizAdminApp.prototype.onAction = function (action) {
-        this.ws.send(global.QuizProtocol.makeAdminAction(action, {}));
+    QuizAdminApp.prototype.onAction = function (action, extra) {
+        this.ws.send(global.QuizProtocol.makeAdminAction(action, extra || {}));
+    };
+
+    QuizAdminApp.prototype.onDeleteParticipant = function (clientId) {
+        if (!clientId || !this.state) return;
+        var target = (this.state.participants || []).find(function (p) {
+            return p.clientId === clientId;
+        });
+        if (!target) return;
+        var label = target.name || ('编号 ' + target.id);
+        if (!confirm('确定删除「' + label + '」的全部数据？')) return;
+        this.onAction('delete_participant', { clientId: clientId });
     };
 
     QuizAdminApp.prototype.onMessage = function (msg) {
@@ -127,8 +149,10 @@
                 '<td>' + (p.score || 0) + '</td>' +
                 '<td>' + (p.streak || 0) + '</td>' +
                 '<td>' + (p.bestStreak || 0) + '</td>' +
-                '<td>' + (p.online ? '在线' : '离线') + '</td></tr>';
-        }).join('') || '<tr><td colspan="6">暂无参与者</td></tr>';
+                '<td>' + (p.online ? '在线' : '离线') + '</td>' +
+                '<td><button type="button" class="ql-btn ql-btn--xs ql-btn--danger" data-delete-participant="' +
+                (p.clientId || '') + '">删除</button></td></tr>';
+        }).join('') || '<tr><td colspan="7">暂无参与者</td></tr>';
     };
 
     QuizAdminApp.prototype.showQrWarn = function (text) {
