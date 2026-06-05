@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "title": "扫码加入 · 输入昵称",
+  "submitLabel": "进入答题",
+  "fields": [
+    {
+      "id": "name",
+      "enabled": true,
+      "required": true,
+      "label": "昵称",
+      "type": "text",
+      "placeholder": "请输入你的昵称",
+      "autocomplete": "nickname",
+      "maxLength": 12
+    }
+  ],
+  "messages": {
+    "required": "请填写{label}",
+    "pattern": "{label}格式不正确"
+  }
+}

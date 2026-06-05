@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翻页笔 · 主讲端</title>
+    <link rel="stylesheet" href="presenter.css?v=1">
+</head>
+<body>
+    <header class="presenter-chrome">
+        <div class="presenter-chrome-left">
+            <span class="presenter-label">翻页笔主讲端</span>
+            <strong id="deck-title">加载中…</strong>
+        </div>
+        <div class="presenter-chrome-center">
+            <span id="presenter-position">—</span>
+            <span id="presenter-slide-title" class="presenter-slide-title">—</span>
+        </div>
+        <div class="presenter-chrome-right">
+            <span id="presenter-status" data-kind="pending">初始化…</span>
+            <button type="button" id="qr-toggle" class="btn-chrome">手机连接</button>
+            <button type="button" id="btn-fullscreen" class="btn-chrome">全屏</button>
+        </div>
+    </header>
+
+    <aside id="qr-panel" class="qr-panel">
+        <div class="qr-panel-inner">
+            <h2>手机扫码连接</h2>
+            <p class="qr-room">房间码 <strong id="room-code">—</strong></p>
+            <canvas id="qr-canvas" width="180" height="180" aria-label="遥控链接二维码"></canvas>
+            <p id="qr-warning" class="qr-warning" hidden></p>
+            <a id="remote-url" class="remote-url" href="#" target="_blank" rel="noopener">—</a>
+            <p class="qr-hint">手机与电脑需在同一 WiFi；先运行 <code>start-remote-server.bat</code></p>
+        </div>
+    </aside>
+
+    <iframe id="deck-frame" class="deck-frame" title="演示文稿" allowfullscreen></iframe>
+
+    <script src="scripts/vendor/qrcode.min.js?v=1"></script>
+    <script src="scripts/protocol.js?v=5"></script>
+    <script src="scripts/ws-client.js?v=5"></script>
+    <script src="scripts/presenter-bridge.js?v=7"></script>
+</body>
+</html>

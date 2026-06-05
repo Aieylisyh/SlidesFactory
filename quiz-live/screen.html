@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>趣味常识挑战 · 大屏</title>
+
+    <link rel="stylesheet" href="css/quiz-live.css">
+
+</head>
+
+<body>
+
+    <div class="ql-broadcast" data-broadcast>
+
+        <span class="ql-broadcast-label">广播</span>
+
+        <div class="ql-broadcast-viewport">
+
+            <span class="ql-broadcast-track ql-broadcast-idle" data-broadcast-track>等待连杀广播…</span>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="ql-screen" data-quiz-screen>
+
+        <h1 class="ql-screen-title" data-screen-title>趣味常识挑战</h1>
+
+        <p class="ql-screen-sub" data-screen-sub>扫码自选类别 · 连对触发全场广播</p>
+
+
+
+        <div class="ql-screen-grid" style="margin-top:24px;">
+
+            <div class="ql-panel">
+
+                <h3 style="margin:0 0 8px;">在线人数</h3>
+
+                <div class="ql-counter" data-online-counter>0 / 0</div>
+
+                <div class="ql-participant-grid" data-roster-grid></div>
+
+            </div>
+
+
+
+            <div class="ql-panel">
+
+                <h3 style="margin:0 0 8px;">实时排行榜</h3>
+
+                <table class="ql-score-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>昵称</th>
+
+                            <th>得分</th>
+
+                            <th>当前连胜</th>
+
+                            <th>最高连胜</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody data-leaderboard-body>
+
+                        <tr><td colspan="4">等待观众加入…</td></tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="scripts/quiz-protocol.js"></script>
+
+    <script src="scripts/quiz-broadcast.js"></script>
+
+    <script src="scripts/quiz-ws-client.js"></script>
+
+    <script src="scripts/quiz-screen.js"></script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,171 @@
+{
+  "version": 2,
+  "deckId": "summerschool",
+  "deckTitle": "USC × 游研社 · 夏校课程说明会",
+  "deckPath": "summerschool/index.html",
+  "navFile": "deck-nav-summerschool.json",
+  "generatedAt": "2026-06-05T04:17:19.937Z",
+  "linear": true,
+  "totalSlides": 9,
+  "chapters": [],
+  "slides": [
+    {
+      "index": 0,
+      "h": 0,
+      "v": 0,
+      "id": "title",
+      "className": "title-slide slide-ss-cover",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-skip": ""
+      },
+      "kind": "cover",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "USC × 游研社 · 夏校课程说明会",
+      "shareSlug": "title"
+    },
+    {
+      "index": 1,
+      "h": 1,
+      "v": 0,
+      "id": "team",
+      "className": "content-slide slide-ss-sparse section-opener",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-skip": ""
+      },
+      "kind": "opener",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "教学团队",
+      "shareSlug": "team"
+    },
+    {
+      "index": 2,
+      "h": 2,
+      "v": 0,
+      "id": "schedule",
+      "className": "content-slide slide-ss-schedule slide-ss-schedule-online interactive-zone",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-ss-schedule": "true",
+        "data-ss-schedule-mode": "online",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "日程安排",
+      "shareSlug": "schedule"
+    },
+    {
+      "index": 3,
+      "h": 3,
+      "v": 0,
+      "id": "schedule-offline",
+      "className": "content-slide slide-ss-schedule slide-ss-schedule-offline interactive-zone",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-ss-schedule": "true",
+        "data-ss-schedule-mode": "offline",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "日程安排 · 线下",
+      "shareSlug": "schedule-offline"
+    },
+    {
+      "index": 4,
+      "h": 4,
+      "v": 0,
+      "id": "experience",
+      "className": "content-slide slide-ss-experience section-opener",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-skip": ""
+      },
+      "kind": "opener",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "核心体验",
+      "shareSlug": "experience"
+    },
+    {
+      "index": 5,
+      "h": 5,
+      "v": 0,
+      "id": "venue",
+      "className": "content-slide slide-ss-venue",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "场地介绍",
+      "shareSlug": "venue"
+    },
+    {
+      "index": 6,
+      "h": 6,
+      "v": 0,
+      "id": "support",
+      "className": "content-slide slide-ss-support interactive-zone",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-ss-tabs": "true",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "课程支持",
+      "shareSlug": "support"
+    },
+    {
+      "index": 7,
+      "h": 7,
+      "v": 0,
+      "id": "homework",
+      "className": "content-slide slide-ss-homework",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "课前作业",
+      "shareSlug": "homework"
+    },
+    {
+      "index": 8,
+      "h": 8,
+      "v": 0,
+      "id": "tips",
+      "className": "content-slide slide-ss-tips",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "小贴士",
+      "shareSlug": "tips"
+    }
+  ]
+}

@@ -1,0 +1,574 @@
+{
+  "strings": {
+    "page.title": {
+      "zh": "USC × 游研社 · 夏校课程说明会",
+      "ja": "USC × 游研社 · サマースクール説明会",
+      "en": "USC × GameResearch · Summer School Briefing"
+    },
+    "ui.langSwitcher": {
+      "zh": "语言切换",
+      "ja": "言語切替",
+      "en": "Language"
+    },
+    "cover.kicker": {
+      "zh": "USC × 游研社",
+      "ja": "USC × 游研社",
+      "en": "USC × GameResearch"
+    },
+    "cover.title": {
+      "zh": "夏校课程说明会",
+      "ja": "サマースクール説明会",
+      "en": "Summer School Briefing"
+    },
+    "cover.subtitle": {
+      "zh": "2026 Summer School",
+      "ja": "2026 Summer School",
+      "en": "2026 Summer School"
+    },
+    "team.title": {
+      "zh": "教学团队",
+      "ja": "授業チーム",
+      "en": "Teaching Team"
+    },
+    "team.disclaimer": {
+      "zh": "海外教授 · 专业导师 · 教务老师",
+      "ja": "海外教授 · 専門メンター · 教务スタッフ",
+      "en": "Visiting professors · Mentors · Academic staff"
+    },
+    "team.placeholder": {
+      "zh": "现场介绍",
+      "ja": "当日ご紹介",
+      "en": "Introduced live"
+    },
+    "schedule.title": {
+      "zh": "日程安排",
+      "ja": "スケジュール",
+      "en": "Schedule"
+    },
+    "schedule.online.disclaimer": {
+      "zh": "Module 1 · 线上课：游戏设计理论知识、学习方法论、USC 游戏教学核心课程 · 点击卡片查看摘要",
+      "ja": "Module 1 · オンライン：ゲームデザイン理論、学習方法論、USC コアカリキュラム · カードをクリックで概要",
+      "en": "Module 1 · Online: game design theory, learning methods, USC core curriculum · Click a card for summary"
+    },
+    "experience.title": {
+      "zh": "核心体验",
+      "ja": "コア体験",
+      "en": "Core Experience"
+    },
+    "experience.disclaimer": {
+      "zh": "线上预习 · 线下产出 · 小组合作 · 博物馆展览",
+      "ja": "オンライン予習 · オフライン制作 · チーム協働 · 博物館展示",
+      "en": "Online prep · Offline production · Team collaboration · Museum exhibition"
+    },
+    "experience.knowledge": {
+      "zh": "默会知识（Tacit）在协作与试玩中习得 · 显性知识（Explicit）在课堂与文档中传递",
+      "ja": "暗黙知（Tacit）は協働とプレイテストで · 形式知（Explicit）は授業と資料で伝わる",
+      "en": "Tacit knowledge grows through collaboration and playtesting · Explicit knowledge is taught in class and docs"
+    },
+    "experience.teamwork": {
+      "zh": "团队合作",
+      "ja": "チーム協働",
+      "en": "Team Collaboration"
+    },
+    "experience.format": {
+      "zh": "课程形式",
+      "ja": "授業形式",
+      "en": "Course Format"
+    },
+    "experience.img.team.alt": {
+      "zh": "创意工作坊中围绕笔记本电脑协作的多元团队",
+      "ja": "クリエイティブワークショップでノートPCを囲む多様なチーム",
+      "en": "Diverse team collaborating around laptops in a creative workshop"
+    },
+    "experience.img.format.alt": {
+      "zh": "工作坊桌上精致的桌游组件与配件",
+      "ja": "ワークショップ卓上のボードゲームとコンポーネント",
+      "en": "Designer tabletop board game with quality meeples and components on an elegant workshop table"
+    },
+    "venue.title": {
+      "zh": "场地介绍",
+      "ja": "会場紹介",
+      "en": "Venues"
+    },
+    "venue.disclaimer": {
+      "zh": "线下集训场地 · 游戏博物馆 × S 空间",
+      "ja": "オフライン集中会場 · 游研社 × S スペース",
+      "en": "Offline intensive venues · GameResearch × S Space"
+    },
+    "venue.yystv": {
+      "zh": "游戏博物馆",
+      "ja": "游研社",
+      "en": "GameResearch (YYSTV)"
+    },
+    "venue.sSpace": {
+      "zh": "S 空间",
+      "ja": "S スペース",
+      "en": "S Space"
+    },
+    "venue.yystv.alt": {
+      "zh": "游研社线下活动场地",
+      "ja": "游研社オフラインイベント会場",
+      "en": "GameResearch offline event venue"
+    },
+    "venue.sSpace.alt": {
+      "zh": "S 空间 · GGJ 上海站点",
+      "ja": "S スペース · GGJ 上海会場",
+      "en": "S Space · GGJ Shanghai jam site"
+    },
+    "venue.yystv.link": {
+      "zh": "查看游研社场地报道 →",
+      "ja": "游研社会場レポート →",
+      "en": "GameResearch venue report →"
+    },
+    "venue.sspace.link": {
+      "zh": "GGJ 2026 场地详情 →",
+      "ja": "GGJ 2026 会場詳細 →",
+      "en": "GGJ 2026 venue details →"
+    },
+    "support.title": {
+      "zh": "课程支持",
+      "ja": "学習サポート",
+      "en": "Course Support"
+    },
+    "support.tabs.aria": {
+      "zh": "课程支持分类",
+      "ja": "学習サポートカテゴリ",
+      "en": "Course support categories"
+    },
+    "support.tab.materials": {
+      "zh": "课程资料",
+      "ja": "教材・資料",
+      "en": "Course Materials"
+    },
+    "support.tab.gear": {
+      "zh": "自备物料",
+      "ja": "持参品",
+      "en": "Bring Your Own"
+    },
+    "support.materials.1": {
+      "zh": "微信群公告（实用信息汇总，不定期更新）",
+      "ja": "WeChat グループ告知（実用情報まとめ・随時更新）",
+      "en": "WeChat group announcements (practical info hub, updated periodically)"
+    },
+    "support.materials.2": {
+      "zh": "线上合作平台",
+      "ja": "オンライン協働プラットフォーム",
+      "en": "Online collaboration platform"
+    },
+    "support.materials.3": {
+      "zh": "资料云盘（线上课录频回放，课程资料下载）",
+      "ja": "資料クラウド（オンライン授業録画・教材ダウンロード）",
+      "en": "Cloud drive (online session recordings, course material downloads)"
+    },
+    "support.materials.4": {
+      "zh": "课程笔记（当日课程核心内容总结）",
+      "ja": "授業ノート（当日のコア内容まとめ）",
+      "en": "Course notes (daily session core summary)"
+    },
+    "support.gear.title": {
+      "zh": "自备物料建议",
+      "ja": "持参品の推奨",
+      "en": "Suggested supplies"
+    },
+    "support.gear.1": {
+      "zh": "笔记本电脑",
+      "ja": "ノート PC",
+      "en": "Laptop"
+    },
+    "support.gear.2": {
+      "zh": "耳机 / 静音耳机",
+      "ja": "ヘッドフォン / イヤホン",
+      "en": "Headphones / earbuds"
+    },
+    "support.gear.3": {
+      "zh": "创意生成工具（桌游、便利贴、铅笔橡皮、标准扑克牌、骰子、乐高积木）",
+      "ja": "アイデア出しツール（ボードゲーム、付箋、鉛筆・消しゴム、トランプ、サイコロ、LEGO）",
+      "en": "Ideation tools (board games, sticky notes, pencil & eraser, playing cards, dice, LEGO)"
+    },
+    "support.software.title": {
+      "zh": "建议安装软件",
+      "ja": "推奨ソフトウェア",
+      "en": "Recommended software"
+    },
+    "support.software.note": {
+      "zh": "无必须预装软件，但建议安装",
+      "ja": "必須インストールはありませんが、推奨します",
+      "en": "Nothing required in advance, but installation is recommended"
+    },
+    "support.software.1": {
+      "zh": "Git IDE",
+      "ja": "Git IDE",
+      "en": "Git IDE"
+    },
+    "support.software.2": {
+      "zh": "Unity / Unreal Engine",
+      "ja": "Unity / Unreal Engine",
+      "en": "Unity / Unreal Engine"
+    },
+    "support.software.3": {
+      "zh": "推荐 Unity 版本：6 或 团结 1.9",
+      "ja": "推奨 Unity：6 または Tuanjie 1.9",
+      "en": "Recommended Unity: 6 or Tuanjie 1.9"
+    },
+    "support.software.4": {
+      "zh": "推荐 Unreal 版本：5.7",
+      "ja": "推奨 Unreal：5.7",
+      "en": "Recommended Unreal: 5.7"
+    },
+    "support.software.5": {
+      "zh": "Blender / Maya",
+      "ja": "Blender / Maya",
+      "en": "Blender / Maya"
+    },
+    "homework.title": {
+      "zh": "课前作业",
+      "ja": "事前課題",
+      "en": "Pre-course Assignment"
+    },
+    "homework.disclaimer": {
+      "zh": "没错，还是有作业！",
+      "ja": "はい、課題があります！",
+      "en": "Yes — there is homework!"
+    },
+    "homework.heading": {
+      "zh": "去腾讯云文档填写自己的",
+      "ja": "Tencent クラウドドキュメントに記入してください",
+      "en": "Fill in the Tencent Cloud doc with your"
+    },
+    "homework.1": {
+      "zh": "英文名",
+      "ja": "英語名",
+      "en": "English name"
+    },
+    "homework.2": {
+      "zh": "希望自己在小组合作中是个怎样的人？",
+      "ja": "チームでどんな役割・姿勢でいたいですか？",
+      "en": "What kind of teammate do you want to be?"
+    },
+    "homework.3": {
+      "zh": "希望线下课是啥样的？",
+      "ja": "オフライン授業にどんな期待がありますか？",
+      "en": "What do you hope the offline sessions will be like?"
+    },
+    "tips.title": {
+      "zh": "小贴士",
+      "ja": "ヒント",
+      "en": "Tips"
+    },
+    "tips.disclaimer": {
+      "zh": "小而重要的事情 · 物料准备 · 投入建议 · 电子书资源",
+      "ja": "小さくて大切なこと · 備品 · 集中のすすめ · 電子書籍",
+      "en": "Small but important · Supplies · Focus · E-books"
+    },
+    "tips.materials.title": {
+      "zh": "物料准备",
+      "ja": "備品の準備",
+      "en": "Supplies"
+    },
+    "tips.materials.item": {
+      "zh": "项目若需特殊物料（控制器、传感器、玩具等），请<strong>提前下单</strong>并留意收货时间",
+      "ja": "特殊な備品（コントローラ、センサー、玩具など）が必要な場合は<strong>早めに注文</strong>し、到着日に注意",
+      "en": "If your project needs special parts (controllers, sensors, toys, etc.), <strong>order early</strong> and watch delivery dates"
+    },
+    "tips.commitment.title": {
+      "zh": "投入建议",
+      "ja": "集中のすすめ",
+      "en": "Stay focused"
+    },
+    "tips.commitment.item": {
+      "zh": "线下课期间请<strong>全身心投入</strong>，勿安排外出娱乐或其他分散精力的活动",
+      "ja": "オフライン期間は<strong>全力で取り組み</strong>、娯楽や気を散らす予定は避けてください",
+      "en": "During offline sessions, <strong>give your full attention</strong> — avoid outings or distractions"
+    },
+    "tips.ebooks.title": {
+      "zh": "电子书资源",
+      "ja": "電子書籍",
+      "en": "E-books"
+    },
+    "tips.ebooks.lead": {
+      "zh": "电子书大放送",
+      "ja": "電子書籍プレゼント",
+      "en": "Free e-book bundle"
+    },
+    "tips.ebooks.linkLabel": {
+      "zh": "云盘链接：",
+      "ja": "クラウドリンク：",
+      "en": "Cloud link:"
+    },
+    "tips.ebooks.aria": {
+      "zh": "电子书下载",
+      "ja": "電子書籍ダウンロード",
+      "en": "Download e-books"
+    },
+    "schedule.ui.modal.aria": {
+      "zh": "课程详情",
+      "ja": "授業詳細",
+      "en": "Session details"
+    },
+    "schedule.ui.modal.close": {
+      "zh": "关闭",
+      "ja": "閉じる",
+      "en": "Close"
+    },
+    "schedule.ui.cellHint": {
+      "zh": "，点击查看详情",
+      "ja": "、クリックで詳細",
+      "en": ", click for details"
+    },
+    "schedule.ui.online.label": {
+      "zh": "Module 1 · 线上课 · 游戏设计理论 / 学习方法论 / USC 核心课程",
+      "ja": "Module 1 · オンライン · ゲームデザイン理論 / 学習方法論 / USC コア",
+      "en": "Module 1 · Online · Game design theory / Methods / USC core"
+    },
+    "schedule.ui.online.aria": {
+      "zh": "Module 1 线上课程",
+      "ja": "Module 1 オンライン授業",
+      "en": "Module 1 online sessions"
+    },
+    "schedule.ui.offline.aria": {
+      "zh": "Module 2–3 线下集训与展览",
+      "ja": "Module 2–3 オフライン集中と展示",
+      "en": "Module 2–3 onsite intensive and exhibition"
+    },
+    "schedule.ui.offline.label": {
+      "zh": "Module 2–3 · 上海线下（7/15–7/25）",
+      "ja": "Module 2–3 · 上海オフライン（7/15–7/25）",
+      "en": "Module 2–3 · Shanghai onsite (7/15–7/25)"
+    },
+    "schedule.ui.offline.desc": {
+      "zh": "Module 2 组队高强度 workshop 集训（7/15–7/23）与 Module 3 博物馆展览收官（7/24–7/25）；点击单元格查看 Syllabus 摘要",
+      "ja": "Module 2 チーム集中ワークショップ（7/15–7/23）と Module 3 博物館展示（7/24–7/25）；セルをクリックでシラバス概要",
+      "en": "Module 2 team intensive workshop (7/15–7/23) and Module 3 museum show (7/24–7/25); click cells for syllabus summary"
+    },
+    "schedule.ui.timeCol": {
+      "zh": "时间",
+      "ja": "時間",
+      "en": "Time"
+    },
+    "schedule.ui.error": {
+      "zh": "课表加载失败，请刷新页面。",
+      "ja": "スケジュールの読み込みに失敗しました。ページを更新してください。",
+      "en": "Failed to load schedule. Please refresh the page."
+    }
+  },
+  "schedule": {
+    "syllabus": {
+      "briefing": {
+        "body": {
+          "zh": "夏校课程说明会：介绍 USC × 游研社合作框架与三模块学习路径。\n\nModule 1 为线上课，以游戏设计理论知识、学习方法论与 USC 游戏教学核心课程为主，帮助学员在抵达上海前建立共同术语与思考框架。说明会将梳理五次 Session 的节奏、预习期望，并解答夏校流程与后续线下制作安排。\n\n实作与 workshop 环节在 Module 2 上海线下集训开展，本模块不含 workshop。",
+          "ja": "サマースクール説明会：USC × 游研社の協働枠組みと 3 モジュールの学習経路を紹介します。\n\nModule 1 はオンラインで、ゲームデザイン理論・学習方法論・USC コアカリキュラムを中心に、上海到着前に共通言語と思考枠組みを整えます。5 回の Session の流れ、予習の期待、夏校の流れとオフライン制作について説明します。\n\n制作とワークショップは Module 2 の上海オフライン集中で行い、本モジュールに workshop は含まれません。",
+          "en": "Summer school briefing: USC × GameResearch partnership and the three-module learning path.\n\nModule 1 is online—game design theory, learning methods, and USC core curriculum—building shared vocabulary before Shanghai. We cover the five sessions, prep expectations, and the path to offline production.\n\nHands-on workshops run in Module 2 onsite in Shanghai; Module 1 has no workshop component."
+        }
+      },
+      "session-1": {
+        "body": {
+          "zh": "Module 1 · 线上课 · Day 1（6/7）\n\nUSC 游戏教学核心课程入门：导师介绍与课程预期；探索型 vs 执行型设计思维；体验目标（Experience Goals）的提炼；Playcentric 设计方法论；「Single A Games」与设计留白（Designed Omission）。\n\n以讲座与案例讨论为主，建立游戏设计理论共同语言，为后续 Session 的学习方法论打底。",
+          "ja": "Module 1 · オンライン · Day 1（6/7）\n\nUSC コア入門：メンター紹介と期待値；探索型 vs 実行型デザイン思考；体験目標（Experience Goals）の抽出；Playcentric 設計；「Single A Games」と設計的省略（Designed Omission）。\n\n講義とケース討論で理論の共通言語を築き、以降の Session の基礎にします。",
+          "en": "Module 1 · Online · Day 1 (6/7)\n\nUSC core intro: mentor intro and expectations; exploratory vs executional design thinking; Experience Goals; Playcentric design; Single A Games and Designed Omission.\n\nLectures and case discussion build shared design language for later sessions."
+        }
+      },
+      "session-2": {
+        "body": {
+          "zh": "Module 1 · 线上课 · Day 2（6/14）\n\n游戏设计理论与研究方法：研究型游戏（Research Games）与跨学科议题；Single A 框架下的命题拓展；创造力激发与 ideation 方法论。\n\n课堂侧重理论辨析与思维训练——如何把学术或社会议题转化为可玩的体验目标，从题材推演至核心机制，为线下制作积累设计判断力。",
+          "ja": "Module 1 · オンライン · Day 2（6/14）\n\nゲームデザイン理論と研究方法：リサーチゲームと学際的テーマ；Single A フレームでの命題拡張；創造性と ideation 手法。\n\n理論の整理と思考訓練に重点——学術・社会テーマをプレイ可能な体験目標へ、題材からコアメカニクスまで、オフライン制作の判断力を養います。",
+          "en": "Module 1 · Online · Day 2 (6/14)\n\nDesign theory and research methods: Research Games and interdisciplinary topics; expanding prompts under Single A; creativity and ideation methods.\n\nFocus on theory and thinking—turning academic or social themes into playable experience goals and core mechanics for offline work."
+        }
+      },
+      "session-3": {
+        "body": {
+          "zh": "Module 1 · 线上课 · Day 3（6/21）\n\nUSC 核心课 · 玩家心理与形式要素：玩家奖励结构与动机循环；「像玩家一样思考」的观察方法；复杂（Complexity）vs 繁复（Complication）；运气、技巧与投入（Luck / Skill / Commitment）的配比。\n\n通过拆解经典游戏片段理解设计理论——如何让规则支撑体验目标，而非堆叠机制。纯线上理论课，无实作 workshop。",
+          "ja": "Module 1 · オンライン · Day 3（6/21）\n\nUSC コア · プレイヤー心理と形式要素：報酬構造と動機ループ；「プレイヤーのように考える」観察法；Complexity vs Complication；Luck / Skill / Commitment のバランス。\n\n名作パートの分解で理論を理解——ルールが体験目標を支える設計。オンライン理論のみ、workshop なし。",
+          "en": "Module 1 · Online · Day 3 (6/21)\n\nUSC core · Player psychology and formal elements: reward structures and motivation loops; thinking like a player; Complexity vs Complication; Luck / Skill / Commitment balance.\n\nAnalyze classic game moments—rules that serve experience goals, not mechanism stacking. Theory only, no workshop."
+        }
+      },
+      "session-4": {
+        "body": {
+          "zh": "Module 1 · 线上课 · Day 4（6/28）\n\n学习方法论 · 制作流程与迭代思维：游戏制作管线概览；宏观设计结构；同心圆式开发（Concentric Development）与试玩迭代（Playtesting）的理论框架。\n\n讲授 USC 核心方法论中「如何分阶段验证核心乐趣、如何排序优先级」，为 Module 2 线下 workshop 实作建立认知基础；本课以理论讲解为主，不在线上进行制作实作。",
+          "ja": "Module 1 · オンライン · Day 4（6/28）\n\n学習方法論 · 制作フローと反復思考：パイプライン概観；マクロ設計構造；Concentric Development と Playtesting の枠組み。\n\nUSC 手法「段階的にコアファンを検証し優先順位を付ける」を解説し Module 2 workshop の基礎に。理論中心、オンライン制作なし。",
+          "en": "Module 1 · Online · Day 4 (6/28)\n\nLearning methods · Production flow and iteration: pipeline overview; macro design structure; Concentric Development and Playtesting frameworks.\n\nUSC methods for validating core fun in stages and prioritizing work—foundation for Module 2 workshops. Theory only, no online production."
+        }
+      },
+      "session-5": {
+        "body": {
+          "zh": "Module 1 · 线上课 · Day 5（7/4）\n\nUSC 核心课收官 · 协作理论与 Module 2 衔接：协作沟通与试玩反馈礼仪；制作三要素（3 C's）；关键术语回顾与答疑。\n\n巩固 Module 1 全部游戏设计理论与学习方法论，说明 Module 2 线下 9 天 workshop 集训与博物馆展的预期——线上课完成理论准备，线下课进入高强度实作与团队制作。",
+          "ja": "Module 1 · オンライン · Day 5（7/4）\n\nUSC コア総括 · 協働理論と Module 2 接続：協働コミュニケーションとプレイテストフィードバック；3 C's；用語の総復習と Q&A。\n\nModule 1 の理論を固め、Module 2 の 9 日間 workshop と博物館展の期待を説明——オンラインで理論準備、オフラインで集中制作へ。",
+          "en": "Module 1 · Online · Day 5 (7/4)\n\nUSC core wrap-up · Collaboration and Module 2 bridge: team communication and playtest feedback etiquette; the 3 C's; key terms review and Q&A.\n\nConsolidate Module 1 theory and set expectations for Module 2's 9-day workshop and museum show—online prep, then intensive team production onsite."
+        }
+      },
+      "arrival": {
+        "body": {
+          "zh": "Module 2 首日：学员抵达上海冬校基地，办理入住与场地熟悉。为后续 9 天集训与小组协作做准备。",
+          "ja": "Module 2 初日：上海キャンパス到着、チェックインと会場案内。9 日間の集中とチーム協働の準備。",
+          "en": "Module 2 Day 1: Arrive at the Shanghai campus, check in, and orient to the venue. Prep for 9 days of intensive team work."
+        }
+      },
+      "morning-prep": {
+        "body": {
+          "zh": "跟班教务老师叫早，自助早餐与课前准备。确保学员按时进入当日课程节奏。",
+          "ja": "担当スタッフによる起床、自助早餐、课前準備。当日の授業リズムに合わせます。",
+          "en": "Staff wake-up call, self-serve breakfast, and pre-class prep. Keeps everyone on the daily schedule."
+        }
+      },
+      "departure": {
+        "body": {
+          "zh": "Module 2 结束返程。线下集训与博物馆展览收官后的离营安排。",
+          "ja": "Module 2 終了・帰路。オフライン集中と博物館展示後の退营。",
+          "en": "Module 2 wrap-up and departure after onsite intensive and museum exhibition."
+        }
+      },
+      "gamepress-visit": {
+        "body": {
+          "zh": "参观游研社并开展场地内课程/交流。了解行业媒体视角与游戏文化语境，衔接线下制作模块。",
+          "ja": "游研社見学と会場内授業・交流。業界メディア視点とゲーム文化の文脈を学び、オフライン制作へ接続。",
+          "en": "Visit GameResearch and onsite sessions/discussion. Industry media perspective and game culture context before offline production."
+        }
+      },
+      "professor-course": {
+        "body": {
+          "zh": "Module 2 · 海外教授课程\n\n以 Richard Lemarchand《Playful Production Process》为框架，聚焦游戏制作：讲座、工坊与实作练习并行。学员在小组中推进可玩原型，并记录设计—试玩—评估—迭代过程。",
+          "ja": "Module 2 · 海外教授授業\n\nRichard Lemarchand『Playful Production Process』を枠組みに制作に集中：講義、ワークショップ、実習を並行。チームでプレイ可能プロトタイプを進め、設計—プレイテスト—評価—反復を記録。",
+          "en": "Module 2 · Visiting professor sessions\n\nFramed on Richard Lemarchand's Playful Production Process—lectures, workshops, and hands-on work in parallel. Teams advance playable prototypes and document design–playtest–evaluate–iterate cycles."
+        }
+      },
+      "industry-guest": {
+        "body": {
+          "zh": "行业嘉宾分享：邀请游戏行业从业者分享项目经验、岗位路径与创作实践，帮助学员将课堂方法对接真实生产环境。",
+          "ja": "業界ゲスト：現役クリエイターがプロジェクト経験、キャリア、制作実践を共有。授業の方法を実務環境につなぎます。",
+          "en": "Industry guest talk: practitioners share project experience, career paths, and creative practice—connecting classroom methods to real production."
+        }
+      },
+      "sfk-tutor": {
+        "body": {
+          "zh": "SFK 导师辅导：跟班导师针对小组项目提供答疑、里程碑检查与 portfolio-ready 文档指导，支持海外教授课后的落地与迭代。",
+          "ja": "SFK メンター：チームプロジェクトの Q&A、マイルストーン確認、ポートフォリオ向けドキュメント支援。教授授業後の実装と反復をサポート。",
+          "en": "SFK mentor support: Q&A, milestone checks, and portfolio-ready documentation for team projects after professor sessions."
+        }
+      },
+      "museum-exhibition": {
+        "body": {
+          "zh": "Module 3 · 博物馆展览\n\n团队面向公众展示可玩原型与设计过程文档。展览是课程第三模块的收官，强调完成度、可玩性与过程记录。",
+          "ja": "Module 3 · 博物館展示\n\nチームが一般公開向けにプレイ可能プロトタイプと設計プロセスを展示。完成度、プレイアビリティ、プロセス記録を重視する総仕上げ。",
+          "en": "Module 3 · Museum exhibition\n\nTeams present playable prototypes and design process docs to the public. Emphasis on polish, playability, and documented process."
+        }
+      },
+      "museum-prep": {
+        "body": {
+          "zh": "博物馆开展前准备：布展、设备调试、作品说明与开放流程排练，确保展览日顺利面向观众呈现。",
+          "ja": "博物館展示前準備：設営、機器調整、作品説明、オープニングリハーサル。当日の公開をスムーズに。",
+          "en": "Pre-exhibition prep: install, tech check, work descriptions, and opening rehearsal for a smooth public day."
+        }
+      },
+      "lunch-break": {
+        "body": {
+          "zh": "午餐与午休。线下集训期间固定用餐与休息时段，保证高强度课程中的恢复节奏。",
+          "ja": "昼食と休憩。オフライン集中期間の定時食事・休息で、高強度授業の回復を確保。",
+          "en": "Lunch and rest break. Fixed meal and downtime during the onsite intensive."
+        }
+      },
+      "tutor-selfstudy": {
+        "body": {
+          "zh": "SFK 导师辅导 / 自习 / 答疑：灵活时段，学员可继续推进项目、向导师提问或小组内协作。",
+          "ja": "SFK メンター / 自習 / Q&A：柔軟な時間帯でプロジェクト継続、質問、チーム協働が可能。",
+          "en": "SFK mentor / self-study / Q&A: flexible time to keep building, ask mentors, or collaborate in teams."
+        }
+      },
+      "dinner-rest": {
+        "body": {
+          "zh": "晚餐与休息。晚间固定休整，为晚自习与次日课程储备精力。",
+          "ja": "夕食と休息。夜間の定時休憩で、夜間自習と翌日の授業に備えます。",
+          "en": "Dinner and rest. Evening downtime before night study and the next day."
+        }
+      },
+      "evening-study": {
+        "body": {
+          "zh": "晚自习：小组可继续制作、试玩与文档整理。线下模块强调高强度产出与协作迭代。",
+          "ja": "夜間自習：チームで制作、プレイテスト、ドキュメント整理を継続。オフライン期間は高強度の产出と協働反復を重視。",
+          "en": "Evening study: teams continue building, playtesting, and documentation. Onsite module emphasizes intensive output and iteration."
+        }
+      },
+      "icebreaker": {
+        "body": {
+          "zh": "班级破冰活动：抵达当日晚间团队建设，帮助 Module 2 起正式转入小组协作模式（Module 1 为个人线上学习，Module 2–3 为团队制作）。",
+          "ja": "クラスアイスブレイク：到着当日夜のチームビルディング。Module 2 から本格的なチーム制作へ（Module 1 は個人オンライン、Module 2–3 はチーム）。",
+          "en": "Class icebreaker: team building on arrival night—transition to team mode from Module 2 (Module 1 is solo online; Modules 2–3 are team production)."
+        }
+      }
+    },
+    "online": {
+      "briefing": {
+        "title": {
+          "zh": "说明会",
+          "ja": "説明会",
+          "en": "Briefing"
+        }
+      },
+      "session-1": { "title": { "zh": "Session 1", "ja": "Session 1", "en": "Session 1" } },
+      "session-2": { "title": { "zh": "Session 2", "ja": "Session 2", "en": "Session 2" } },
+      "session-3": { "title": { "zh": "Session 3", "ja": "Session 3", "en": "Session 3" } },
+      "session-4": { "title": { "zh": "Session 4", "ja": "Session 4", "en": "Session 4" } },
+      "session-5": { "title": { "zh": "Session 5", "ja": "Session 5", "en": "Session 5" } }
+    },
+    "cells": {
+      "morning-prep": {
+        "label": {
+          "zh": "跟班教务老师叫早+自助早餐+课前准备",
+          "ja": "スタッフ起床・自助早餐・课前準備",
+          "en": "Staff wake-up + breakfast + prep"
+        }
+      },
+      "departure": {
+        "label": { "zh": "返程", "ja": "帰路", "en": "Departure" }
+      },
+      "arrival": {
+        "label": { "zh": "抵达冬校基地", "ja": "キャンパス到着", "en": "Arrive at campus" }
+      },
+      "gamepress-visit": {
+        "label": {
+          "zh": "游研社 / 参观\n上课",
+          "ja": "游研社 / 見学\n授業",
+          "en": "GameResearch / Visit\nClass"
+        }
+      },
+      "professor-course": {
+        "label": { "zh": "海外教授课程", "ja": "海外教授授業", "en": "Professor sessions" }
+      },
+      "industry-guest": {
+        "label": { "zh": "行业嘉宾分享", "ja": "業界ゲスト", "en": "Industry guest" }
+      },
+      "sfk-tutor": {
+        "label": { "zh": "SFK导师辅导", "ja": "SFKメンター", "en": "SFK mentor" }
+      },
+      "museum-exhibition": {
+        "label": { "zh": "博物馆 / 展览", "ja": "博物館 / 展示", "en": "Museum / Exhibition" }
+      },
+      "lunch-break": {
+        "label": { "zh": "午休", "ja": "昼休み", "en": "Lunch break" }
+      },
+      "tutor-selfstudy": {
+        "label": {
+          "zh": "SFK导师辅导/自习/答疑",
+          "ja": "SFKメンター/自習/Q&A",
+          "en": "SFK mentor / study / Q&A"
+        }
+      },
+      "dinner-rest": {
+        "label": { "zh": "晚餐/休息", "ja": "夕食/休息", "en": "Dinner / rest" }
+      },
+      "evening-study": {
+        "label": { "zh": "晚自习", "ja": "夜間自習", "en": "Evening study" }
+      },
+      "icebreaker": {
+        "label": { "zh": "班级破冰活动", "ja": "クラスアイスブレイク", "en": "Icebreaker" }
+      }
+    },
+    "weekdays": {
+      "wed": { "label": { "zh": "周三", "ja": "水", "en": "Wed" } },
+      "thu": { "label": { "zh": "周四", "ja": "木", "en": "Thu" } },
+      "fri": { "label": { "zh": "周五", "ja": "金", "en": "Fri" } },
+      "sat": { "label": { "zh": "周六", "ja": "土", "en": "Sat" } },
+      "sun": { "label": { "zh": "周日", "ja": "日", "en": "Sun" } },
+      "mon": { "label": { "zh": "周一", "ja": "月", "en": "Mon" } },
+      "tue": { "label": { "zh": "周二", "ja": "火", "en": "Tue" } }
+    }
+  }
+}

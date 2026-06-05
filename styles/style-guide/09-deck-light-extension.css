@@ -1,0 +1,391 @@
+﻿/**
+
+ * Main employment deck — light theme (html.deck-light white canvas, magenta brand)
+
+ * Loaded via style_guide.css hub · summerschool uses its own style_extension.css
+
+ */
+
+
+
+html.deck-light {
+
+    --deck-gray-900: #212121;
+
+    --deck-gray-800: #2E2E2E;
+
+    --deck-gray-700: #404040;
+
+    --deck-gray-600: #555555;
+
+    --deck-gray-500: #777777;
+
+    --deck-gray-400: #999999;
+
+    --deck-gray-300: #BBBBBB;
+
+    --deck-gray-200: #DDDDDD;
+
+    --deck-gray-100: #F0F0F0;
+
+    --deck-white: #FFFFFF;
+
+    --deck-magenta-10: rgba(200, 36, 100, 0.10);
+
+    --deck-magenta-15: rgba(200, 36, 100, 0.15);
+
+    --deck-magenta-20: rgba(200, 36, 100, 0.20);
+
+}
+
+
+
+html.deck-light,
+
+html.deck-light body {
+
+    background: var(--deck-white) !important;
+
+    color: var(--deck-gray-800) !important;
+
+}
+
+
+
+html.deck-light .reveal,
+
+html.deck-light .reveal .viewport,
+
+html.deck-light .reveal .slides,
+
+html.deck-light .reveal .backgrounds,
+
+html.deck-light .reveal .slide-background,
+
+html.deck-light .reveal .slides section,
+
+html.deck-light .reveal .slides section[data-background-color="#fff"],
+
+html.deck-light .reveal .slides section[data-background-color="#ffffff"] {
+
+    background-color: var(--deck-white) !important;
+
+    color: var(--deck-gray-800) !important;
+
+}
+
+
+
+html.deck-light .reveal {
+
+    --bg-color: var(--deck-white);
+
+    --panel-bg: var(--deck-gray-100);
+
+    --text-main: var(--deck-gray-800);
+
+    --text-muted: var(--deck-gray-500);
+
+    --image-border-color: var(--deck-gray-200);
+
+    --deck-progress-track: rgba(46, 46, 46, 0.12);
+
+    --deck-progress-track-active: rgba(46, 46, 46, 0.18);
+
+    --deck-progress-bar-edge: var(--deck-gray-200);
+
+    --deck-progress-bar-mid: rgba(200, 36, 100, 0.35);
+
+    --deck-progress-bar-peak: var(--sfk-magenta-light);
+
+}
+
+
+
+html.deck-light .reveal h1,
+
+html.deck-light .reveal h2,
+
+html.deck-light .reveal h3,
+
+html.deck-light .reveal h4,
+
+html.deck-light .reveal p,
+
+html.deck-light .reveal li,
+
+html.deck-light .reveal .slide-content-layer {
+
+    color: var(--deck-gray-800);
+
+}
+
+
+
+html.deck-light .reveal .subtitle,
+
+html.deck-light .reveal .disclaimer-note,
+
+html.deck-light .reveal p,
+
+html.deck-light .reveal li {
+
+    color: var(--deck-gray-500);
+
+}
+
+
+
+html.deck-light .reveal .title-slide .subtitle {
+
+    border-top-color: var(--sfk-magenta) !important;
+
+}
+
+
+
+html.deck-light .reveal .content-slide.section-opener h2 {
+
+    border-bottom-color: var(--sfk-magenta) !important;
+
+}
+
+
+
+html.deck-light .reveal .slides section .slide-content-layer,
+
+html.deck-light .reveal .slides section.present .slide-content-layer {
+
+    opacity: 1 !important;
+
+    transform: none !important;
+
+    filter: none !important;
+
+    clip-path: none !important;
+
+    visibility: visible !important;
+
+}
+
+
+
+html.deck-light .reveal .controls .deck-nav-cluster .slide-number {
+
+    color: var(--deck-gray-800);
+
+    background-color: rgba(255, 255, 255, 0.92);
+
+    border: 1px solid var(--deck-gray-200);
+
+}
+
+
+
+html.deck-light .reveal.is-deck-progress-active .progress,
+
+html.deck-light .reveal .progress:hover,
+
+html.deck-light .reveal .progress.is-dragging,
+
+html.deck-light .reveal .progress.is-snapping {
+
+    box-shadow:
+
+        0 0 12px var(--deck-magenta-20),
+
+        0 4px 14px rgba(46, 46, 46, 0.1);
+
+}
+
+
+
+html.deck-light .reveal .progress > .deck-progress-thumb {
+
+    filter: drop-shadow(0 0 8px var(--deck-magenta-20));
+
+}
+
+
+
+html.deck-light .reveal.is-deck-progress-active .progress > .deck-progress-thumb,
+
+html.deck-light .reveal .progress:hover > .deck-progress-thumb,
+
+html.deck-light .reveal .progress.is-dragging > .deck-progress-thumb,
+
+html.deck-light .reveal .progress.is-snapping > .deck-progress-thumb {
+
+    filter: drop-shadow(0 0 12px rgba(200, 36, 100, 0.45));
+
+}
+
+
+
+html.deck-light .reveal .case-card {
+
+    border-color: var(--deck-gray-200);
+
+}
+
+
+
+html.deck-light .reveal .case-card:hover,
+
+html.deck-light .reveal .case-card.is-active {
+
+    border-color: var(--sfk-magenta-light);
+
+    box-shadow: 0 0 16px var(--deck-magenta-15);
+
+}
+
+
+
+html.deck-light .reveal .major-pick-panel,
+
+html.deck-light .reveal table.sfk-table td {
+
+    border-color: var(--deck-gray-200);
+
+}
+
+
+
+html.deck-light .reveal .major-pick-chip {
+
+    background: var(--deck-white);
+
+    border-color: var(--deck-gray-300);
+
+    color: var(--deck-gray-800);
+
+}
+
+
+
+html.deck-light .reveal .major-pick-chip.is-selected {
+
+    background: color-mix(in srgb, var(--chip-accent) 14%, var(--deck-white));
+
+}
+
+
+
+html.deck-light .reveal .portfolio-axis-chip,
+
+html.deck-light .reveal .portfolio-axis-result {
+
+    background: var(--deck-white);
+
+    border-color: var(--deck-gray-300);
+
+}
+
+
+
+html.deck-light .reveal .portfolio-axis-chip[data-axis="trait"].is-selected,
+
+html.deck-light .reveal .portfolio-axis-chip[data-axis="school"].is-selected,
+
+html.deck-light .reveal .portfolio-axis-chip[data-axis="trend"].is-selected {
+
+    background: var(--deck-white);
+
+}
+
+
+
+html.deck-light .reveal .slide-portfolio-trends .portfolio-axis-panel .portfolio-axis-result.is-ready .portfolio-axis-insight,
+
+html.deck-light .reveal .slide-portfolio-trends .portfolio-axis-panel .portfolio-axis-result.is-ready .portfolio-axis-insight-label {
+
+    color: var(--deck-gray-900);
+
+}
+
+
+
+html.deck-light .reveal .salary-toggle-btn {
+
+    border-color: var(--deck-gray-200);
+
+    background: var(--deck-white);
+
+    color: var(--deck-gray-600);
+
+}
+
+
+
+html.deck-light .reveal .salary-toggle-btn.is-active {
+
+    color: var(--deck-white);
+
+    background: var(--sfk-magenta);
+
+    border-color: var(--sfk-magenta);
+
+}
+
+
+
+html.deck-light .reveal .salary-toggle-btn:hover:not(.is-active) {
+
+    color: var(--sfk-magenta);
+
+    background: var(--deck-magenta-10);
+
+    border-color: var(--sfk-magenta);
+
+}
+
+
+
+html.deck-light .reveal .surround-mesh-grid canvas[data-surround-mesh-grid-canvas] {
+
+    opacity: 0.72;
+
+}
+
+
+
+html.deck-light .reveal .surround-mesh-grid.is-mesh-flash canvas[data-surround-mesh-grid-canvas],
+
+html.deck-light .reveal .surround-mesh-grid.is-mesh-flash canvas[data-surround-mesh-link-canvas] {
+
+    animation: surround-mesh-flash-light 720ms cubic-bezier(0.22, 1, 0.36, 1);
+
+}
+
+
+
+@keyframes surround-mesh-flash-light {
+
+    0% {
+
+        opacity: 0.18;
+
+        filter: brightness(1.35) drop-shadow(-4px 0 rgba(200, 36, 100, 0.45)) drop-shadow(4px 0 rgba(72, 168, 240, 0.28));
+
+    }
+
+    38% {
+
+        opacity: 0.88;
+
+        filter: brightness(1.15) drop-shadow(0 0 10px rgba(200, 36, 100, 0.35));
+
+    }
+
+    100% {
+
+        opacity: 0.72;
+
+        filter: brightness(1) drop-shadow(0 0 0 transparent);
+
+    }
+
+}
+
+

@@ -1,0 +1,127 @@
+{
+  "years": ["2020", "2021", "2022", "2023", "2024", "2025"],
+  "countryOrder": ["cn", "us", "uk", "jp"],
+  "tableRoles": ["art", "design", "ta"],
+  "defaultVisibleRoles": ["art", "design", "ta"],
+  "roles": [
+    { "id": "dev", "name": "游戏程序", "colorKey": "magenta" },
+    { "id": "art", "name": "游戏美术", "colorKey": "magentaLight" },
+    { "id": "design", "name": "游戏策划", "colorKey": "cyan" },
+    { "id": "ta", "name": "技术美术 TA", "colorKey": "teal" },
+    { "id": "audio", "name": "游戏音频", "colorKey": "blue" },
+    { "id": "producer", "name": "游戏制作人", "colorKey": "gold" },
+    { "id": "ui", "name": "游戏 UI", "colorKey": "purple" },
+    { "id": "anim", "name": "游戏动画", "colorKey": "orange" },
+    { "id": "qa", "name": "游戏测试 QA", "colorKey": "gray" }
+  ],
+  "countries": {
+    "cn": {
+      "label": "中国",
+      "yAxis": { "name": "薪资 (万/年)" },
+      "salaryFormat": "wan",
+      "series": {
+        "dev": { "salary": [28, 30, 34, 38, 42, 48], "demand": [72, 76, 80, 85, 90, 94] },
+        "art": { "salary": [22, 24, 26, 30, 34, 38], "demand": [70, 73, 78, 82, 86, 88] },
+        "design": { "salary": [18, 19, 21, 24, 27, 30], "demand": [68, 70, 72, 74, 76, 78] },
+        "ta": { "salary": [26, 28, 32, 36, 42, 48], "demand": [75, 80, 86, 92, 96, 98] },
+        "audio": { "salary": [16, 17, 19, 22, 25, 28], "demand": [62, 64, 68, 70, 73, 75] },
+        "producer": { "salary": [30, 32, 36, 42, 48, 55], "demand": [74, 78, 82, 86, 90, 92] },
+        "ui": { "salary": [20, 22, 24, 28, 32, 36], "demand": [69, 72, 76, 80, 84, 86] },
+        "anim": { "salary": [19, 21, 23, 27, 31, 35], "demand": [71, 74, 78, 82, 85, 87] },
+        "qa": { "salary": [14, 15, 17, 19, 22, 25], "demand": [65, 67, 70, 72, 74, 76] }
+      },
+      "table": [
+        { "role": "游戏程序", "range": "25 – 55 万/年", "trend": "↑ 稳定", "trendType": "up" },
+        { "role": "游戏美术", "range": "18 – 45 万/年", "trend": "↑ 回暖", "trendType": "up" },
+        { "role": "游戏策划", "range": "15 – 35 万/年", "trend": "→ 平稳", "trendType": "flat" },
+        { "role": "技术美术 TA", "range": "22 – 50 万/年", "trend": "↑↑ 紧缺", "trendType": "up" },
+        { "role": "游戏音频", "range": "14 – 32 万/年", "trend": "→ 平稳", "trendType": "flat" },
+        { "role": "游戏制作人", "range": "28 – 60 万/年", "trend": "↑ 稳定", "trendType": "up" },
+        { "role": "游戏 UI", "range": "16 – 40 万/年", "trend": "↑ 回暖", "trendType": "up" },
+        { "role": "游戏动画", "range": "15 – 38 万/年", "trend": "↑ 需求增", "trendType": "up" },
+        { "role": "游戏测试 QA", "range": "12 – 28 万/年", "trend": "→ 平稳", "trendType": "flat" }
+      ]
+    },
+    "us": {
+      "label": "美国",
+      "yAxis": { "name": "薪资 (k USD)" },
+      "salaryFormat": "usd_k",
+      "series": {
+        "dev": { "salary": [92, 96, 102, 108, 115, 125], "demand": [78, 82, 86, 90, 94, 97] },
+        "art": { "salary": [72, 76, 80, 85, 90, 96], "demand": [74, 76, 80, 83, 86, 88] },
+        "design": { "salary": [65, 68, 72, 76, 82, 88], "demand": [66, 68, 70, 72, 74, 76] },
+        "ta": { "salary": [88, 94, 100, 108, 118, 128], "demand": [82, 86, 90, 94, 97, 99] },
+        "audio": { "salary": [58, 62, 66, 70, 76, 82], "demand": [64, 66, 68, 70, 72, 74] },
+        "producer": { "salary": [95, 100, 108, 118, 128, 140], "demand": [76, 80, 84, 88, 92, 94] },
+        "ui": { "salary": [68, 72, 76, 82, 88, 94], "demand": [70, 73, 76, 80, 83, 85] },
+        "anim": { "salary": [70, 74, 78, 84, 90, 96], "demand": [72, 75, 78, 82, 85, 87] },
+        "qa": { "salary": [52, 55, 58, 62, 68, 74], "demand": [63, 65, 67, 69, 71, 73] }
+      },
+      "table": [
+        { "role": "游戏程序", "range": "90 – 140k USD", "trend": "↑ 稳定", "trendType": "up" },
+        { "role": "游戏美术", "range": "60 – 105k USD", "trend": "↑ 回暖", "trendType": "up" },
+        { "role": "游戏策划", "range": "55 – 95k USD", "trend": "→ 平稳", "trendType": "flat" },
+        { "role": "技术美术 TA", "range": "80 – 135k USD", "trend": "↑↑ 紧缺", "trendType": "up" },
+        { "role": "游戏音频", "range": "50 – 90k USD", "trend": "→ 平稳", "trendType": "flat" },
+        { "role": "游戏制作人", "range": "95 – 155k USD", "trend": "↑ 稳定", "trendType": "up" },
+        { "role": "游戏 UI", "range": "58 – 100k USD", "trend": "↑ 回暖", "trendType": "up" },
+        { "role": "游戏动画", "range": "55 – 98k USD", "trend": "↑ 需求增", "trendType": "up" },
+        { "role": "游戏测试 QA", "range": "48 – 82k USD", "trend": "→ 平稳", "trendType": "flat" }
+      ]
+    },
+    "uk": {
+      "label": "英国",
+      "yAxis": { "name": "薪资 (k GBP)" },
+      "salaryFormat": "gbp_k",
+      "series": {
+        "dev": { "salary": [42, 44, 48, 52, 56, 62], "demand": [70, 74, 78, 82, 86, 88] },
+        "art": { "salary": [32, 34, 36, 40, 44, 48], "demand": [68, 71, 75, 78, 82, 84] },
+        "design": { "salary": [28, 30, 32, 36, 40, 44], "demand": [64, 66, 68, 70, 72, 74] },
+        "ta": { "salary": [38, 40, 44, 48, 54, 60], "demand": [76, 80, 84, 88, 92, 94] },
+        "audio": { "salary": [26, 28, 30, 34, 38, 42], "demand": [60, 62, 65, 67, 69, 71] },
+        "producer": { "salary": [44, 46, 50, 56, 62, 68], "demand": [72, 76, 80, 83, 86, 88] },
+        "ui": { "salary": [30, 32, 34, 38, 42, 46], "demand": [66, 69, 72, 75, 78, 80] },
+        "anim": { "salary": [30, 32, 35, 39, 43, 47], "demand": [67, 70, 73, 76, 79, 81] },
+        "qa": { "salary": [24, 26, 28, 30, 34, 38], "demand": [61, 63, 65, 67, 69, 71] }
+      },
+      "table": [
+        { "role": "游戏程序", "range": "38 – 68k GBP", "trend": "↑ 稳定", "trendType": "up" },
+        { "role": "游戏美术", "range": "28 – 52k GBP", "trend": "↑ 回暖", "trendType": "up" },
+        { "role": "游戏策划", "range": "26 – 48k GBP", "trend": "→ 平稳", "trendType": "flat" },
+        { "role": "技术美术 TA", "range": "36 – 65k GBP", "trend": "↑ 紧缺", "trendType": "up" },
+        { "role": "游戏音频", "range": "24 – 45k GBP", "trend": "→ 平稳", "trendType": "flat" },
+        { "role": "游戏制作人", "range": "40 – 72k GBP", "trend": "↑ 稳定", "trendType": "up" },
+        { "role": "游戏 UI", "range": "26 – 50k GBP", "trend": "↑ 回暖", "trendType": "up" },
+        { "role": "游戏动画", "range": "26 – 48k GBP", "trend": "↑ 需求增", "trendType": "up" },
+        { "role": "游戏测试 QA", "range": "22 – 40k GBP", "trend": "→ 平稳", "trendType": "flat" }
+      ]
+    },
+    "jp": {
+      "label": "日本",
+      "yAxis": { "name": "薪资 (万日元/年)" },
+      "salaryFormat": "jpy_man",
+      "series": {
+        "dev": { "salary": [520, 540, 580, 620, 660, 720], "demand": [68, 72, 76, 80, 84, 86] },
+        "art": { "salary": [420, 440, 470, 510, 550, 590], "demand": [66, 69, 73, 76, 80, 82] },
+        "design": { "salary": [380, 400, 430, 460, 500, 540], "demand": [64, 66, 68, 70, 72, 74] },
+        "ta": { "salary": [480, 500, 540, 580, 630, 680], "demand": [74, 78, 82, 86, 90, 92] },
+        "audio": { "salary": [360, 380, 400, 430, 470, 510], "demand": [60, 62, 64, 66, 68, 70] },
+        "producer": { "salary": [550, 570, 610, 660, 710, 780], "demand": [70, 74, 78, 82, 85, 87] },
+        "ui": { "salary": [400, 420, 450, 490, 530, 570], "demand": [65, 68, 71, 74, 77, 79] },
+        "anim": { "salary": [410, 430, 460, 500, 540, 580], "demand": [67, 70, 73, 76, 79, 81] },
+        "qa": { "salary": [340, 360, 380, 410, 440, 480], "demand": [59, 61, 63, 65, 67, 69] }
+      },
+      "table": [
+        { "role": "游戏程序", "range": "480 – 780 万日元", "trend": "↑ 稳定", "trendType": "up" },
+        { "role": "游戏美术", "range": "380 – 620 万日元", "trend": "↑ 回暖", "trendType": "up" },
+        { "role": "游戏策划", "range": "350 – 560 万日元", "trend": "→ 平稳", "trendType": "flat" },
+        { "role": "技术美术 TA", "range": "450 – 720 万日元", "trend": "↑ 紧缺", "trendType": "up" },
+        { "role": "游戏音频", "range": "330 – 540 万日元", "trend": "→ 平稳", "trendType": "flat" },
+        { "role": "游戏制作人", "range": "500 – 850 万日元", "trend": "↑ 稳定", "trendType": "up" },
+        { "role": "游戏 UI", "range": "360 – 600 万日元", "trend": "↑ 回暖", "trendType": "up" },
+        { "role": "游戏动画", "range": "370 – 610 万日元", "trend": "↑ 需求增", "trendType": "up" },
+        { "role": "游戏测试 QA", "range": "320 – 500 万日元", "trend": "→ 平稳", "trendType": "flat" }
+      ]
+    }
+  }
+}

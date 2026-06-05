@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <script>
+
+    (function () {
+
+        var path = window.location.pathname || '';
+
+        var match = path.match(/(?:^|\/)r\/([A-Za-z0-9]{4,8})\/?$/i);
+
+        if (match) window.__REMOTE_ROOM = match[1].toUpperCase();
+
+        try {
+
+            if (!window.__REMOTE_ROOM) {
+
+                var saved = sessionStorage.getItem('deckRemoteRoom');
+
+                if (saved) window.__REMOTE_ROOM = saved.toUpperCase();
+
+            }
+
+        } catch (e) { /* ignore */ }
+
+    })();
+
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <title>翻页笔</title>
+
+    <link rel="stylesheet" href="/remoteNavigator/remote.css?v=9">
+
+</head>
+
+<body>
+
+    <div id="room-prompt" class="room-prompt" hidden>
+
+        <h1>连接翻页笔</h1>
+
+        <p id="room-hint">请从主讲端扫码；若扫码后仍在此页，请直接输入房间码</p>
+
+        <form id="room-form" class="room-form">
+
+            <label class="room-form-label" for="room-input">房间码（主讲页 QR 面板中显示）</label>
+
+            <input id="room-input" class="room-input" type="text" inputmode="text" autocapitalize="characters"
+
+                autocomplete="off" maxlength="8" placeholder="例如 PMA8QJ">
+
+            <button id="room-connect" type="submit" class="room-connect-btn">连接</button>
+
+        </form>
+
+    </div>
+
+
+
+    <main id="remote-main" class="remote-main" hidden>
+
+        <header class="remote-header">
+
+            <p id="remote-deck-title" class="remote-deck-title">—</p>
+
+            <p id="remote-position" class="remote-position">—</p>
+
+            <p id="remote-slide-title" class="remote-slide-title">等待同步…</p>
+
+            <p id="connection-status" class="connection-status" data-kind="pending">连接中…</p>
+
+            <p class="room-label">房间 <span id="room-label">—</span></p>
+
+        </header>
+
+
+
+        <div class="remote-nav">
+
+            <button type="button" id="btn-prev" class="nav-btn nav-btn-prev">上一页</button>
+
+            <button type="button" id="btn-next" class="nav-btn nav-btn-next">下一页</button>
+
+        </div>
+
+
+
+        <section id="focus-section" class="focus-section">
+
+            <p id="remote-focus-label" class="remote-focus-label">本页无互动焦点</p>
+
+            <div class="focus-pad" id="focus-pad">
+
+                <button type="button" class="focus-btn focus-btn-up" data-focus-dir="up" aria-label="焦点上移">↑</button>
+
+                <div class="focus-pad-mid">
+
+                    <button type="button" class="focus-btn focus-btn-left" data-focus-dir="left" aria-label="焦点左移">←</button>
+
+                    <button type="button" id="btn-focus-confirm" class="focus-btn focus-btn-confirm" aria-label="确认">✓</button>
+
+                    <button type="button" class="focus-btn focus-btn-right" data-focus-dir="right" aria-label="焦点右移">→</button>
+
+                </div>
+
+                <button type="button" class="focus-btn focus-btn-down" data-focus-dir="down" aria-label="焦点下移">↓</button>
+
+            </div>
+
+            <button type="button" id="btn-focus-mode" class="focus-mode-toggle" aria-pressed="false">互动模式 · 关</button>
+
+        </section>
+
+
+
+        <section class="chapter-section">
+
+            <h2 class="chapter-heading">章节跳转</h2>
+
+            <div id="chapter-list" class="chapter-list"></div>
+
+        </section>
+
+    </main>
+
+
+
+    <script src="/remoteNavigator/scripts/protocol.js?v=5"></script>
+
+    <script src="/remoteNavigator/scripts/ws-client.js?v=5"></script>
+
+    <script src="/remoteNavigator/scripts/remote-ui.js?v=7"></script>
+
+</body>
+
+</html>
+
+

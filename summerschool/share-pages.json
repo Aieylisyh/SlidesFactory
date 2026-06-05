@@ -1,0 +1,40 @@
+{
+  "pages": {
+    "title": {
+      "slideId": "title",
+      "title": "USC × 游研社 · 夏校课程说明会"
+    },
+    "team": {
+      "slideId": "team",
+      "title": "教学团队"
+    },
+    "schedule": {
+      "slideId": "schedule",
+      "title": "日程安排"
+    },
+    "schedule-offline": {
+      "slideId": "schedule-offline",
+      "title": "日程安排 · 线下"
+    },
+    "experience": {
+      "slideId": "experience",
+      "title": "核心体验"
+    },
+    "venue": {
+      "slideId": "venue",
+      "title": "场地介绍"
+    },
+    "support": {
+      "slideId": "support",
+      "title": "课程支持"
+    },
+    "homework": {
+      "slideId": "homework",
+      "title": "课前作业"
+    },
+    "tips": {
+      "slideId": "tips",
+      "title": "小贴士"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+# 若 prefer 手动配置 coscli，可复制为 cos.yaml 并填写（cos.yaml 已被 git 忽略）
+# 使用 sync.ps1 时也可只填 sync.env，脚本会自动生成本文件
+
+cos:
+  base:
+    secretid: your-tencent-cam-secret-id
+    secretkey: your-tencent-cam-secret-key
+    protocol: https
+  buckets:
+    - name: publicity-1256190400
+      alias: site
+      region: ap-osaka
+      endpoint: cos.ap-osaka.myqcloud.com

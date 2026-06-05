@@ -1,0 +1,176 @@
+﻿/* ==========================================================================
+   SFK Reveal Deck — 07-mesh-lightbox.css
+   Growth timeline, chat lightbox, surround-mesh slide chrome
+   Part of style_guide.css split — see guides/style_guide.md §CSS Architecture
+   ========================================================================== */
+
+/* --- Growth timeline expand --- */
+.reveal .growth-timeline-grid .growth-stage-card {
+    cursor: default;
+    transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.reveal .growth-stage-card .growth-stage-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.82em;
+    color: var(--sfk-magenta);
+    transition: color 0.25s ease;
+}
+
+.reveal .growth-stage-chevron {
+    font-size: 1.35em;
+    line-height: 1;
+    color: var(--sfk-magenta);
+    transition: transform 0.25s ease, color 0.25s ease;
+    flex-shrink: 0;
+}
+
+.reveal .growth-stage-card.is-expanded {
+    border-top-color: var(--text-main);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.reveal .growth-stage-card.is-expanded .growth-stage-toggle {
+    color: var(--text-main);
+}
+
+.reveal .growth-stage-card.is-expanded .growth-stage-chevron {
+    transform: rotate(180deg);
+    color: var(--text-main);
+}
+
+.reveal .growth-stage-body {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.25s ease;
+    margin-top: 0;
+}
+
+.reveal .growth-stage-card.is-expanded .growth-stage-body {
+    max-height: 320px;
+    opacity: 1;
+    margin-top: calc(0.5em + 2lh);
+}
+
+.reveal .growth-stage-card.is-expanded .growth-stage-body li {
+    font-size: 0.56em;
+    line-height: 1.85;
+}
+
+/* Growth slide — all stages visible by default, no expand chrome */
+.reveal .slide-major-growth .growth-stage-body {
+    max-height: none;
+    overflow: visible;
+    opacity: 1;
+    margin-top: 10px;
+}
+
+.reveal .slide-major-growth .major-prism-card h3 {
+    color: var(--sfk-magenta);
+    margin-bottom: 0;
+}
+
+.reveal .slide-major-growth .growth-stage-body ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.reveal .slide-major-growth .growth-stage-body li {
+    font-size: 0.46em;
+    line-height: 1.55;
+}
+
+/* --- Chat screenshot lightbox --- */
+.reveal .tech-image-container.chat-shot-zoomable {
+    cursor: zoom-in;
+}
+
+.reveal .tech-image-container.chat-shot-zoomable:focus-visible {
+    outline: 2px solid var(--sfk-magenta);
+    outline-offset: 2px;
+}
+
+.chat-lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.92);
+    cursor: zoom-out;
+    opacity: 0;
+    transition: opacity 0.22s ease;
+}
+
+.chat-lightbox-overlay.is-open {
+    opacity: 1;
+}
+
+.chat-lightbox-overlay[hidden] {
+    display: none !important;
+}
+
+.chat-lightbox-img {
+    max-width: min(96vw, 1400px);
+    max-height: 96vh;
+    object-fit: contain;
+    pointer-events: none;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55);
+}
+
+body.is-chat-lightbox-open {
+    overflow: hidden;
+}
+
+/* --- Section / major mesh backgrounds --- */
+/* Pass pointer through empty content to slide root — keeps cursor visible on grid backdrop */
+.reveal [data-surround-mesh-slide] {
+    cursor: default;
+}
+
+.reveal [data-surround-mesh-slide] .slide-content-layer {
+    pointer-events: none;
+    cursor: default;
+}
+
+.reveal [data-surround-mesh-slide] .slide-content-layer > *,
+.reveal [data-surround-mesh-slide] .slide-content-layer .interactive-zone,
+.reveal [data-surround-mesh-slide] .slide-content-layer .interactive-zone * {
+    pointer-events: auto;
+}
+
+.reveal .slide-portfolio-traits.interactive-zone[data-surround-mesh-slide],
+.reveal .slide-portfolio-schools.interactive-zone[data-surround-mesh-slide] {
+    cursor: crosshair;
+}
+
+.reveal [data-surround-mesh-slide].section-opener,
+.reveal .slide-major[data-surround-mesh-slide] {
+    position: relative;
+}
+
+.reveal [data-surround-mesh-slide].section-opener .slide-content-layer,
+.reveal .slide-major[data-surround-mesh-slide] .slide-content-layer {
+    position: relative;
+    z-index: 2;
+}
+
+.reveal [data-surround-mesh-slide].section-opener .surround-mesh-grid {
+    -webkit-mask-image: radial-gradient(ellipse 44% 40% at 50% 50%, transparent 0%, transparent 38%, #000 70%);
+    mask-image: radial-gradient(ellipse 44% 40% at 50% 50%, transparent 0%, transparent 38%, #000 70%);
+}
+
+.reveal .slide-major-mesh-host .surround-mesh-grid {
+    -webkit-mask-image: radial-gradient(ellipse 48% 42% at 50% 48%, transparent 0%, transparent 32%, #000 64%);
+    mask-image: radial-gradient(ellipse 48% 42% at 50% 48%, transparent 0%, transparent 32%, #000 64%);
+}
+

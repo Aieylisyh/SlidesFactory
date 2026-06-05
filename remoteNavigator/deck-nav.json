@@ -1,0 +1,712 @@
+{
+  "version": 2,
+  "deckId": "index",
+  "deckTitle": "数字娱乐技术的就业",
+  "deckPath": "index.html",
+  "navFile": "deck-nav.json",
+  "generatedAt": "2026-06-05T04:02:21.752Z",
+  "linear": true,
+  "totalSlides": 32,
+  "chapters": [
+    {
+      "id": "portfolio-planning",
+      "title": "作品集规划",
+      "agendaIndex": 1,
+      "startIndex": 2
+    },
+    {
+      "id": "case-studies",
+      "title": "往届优秀学员就业案例",
+      "agendaIndex": 2,
+      "startIndex": 6
+    },
+    {
+      "id": "employment-global",
+      "title": "全球就业形势与薪资",
+      "agendaIndex": 3,
+      "startIndex": 23
+    },
+    {
+      "id": "major-direction",
+      "title": "如何选专业方向",
+      "agendaIndex": 4,
+      "startIndex": 27
+    }
+  ],
+  "slides": [
+    {
+      "index": 0,
+      "h": 0,
+      "v": 0,
+      "id": "title",
+      "className": "title-slide title-slide-surround-bg",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-surround-mesh-slide": ""
+      },
+      "kind": "cover",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "数字娱乐技术的就业",
+      "shareSlug": "title"
+    },
+    {
+      "index": 1,
+      "h": 1,
+      "v": 0,
+      "id": "agenda",
+      "className": "content-slide slide-agenda",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-segment-arrow": "true"
+      },
+      "kind": "agenda",
+      "chapterId": null,
+      "focusProfile": "segment-arrow-4",
+      "focusTargets": [
+        {
+          "id": "agenda-seg-1",
+          "selector": "[data-segment-arrow-segment][data-goto='#/portfolio-planning']",
+          "action": "click",
+          "order": 1
+        },
+        {
+          "id": "agenda-seg-2",
+          "selector": "[data-segment-arrow-segment][data-goto='#/case-studies']",
+          "action": "click",
+          "order": 2
+        },
+        {
+          "id": "agenda-seg-3",
+          "selector": "[data-segment-arrow-segment][data-goto='#/employment-global']",
+          "action": "click",
+          "order": 3
+        },
+        {
+          "id": "agenda-seg-4",
+          "selector": "[data-segment-arrow-segment][data-goto='#/major-direction']",
+          "action": "click",
+          "order": 4
+        }
+      ],
+      "title": "议程",
+      "shareSlug": "agenda"
+    },
+    {
+      "index": 2,
+      "h": 2,
+      "v": 0,
+      "id": "portfolio-planning",
+      "className": "content-slide section-opener",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-tier": "key"
+      },
+      "kind": "opener",
+      "chapterId": "portfolio-planning",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "作品集规划",
+      "shareSlug": "portfolio-planning"
+    },
+    {
+      "index": 3,
+      "h": 2,
+      "v": 1,
+      "id": "portfolio-traits",
+      "className": "content-slide slide-portfolio slide-portfolio-traits interactive-zone",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-skip": "",
+        "data-surround-mesh-slide": ""
+      },
+      "kind": "content",
+      "chapterId": "portfolio-planning",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "针对学生特点",
+      "shareSlug": "portfolio-traits"
+    },
+    {
+      "index": 4,
+      "h": 2,
+      "v": 2,
+      "id": "portfolio-schools",
+      "className": "content-slide slide-portfolio slide-portfolio-schools interactive-zone",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-surround-mesh-slide": ""
+      },
+      "kind": "content",
+      "chapterId": "portfolio-planning",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "针对目前院校",
+      "shareSlug": "portfolio-schools"
+    },
+    {
+      "index": 5,
+      "h": 2,
+      "v": 3,
+      "id": "portfolio-trends",
+      "className": "content-slide slide-portfolio slide-portfolio-trends",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-surround-mesh-slide": "",
+        "data-portfolio-axis": "true"
+      },
+      "kind": "content",
+      "chapterId": "portfolio-planning",
+      "focusProfile": "portfolio-axis",
+      "focusTargets": [
+        {
+          "id": "portfolio-axis-1",
+          "selector": ".portfolio-axis-chip",
+          "action": "click",
+          "order": 1,
+          "dynamic": true
+        }
+      ],
+      "title": "针对时下热点",
+      "shareSlug": "portfolio-trends"
+    },
+    {
+      "index": 6,
+      "h": 3,
+      "v": 0,
+      "id": "case-studies",
+      "className": "content-slide section-opener",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-key": "zoom-blur"
+      },
+      "kind": "opener",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "往届优秀学员就业案例",
+      "shareSlug": "case-studies"
+    },
+    {
+      "index": 7,
+      "h": 4,
+      "v": 0,
+      "id": "case-match",
+      "className": "content-slide",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-match-game": "true",
+        "data-transition-key": "curtain"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": "case-match-page",
+      "focusTargets": [
+        {
+          "id": "case-card-cui",
+          "selector": "[data-case-card][data-goto='#/case-cui']",
+          "action": "click",
+          "order": 1
+        },
+        {
+          "id": "case-card-huang",
+          "selector": "[data-case-card][data-goto='#/case-huang']",
+          "action": "click",
+          "order": 2
+        },
+        {
+          "id": "case-card-li",
+          "selector": "[data-case-card][data-goto='#/case-li']",
+          "action": "click",
+          "order": 3
+        },
+        {
+          "id": "case-card-lu",
+          "selector": "[data-case-card][data-goto='#/case-lu']",
+          "action": "click",
+          "order": 4
+        },
+        {
+          "id": "case-card-ma",
+          "selector": "[data-case-card][data-goto='#/case-ma']",
+          "action": "click",
+          "order": 5
+        },
+        {
+          "id": "match-pool",
+          "selector": ".match-pool .match-chip",
+          "action": "click",
+          "order": 6,
+          "dynamic": true
+        },
+        {
+          "id": "match-targets",
+          "selector": ".match-targets .match-chip",
+          "action": "click",
+          "order": 7,
+          "dynamic": true
+        }
+      ],
+      "title": "学员去向对对碰",
+      "shareSlug": "case-match"
+    },
+    {
+      "index": 8,
+      "h": 5,
+      "v": 0,
+      "id": "case-cui",
+      "className": "content-slide",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-image-lightbox": ""
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "崔同学 · 从南艺到腾讯天美",
+      "shareSlug": "case-cui"
+    },
+    {
+      "index": 9,
+      "h": 5,
+      "v": 1,
+      "id": "case-cui-projects",
+      "className": "content-slide slide-case-project-cui",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-key": "flip-y"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "崔同学 · 在 SFK 完成的项目",
+      "shareSlug": "case-cui-projects"
+    },
+    {
+      "index": 10,
+      "h": 5,
+      "v": 2,
+      "id": "case-cui-tfe-video",
+      "className": "content-slide slide-cui-tfe-video",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-bilibili-embed": "BV1UM4m1o7S3"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "崔同学 · TFE 演示视频",
+      "shareSlug": "case-cui-tfe-video"
+    },
+    {
+      "index": 11,
+      "h": 5,
+      "v": 3,
+      "id": "case-cui-indie",
+      "className": "content-slide slide-cui-indie",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-image-lightbox": ""
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "崔同学 · 独立游戏与商业化",
+      "shareSlug": "case-cui-indie"
+    },
+    {
+      "index": 12,
+      "h": 5,
+      "v": 4,
+      "id": "case-cui-commercial",
+      "className": "content-slide slide-image-full slide-cui-commercial-plan",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-image-lightbox": ""
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "在学校设计的游戏商业化企划",
+      "shareSlug": "case-cui-commercial"
+    },
+    {
+      "index": 13,
+      "h": 6,
+      "v": 0,
+      "id": "case-huang",
+      "className": "content-slide slide-huang-intro",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "黄同学 · 从网瘾少女到网易设计师",
+      "shareSlug": "case-huang"
+    },
+    {
+      "index": 14,
+      "h": 6,
+      "v": 1,
+      "id": "case-huang-admission",
+      "className": "content-slide slide-wechat-board slide-huang-admission",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "黄同学 · 录取与入职",
+      "shareSlug": "case-huang-admission"
+    },
+    {
+      "index": 15,
+      "h": 7,
+      "v": 0,
+      "id": "case-li",
+      "className": "content-slide slide-li-intro",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "李同学 · 从 600 份简历到大厂",
+      "shareSlug": "case-li"
+    },
+    {
+      "index": 16,
+      "h": 7,
+      "v": 1,
+      "id": "case-li-feedback-1",
+      "className": "content-slide slide-wechat-board slide-wechat-enlarge slide-li-feedback-top",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "李同学 · 求职与入职反馈（上）",
+      "shareSlug": "case-li-feedback-1"
+    },
+    {
+      "index": 17,
+      "h": 7,
+      "v": 2,
+      "id": "case-li-feedback-2",
+      "className": "content-slide slide-wechat-board",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "李同学 · 求职与入职反馈（下）",
+      "shareSlug": "case-li-feedback-2"
+    },
+    {
+      "index": 18,
+      "h": 8,
+      "v": 0,
+      "id": "case-lu",
+      "className": "content-slide",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "卢同学 · 犹他大学到育碧、米哈游",
+      "shareSlug": "case-lu"
+    },
+    {
+      "index": 19,
+      "h": 8,
+      "v": 1,
+      "id": "case-lu-transition",
+      "className": "content-slide slide-wechat-board slide-lu-transition",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "卢同学 · 从育碧到米哈游",
+      "shareSlug": "case-lu-transition"
+    },
+    {
+      "index": 20,
+      "h": 9,
+      "v": 0,
+      "id": "case-ma",
+      "className": "content-slide",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "马同学 · 不出国也能进大厂",
+      "shareSlug": "case-ma"
+    },
+    {
+      "index": 21,
+      "h": 9,
+      "v": 1,
+      "id": "case-ma-progress-1",
+      "className": "content-slide slide-wechat-board slide-ma-progress",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "马同学 · 求职进展（一）",
+      "shareSlug": "case-ma-progress-1"
+    },
+    {
+      "index": 22,
+      "h": 9,
+      "v": 2,
+      "id": "case-ma-progress-2",
+      "className": "content-slide slide-wechat-board slide-wechat-enlarge slide-ma-progress-final",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "case-studies",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "马同学 · 求职进展（二）",
+      "shareSlug": "case-ma-progress-2"
+    },
+    {
+      "index": 23,
+      "h": 10,
+      "v": 0,
+      "id": "employment-global",
+      "className": "content-slide section-opener",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-tier": "key",
+        "data-surround-mesh-slide": ""
+      },
+      "kind": "opener",
+      "chapterId": "employment-global",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "有用的信息",
+      "shareSlug": "employment-global"
+    },
+    {
+      "index": 24,
+      "h": 11,
+      "v": 0,
+      "id": "employment-overview",
+      "className": "content-slide slide-employment slide-employment-global",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "employment-global",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "全球就业整体形势",
+      "shareSlug": "employment-overview"
+    },
+    {
+      "index": 25,
+      "h": 12,
+      "v": 0,
+      "id": "employment-hits",
+      "className": "content-slide slide-employment slide-employment-hits",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-employment-hit-sources": "true"
+      },
+      "kind": "content",
+      "chapterId": "employment-global",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "国内现象 · 高品质内容的商业力",
+      "shareSlug": "employment-hits"
+    },
+    {
+      "index": 26,
+      "h": 13,
+      "v": 0,
+      "id": "salary-cn-us",
+      "className": "content-slide slide-employment slide-employment-salary-echarts",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-salary-echarts": "true",
+        "data-share-page": "salary-cn-us"
+      },
+      "kind": "content",
+      "chapterId": "employment-global",
+      "focusProfile": "salary-echarts",
+      "focusTargets": [
+        {
+          "id": "salary-echarts-1",
+          "selector": ".salary-toggle-btn",
+          "action": "click",
+          "order": 1,
+          "dynamic": true
+        },
+        {
+          "id": "salary-echarts-2",
+          "selector": ".salary-echarts-legend-item",
+          "action": "click",
+          "order": 2,
+          "dynamic": true
+        },
+        {
+          "id": "salary-echarts-3",
+          "selector": "[data-salary-play]",
+          "action": "click",
+          "order": 3,
+          "dynamic": true
+        },
+        {
+          "id": "salary-echarts-4",
+          "selector": "[data-salary-demand-help]",
+          "action": "click",
+          "order": 4,
+          "dynamic": true
+        }
+      ],
+      "title": "全球游戏行业薪资对比",
+      "shareSlug": "salary-cn-us"
+    },
+    {
+      "index": 27,
+      "h": 14,
+      "v": 0,
+      "id": "major-direction",
+      "className": "content-slide section-opener",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-tier": "key"
+      },
+      "kind": "opener",
+      "chapterId": "major-direction",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "应该如何选专业方向？",
+      "shareSlug": "major-direction"
+    },
+    {
+      "index": 28,
+      "h": 15,
+      "v": 0,
+      "id": "major-interest",
+      "className": "content-slide slide-major",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-major-picker": "true",
+        "data-transition-key": "curtain",
+        "data-surround-mesh-slide": "",
+        "data-mesh-chip-attract": ""
+      },
+      "kind": "content",
+      "chapterId": "major-direction",
+      "focusProfile": "major-picker",
+      "focusTargets": [
+        {
+          "id": "major-picker-1",
+          "selector": ".major-pick-chip",
+          "action": "click",
+          "order": 1,
+          "dynamic": true
+        }
+      ],
+      "title": "兴趣 · 能否做得下去",
+      "shareSlug": "major-interest"
+    },
+    {
+      "index": 29,
+      "h": 16,
+      "v": 0,
+      "id": "major-salary",
+      "className": "content-slide slide-major slide-major-salary",
+      "attrs": {
+        "data-background-color": "#fff"
+      },
+      "kind": "content",
+      "chapterId": "major-direction",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "薪资 · 能否立足社会",
+      "shareSlug": "major-salary"
+    },
+    {
+      "index": 30,
+      "h": 17,
+      "v": 0,
+      "id": "major-growth",
+      "className": "content-slide slide-major slide-major-growth",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-segment-arrow": "true"
+      },
+      "kind": "content",
+      "chapterId": "major-direction",
+      "focusProfile": "segment-arrow-3",
+      "focusTargets": [
+        {
+          "id": "growth-seg-1",
+          "selector": "[data-segment-arrow-segment]:nth-child(1)",
+          "action": "click",
+          "order": 1
+        },
+        {
+          "id": "growth-seg-2",
+          "selector": "[data-segment-arrow-segment]:nth-child(2)",
+          "action": "click",
+          "order": 2
+        },
+        {
+          "id": "growth-seg-3",
+          "selector": "[data-segment-arrow-segment]:nth-child(3)",
+          "action": "click",
+          "order": 3
+        }
+      ],
+      "title": "成长性 · 多年后的自己",
+      "shareSlug": "major-growth"
+    },
+    {
+      "index": 31,
+      "h": 18,
+      "v": 0,
+      "id": "closing",
+      "className": "content-slide slide-closing",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-tier": "key"
+      },
+      "kind": "closing",
+      "chapterId": "major-direction",
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "谢谢 · Q & A",
+      "shareSlug": "closing"
+    }
+  ]
+}

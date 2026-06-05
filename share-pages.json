@@ -1,0 +1,132 @@
+{
+  "pages": {
+    "title": {
+      "slideId": "title",
+      "title": "数字娱乐技术的就业"
+    },
+    "agenda": {
+      "slideId": "agenda",
+      "title": "议程"
+    },
+    "portfolio-planning": {
+      "slideId": "portfolio-planning",
+      "title": "作品集规划"
+    },
+    "portfolio-traits": {
+      "slideId": "portfolio-traits",
+      "title": "针对学生特点"
+    },
+    "portfolio-schools": {
+      "slideId": "portfolio-schools",
+      "title": "针对目前院校"
+    },
+    "portfolio-trends": {
+      "slideId": "portfolio-trends",
+      "title": "针对时下热点"
+    },
+    "case-studies": {
+      "slideId": "case-studies",
+      "title": "往届优秀学员就业案例"
+    },
+    "case-match": {
+      "slideId": "case-match",
+      "title": "学员去向对对碰"
+    },
+    "case-cui": {
+      "slideId": "case-cui",
+      "title": "崔同学 · 从南艺到腾讯天美"
+    },
+    "case-cui-projects": {
+      "slideId": "case-cui-projects",
+      "title": "崔同学 · 在 SFK 完成的项目"
+    },
+    "case-cui-indie": {
+      "slideId": "case-cui-indie",
+      "title": "崔同学 · 独立游戏与商业化"
+    },
+    "case-cui-tfe-video": {
+      "slideId": "case-cui-tfe-video",
+      "title": "崔同学 · TFE 演示视频"
+    },
+    "case-cui-commercial": {
+      "slideId": "case-cui-commercial",
+      "title": "在学校设计的游戏商业化企划"
+    },
+    "case-huang": {
+      "slideId": "case-huang",
+      "title": "黄同学 · 从网瘾少女到网易设计师"
+    },
+    "case-huang-admission": {
+      "slideId": "case-huang-admission",
+      "title": "黄同学 · 录取与入职"
+    },
+    "case-li": {
+      "slideId": "case-li",
+      "title": "李同学 · 从 600 份简历到大厂"
+    },
+    "case-li-feedback-1": {
+      "slideId": "case-li-feedback-1",
+      "title": "李同学 · 求职与入职反馈（上）"
+    },
+    "case-li-feedback-2": {
+      "slideId": "case-li-feedback-2",
+      "title": "李同学 · 求职与入职反馈（下）"
+    },
+    "case-lu": {
+      "slideId": "case-lu",
+      "title": "卢同学 · 犹他大学到育碧、米哈游"
+    },
+    "case-lu-transition": {
+      "slideId": "case-lu-transition",
+      "title": "卢同学 · 从育碧到米哈游"
+    },
+    "case-ma": {
+      "slideId": "case-ma",
+      "title": "马同学 · 不出国也能进大厂"
+    },
+    "case-ma-progress-1": {
+      "slideId": "case-ma-progress-1",
+      "title": "马同学 · 求职进展（一）"
+    },
+    "case-ma-progress-2": {
+      "slideId": "case-ma-progress-2",
+      "title": "马同学 · 求职进展（二）"
+    },
+    "employment-global": {
+      "slideId": "employment-global",
+      "title": "有用的信息"
+    },
+    "employment-overview": {
+      "slideId": "employment-overview",
+      "title": "全球就业整体形势"
+    },
+    "employment-hits": {
+      "slideId": "employment-hits",
+      "title": "国内现象 · 高品质内容的商业力"
+    },
+    "salary-cn-us": {
+      "slideId": "salary-cn-us",
+      "title": "全球游戏行业薪资对比"
+    },
+    "major-direction": {
+      "slideId": "major-direction",
+      "title": "应该如何选专业方向？"
+    },
+    "major-interest": {
+      "slideId": "major-interest",
+      "title": "兴趣 · 能否做得下去"
+    },
+    "major-salary": {
+      "slideId": "major-salary",
+      "title": "薪资 · 能否立足社会"
+    },
+    "major-growth": {
+      "slideId": "major-growth",
+      "title": "成长性 · 多年后的自己"
+    },
+    "closing": {
+      "slideId": "closing",
+      "title": "谢谢 · Q & A"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="sfk-s-g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#961848"/>
+      <stop offset="45%" stop-color="#C82464"/>
+      <stop offset="100%" stop-color="#E05688"/>
+    </linearGradient>
+  </defs>
+  <text
+    x="12"
+    y="21.5"
+    font-family="Inter, 'Arial Black', Arial, Helvetica, sans-serif"
+    font-size="19"
+    font-weight="800"
+    fill="url(#sfk-s-g)"
+    stroke="#FFFFFF"
+    stroke-width="0.55"
+    paint-order="stroke fill"
+    text-anchor="middle"
+  >S</text>
+</svg>

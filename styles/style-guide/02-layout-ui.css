@@ -1,0 +1,101 @@
+﻿/* ==========================================================================
+   SFK Reveal Deck — 02-layout-ui.css
+   Typography utilities, title/section layouts, sfk-table
+   Part of style_guide.css split — see guides/style_guide.md §CSS Architecture
+   ========================================================================== */
+
+/* --- Typography Utilities --- */
+.reveal .accent-pink {
+    color: var(--sfk-pink) !important;
+    font-weight: bold;
+}
+
+.reveal .accent-orange {
+    color: var(--sfk-orange) !important;
+    font-weight: bold;
+}
+
+.reveal .text-center {
+    text-align: center;
+}
+
+/* --- Custom Slide Layouts --- */
+
+/* Title Slide Styling */
+.reveal .title-slide h1 {
+    font-size: 2.4em;
+    margin-bottom: 0.15em;
+    flex-shrink: 0;
+}
+.reveal .title-slide .subtitle {
+    font-size: 0.42em;
+    color: var(--text-muted);
+    border-top: 2px solid var(--sfk-pink);
+    padding-top: 8px;
+    display: inline-block;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+}
+
+/* Section Header Slide (legacy — prefer .section-opener for chapter dividers) */
+.reveal .section-header {
+    background-color: var(--sfk-pink);
+    padding: 40px;
+    border-radius: 4px;
+}
+.reveal .section-header h2 {
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.reveal .section-opener .slide-content-layer {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.reveal .section-opener .disclaimer-note {
+    margin-top: 8px;
+}
+
+/* --- UI Components --- */
+
+/* Academic/Data Tables (Based on ppt配色.jpg) */
+.reveal table.sfk-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.8em;
+}
+
+.reveal table.sfk-table th {
+    background-color: var(--sfk-pink);
+    color: #FFFFFF;
+    text-align: center;
+    padding: 15px;
+    font-weight: bold;
+    border: 1px solid var(--text-muted);
+}
+
+.reveal table.sfk-table td {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    text-align: center;
+    padding: 15px;
+    border: 1px solid var(--text-muted);
+}
+
+/* Assignment / Highlight Box */
+.reveal .assignment-box {
+    background-color: var(--panel-bg);
+    border-left: 8px solid var(--sfk-pink);
+    padding: 30px;
+    text-align: left;
+    margin-top: 30px;
+}
+
+.reveal .assignment-box h3 {
+    color: var(--sfk-pink);
+    margin-top: 0;
+}
+

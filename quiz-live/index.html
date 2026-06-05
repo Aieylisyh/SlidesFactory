@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI 安全趣味抢答 · 入口</title>
+    <link rel="stylesheet" href="css/quiz-live.css">
+</head>
+<body>
+    <div class="ql-main" style="max-width:640px;margin:0 auto;">
+        <div class="ql-panel">
+            <h1 style="margin:0 0 8px;">AI 安全趣味抢答</h1>
+            <p style="margin:0 0 20px;color:var(--ql-muted);">
+                独立暖场答题系统 · 扫码登记 · 大屏同步 · 进度格计分
+            </p>
+            <ul style="line-height:2;padding-left:1.2em;color:var(--ql-muted);">
+                <li><a href="admin.html" style="color:var(--ql-accent-light);">主持控台</a> — 生成房间码与二维码</li>
+                <li><a href="screen.html?room=DEMO" style="color:var(--ql-accent-light);">大屏展示</a> — 需与控台相同 room</li>
+                <li><a href="answer.html?room=DEMO" style="color:var(--ql-accent-light);">观众答题</a> — 手机扫码入口</li>
+            </ul>
+            <p style="margin-top:20px;font-size:0.85rem;color:var(--ql-muted);">
+                启动方式见 <code>quiz-live/start-quiz-server.bat</code><br>
+                观众登记表字段见 <code>data/register-config.json</code>（详见 <code>guides/QUIZ_LIVE_GUIDE.md</code>）
+            </p>
+        </div>
+    </div>
+</body>
+</html>

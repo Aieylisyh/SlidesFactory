@@ -1,0 +1,334 @@
+﻿/* ==========================================================================
+   SFK Reveal Deck — 01-tokens-base.css
+   Design tokens (:root) + Reveal base, progress bar, slide content layer, heading defaults
+   Part of style_guide.css split — see guides/style_guide.md §CSS Architecture
+   ========================================================================== */
+
+/* ==========================================================================
+   SFK Game Animation Design - Reveal.js Custom Theme
+   See guides/style_guide.md (design rules) + guides/style_guide_extended.md (components)
+   ========================================================================== */
+
+:root {
+    /* --- Brand Colors (derived from SFK logo) --- */
+    --bg-color: #000000;              /* Logo background — pure black */
+    --panel-bg: #111111;
+    --text-main: #FFFFFF;             /* Logo secondary text */
+    --text-muted: #B3B3B3;
+
+    /* Logo SFK letter fill — deep magenta-crimson (not neon red) */
+    --sfk-magenta: #C82464;
+    --sfk-magenta-light: #E05688;    /* Lighter tint — dual-column / path B */
+    --sfk-magenta-mid: #D43272;      /* Gradient midpoint */
+    --sfk-magenta-dark: #961848;     /* Stamp ring / depth */
+    --sfk-magenta-r: 200;
+    --sfk-magenta-g: 36;
+    --sfk-magenta-b: 100;
+    --sfk-magenta-light-r: 224;
+    --sfk-magenta-light-g: 86;
+    --sfk-magenta-light-b: 136;
+
+    /* Semantic aliases — HTML classes accent-pink / accent-orange unchanged */
+    --sfk-pink: var(--sfk-magenta);
+    --sfk-orange: var(--sfk-magenta-light);
+
+    /* Logo DMA 方块橙（右上角联合标识） */
+    --sfk-logo-orange: #F48C48;
+    --sfk-logo-gold: #E8B040;
+    --sfk-logo-orange-r: 244;
+    --sfk-logo-orange-g: 140;
+    --sfk-logo-orange-b: 72;
+    --sfk-logo-gold-r: 232;
+    --sfk-logo-gold-g: 176;
+    --sfk-logo-gold-b: 64;
+
+    /* Module accents (non-brand — portfolio hotspot slide) */
+    --sfk-cyan: #00D4FF;
+    --sfk-teal: #00C896;
+    --sfk-blue: #48A8F0;
+
+    /* --- Typography --- */
+    --font-sans: 'Inter', '-apple-system', 'BlinkMacSystemFont', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-case-highlight: 0.85em;
+    --font-case-body-sm: 0.62em;
+    --font-brand-footer: 0.5em;
+    --line-height-body: 1.6;
+
+    /* --- Slide canvas (logical px; height toggles 1080/1200 via main.js) --- */
+    --slide-width: 1920;
+    --slide-height: 1080;
+    --slide-padding-x: 48px;
+    --slide-padding-y: 32px;
+    --slide-padding-bottom: 40px;
+    --slide-brand-logo-max-width: 180px;
+    --slide-brand-logo-ratio: 0.272;
+    --slide-brand-logo-display-height: calc(var(--slide-brand-logo-max-width) * var(--slide-brand-logo-ratio));
+    /* Wide/short logos must not shrink the title band (was tied 1:1 to image height). */
+    --slide-brand-logo-layout-height: max(
+        var(--slide-brand-logo-display-height),
+        calc(var(--slide-brand-logo-max-width) * 0.537)
+    );
+    --slide-title-zone-height: calc(var(--slide-brand-logo-layout-height) - var(--slide-padding-y) + 6px);
+    --slide-title-max-width: 70%;
+    --slide-title-font-max: 3.5em;
+    --slide-title-font-min: 0.72em;
+    --slide-title-underline-width: 3px;
+    --slide-title-underline-gap: 8px;
+    --slide-title-margin-bottom: 28px;
+    --slide-title-line-height: 1.08;
+    --gap-split: 32px;
+    --gap-grid: 16px;
+    --gap-grid-tight: 10px;
+
+    /* --- Chrome / navigation --- */
+    --reveal-nav-arrow: 36px;
+    --slide-number-bottom: 8px;
+    --deck-progress-height: 5px;
+    --deck-progress-height-active: 12px;
+    --deck-progress-track-width: min(96vw, 1840px);
+    --deck-progress-hit: 40px;
+    --deck-progress-opacity-idle: 0.45;
+    --deck-progress-opacity-active: 1;
+    --deck-progress-track: rgba(255, 255, 255, 0.14);
+    --deck-progress-track-active: rgba(255, 255, 255, 0.22);
+    --deck-progress-bar-spread: 16%;
+    --deck-progress-bar-edge: #3a3a3a;
+    --deck-progress-bar-mid: #5c3548;
+    --deck-progress-bar-peak: #f084a8;
+    --deck-progress-thumb-h: 32px;
+    --deck-progress-thumb-h-active: 41px;
+    --deck-progress-thumb-aspect: 187 / 257;
+    --deck-progress-thumb-spin: 0deg;
+    --deck-progress-thumb-origin-x: 50%;
+    --deck-progress-thumb-origin-y: 50%;
+    --deck-progress-thumb-offset-y: calc(10px + var(--deck-progress-thumb-h) * var(--deck-progress-thumb-aspect) * 0.8 - var(--deck-progress-thumb-h));
+    --deck-progress-s-mask: url("assets/logos/S.png");
+
+    /* --- Media --- */
+    --image-border-width: 2px;
+    --image-border-color: #333;
+    --image-radius: 0;
+}
+
+/* --- Base Overrides for Reveal.js --- */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.reveal {
+    font-family: var(--font-sans);
+    color: var(--text-main);
+    background-color: var(--bg-color);
+    position: relative;
+    z-index: 1;
+}
+
+.reveal .controls button.navigate-up,
+.reveal .controls button.navigate-down {
+    display: none !important;
+}
+
+.reveal .controls {
+    transform: translate(
+        calc(-2 * var(--reveal-nav-arrow)),
+        calc(-1 * var(--reveal-nav-arrow))
+    );
+}
+
+.reveal .controls .deck-nav-cluster {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.reveal .controls .deck-nav-cluster .navigate-left,
+.reveal .controls .deck-nav-cluster .navigate-right {
+    position: static !important;
+    flex: 0 0 auto;
+    transform: none !important;
+    width: var(--reveal-nav-arrow);
+    height: var(--reveal-nav-arrow);
+    pointer-events: auto;
+}
+
+.reveal .controls .deck-nav-cluster .slide-number {
+    position: static !important;
+    display: block !important;
+    flex: 0 0 auto;
+    z-index: 20;
+    min-width: calc(var(--reveal-nav-arrow) * 1.15);
+    padding: 4px 6px;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 12px;
+    line-height: 1;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.4);
+    pointer-events: auto;
+}
+
+.reveal .progress {
+    left: 50%;
+    right: auto;
+    width: var(--deck-progress-track-width);
+    max-width: calc(100% - 40px);
+    height: var(--deck-progress-height);
+    bottom: 10px;
+    transform: translateX(-50%);
+    opacity: var(--deck-progress-opacity-idle);
+    --deck-progress-thumb-pct: 0%;
+    background: linear-gradient(
+        90deg,
+        var(--deck-progress-bar-edge) 0%,
+        var(--deck-progress-bar-mid) max(0%, calc(var(--deck-progress-thumb-pct) - var(--deck-progress-bar-spread))),
+        var(--deck-progress-bar-peak) var(--deck-progress-thumb-pct),
+        var(--deck-progress-bar-mid) min(100%, calc(var(--deck-progress-thumb-pct) + var(--deck-progress-bar-spread))),
+        var(--deck-progress-bar-edge) 100%
+    );
+    border-radius: 999px;
+    overflow: visible;
+    cursor: grab;
+    z-index: 30;
+    transition:
+        height 0.22s ease,
+        opacity 0.22s ease,
+        bottom 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease;
+}
+
+.reveal .progress::after {
+    height: var(--deck-progress-hit);
+    top: calc((var(--deck-progress-height) - var(--deck-progress-hit)) / 2);
+}
+
+.reveal .progress > span:not(.deck-progress-thumb) {
+    position: relative;
+    overflow: visible;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+    transition: none !important;
+}
+
+.reveal .progress > .deck-progress-thumb {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: calc(var(--deck-progress-thumb-h) * var(--deck-progress-thumb-aspect));
+    height: var(--deck-progress-thumb-h);
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: linear-gradient(
+        145deg,
+        var(--sfk-magenta-dark) 0%,
+        var(--sfk-magenta) 52%,
+        var(--sfk-magenta-light) 100%
+    );
+    mask-image: var(--deck-progress-s-mask);
+    mask-mode: alpha;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-image: var(--deck-progress-s-mask);
+    -webkit-mask-mode: alpha;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    transform-origin: var(--deck-progress-thumb-origin-x) var(--deck-progress-thumb-origin-y);
+    transform: translate(-50%, calc(-50% + var(--deck-progress-thumb-offset-y))) rotate(var(--deck-progress-thumb-spin));
+    filter: drop-shadow(0 0 8px rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.55));
+    transition: width 0.22s ease, height 0.22s ease, filter 0.22s ease, transform 0.22s ease;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+}
+
+.reveal.is-deck-progress-active .progress > .deck-progress-thumb,
+.reveal .progress:hover > .deck-progress-thumb,
+.reveal .progress.is-dragging > .deck-progress-thumb,
+.reveal .progress.is-snapping > .deck-progress-thumb {
+    width: calc(var(--deck-progress-thumb-h-active) * var(--deck-progress-thumb-aspect));
+    height: var(--deck-progress-thumb-h-active);
+    filter: drop-shadow(0 0 12px rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.72));
+}
+
+.reveal .progress.is-dragging > .deck-progress-thumb,
+.reveal .progress.is-snapping > .deck-progress-thumb {
+    transition: width 0.22s ease, height 0.22s ease, filter 0.22s ease;
+}
+
+.reveal.is-deck-progress-active .progress,
+.reveal .progress:hover,
+.reveal .progress.is-dragging,
+.reveal .progress.is-snapping {
+    height: var(--deck-progress-height-active);
+    bottom: 14px;
+    opacity: var(--deck-progress-opacity-active);
+    box-shadow:
+        0 0 16px rgba(255, 255, 255, 0.14),
+        0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+.reveal .progress.is-dragging {
+    cursor: grabbing;
+}
+
+/* Do NOT override Reveal section positioning (must stay absolute) */
+.reveal .slides > section {
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.reveal .slides > section .slide-content-layer {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: var(--slide-padding-y) var(--slide-padding-x) var(--slide-padding-bottom);
+}
+
+.reveal .title-slide .slide-content-layer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 48px 64px 64px;
+}
+
+.reveal .content-slide .slide-content-layer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.reveal h1, 
+.reveal h2, 
+.reveal h3, 
+.reveal h4 {
+    font-family: var(--font-sans);
+    color: var(--text-main);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: none;
+    margin-bottom: 20px;
+}
+
+.reveal p, 
+.reveal li {
+    line-height: var(--line-height-body);
+    color: var(--text-muted);
+}
+

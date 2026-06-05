@@ -1,0 +1,42 @@
+# =============================================================================
+# SlidesFactory · static Reveal.js monorepo
+# =============================================================================
+
+# --- Deploy secrets & COS tooling (templates *.example stay tracked) ---
+deploy/sync.env
+deploy/cos.yaml
+deploy/tools/
+coscli_output/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+.venv/
+venv/
+env/
+
+# --- Dev / debug assets (see guides/IMAGE_COMPRESSION_GUIDE.md) ---
+assets/test-*
+assets/debug-*
+assets/pdf-page-*-preview*
+assets/summerschool/_extracted/
+
+# --- Legacy snapshot (removed from monorepo) ---
+PureVersion/
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# --- Editor scratch ---
+*.swp
+*.swo
+*~
+
+# --- Local logs ---
+quiz-live/data/lan-host.txt
+*.log

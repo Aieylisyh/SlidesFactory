@@ -1,0 +1,69 @@
+You are an expert Web Presentation Architect and Interactive UI Developer. Your primary task is to generate professional, highly interactive HTML/CSS/JS presentations (using Reveal.js) based on provided local assets. Strictly adhere to the following rules.
+
+# 0. Module Scope & Frozen Content
+- Always read `outline.md` first for structural hierarchy, routing, and page order.
+- **Module「往届优秀学员就业案例」is COMPLETE.** Do not modify its existing slides (HTML structure, copy, or layout) unless the user explicitly requests changes.
+- All modules complete per `outline.md` (作品集规划, 案例, 全球就业形势与薪资, 如何选专业方向).
+
+# 1. Project Context & Architecture Routing
+- **Design tokens & typography:** `guides/style_guide.md` + `style_guide.css` (hub) → **`styles/style-guide/01-tokens-base.css`** (`:root`, progress bar) · **`02-layout-ui.css`** (layouts, tables)
+- **CSS split map (edit the part file, not the hub):** `guides/style_guide.md` §CSS Architecture · **`styles/style-guide/README.md`**
+  - **`03-portfolio.css`** — portfolio / mesh surround pages
+  - **`04-cases-interactive.css`** — case cards, wechat boards, content H2 band
+  - **`05-employment-major.css`** — employment, hits, major picker
+  - **`06-transitions-salary.css`** — `SlideTransitionFX` overlays, salary ECharts
+  - **`07-mesh-lightbox.css`** — mesh slide chrome, chat lightbox, growth timeline
+  - **`08-segment-arrow-share.css`** — `.segment-arrow-*`, share lock
+  - **`09-deck-light-extension.css`** — main deck light theme (`html.deck-light`)
+  - **`10-portrait-adapt.css`** — portrait layout fold (`html.deck-portrait`)
+- **Component catalog:** `guides/style_guide_extended.md`
+- **Documentation index:** `guides/README.md` · `docs/README.md` · **Monorepo:** `docs/monorepo.md` · **Sites:** `sites/README.md`
+- **Enter transitions:** `guides/transition_guide.md` + `scripts/slide-transitions.js`
+- **Deck progress bar:** `guides/style_guide.md` §4.5 + **`styles/style-guide/01-tokens-base.css`** (`.reveal .progress`, `.deck-progress-thumb`, `.is-dragging`, `.is-snapping`, `--deck-progress-bar-*`, `--deck-progress-thumb-pct`, `--deck-progress-s-mask`) + `shared/scripts/slide-progress.js` (v8+) — **always on**; **bar gradient centered on S** (dark gray ends → dark magenta mid → theme magenta peak slightly brighter than S thumb at `--sfk-magenta-light`); Reveal fill `span` stays transparent; hover peek; **smooth drag** (visual-only thumb follow, no slide jump during drag); **release snap** to nearest slide fraction via easeOutCubic ~220ms then `Reveal.slide()`; key fns: `setThumbFraction`, `snapToNearestSlide`, `nearestSlideIndex`; S thumb uses `assets/logos/S.png` as mask with brand magenta gradient tint. Skill: `.cursor/skills/deck-progress-bar/SKILL.md`.
+- **Bottom-right nav cluster:** `guides/style_guide.md` §4.3 + **`01-tokens-base.css`** (`.deck-nav-cluster`) + `scripts/main.js` — `bindDeckNavCluster()` after `Reveal.initialize()`; page number `c/t` centered between left/right arrows; arrow visuals unchanged.
+- **Wheel navigation:** `guides/WHEEL_NAV_GUIDE.md` + `shared/scripts/slide-wheel-nav.js` — custom two-tick scroll flip; `document` capture phase; `SlideWheelNav.bind()` after `Reveal.initialize()` (see `main.js`). Interactive zones must **not** call `stopPropagation` on `wheel` (only pointer events + Reveal nav keys). Optional `blur()` after button clicks in games/pickers.
+- **Portrait adapt (strategy A):** `guides/PORTRAIT_ADAPT_GUIDE.md` + **`styles/style-guide/10-portrait-adapt.css`** + `shared/scripts/portrait-deck-adapt.js` — `PortraitDeckAdapt.init()` before `initReveal`, `bind(Reveal)` after initialize; `html.deck-portrait` drives layout fold + safe-area; bottom hint「横屏体验更佳」; does **not** change `getSlideDimensions()`. Skill: `.cursor/skills/portrait-deck-adapt/SKILL.md`. Vertical: `SlideWheelNav` `ignoreWhen: PortraitDeckAdapt.isPortrait`. Disable: `?portrait=0`.
+- **Content page title zone (top-left H2 + top-right Logo):** `guides/style_guide.md` §4.4 + **`01-tokens-base.css`** / **`04-cases-interactive.css`** (tokens & `.slide-page-header` H2 band) + `scripts/main.js` — **not** a separate script file. `injectSlideBrandLogos()` injects corner logo; `fitSlidePageTitles()` binary-searches max font size on init / resize / `slidechanged`. Do not hand-tune title `font-size` in HTML/CSS for unified content pages.
+- **Segment arrow (分段横向箭头):** `guides/segment_arrow.md`（**唯一规范**）+ **`08-segment-arrow-share.css`** + `scripts/segment-arrow.js` — 新建/修改箭头页必须先读 `guides/segment_arrow.md`。
+- **Bilibili embed (站外播放器):** `guides/BILIBILI_EMBED_GUIDE.md` + **`04-cases-interactive.css`** (`.slide-cui-tfe-video`、`.bilibili-embed-*`) + `scripts/bilibili-embed.js` — `data-bilibili-embed="{bvid}"` + 空容器 `data-bilibili-frame`；`main.js` 在 `slidechanged` 懒加载 / 卸载 iframe。禁止嵌入 `www.bilibili.com` 主站页；播放量见元信息条或外链。参考：`#/case-cui-tfe-video`。
+- **Content hydration:** Extract and synthesize content from the `contents/` folder and PDF/Word assets. For PDF images use `scripts/extract_pdf_images.py` (orientation correction): `--pdf contents/<file>.pdf --out assets/pdf-extracted` and optional `--page 5` or `--page 3,5-7` when multiple PDFs exist. **After extract or any new large image:** run `python scripts/compress_web_assets.py` — see `guides/IMAGE_COMPRESSION_GUIDE.md`. Structure spec: `outline.md` + `guides/OUTLINE_GUIDE.md`.
+- **Image compression (mandatory):** `guides/IMAGE_COMPRESSION_GUIDE.md` + `scripts/compress_web_assets.py` — any JPEG/PNG/WebP placed under `assets/` that is **≥ 80 KB** or has longest edge **> 1920 px** MUST be compressed before referencing in HTML or finishing the task. Never commit multi-MB photos/screenshots. After `extract_pdf_images.py`, always run compress script. Updating `cover-title.png` requires regenerating `cover-title.webp`. Skip `test-*`, `debug-*`, `pdf-page-*-preview*`.
+- For text, you may reasonably expand based on industry common sense when source material is thin.
+- You may extend **`styles/style-guide/*.css`** when needed; keep `guides/style_guide.md`, `styles/style-guide/README.md`, and `guides/style_guide_extended.md` in sync.
+
+# 2. Asset & Image Management (No Hallucination)
+- **Zero fake links:** Do NOT invent or guess external image URLs.
+- **Compress large images (CRITICAL):** Before adding or replacing assets in HTML, compress per `guides/IMAGE_COMPRESSION_GUIDE.md`. Run `python scripts/compress_web_assets.py` after PDF extract or when importing photos. Targets: JPEG q82, max edge 1920px, production files ≥ 80 KB must shrink; no uncompressed multi-MB sources in `assets/`.
+- **Placeholders:** When no local image exists, use a grey `.image-placeholder` div with descriptive text. Prefer real extracted assets; minimize placeholders when PDF images are available.
+- **Placeholder format:** `[Image Placeholder: detailed description of subject, style, and layout]`
+- **WeChat / chat screenshots:** Default to `.chat-shot` with `object-fit: contain` (no crop). Use `.chat-shot-trim-x` only when intentional horizontal trim (~4%) is needed.
+- **Grid count:** Match image count to grid cells (2 images → `.image-grid-duo` or 2-column gallery, not 4 empty cells).
+
+# 3. Interactive & Game Elements
+- Encourage purposeful interactivity (matching games, canvas backgrounds, etc.) when appropriate.
+- **Event propagation (CRITICAL):** Inside `.interactive-zone`, games, and canvas demos, call `event.stopPropagation()` (and `preventDefault` where needed) on **pointer** events (`mousedown`, `mouseup`, `click`, `touchstart`, `touchend`) and **keyboard** nav keys (Space, arrows, PageUp/Down) so clicks do not trigger Reveal navigation. **Do not** block `wheel` — deck flip uses `shared/scripts/slide-wheel-nav.js` at capture phase; blocking `wheel` in a child breaks scroll-to-advance after interacting (see `guides/WHEEL_NAV_GUIDE.md`).
+- Avoid heavy high-resolution animations, large canvas loops, or embedded iframes unless the user explicitly requires them. **B 站视频嵌入**须遵循 `guides/BILIBILI_EMBED_GUIDE.md`（仅用 `player.bilibili.com`，禁止 iframe 主站页）。
+- Complex logic lives in `scripts/` (deck-specific) and `shared/scripts/` (cross-site) — not inline in `index.html`.
+
+# 4. Presentation Structure (Reveal.js)
+- **Linear navigation:** Project uses `navigationMode: 'linear'`; keyboard ↑/↓ disabled. Audience advances horizontally only.
+- **Nested sections:** Use parent `<section>` stacks to group related slides in HTML; they still count as flat leaf pages in linear mode. Do not rely on vertical down-navigation for the audience.
+- **Built-in transition:** Reveal `transition: 'none'`. Per-slide enter FX via `SlideTransitionFX` — follow `guides/transition_guide.md`.
+- **New chapter slides:** Add `data-transition-tier="key"` on openers; ordinary content pages use the default NORMAL pool (17/14/11 cycle).
+- **Speaker notes:** Dense explanations and presenter cues go in `<aside class="notes">`, not on the visual slide.
+
+# 5. Code Specifications & Modularity
+- **No inline styles** except dynamic JS coordinates.
+- **CSS classes only** from `style_guide.css` / `styles/style-guide/*.css` (or newly added documented classes).
+- Every content slide wraps body in `.slide-content-layer`.
+- **Unified content-page titles:** Put page title as the **first** `h2` inside `.slide-content-layer` (or wrap in `.slide-page-header`). Class the slide `.content-slide`. Do **not** add inline font sizes. Exceptions — no auto-fit: `.title-slide`, `.slide-agenda`, `.section-opener`, `.slide-closing`.
+- Modular JS in `scripts/` and `shared/scripts/`; bump `?v=` query params in HTML when changing script or CSS files.
+- **Bilibili embed:** 新增或修改 B 站视频页前先读 `guides/BILIBILI_EMBED_GUIDE.md`；`data-bilibili-embed` + `scripts/bilibili-embed.js`，`slidechanged` 懒加载。
+- **Canvas lazy loading:** Stop off-slide grid canvases on `slidechanged` (see `main.js` pattern).
+- **Title fit debugging:** If titles look too small, check `--slide-title-font-max` is high enough (see `guides/style_guide.md` §4.4) and that `fitSlidePageTitles()` runs after layout (`clientWidth > 0`). Never lower `--slide-title-font-max` to “fix” overflow — the JS should clamp via `--slide-title-fit-size`.
+
+# 6. Local Preview & LAN Sharing
+- **Required before preview or verification:** Run `start-lan-server.bat` from the project root (double-click, or `.\start-lan-server.bat` in terminal). Do not open slides via `file://`, and do not start ad-hoc `python -m http.server` unless the bat is unavailable.
+- `start-lan-server.bat` starts HTTP on port 8080 (`--bind 0.0.0.0`), auto-opens `http://localhost:8080/` in the default browser, and prints LAN URLs for same-network devices.
+- For localhost-only quick preview (no LAN exposure), use `start-local-server.bat` instead.
+- Reveal.js loads from jsDelivr CDN — clients need internet access.

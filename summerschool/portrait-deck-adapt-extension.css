@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Summerschool — portrait overrides (light theme + ss layouts)
+   Requires: style_guide.css (includes 10-portrait-adapt.css) + html.ss-deck-light.deck-portrait
+   ========================================================================== */
+
+/* --- Hint banner (portal orange) --- */
+html.ss-deck-light.deck-portrait .deck-portrait-hint__panel {
+    border-color: var(--ss-orange-20);
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 12px 36px rgba(46, 46, 46, 0.14);
+}
+
+html.ss-deck-light.deck-portrait .deck-portrait-hint__title {
+    color: var(--ss-gray-800);
+}
+
+html.ss-deck-light.deck-portrait .deck-portrait-hint__body {
+    color: var(--ss-gray-600);
+}
+
+html.ss-deck-light.deck-portrait .deck-portrait-hint__btn--primary {
+    background: linear-gradient(135deg, var(--ss-orange-dark), var(--ss-orange));
+}
+
+html.ss-deck-light.deck-portrait .deck-portrait-hint__btn--ghost {
+    color: var(--ss-gray-700);
+    border-color: var(--ss-gray-300);
+}
+
+/* --- Progress / nav on white deck --- */
+html.ss-deck-light.deck-portrait .reveal .progress {
+    --deck-progress-bar-edge: #c8c8c8;
+    --deck-progress-bar-mid: #e8c4b0;
+    --deck-progress-bar-peak: #ff8a52;
+    --deck-progress-track: rgba(46, 46, 46, 0.1);
+    --deck-progress-track-active: rgba(46, 46, 46, 0.16);
+}
+
+/* --- Summerschool split / grid layouts --- */
+html.ss-deck-light.deck-portrait .reveal .ss-tabs-bar-dual,
+html.ss-deck-light.deck-portrait .reveal .ss-support-split,
+html.ss-deck-light.deck-portrait .reveal .ss-experience-split,
+html.ss-deck-light.deck-portrait .reveal .ss-venue-split {
+    grid-template-columns: 1fr !important;
+    width: min(96%, 520px);
+    gap: 20px;
+}
+
+html.ss-deck-light.deck-portrait .reveal .slide-ss-support .ss-tabs-bar-dual {
+    width: 100%;
+}
+
+html.ss-deck-light.deck-portrait .reveal .slide-ss-support .ss-support-list {
+    width: 100%;
+}
+
+html.ss-deck-light.deck-portrait .reveal .ss-schedule-online-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.5em;
+}
+
+html.ss-deck-light.deck-portrait .reveal .ss-schedule-online-card {
+    min-height: 44px;
+}
+
+html.ss-deck-light.deck-portrait .reveal .slide-ss-tips .ss-tips-grid {
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+html.ss-deck-light.deck-portrait .reveal .slide-ss-tips .ss-tips-block {
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+html.ss-deck-light.deck-portrait .reveal .ss-schedule-grid-scroll {
+    -webkit-overflow-scrolling: touch;
+}
+
+html.ss-deck-light.deck-portrait .reveal .ss-schedule-table {
+    min-width: 640px;
+}
+
+html.ss-deck-light.deck-portrait .reveal .slide-ss-schedule .slide-content-layer {
+    overflow-x: auto;
+}
+
+/* --- Tabs / toggles touch --- */
+html.ss-deck-light.deck-portrait .reveal .salary-toggle-btn,
+html.ss-deck-light.deck-portrait .reveal .ss-schedule-online-card,
+html.ss-deck-light.deck-portrait .ss-lang-switcher__toggle,
+html.ss-deck-light.deck-portrait .ss-lang-switcher__btn {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* --- Cover --- */
+html.ss-deck-light.deck-portrait .reveal .slide-ss-cover .cover-brand-image img,
+html.ss-deck-light.deck-portrait .reveal .slide-ss-cover h1 + img {
+    max-height: min(32dvh, 280px);
+}
+
+html.ss-deck-light.deck-portrait .reveal .ss-experience-photo {
+    max-height: min(23.4dvh, 207px);
+    object-fit: cover;
+}
+
+html.ss-deck-light.deck-portrait .reveal .ss-venue-photo {
+    max-height: min(48dvh, 430px);
+    object-fit: cover;
+}
+
+html.ss-deck-light.deck-portrait .reveal .ss-experience-block--media {
+    aspect-ratio: auto;
+    width: 65%;
+    max-width: 65%;
+    max-height: min(24.7dvh, 220px);
+}
+
+html.ss-deck-light.deck-portrait .reveal .ss-venue-block--media {
+    aspect-ratio: auto;
+    width: 100%;
+    max-width: 100%;
+    align-self: stretch;
+    max-height: min(48dvh, 430px);
+}
+
+/* --- Readable floor on light deck --- */
+html.ss-deck-light.deck-portrait .reveal p,
+html.ss-deck-light.deck-portrait .reveal li,
+html.ss-deck-light.deck-portrait .reveal .ss-support-list,
+html.ss-deck-light.deck-portrait .reveal .ss-tips-list {
+    font-size: max(var(--ss-text-floor), 13px);
+}

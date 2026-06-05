@@ -1,0 +1,52 @@
+%% SFK · 数字娱乐技术的就业 — deck map from outline.md
+%% Use with Figma plugin: generate_diagram (FigJam) or paste into FigJam Mermaid widget
+flowchart LR
+  start(["Cover + Agenda"]) --> portfolio
+
+  subgraph portfolioModule ["01 Portfolio Planning"]
+    portOpener["Section opener"]
+    portTraits["Student traits"]
+    portSchool["Target schools"]
+    portHotspot["Hotspots + portfolio-axis.js"]
+    portOpener --> portTraits --> portSchool --> portHotspot
+  end
+
+  portfolio --> caseStudies
+
+  subgraph caseModule ["02 Case Studies FROZEN"]
+    caseOpener["Section opener"]
+    caseOverview["5 students + case-match.js"]
+    cui["Cui: Tencent Timi"]
+    huang["Huang: UCL + NetEase"]
+    liCase["Li: NTU + referral"]
+    lu["Lu: Ubisoft to miHoYo"]
+    ma["Ma: systems design"]
+    caseSummary["Summary table"]
+    caseOpener --> caseOverview --> cui --> huang --> liCase --> lu --> ma --> caseSummary
+  end
+
+  caseStudies --> employment
+
+  subgraph empModule ["03 Employment + Salary"]
+    empOpener["Section opener"]
+    empMarket["Global market slides"]
+    empSalary["salary-toggle.js"]
+    empOpener --> empMarket --> empSalary
+  end
+
+  employment --> major
+
+  subgraph majorModule ["04 Major Direction"]
+    majorOpener["Section opener"]
+    interest["Interest"]
+    salarySlide["Salary"]
+    growth["Growth timeline + segment-arrow.js"]
+    majorOpener --> interest --> salarySlide --> growth
+  end
+
+  major --> closing(["Closing slide"])
+
+  assetsPdf[("contents PDF")] -.-> caseOverview
+  styleGuide[("style_guide.css hub")] -.-> portfolio
+  styleParts[("styles/style-guide/*.css")] -.-> portfolio
+  styleGuide -.-> caseModule

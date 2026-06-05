@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="SFK">
+  <defs>
+    <linearGradient id="sfk-g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C82464"/>
+      <stop offset="100%" stop-color="#E05688"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="7" fill="#000000"/>
+  <rect x="1.25" y="1.25" width="29.5" height="29.5" rx="6.25" fill="none" stroke="url(#sfk-g)" stroke-width="1.75"/>
+  <text x="16" y="21.5" font-family="Inter, Arial, Helvetica, sans-serif" font-size="15" font-weight="800" fill="url(#sfk-g)" text-anchor="middle">S</text>
+  <circle cx="25.5" cy="6.5" r="2" fill="#961848"/>
+</svg>

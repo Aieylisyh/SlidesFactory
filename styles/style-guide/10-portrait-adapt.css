@@ -1,0 +1,539 @@
+﻿/* ==========================================================================
+
+   Portrait deck adapt — html.deck-portrait overrides (strategy A: scale-first)
+
+   Spec: guides/PORTRAIT_ADAPT_GUIDE.md · JS: shared/scripts/portrait-deck-adapt.js
+
+   ========================================================================== */
+
+
+
+html.deck-portrait {
+
+    --slide-padding-x: 24px;
+
+    --slide-padding-y: 20px;
+
+    --slide-padding-bottom: 28px;
+
+    --slide-brand-logo-max-width: 108px;
+
+    --slide-title-max-width: 92%;
+
+    --gap-split: 18px;
+
+    --gap-grid: 12px;
+
+    --reveal-nav-arrow: 44px;
+
+    --deck-progress-hit: 48px;
+
+    --deck-progress-opacity-idle: 0.72;
+
+    --deck-portrait-hint-z: 200000;
+
+}
+
+
+
+/* --- Landscape hint banner (above deck chrome, modals, lang switcher) --- */
+
+.deck-portrait-hint {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: var(--deck-portrait-hint-z, 200000);
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    padding: 20px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: opacity 0.28s ease, visibility 0.28s ease;
+
+}
+
+
+
+.deck-portrait-hint.is-visible {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+}
+
+
+
+.deck-portrait-hint__panel {
+
+    width: min(100%, 480px);
+
+    padding: 22px 24px 20px;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(224, 86, 136, 0.45);
+
+    background: rgba(12, 12, 12, 0.94);
+
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+
+.deck-portrait-hint__title {
+
+    margin: 0 0 8px;
+
+    font-size: 1.22rem;
+
+    font-weight: 600;
+
+    color: #fff;
+
+}
+
+
+
+.deck-portrait-hint__body {
+
+    margin: 0 0 18px;
+
+    font-size: 0.95rem;
+
+    line-height: 1.55;
+
+    color: #b3b3b3;
+
+}
+
+
+
+.deck-portrait-hint__actions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+}
+
+
+
+.deck-portrait-hint__btn {
+
+    min-height: 48px;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    font-size: 0.95rem;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+
+}
+
+
+
+.deck-portrait-hint__btn--primary {
+
+    flex: 1 1 auto;
+
+    border: none;
+
+    color: #fff;
+
+    background: linear-gradient(135deg, #c82464, #e05688);
+
+}
+
+
+
+.deck-portrait-hint__btn--ghost {
+
+    flex: 0 1 auto;
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+
+    color: #ddd;
+
+    background: transparent;
+
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .deck-portrait-hint {
+
+        transition: none;
+
+    }
+
+}
+
+
+
+/* --- Deck chrome safe area --- */
+
+html.deck-portrait .reveal .progress {
+
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+
+    touch-action: none;
+
+}
+
+
+
+html.deck-portrait .reveal .controls {
+
+    transform: translate(
+
+        calc(-2 * var(--reveal-nav-arrow)),
+
+        calc(-1 * var(--reveal-nav-arrow) - env(safe-area-inset-bottom, 0px) * 0.35)
+
+    );
+
+}
+
+
+
+html.deck-portrait .reveal .controls .deck-nav-cluster .navigate-left,
+
+html.deck-portrait .reveal .controls .deck-nav-cluster .navigate-right,
+
+html.deck-portrait .reveal .controls .deck-nav-cluster .slide-number {
+
+    min-height: 44px;
+
+}
+
+
+
+/* --- Readable minimum type (after Reveal scale) --- */
+
+html.deck-portrait .reveal p,
+
+html.deck-portrait .reveal li,
+
+html.deck-portrait .reveal .case-body-sm,
+
+html.deck-portrait .reveal .employment-lead {
+
+    font-size: max(0.62em, 13px);
+
+}
+
+
+
+html.deck-portrait .reveal .case-highlight {
+
+    font-size: max(0.85em, 14px);
+
+}
+
+
+
+/* --- Split & image grids → single column --- */
+
+html.deck-portrait .reveal .slide-layout-split,
+
+html.deck-portrait .reveal .slide-layout-split-wide-right,
+
+html.deck-portrait .reveal .slide-layout-split-wide-left,
+
+html.deck-portrait .reveal .image-grid-2,
+
+html.deck-portrait .reveal .image-grid-3,
+
+html.deck-portrait .reveal .image-grid-duo,
+
+html.deck-portrait .reveal .chat-evidence-grid,
+
+html.deck-portrait .reveal .wechat-gallery,
+
+html.deck-portrait .reveal .wechat-gallery-trio,
+
+html.deck-portrait .reveal .wechat-gallery-large,
+
+html.deck-portrait .reveal .wechat-gallery-dense,
+
+html.deck-portrait .reveal .wechat-gallery-trio-bias-right,
+
+html.deck-portrait .reveal .wechat-gallery-lu-fill,
+
+html.deck-portrait .reveal .match-game-board,
+
+html.deck-portrait .reveal .employment-split-grid,
+
+html.deck-portrait .reveal .employment-hit-duo,
+
+html.deck-portrait .reveal .major-pick-pool,
+
+html.deck-portrait .reveal .portfolio-axis-grid,
+
+html.deck-portrait .reveal .case-card-grid {
+
+    grid-template-columns: 1fr !important;
+
+}
+
+
+
+html.deck-portrait .reveal .case-card-grid {
+
+    gap: 10px;
+
+}
+
+
+
+html.deck-portrait .reveal .case-card {
+
+    min-height: 44px;
+
+}
+
+
+
+html.deck-portrait .reveal .salary-toggle-bar {
+
+    flex-wrap: wrap;
+
+}
+
+
+
+html.deck-portrait .reveal .salary-toggle-btn {
+
+    min-height: 44px;
+
+}
+
+
+
+html.deck-portrait .reveal .wechat-gallery-lu-fill {
+
+    grid-template-rows: auto;
+
+}
+
+
+
+html.deck-portrait .reveal .chat-lu-side-col {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--gap-grid);
+
+}
+
+
+
+/* --- Tables --- */
+
+html.deck-portrait .reveal .slide-case-summary-table-only .slide-content-layer {
+
+    overflow-x: auto;
+
+    -webkit-overflow-scrolling: touch;
+
+}
+
+
+
+html.deck-portrait .reveal .case-summary-table {
+
+    min-width: 520px;
+
+}
+
+
+
+/* --- Segment arrow (agenda) --- */
+
+html.deck-portrait .reveal .segment-arrow-grid {
+
+    width: min(96%, 520px);
+
+    --segment-arrow-head-w: 0px;
+
+    --segment-arrow-row-h: min(22dvh, 168px);
+
+    --segment-arrow-shell-h: auto !important;
+
+    height: auto !important;
+
+    min-height: 0 !important;
+
+    max-height: none !important;
+
+}
+
+
+
+html.deck-portrait .reveal .segment-arrow-row,
+
+html.deck-portrait .reveal .segment-arrow-footer,
+
+html.deck-portrait .reveal .segment-arrow-labels {
+
+    grid-template-columns: 1fr 1fr !important;
+
+}
+
+
+
+html.deck-portrait .reveal .segment-arrow-tip,
+
+html.deck-portrait .reveal .segment-arrow-head-spacer {
+
+    display: none !important;
+
+}
+
+
+
+html.deck-portrait .reveal .segment-arrow-segment {
+
+    min-height: 44px;
+
+}
+
+
+
+html.deck-portrait .reveal .segment-arrow-grid--cols-4 .segment-arrow-segment-title {
+
+    font-size: 0.78em;
+
+    line-height: 1.25;
+
+}
+
+
+
+/* --- Interactive touch targets --- */
+
+html.deck-portrait .reveal .match-chip,
+
+html.deck-portrait .reveal .major-pick-chip,
+
+html.deck-portrait .reveal .case-card,
+
+html.deck-portrait .reveal [data-case-card],
+
+html.deck-portrait .reveal .segment-arrow-segment,
+
+html.deck-portrait .reveal .portfolio-axis-option {
+
+    min-height: 44px;
+
+}
+
+
+
+/* --- Images: cap height on short viewports --- */
+
+html.deck-portrait .reveal .tech-image-container.chat-shot img,
+
+html.deck-portrait .reveal .chat-evidence-grid .tech-image-container img {
+
+    max-height: min(42dvh, 520px);
+
+}
+
+
+
+html.deck-portrait .reveal .tech-image-container.fit-shot img,
+
+html.deck-portrait .reveal .tech-image-container.fit-shot-large img {
+
+    max-height: min(38dvh, 480px);
+
+}
+
+
+
+html.deck-portrait .reveal .employment-hero-chart img {
+
+    max-height: min(40dvh, 440px);
+
+}
+
+
+
+/* --- Video embed --- */
+
+html.deck-portrait .reveal .bilibili-embed-wrap,
+
+html.deck-portrait .reveal .slide-cui-tfe-video .bilibili-embed-frame-host {
+
+    max-height: min(48dvh, 360px);
+
+}
+
+
+
+/* --- Cover --- */
+
+html.deck-portrait .reveal .title-slide .cover-brand-image img {
+
+    max-height: min(36dvh, 320px);
+
+    width: auto;
+
+    margin: 0 auto;
+
+}
+
+
+
+/* --- Reduce heavy FX on low-power portrait --- */
+
+@media (prefers-reduced-motion: no-preference) {
+
+    html.deck-portrait .reveal .surround-mesh-grid {
+
+        opacity: 0.65;
+
+    }
+
+}
+
+
+
+html.deck-portrait .reveal .slide-content-layer.tx-layer-active {
+
+    will-change: auto;
+
+}
+
+

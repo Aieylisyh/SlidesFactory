@@ -1,0 +1,654 @@
+﻿/* ==========================================================================
+   SFK Reveal Deck — 08-segment-arrow-share.css
+   Segment arrow component, agenda/growth layouts, share lock
+   Part of style_guide.css split — see guides/style_guide.md §CSS Architecture
+   ========================================================================== */
+
+/* --- Growth arrow milestone (slide-major-growth · 3 time stages) --- */
+.reveal .slide-major-growth .slide-content-layer {
+    gap: clamp(12px, 2vh, 24px);
+    overflow: visible;
+    justify-content: center;
+}
+
+.reveal .segment-arrow {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 0 8px;
+    overflow: visible;
+}
+
+.reveal .segment-arrow-grid {
+    position: relative;
+    width: min(82%, 1180px);
+    margin: 0 auto;
+    flex-shrink: 0;
+    --segment-arrow-head-w: min(320px, 28vw);
+    --segment-arrow-tip-scale-x: 0.8;
+    --segment-arrow-tip-scale-y: 1.8;
+    --segment-arrow-hover-cushion: 28px;
+    --segment-arrow-row-h: min(28vh, 248px);
+    --segment-arrow-labels-block: 100px;
+    --segment-arrow-footer-block: 36px;
+    --segment-arrow-shell-h: calc(
+        var(--segment-arrow-labels-block) +
+        var(--segment-arrow-hover-cushion) +
+        var(--segment-arrow-row-h) +
+        var(--segment-arrow-footer-block)
+    );
+    height: var(--segment-arrow-shell-h);
+    min-height: var(--segment-arrow-shell-h);
+    max-height: var(--segment-arrow-shell-h);
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.reveal .segment-arrow-grid--cols-3 {
+    --segment-arrow-cols: 1fr 1.12fr 1fr;
+    --segment-arrow-cols-top: 1fr 1.12fr 1fr var(--segment-arrow-head-w);
+}
+
+.reveal .segment-arrow-grid--cols-4 {
+    --segment-arrow-cols: repeat(4, 1fr);
+    --segment-arrow-cols-top: repeat(4, 1fr) var(--segment-arrow-head-w);
+    --segment-arrow-labels-block: 0px;
+    --segment-arrow-row-h: min(33vh, 292px);
+    --segment-arrow-shell-h: calc(
+        var(--segment-arrow-hover-cushion) +
+        var(--segment-arrow-row-h) +
+        var(--segment-arrow-footer-block)
+    );
+}
+
+.reveal .segment-arrow-labels,
+.reveal .segment-arrow-footer {
+    display: grid;
+    grid-template-columns: var(--segment-arrow-cols-top);
+}
+
+.reveal .segment-arrow-row {
+    display: grid;
+    grid-template-columns: var(--segment-arrow-cols);
+}
+
+.reveal .segment-arrow-labels {
+    position: relative;
+    z-index: 30;
+    align-items: flex-end;
+    height: 76px;
+    min-height: 76px;
+    max-height: 76px;
+    margin-bottom: 22px;
+    padding-bottom: 2px;
+    overflow: visible;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.reveal .segment-arrow-label-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    min-width: 0;
+    transition: transform 0.28s ease;
+}
+
+.reveal .segment-arrow-label-text,
+.reveal .segment-arrow-stem {
+    opacity: 0.5;
+    visibility: visible;
+    transition: opacity 0.22s ease;
+}
+
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(1):hover) .segment-arrow-labels > :nth-child(1),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(1):focus-visible) .segment-arrow-labels > :nth-child(1),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(2):hover) .segment-arrow-labels > :nth-child(2),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(2):focus-visible) .segment-arrow-labels > :nth-child(2),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(3):hover) .segment-arrow-labels > :nth-child(3),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(3):focus-visible) .segment-arrow-labels > :nth-child(3),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(4):hover) .segment-arrow-labels > :nth-child(4),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(4):focus-visible) .segment-arrow-labels > :nth-child(4),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(5):hover) .segment-arrow-labels > :nth-child(5),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(5):focus-visible) .segment-arrow-labels > :nth-child(5),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(6):hover) .segment-arrow-labels > :nth-child(6),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(6):focus-visible) .segment-arrow-labels > :nth-child(6) {
+    position: relative;
+    z-index: 40;
+    transform: translateY(-14px);
+}
+
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(1):hover) .segment-arrow-labels > :nth-child(1) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(1):hover) .segment-arrow-labels > :nth-child(1) .segment-arrow-stem,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(1):focus-visible) .segment-arrow-labels > :nth-child(1) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(1):focus-visible) .segment-arrow-labels > :nth-child(1) .segment-arrow-stem,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(2):hover) .segment-arrow-labels > :nth-child(2) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(2):hover) .segment-arrow-labels > :nth-child(2) .segment-arrow-stem,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(2):focus-visible) .segment-arrow-labels > :nth-child(2) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(2):focus-visible) .segment-arrow-labels > :nth-child(2) .segment-arrow-stem,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(3):hover) .segment-arrow-labels > :nth-child(3) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(3):hover) .segment-arrow-labels > :nth-child(3) .segment-arrow-stem,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(3):focus-visible) .segment-arrow-labels > :nth-child(3) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(3):focus-visible) .segment-arrow-labels > :nth-child(3) .segment-arrow-stem,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(4):hover) .segment-arrow-labels > :nth-child(4) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(4):hover) .segment-arrow-labels > :nth-child(4) .segment-arrow-stem,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(4):focus-visible) .segment-arrow-labels > :nth-child(4) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(4):focus-visible) .segment-arrow-labels > :nth-child(4) .segment-arrow-stem,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(5):hover) .segment-arrow-labels > :nth-child(5) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(5):hover) .segment-arrow-labels > :nth-child(5) .segment-arrow-stem,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(5):focus-visible) .segment-arrow-labels > :nth-child(5) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(5):focus-visible) .segment-arrow-labels > :nth-child(5) .segment-arrow-stem,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(6):hover) .segment-arrow-labels > :nth-child(6) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(6):hover) .segment-arrow-labels > :nth-child(6) .segment-arrow-stem,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(6):focus-visible) .segment-arrow-labels > :nth-child(6) .segment-arrow-label-text,
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(6):focus-visible) .segment-arrow-labels > :nth-child(6) .segment-arrow-stem {
+    opacity: 1;
+}
+
+.reveal .segment-arrow-label-text {
+    font-size: 0.5em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: rgba(200, 200, 200, 0.94);
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.reveal .segment-arrow-stem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 2px;
+    background: rgba(170, 170, 170, 0.88);
+}
+
+.reveal .segment-arrow-stem--tall { height: 46px; }
+.reveal .segment-arrow-stem--mid { height: 34px; }
+.reveal .segment-arrow-stem--short { height: 26px; }
+
+.reveal .segment-arrow-stem-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: rgba(175, 175, 175, 0.96);
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+
+.reveal .segment-arrow-row {
+    position: relative;
+    z-index: 1;
+    align-items: stretch;
+    height: calc(var(--segment-arrow-row-h) + var(--segment-arrow-hover-cushion));
+    min-height: calc(var(--segment-arrow-row-h) + var(--segment-arrow-hover-cushion));
+    max-height: calc(var(--segment-arrow-row-h) + var(--segment-arrow-hover-cushion));
+    padding-top: var(--segment-arrow-hover-cushion);
+    isolation: isolate;
+    overflow: visible;
+    padding-right: var(--segment-arrow-head-w);
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.reveal .segment-arrow-tip {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: var(--segment-arrow-head-w);
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+    transform: scale(var(--segment-arrow-tip-scale-x), var(--segment-arrow-tip-scale-y));
+    transform-origin: left center;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal .segment-arrow-tip svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/*
+ * 绝对尺寸箭头尖（成长性 / 议程共用形态）：
+ * 左缘直角、仅尖端圆角；左缘垂直居中于箭身
+ */
+.reveal .slide-major-growth .segment-arrow-grid {
+    --segment-arrow-tip-w: min(177px, 15.46vw);
+    --segment-arrow-tip-h: min(46.37vh, 411px);
+    --segment-arrow-head-w: var(--segment-arrow-tip-w);
+    --segment-arrow-row-h: min(28vh, 248px);
+    width: min(92.5%, 1250px);
+    --segment-arrow-zone-w: min(320px, 28vw);
+    --segment-arrow-body-h: min(28vh, 248px);
+}
+
+.reveal .slide-major-growth .segment-arrow-tip,
+.reveal .slide-agenda .segment-arrow-tip {
+    width: var(--segment-arrow-tip-w);
+    height: var(--segment-arrow-tip-h);
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: left center;
+}
+
+.reveal .slide-major-growth .segment-arrow-row:has(> .segment-arrow-segment:nth-last-child(2):hover) .segment-arrow-tip,
+.reveal .slide-major-growth .segment-arrow-row:has(> .segment-arrow-segment:nth-last-child(2):focus-visible) .segment-arrow-tip,
+.reveal .slide-agenda .segment-arrow-row:has(> .segment-arrow-segment:nth-last-child(2):hover) .segment-arrow-tip,
+.reveal .slide-agenda .segment-arrow-row:has(> .segment-arrow-segment:nth-last-child(2):focus-visible) .segment-arrow-tip {
+    transform: translateY(calc(-50% - 3px)) scale(1.03);
+}
+
+.reveal .segment-arrow-segment {
+    position: relative;
+    z-index: 1;
+    padding: 12px 10px 10px;
+    border-right: none;
+    box-sizing: border-box;
+    display: block;
+    height: 100%;
+    text-align: center;
+    color: rgba(48, 48, 48, 0.95);
+    cursor: pointer;
+    transform: translateY(0) scale(1);
+    transform-origin: center bottom;
+    transition:
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s ease,
+        background 0.25s ease,
+        color 0.25s ease;
+    overflow: visible;
+}
+
+/* 每段箭身右缘细灰分隔条（参考原图竖向切分线） */
+.reveal .segment-arrow-segment::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 6px;
+    background: linear-gradient(
+        180deg,
+        rgba(210, 210, 210, 0.78) 0%,
+        rgba(185, 185, 185, 0.92) 48%,
+        rgba(168, 168, 168, 0.96) 100%
+    );
+    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.18);
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* 相邻段 25% 联动（相对 hover 段 -12px / scale 1.12） */
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(1):hover) .segment-arrow-row > .segment-arrow-segment:nth-child(2),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(1):focus-visible) .segment-arrow-row > .segment-arrow-segment:nth-child(2),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(2):hover) .segment-arrow-row > .segment-arrow-segment:nth-child(1),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(2):focus-visible) .segment-arrow-row > .segment-arrow-segment:nth-child(1),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(2):hover) .segment-arrow-row > .segment-arrow-segment:nth-child(3),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(2):focus-visible) .segment-arrow-row > .segment-arrow-segment:nth-child(3),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(3):hover) .segment-arrow-row > .segment-arrow-segment:nth-child(2),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(3):focus-visible) .segment-arrow-row > .segment-arrow-segment:nth-child(2),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(3):hover) .segment-arrow-row > .segment-arrow-segment:nth-child(4),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(3):focus-visible) .segment-arrow-row > .segment-arrow-segment:nth-child(4),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(4):hover) .segment-arrow-row > .segment-arrow-segment:nth-child(3),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(4):focus-visible) .segment-arrow-row > .segment-arrow-segment:nth-child(3),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(4):hover) .segment-arrow-row > .segment-arrow-segment:nth-child(5),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(4):focus-visible) .segment-arrow-row > .segment-arrow-segment:nth-child(5),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(5):hover) .segment-arrow-row > .segment-arrow-segment:nth-child(4),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(5):focus-visible) .segment-arrow-row > .segment-arrow-segment:nth-child(4),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(5):hover) .segment-arrow-row > .segment-arrow-segment:nth-child(6),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(5):focus-visible) .segment-arrow-row > .segment-arrow-segment:nth-child(6),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(6):hover) .segment-arrow-row > .segment-arrow-segment:nth-child(5),
+.reveal .segment-arrow-grid:has(.segment-arrow-row > .segment-arrow-segment:nth-child(6):focus-visible) .segment-arrow-row > .segment-arrow-segment:nth-child(5) {
+    z-index: 15;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
+}
+
+.reveal .segment-arrow-segment:hover,
+.reveal .segment-arrow-segment:focus-visible {
+    z-index: 20;
+    transform: translateY(-12px) scale(1.12);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.48);
+    outline: none;
+}
+
+.reveal .segment-arrow-segment-title,
+.reveal .segment-arrow-segment-list {
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    top: 50%;
+    width: auto;
+    margin: 0;
+    transform: translateY(-50%);
+    opacity: 0.5;
+    visibility: visible;
+    pointer-events: none;
+    transition: opacity 0.22s ease;
+}
+
+.reveal .segment-arrow-segment:hover .segment-arrow-segment-title,
+.reveal .segment-arrow-segment:hover .segment-arrow-segment-list,
+.reveal .segment-arrow-segment:focus-visible .segment-arrow-segment-title,
+.reveal .segment-arrow-segment:focus-visible .segment-arrow-segment-list {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.reveal .segment-arrow--show-title .segment-arrow-segment-title {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.reveal .segment-arrow-segment-title {
+    margin: 0;
+    font-size: 0.52em;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.reveal .segment-arrow-segment-list {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    max-height: 88%;
+    overflow: hidden;
+}
+
+.reveal .segment-arrow-segment:has(.segment-arrow-segment-list li) .segment-arrow-segment-title {
+    top: 20%;
+    transform: translateY(-50%);
+}
+
+.reveal .segment-arrow-segment:has(.segment-arrow-segment-list li) .segment-arrow-segment-list {
+    top: 58%;
+    transform: translateY(-50%);
+}
+
+.reveal .segment-arrow-segment-list li {
+    font-size: 0.42em;
+    line-height: 1.4;
+    max-width: 96%;
+}
+
+.reveal .segment-arrow-segment-list li::before {
+    content: '• ';
+    font-weight: 700;
+}
+
+.reveal .segment-arrow-footer {
+    position: relative;
+    z-index: 0;
+    margin-top: 0;
+    height: var(--segment-arrow-footer-block);
+    min-height: var(--segment-arrow-footer-block);
+    max-height: var(--segment-arrow-footer-block);
+    align-items: start;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.reveal .segment-arrow-footer-item {
+    text-align: center;
+    font-size: 0.72em;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+}
+
+.reveal .segment-arrow-head-spacer {
+    min-width: 0;
+}
+
+/* --- Theme: gold (成长性) --- */
+.reveal .segment-arrow-theme-gold .segment-arrow-segment:nth-child(1) {
+    background: linear-gradient(180deg, #fff0b8 0%, #ffe496 72%, #efd06e 84%, #d9b84e 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.reveal .segment-arrow-theme-gold .segment-arrow-segment:nth-child(2) {
+    background: linear-gradient(180deg, #ffe498 0%, #ffd678 72%, #ecc057 84%, #d4a739 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.reveal .segment-arrow-theme-gold .segment-arrow-segment:nth-child(3) {
+    background: linear-gradient(180deg, #ffd878 0%, #ffc85a 72%, #e8b040 84%, #cf9624 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+.reveal .segment-arrow-theme-gold .segment-arrow-segment:nth-child(1):hover,
+.reveal .segment-arrow-theme-gold .segment-arrow-segment:nth-child(1):focus-visible {
+    background: linear-gradient(180deg, #fff4c4 0%, #ffecb0 72%, #f2d880 84%, #ddc05a 100%);
+}
+
+.reveal .segment-arrow-theme-gold .segment-arrow-segment:nth-child(2):hover,
+.reveal .segment-arrow-theme-gold .segment-arrow-segment:nth-child(2):focus-visible {
+    background: linear-gradient(180deg, #ffeba7 0%, #ffe190 72%, #f1ca64 84%, #dbb041 100%);
+}
+
+.reveal .segment-arrow-theme-gold .segment-arrow-segment:nth-child(3):hover,
+.reveal .segment-arrow-theme-gold .segment-arrow-segment:nth-child(3):focus-visible {
+    background: linear-gradient(180deg, #ffe28a 0%, #ffd670 72%, #f0bc48 84%, #d9a028 100%);
+}
+
+.reveal .segment-arrow-grid--cols-4 .segment-arrow-segment-title {
+    font-size: 0.44em;
+    line-height: 1.25;
+}
+
+.reveal .segment-arrow-theme-gold .segment-arrow-segment-title,
+.reveal .segment-arrow-theme-gold .segment-arrow-segment-list li {
+    color: rgba(40, 40, 40, 0.92);
+}
+
+.reveal .segment-arrow-theme-gold .segment-arrow-segment-list li {
+    color: rgba(55, 55, 55, 0.92);
+}
+
+.reveal .segment-arrow-theme-gold .segment-arrow-footer-item:nth-child(1) { color: #ffd878; text-shadow: 0 0 18px rgba(255, 200, 90, 0.35); }
+.reveal .segment-arrow-theme-gold .segment-arrow-footer-item:nth-child(2) { color: #f3c45c; text-shadow: 0 0 18px rgba(255, 200, 90, 0.35); }
+.reveal .segment-arrow-theme-gold .segment-arrow-footer-item:nth-child(3) { color: #e8b040; text-shadow: 0 0 18px rgba(255, 200, 90, 0.35); }
+
+/* --- Theme: red gradient 主题红→浅红（议程） --- */
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(1) {
+    background: linear-gradient(180deg, #d43272 0%, var(--sfk-magenta) 72%, var(--sfk-magenta-dark) 100%);
+    color: var(--text-main);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(2) {
+    background: linear-gradient(180deg, #e05688 0%, #d43272 72%, var(--sfk-magenta) 100%);
+    color: var(--text-main);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(3) {
+    background: linear-gradient(180deg, #f0a0bc 0%, var(--sfk-magenta-light) 72%, #e05688 100%);
+    color: var(--text-main);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(4) {
+    background: linear-gradient(180deg, #f5b8cc 0%, var(--sfk-magenta-light) 72%, #e05688 100%);
+    color: #5c1838;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(1):hover,
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(1):focus-visible {
+    background: linear-gradient(180deg, #e05688 0%, #d43272 72%, var(--sfk-magenta) 100%);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(2):hover,
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(2):focus-visible {
+    background: linear-gradient(180deg, #f0a0bc 0%, #e05688 72%, #d43272 100%);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(3):hover,
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(3):focus-visible {
+    background: linear-gradient(180deg, #fde0ea 0%, #f5b8cc 72%, var(--sfk-magenta-light) 100%);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(4):hover,
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(4):focus-visible {
+    background: linear-gradient(180deg, #fde0ea 0%, #f0a0bc 72%, #f5b8cc 100%);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(1) .segment-arrow-segment-title,
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(2) .segment-arrow-segment-title {
+    color: var(--text-main);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(3) .segment-arrow-segment-title,
+.reveal .segment-arrow-theme-red .segment-arrow-segment:nth-child(4) .segment-arrow-segment-title {
+    color: #5c1838;
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-footer-item:nth-child(1) {
+    color: var(--sfk-magenta);
+    text-shadow: 0 0 14px rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.35);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-footer-item:nth-child(2) {
+    color: var(--sfk-magenta-mid);
+    text-shadow: 0 0 14px rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.3);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-footer-item:nth-child(3) {
+    color: var(--sfk-magenta-light);
+    text-shadow: 0 0 14px rgba(var(--sfk-magenta-light-r), var(--sfk-magenta-light-g), var(--sfk-magenta-light-b), 0.35);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-footer-item:nth-child(4) {
+    color: #e05688;
+    text-shadow: 0 0 14px rgba(var(--sfk-magenta-light-r), var(--sfk-magenta-light-g), var(--sfk-magenta-light-b), 0.38);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-label-text {
+    color: rgba(240, 200, 215, 0.94);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-stem {
+    background: rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.55);
+}
+
+.reveal .segment-arrow-theme-red .segment-arrow-stem-dot {
+    background: var(--sfk-magenta-light);
+}
+
+/* --- Slide layouts --- */
+.reveal .slide-agenda,
+.reveal .slide-major-growth {
+    overflow: visible !important;
+}
+
+.reveal .slide-agenda .slide-content-layer {
+    justify-content: center;
+    align-items: center;
+    gap: clamp(20px, 3vh, 36px);
+    padding-top: var(--slide-padding-y);
+    padding-bottom: var(--slide-padding-bottom);
+}
+
+.reveal .slide-agenda h2 {
+    font-size: 1.75em;
+    margin: 0;
+    text-align: center;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.reveal .slide-agenda .segment-arrow {
+    flex: 0 0 auto;
+    align-self: center;
+    padding: 0;
+}
+
+.reveal .slide-agenda .segment-arrow-grid {
+    width: min(96%, 1480px);
+    --segment-arrow-tip-w: min(210px, 18.3vw);
+    --segment-arrow-tip-h: min(46.37vh, 411px);
+    --segment-arrow-head-w: var(--segment-arrow-tip-w);
+    --segment-arrow-row-h: min(28vh, 248px);
+}
+
+.reveal .slide-agenda .segment-arrow-segment {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.reveal .slide-agenda .segment-arrow-grid .segment-arrow-segment-title {
+    font-size: 0.58em;
+    line-height: 1.15;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+}
+
+.reveal .slide-agenda .segment-arrow-footer-item {
+    font-size: 0.82em;
+}
+
+.reveal .slide-major-growth .segment-arrow {
+    flex: 0 0 auto;
+    align-self: center;
+    padding-top: clamp(8px, 1.5vh, 20px);
+    padding-bottom: clamp(4px, 1vh, 12px);
+}
+
+.reveal .slide-major-growth .employment-lead {
+    flex-shrink: 0;
+    margin-top: 0;
+}
+
+/* --- Share lock (?share=slug) — hide deck chrome --- */
+html.share-locked .reveal .controls,
+html.share-locked .reveal .progress,
+html.share-locked .reveal .slide-number,
+html.share-locked .reveal .playback,
+html.share-locked .reveal .pause-overlay,
+html.share-locked .reveal aside.notes {
+    display: none !important;
+    pointer-events: none !important;
+}
+
+html.share-locked .reveal .slides section aside.notes {
+    display: none !important;
+}
+
+body.share-locked-error {
+    background: #000;
+    color: #fff;
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+}
+
+.share-lock-error {
+    max-width: 480px;
+    margin: 20vh auto;
+    padding: 0 24px;
+    text-align: center;
+}
+
+.share-lock-error h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.share-lock-error p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
