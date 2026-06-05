@@ -419,17 +419,19 @@ body {
 
 /* --- Category picker --- */
 .ql-category-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
 }
 
 .ql-category-btn {
     display: flex;
-    align-items: center;
-    gap: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
     width: 100%;
-    padding: 18px 16px;
+    min-height: 108px;
+    padding: 14px;
     border: 1px solid var(--ql-border);
     border-radius: 14px;
     background: var(--ql-panel-2);
@@ -437,28 +439,85 @@ body {
     font: inherit;
     cursor: pointer;
     text-align: left;
-    transition: border-color 0.15s, background 0.15s;
+    transition: border-color 0.15s, background 0.15s, transform 0.12s;
 }
 
 .ql-category-btn:active {
+    transform: scale(0.98);
     border-color: var(--ql-accent);
-    background: rgba(200, 36, 100, 0.12);
+    background: rgba(200, 36, 100, 0.1);
 }
 
+.ql-category-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.ql-category-btn--game .ql-category-icon-wrap { background: rgba(96, 120, 255, 0.18); }
+.ql-category-btn--anime .ql-category-icon-wrap { background: rgba(255, 120, 180, 0.16); }
+.ql-category-btn--study .ql-category-icon-wrap { background: rgba(80, 200, 160, 0.16); }
+.ql-category-btn--cooking .ql-category-icon-wrap { background: rgba(255, 160, 70, 0.18); }
+.ql-category-btn--art .ql-category-icon-wrap { background: rgba(180, 130, 255, 0.18); }
+
 .ql-category-icon {
-    font-size: 1.6rem;
+    font-size: 1.45rem;
     line-height: 1;
 }
 
+.ql-category-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
 .ql-category-name {
-    flex: 1;
-    font-size: 1.05rem;
+    font-size: 0.98rem;
     font-weight: 700;
+    line-height: 1.25;
 }
 
 .ql-category-count {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     color: var(--ql-muted);
+}
+
+/* 5 个类别：最后一项居中占满一行 */
+.ql-category-btn:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    min-height: 0;
+    padding: 12px 14px;
+}
+
+.ql-category-btn:last-child:nth-child(odd) .ql-category-body {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+@media (max-width: 340px) {
+    .ql-category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ql-category-btn:last-child:nth-child(odd) {
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: 108px;
+    }
+
+    .ql-category-btn:last-child:nth-child(odd) .ql-category-body {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 /* --- Instant feedback --- */

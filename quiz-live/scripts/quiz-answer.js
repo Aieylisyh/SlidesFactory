@@ -15,9 +15,11 @@
 
 
     var CATEGORY_LABELS = {
-        '游戏常识': { short: '游戏', icon: '🎮' },
-        '动画常识': { short: '动画', icon: '🎬' },
-        '留学知识': { short: '留学常识', icon: '✈️' }
+        '游戏常识': { short: '游戏', icon: '🎮', theme: 'game' },
+        '动画常识': { short: '动画', icon: '🎬', theme: 'anime' },
+        '留学知识': { short: '留学', icon: '✈️', theme: 'study' },
+        '做菜常识': { short: '做菜', icon: '🍳', theme: 'cooking' },
+        '艺术史': { short: '艺术史', icon: '🎨', theme: 'art' }
     };
 
     var QUIZ_DRAW_COUNT = 10;
@@ -489,14 +491,17 @@
 
         this.quizzes.forEach(function (quiz) {
 
-            var meta = CATEGORY_LABELS[quiz.category] || { short: quiz.category, icon: '📚' };
+            var meta = CATEGORY_LABELS[quiz.category] || { short: quiz.category, icon: '📚', theme: 'default' };
 
             var drawCount = Math.min(QUIZ_DRAW_COUNT, (quiz.questions || []).length);
-            html += '<button type="button" class="ql-category-btn" data-category="' + quiz.category + '">' +
-                '<span class="ql-category-icon">' + meta.icon + '</span>' +
+            var theme = meta.theme || 'default';
+            html += '<button type="button" class="ql-category-btn ql-category-btn--' + theme + '" data-category="' + quiz.category + '">' +
+                '<span class="ql-category-icon-wrap">' +
+                '<span class="ql-category-icon" aria-hidden="true">' + meta.icon + '</span></span>' +
+                '<span class="ql-category-body">' +
                 '<span class="ql-category-name">' + meta.short + '</span>' +
                 '<span class="ql-category-count">随机 ' + drawCount + ' 题</span>' +
-                '</button>';
+                '</span></button>';
 
         });
 
