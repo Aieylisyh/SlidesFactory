@@ -6,7 +6,7 @@
 
     function QuizAdminApp(root) {
         this.root = root;
-        this.room = global.QuizProtocol.getRoomFromUrl() || global.QuizProtocol.randomRoomCode();
+        this.room = '';
         this.state = null;
 
         this.els = {
@@ -19,10 +19,15 @@
             recentBroadcasts: root.querySelector('[data-recent-broadcasts]')
         };
 
-        this.syncUrl();
         this.bind();
-        this.connect();
-        this.renderQr();
+
+        var self = this;
+        global.QuizProtocol.resolveRoomCode().then(function (room) {
+            self.room = room;
+            self.syncUrl();
+            self.connect();
+            self.renderQr();
+        });
     }
 
     QuizAdminApp.prototype.syncUrl = function () {
@@ -37,10 +42,15 @@
 
     QuizAdminApp.prototype.updateAnswerUrl = function () {
         var self = this;
-        global.QuizProtocol.resolvePublicHost().then(function (host) {
-            var answerUrl = global.QuizProtocol.buildAnswerUrl(self.room, host);
-            if (self.els.answerUrl) self.els.answerUrl.textContent = answerUrl;
-        });
+        if (global.QuizProtocol.isLocalHost(global.location.hostname)) {
+            global.QuizProtocol.resolvePublicHost().then(function (host) {
+                var answerUrl = global.QuizProtocol.buildAnswerUrl(self.room, host);
+                if (self.els.answerUrl) self.els.answerUrl.textContent = answerUrl;
+            });
+            return;
+        }
+        var answerUrl = global.QuizProtocol.buildAnswerUrl(self.room);
+        if (this.els.answerUrl) this.els.answerUrl.textContent = answerUrl;
     };
 
     QuizAdminApp.prototype.connect = function () {
@@ -173,27 +183,32 @@
             return;
         }
 
-        global.QuizProtocol.resolvePublicHost().then(function (host) {
-            var url = global.QuizProtocol.buildAnswerUrl(self.room, host);
+        function paintQr(url) {
             if (self.els.answerUrl) self.els.answerUrl.textContent = url;
-
-            if (global.QuizProtocol.isLocalHost(host)) {
-                self.showQrWarn('未能获取局域网 IP，请重新运行 start-quiz-server.bat 启动。');
-                return;
-            }
-
             var result = global.QRCode.toCanvas(canvas, url, {
                 width: 180,
                 margin: 1,
                 color: { dark: '#111111', light: '#ffffff' }
             });
-
             if (result && typeof result.then === 'function') {
                 result.catch(function () {
                     self.showQrWarn('二维码生成失败，请复制下方链接到手机浏览器。');
                 });
             }
-        });
+        }
+
+        if (global.QuizProtocol.isLocalHost(global.location.hostname)) {
+            global.QuizProtocol.resolvePublicHost().then(function (host) {
+                if (global.QuizProtocol.isLocalHost(host)) {
+                    self.showQrWarn('未能获取局域网 IP，请重新运行 start-quiz-server.bat 启动。');
+                    return;
+                }
+                paintQr(global.QuizProtocol.buildAnswerUrl(self.room, host));
+            });
+            return;
+        }
+
+        paintQr(global.QuizProtocol.buildAnswerUrl(self.room));
     };
 
     global.QuizAdminApp = QuizAdminApp;

@@ -75,7 +75,11 @@
 
     function getWsUrl(host) {
         var proto = global.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        var h = host || global.location.hostname;
+        var h = host || getHostOverride();
+        if (!h && !isLocalHost(global.location.hostname)) {
+            h = global.location.hostname;
+        }
+        if (!h) h = global.location.hostname;
         return proto + '//' + h + ':' + WS_PORT;
     }
 
@@ -142,10 +146,53 @@
         }
     }
 
-    function buildAnswerUrl(room, host) {
-        var h = host || global.location.hostname;
-        var base = buildOriginForHost(h) + global.location.pathname.replace(/[^/]+$/, '');
-        return base + 'answer.html?room=' + encodeURIComponent(room);
+    function fetchDefaultRoom() {
+        return fetch('data/default-room.txt', { cache: 'no-store' })
+            .then(function (res) {
+                if (!res.ok) return '';
+                return res.text();
+            })
+            .then(function (text) {
+                return (text || '').trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+            })
+            .catch(function () { return ''; });
+    }
+
+    /** URL ?room= 优先；否则 data/default-room.txt；再否则随机 6 位 */
+    function resolveRoomCode() {
+        var fromUrl = getRoomFromUrl();
+        if (fromUrl) return Promise.resolve(fromUrl);
+        return fetchDefaultRoom().then(function (preset) {
+            return preset || randomRoomCode();
+        });
+    }
+
+    function pageHostnameFromOrigin(origin) {
+        try {
+            return new URL(origin).hostname;
+        } catch (e) {
+            return '';
+        }
+    }
+
+    /** HTTP 答题页 URL：公网部署用当前站点域名；?host= 仅写入 WS 中继地址 */
+    function buildAnswerUrl(room, lanPageHost) {
+        var basePath = global.location.pathname.replace(/[^/]+$/, '');
+        var origin;
+
+        if (isLocalHost(global.location.hostname)) {
+            if (!lanPageHost || isLocalHost(lanPageHost)) return '';
+            origin = buildOriginForHost(lanPageHost);
+        } else {
+            origin = global.location.origin;
+        }
+
+        var url = origin + basePath + 'answer.html?room=' + encodeURIComponent(room);
+        var wsHost = getHostOverride();
+        if (wsHost && wsHost !== pageHostnameFromOrigin(origin)) {
+            url += '&host=' + encodeURIComponent(wsHost);
+        }
+        return url;
     }
 
     global.QuizProtocol = {
@@ -165,6 +212,7 @@
         makeAdminAction: makeAdminAction,
         makeRequestState: makeRequestState,
         getRoomFromUrl: getRoomFromUrl,
+        resolveRoomCode: resolveRoomCode,
         buildAnswerUrl: buildAnswerUrl
     };
 })(typeof window !== 'undefined' ? window : global);
