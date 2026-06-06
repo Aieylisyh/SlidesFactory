@@ -1,0 +1,32 @@
+{
+  "pages": {
+    "title": {
+      "slideId": "title",
+      "title": "演示标题"
+    },
+    "agenda": {
+      "slideId": "agenda",
+      "title": "议程"
+    },
+    "chapter-one": {
+      "slideId": "chapter-one",
+      "title": "第一章"
+    },
+    "chapter-one-content": {
+      "slideId": "chapter-one-content",
+      "title": "标准内容页标题"
+    },
+    "chapter-two": {
+      "slideId": "chapter-two",
+      "title": "第二章"
+    },
+    "chapter-two-content": {
+      "slideId": "chapter-two-content",
+      "title": "互动区示例"
+    },
+    "closing": {
+      "slideId": "closing",
+      "title": "谢谢 · Q & A"
+    }
+  }
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="deck-light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>演示标题 · 斯芬克游戏动画科系</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+    <link rel="stylesheet" href="style_guide.css?v=1">
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <section id="title" class="title-slide" data-background-color="#fff">
+                <div class="slide-content-layer">
+                    <h1>演示标题</h1>
+                    <p class="subtitle">副标题 · 机构 / 科系</p>
+                </div>
+                <aside class="notes">
+                    开场：用一句话说明本场主题与听众收获。
+                </aside>
+            </section>
+
+            <section id="agenda" class="content-slide slide-agenda" data-background-color="#fff" data-segment-arrow="true">
+                <div class="slide-content-layer">
+                    <h2>议程</h2>
+                    <div class="segment-arrow interactive-zone" data-segment-arrow-root aria-label="议程导航">
+                        <div class="segment-arrow-grid segment-arrow-grid--cols-2 segment-arrow-theme-red">
+                            <div class="segment-arrow-row">
+                                <div class="segment-arrow-segment" data-segment-arrow-segment data-goto="#/chapter-one" tabindex="0" role="link" aria-label="01 第一章">
+                                    <p class="segment-arrow-segment-title">第一章 · 替换章节名</p>
+                                </div>
+                                <div class="segment-arrow-segment" data-segment-arrow-segment data-goto="#/chapter-two" tabindex="0" role="link" aria-label="02 第二章">
+                                    <p class="segment-arrow-segment-title">第二章 · 替换章节名</p>
+                                </div>
+                                <div class="segment-arrow-tip segment-arrow-tip--red" aria-hidden="true">
+                                    <svg viewBox="0 0 200 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <linearGradient id="segment-arrow-tip-grad-red" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#fde0ea"></stop>
+                                                <stop offset="72%" stop-color="#f5b8cc"></stop>
+                                                <stop offset="100%" stop-color="#E05688"></stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <path fill="url(#segment-arrow-tip-grad-red)" d="M 0 0 L 0 72 L 165 42 Q 196 36 165 30 Z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="segment-arrow-footer">
+                                <span class="segment-arrow-footer-item">01</span>
+                                <span class="segment-arrow-footer-item">02</span>
+                                <span class="segment-arrow-head-spacer" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">
+                    议程与 config/outline.md「议程映射」表一致；点击各段可跳转章节开篇。
+                </aside>
+            </section>
+
+            <section>
+                <section id="chapter-one" class="content-slide section-opener" data-background-color="#fff" data-transition-tier="key">
+                    <div class="slide-content-layer">
+                        <h2>第一章</h2>
+                        <p class="disclaimer-note">章节副标题或关键词</p>
+                    </div>
+                    <aside class="notes">章节开篇：说明本章要回答什么问题。</aside>
+                </section>
+
+                <section id="chapter-one-content" class="content-slide" data-background-color="#fff">
+                    <div class="slide-content-layer">
+                        <h2>标准内容页标题</h2>
+                        <p>正文放在 <code>.slide-content-layer</code> 内；首个 <code>h2</code> 由 <code>fitSlidePageTitles()</code> 自动适配字号。</p>
+                        <ul>
+                            <li>要点一</li>
+                            <li>要点二</li>
+                        </ul>
+                        <div class="image-placeholder">[Image Placeholder: 描述画面主体、风格与构图]</div>
+                    </div>
+                    <aside class="notes">讲者备注写在这里，不出现在投影画面。</aside>
+                </section>
+            </section>
+
+            <section>
+                <section id="chapter-two" class="content-slide section-opener" data-background-color="#fff" data-transition-tier="key">
+                    <div class="slide-content-layer">
+                        <h2>第二章</h2>
+                        <p class="disclaimer-note">可按 outline 增删章节栈</p>
+                    </div>
+                    <aside class="notes">第二个章节示例；vertical stack 在 linear 模式下仍按 leaf 顺序翻页。</aside>
+                </section>
+
+                <section id="chapter-two-content" class="content-slide interactive-zone" data-background-color="#fff">
+                    <div class="slide-content-layer">
+                        <h2>互动区示例</h2>
+                        <p>带 <code>.interactive-zone</code> 的页面需拦截 pointer / 键盘，<strong>不要</strong>拦截 <code>wheel</code>（见 docs/guides/WHEEL_NAV_GUIDE.md）。</p>
+                    </div>
+                    <aside class="notes">需要游戏、图表、Tab 等时，从 scripts/ 按需引入并在 config/outline.md 登记。</aside>
+                </section>
+            </section>
+
+            <section id="closing" class="content-slide slide-closing" data-background-color="#fff" data-transition-tier="key">
+                <div class="slide-content-layer">
+                    <h2>谢谢 · Q &amp; A</h2>
+                    <p>收束本场核心信息，引导提问。</p>
+                    <p class="disclaimer-note">机构署名</p>
+                </div>
+                <aside class="notes">开放提问；可提示下一步行动。</aside>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+    <script src="scripts/portfolio/grid-morph.js?v=1"></script>
+    <script src="scripts/portfolio/surround-mesh-grid.js?v=1"></script>
+    <script src="scripts/chrome/click-fx.js?v=1"></script>
+    <script src="scripts/chrome/segment-arrow.js?v=1"></script>
+    <script src="scripts/chrome/slide-transitions.js?v=1"></script>
+    <script src="shared/scripts/slide-progress.js?v=1"></script>
+    <script src="shared/scripts/slide-wheel-nav.js?v=1"></script>
+    <script src="scripts/chrome/share-lock.js?v=1"></script>
+    <script src="shared/scripts/portrait-deck-adapt.js?v=1"></script>
+    <script src="scripts/core/deck-viewport.js?v=1"></script>
+    <script src="scripts/core/deck-nav.js?v=1"></script>
+    <script src="scripts/core/deck-slide-host.js?v=1"></script>
+    <script src="scripts/core/deck-reveal.js?v=1"></script>
+    <script src="scripts/main.js?v=1"></script>
+</body>
+</html>

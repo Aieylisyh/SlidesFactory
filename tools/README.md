@@ -6,7 +6,7 @@
 
 | 路径 | 用途 |
 |------|------|
-| [`dev/`](dev/) | 本地 HTTP 预览（LAN / localhost） |
+| [`dev/`](dev/) | 本地 HTTP 预览（LAN / localhost）；[`new-deck-scaffold/`](dev/new-deck-scaffold/) 为工坊根目录「新建 deck」脚本的最小示例页 |
 | [`python/`](python/) | 图片压缩、PDF 抽图、CSS 分片 |
 | [`design/`](design/) | Figma 对照 HTML / 脚本 |
 
