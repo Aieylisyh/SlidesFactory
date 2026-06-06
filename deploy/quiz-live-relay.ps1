@@ -53,13 +53,13 @@ function Get-SshBaseArgs([hashtable]$Env, [switch]$ForScp) {
     $args += '-o'
     $args += 'StrictHostKeyChecking=accept-new'
     $args += '-o'
-    $args += 'ConnectTimeout=15'
+    $args += 'ConnectTimeout=30'
     $args += '-o'
     $args += 'BatchMode=yes'
     $args += '-o'
-    $args += 'ServerAliveInterval=5'
+    $args += 'ServerAliveInterval=15'
     $args += '-o'
-    $args += 'ServerAliveCountMax=2'
+    $args += 'ServerAliveCountMax=6'
     return $args
 }
 
@@ -73,14 +73,29 @@ function Invoke-Ssh([hashtable]$Env, [string[]]$RemoteCommand) {
     }
 }
 
-function Invoke-Scp([hashtable]$Env, [string]$LocalPath, [string]$RemotePath) {
+function Invoke-Scp {
+    param(
+        [hashtable]$Env,
+        [string]$LocalPath,
+        [string]$RemotePath,
+        [switch]$Recursive
+    )
     $user = $Env['RELAY_USER']
     $hostName = $Env['RELAY_HOST']
-    $scpArgs = @(Get-SshBaseArgs $Env -ForScp) + @($LocalPath, "${user}@${hostName}:$RemotePath")
-    & scp @scpArgs
-    if ($LASTEXITCODE -ne 0) {
-        throw "scp exit code $LASTEXITCODE"
+    $scpArgs = @(Get-SshBaseArgs $Env -ForScp)
+    if ($Recursive) { $scpArgs += '-r' }
+    $scpArgs += @($LocalPath, "${user}@${hostName}:$RemotePath")
+
+    $maxAttempts = 3
+    for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+        & scp @scpArgs
+        if ($LASTEXITCODE -eq 0) { return }
+        if ($attempt -lt $maxAttempts) {
+            Write-Host "  scp failed (exit $LASTEXITCODE), retry $attempt/$maxAttempts in 5s ..." -ForegroundColor Yellow
+            Start-Sleep -Seconds 5
+        }
     }
+    throw "scp exit code $LASTEXITCODE (after $maxAttempts attempts)"
 }
 
 if (-not (Test-Path $EnvFile)) {
@@ -110,6 +125,9 @@ if (-not $appDir) { $appDir = '/opt/quiz-live' }
 $pm2Name = $envMap['RELAY_PM2_NAME']
 if (-not $pm2Name) { $pm2Name = 'quiz-relay' }
 
+$quizDataDir = Join-Path $RepoRoot 'quiz-live\data\quiz'
+$relayDir = Join-Path $RepoRoot 'quiz-live\scripts\relay'
+
 $uploads = @(
     @{
         Local = Join-Path $RepoRoot 'quiz-live\scripts\quiz-ws-relay.js'
@@ -129,23 +147,19 @@ if (Test-Path $levelsFile) {
     }
 }
 
-$quizDataDir = Join-Path $RepoRoot 'quiz-live\data\quiz'
+$dirUploads = @()
 if (Test-Path $quizDataDir) {
-    Get-ChildItem -Path $quizDataDir -Filter '*.json' -File | ForEach-Object {
-        $uploads += @{
-            Local = $_.FullName
-            Remote = "$appDir/data/quiz/$($_.Name)"
-        }
+    $dirUploads += @{
+        Local = $quizDataDir
+        Remote = "$appDir/data/"
+        Label = 'data/quiz/'
     }
 }
-
-$relayDir = Join-Path $RepoRoot 'quiz-live\scripts\relay'
 if (Test-Path $relayDir) {
-    Get-ChildItem -Path $relayDir -Filter '*.js' -File | ForEach-Object {
-        $uploads += @{
-            Local = $_.FullName
-            Remote = "$appDir/scripts/relay/$($_.Name)"
-        }
+    $dirUploads += @{
+        Local = $relayDir
+        Remote = "$appDir/scripts/"
+        Label = 'scripts/relay/'
     }
 }
 
@@ -156,11 +170,20 @@ foreach ($item in $uploads) {
         throw "Local file missing: $($item.Local)"
     }
 }
+foreach ($item in $dirUploads) {
+    if (-not (Test-Path $item.Local)) {
+        throw "Local directory missing: $($item.Local)"
+    }
+}
 
 if ($DryRun) {
     Write-Host '(DryRun — would upload:)' -ForegroundColor Yellow
     foreach ($item in $uploads) {
         Write-Host "  $($item.Local)" -ForegroundColor DarkGray
+        Write-Host "    -> $($item.Remote)" -ForegroundColor DarkGray
+    }
+    foreach ($item in $dirUploads) {
+        Write-Host "  $($item.Local) (recursive)" -ForegroundColor DarkGray
         Write-Host "    -> $($item.Remote)" -ForegroundColor DarkGray
     }
     if (-not $NoRestart) {
@@ -175,6 +198,11 @@ Invoke-Ssh $envMap @("mkdir -p $appDir/scripts/relay $appDir/scripts $appDir/dat
 foreach ($item in $uploads) {
     Write-Step "Upload $($item.Local | Split-Path -Leaf) ..."
     Invoke-Scp $envMap $item.Local $item.Remote
+}
+
+foreach ($item in $dirUploads) {
+    Write-Step "Upload $($item.Label) (recursive) ..."
+    Invoke-Scp $envMap $item.Local $item.Remote -Recursive
 }
 
 if (-not $NoRestart) {

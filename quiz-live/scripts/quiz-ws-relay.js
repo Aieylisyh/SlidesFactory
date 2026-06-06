@@ -64,11 +64,16 @@ server.on('upgrade', function (req, socket) {
         client.open = false;
         handlers.handleDisconnect(client);
     });
+
+    socket.on('error', function () {
+        client.open = false;
+        // Client dropped (mobile network / tab close) — not a server fault
+    });
 });
 
 server.listen(PORT, '0.0.0.0', function () {
     console.log('[quiz-relay] WebSocket listening on ws://0.0.0.0:' + PORT);
-    console.log('[quiz-relay] Categories:', (config.questionBank.quizzes || []).map(function (q) { return q.category; }).join(', '));
+    console.log('[quiz-relay] Categories:', config.categoryDisplayNames().join(', '));
     console.log('[quiz-relay] Questions loaded:', config.totalQuestionCount());
     console.log('[quiz-relay] Win milestones:', broadcast.getWinTiers().join(', '));
 });
