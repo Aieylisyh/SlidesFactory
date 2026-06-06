@@ -1,6 +1,6 @@
-/**
+﻿/**
  * Focus profile registry for deck remote control.
- * Used by generate-deck-nav.js (Node) and documented in guides/REMOTE_FOCUS_MAP.md.
+ * Used by generate-deck-nav.js (Node) and documented in docs/guides/REMOTE_FOCUS_MAP.md.
  */
 'use strict';
 

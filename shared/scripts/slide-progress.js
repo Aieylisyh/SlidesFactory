@@ -1,11 +1,11 @@
-/**
+﻿/**
  * Deck progress bar — Reveal.js bottom track with hover peek + drag-to-seek.
  *
  * Drag: thumb follows pointer smoothly (no slide jumps).
  * Release: snap to nearest slide progress, then navigate.
  *
  * Styles:  style_guide.css → styles/style-guide/01-tokens-base.css
- * Tokens:  guides/style_guide.md §4.5
+ * Tokens:  docs/guides/style_guide.md §4.5
  * Asset:   assets/logos/S.png  (mask + brand gradient tint)
  *
  * Reveal must be initialized with `progress: true`. Call SlideProgress.init(Reveal)

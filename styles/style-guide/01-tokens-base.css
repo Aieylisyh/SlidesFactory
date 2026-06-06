@@ -1,12 +1,12 @@
 ﻿/* ==========================================================================
    SFK Reveal Deck — 01-tokens-base.css
    Design tokens (:root) + Reveal base, progress bar, slide content layer, heading defaults
-   Part of style_guide.css split — see guides/style_guide.md §CSS Architecture
+   Part of style_guide.css split — see docs/guides/style_guide.md §CSS Architecture
    ========================================================================== */
 
 /* ==========================================================================
    SFK Game Animation Design - Reveal.js Custom Theme
-   See guides/style_guide.md (design rules) + guides/style_guide_extended.md (components)
+   See docs/guides/style_guide.md (design rules) + docs/guides/style_guide_extended.md (components)
    ========================================================================== */
 
 :root {

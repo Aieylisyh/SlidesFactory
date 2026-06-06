@@ -1,0 +1,177 @@
+﻿/* ── Language switcher (bottom-left, collapsible) ── */
+html.ss-deck-light {
+    --ss-lang-dock-bottom: calc(10px + var(--deck-progress-hit, 48px) + 60px);
+}
+
+html.ss-deck-light .ss-lang-switcher {
+    position: fixed;
+    left: max(14px, env(safe-area-inset-left, 0px));
+    bottom: max(var(--ss-lang-dock-bottom), calc(env(safe-area-inset-bottom, 0px) + var(--ss-lang-dock-bottom)));
+    z-index: 11000;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+html.ss-deck-light .ss-lang-switcher__toggle,
+html.ss-deck-light .ss-lang-switcher__panel {
+    pointer-events: auto;
+}
+
+html.ss-deck-light .ss-lang-switcher__toggle {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--ss-gray-700, #3a3a3a);
+    cursor: pointer;
+    box-shadow:
+        0 0 0 1px rgba(46, 46, 46, 0.5),
+        0 2px 10px rgba(46, 46, 46, 0.16);
+    transition:
+        box-shadow 0.18s ease,
+        transform 0.18s ease,
+        background 0.18s ease,
+        color 0.18s ease;
+    opacity: 0.9;
+}
+
+html.ss-deck-light .ss-lang-switcher__toggle:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    color: var(--ss-orange, #ff4f00);
+    box-shadow:
+        0 0 0 1px rgba(46, 46, 46, 0.62),
+        0 3px 14px rgba(46, 46, 46, 0.22);
+}
+
+html.ss-deck-light .ss-lang-switcher.is-expanded .ss-lang-switcher__toggle {
+    opacity: 1;
+    color: var(--ss-orange, #ff4f00);
+    box-shadow:
+        0 0 0 1px rgba(46, 46, 46, 0.62),
+        0 0 0 3px rgba(255, 79, 0, 0.28),
+        0 3px 14px rgba(46, 46, 46, 0.22);
+}
+
+html.ss-deck-light .ss-lang-switcher__icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 0;
+}
+
+html.ss-deck-light .ss-lang-switcher__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+html.ss-deck-light .ss-lang-switcher__panel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 2px 0;
+    padding: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: none;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateX(-4px) scale(0.96);
+    transform-origin: left bottom;
+    pointer-events: none;
+    transition:
+        max-width 0.24s ease,
+        opacity 0.2s ease,
+        transform 0.22s ease,
+        margin-left 0.22s ease,
+        padding 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+html.ss-deck-light .ss-lang-switcher.is-expanded .ss-lang-switcher__panel {
+    max-width: 200px;
+    margin-left: 10px;
+    padding: 6px 8px;
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    box-shadow:
+        0 0 0 1px rgba(46, 46, 46, 0.1),
+        0 8px 24px rgba(46, 46, 46, 0.14);
+    pointer-events: auto;
+}
+
+html.ss-deck-light .ss-lang-switcher__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow:
+        0 0 0 1px rgba(46, 46, 46, 0.62),
+        0 2px 8px rgba(46, 46, 46, 0.18);
+    transition:
+        box-shadow 0.15s ease,
+        transform 0.15s ease,
+        opacity 0.15s ease;
+    opacity: 0.88;
+}
+
+html.ss-deck-light .ss-lang-switcher__btn:hover {
+    opacity: 1;
+    transform: scale(1.06);
+    box-shadow:
+        0 0 0 1px rgba(46, 46, 46, 0.72),
+        0 3px 12px rgba(46, 46, 46, 0.24);
+}
+
+html.ss-deck-light .ss-lang-switcher__btn.is-active {
+    opacity: 1;
+    box-shadow:
+        0 0 0 1px rgba(46, 46, 46, 0.72),
+        0 0 0 3px var(--ss-orange),
+        0 3px 12px rgba(46, 46, 46, 0.24);
+}
+
+html.ss-deck-light .ss-lang-switcher__flag {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+html.ss-deck-light .ss-lang-switcher__flag svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: scale(0.94);
+    transform-origin: center center;
+}

@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
- * Generate deck-nav.json from index.html + share-pages.json + outline.md agenda.
+ * Generate deck-nav.json from index.html + config/share-pages.json + config/outline.md agenda.
  * Usage: node remoteNavigator/scripts/generate-deck-nav.js [--deck ../index.html]
  */
 'use strict';
@@ -189,11 +189,11 @@ function resolveDeckAssets(deckRel) {
     var deckDir = path.dirname(deckPath);
     var sharePath = path.join(deckDir, 'share-pages.json');
     if (!fs.existsSync(sharePath)) {
-        sharePath = path.resolve(ROOT, 'share-pages.json');
+        sharePath = path.resolve(ROOT, 'config/share-pages.json');
     }
     var outlinePath = path.join(deckDir, 'outline.md');
     if (!fs.existsSync(outlinePath)) {
-        outlinePath = path.resolve(ROOT, 'outline.md');
+        outlinePath = path.resolve(ROOT, 'config/outline.md');
     }
     var deckId = deriveDeckId(deckRel);
     var navFile = deckId === 'index' ? 'deck-nav.json' : 'deck-nav-' + deckId + '.json';

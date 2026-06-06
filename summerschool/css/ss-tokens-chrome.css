@@ -1,0 +1,223 @@
+﻿/**
+ * Summerschool deck — light theme aligned with sfkgameanimation.cn
+ * Palette source: https://www.sfkgameanimation.cn/styles.css
+ */
+
+html.ss-deck-light {
+    /* Orange */
+    --ss-orange: #FF4F00;
+    --ss-orange-light: #FF6B2B;
+    --ss-orange-dark: #E04500;
+    --ss-orange-10: rgba(255, 79, 0, 0.10);
+    --ss-orange-15: rgba(255, 79, 0, 0.15);
+    --ss-orange-20: rgba(255, 79, 0, 0.20);
+
+    /* Gray scale */
+    --ss-gray-900: #212121;
+    --ss-gray-800: #2E2E2E;
+    --ss-gray-700: #404040;
+    --ss-gray-600: #555555;
+    --ss-gray-500: #777777;
+    --ss-gray-400: #999999;
+    --ss-gray-300: #BBBBBB;
+    --ss-gray-200: #DDDDDD;
+    --ss-gray-100: #F0F0F0;
+    --ss-white: #FFFFFF;
+
+    /* Remap inherited style_guide brand tokens → portal orange */
+    --sfk-magenta: var(--ss-orange);
+    --sfk-magenta-light: var(--ss-orange-light);
+    --sfk-magenta-mid: var(--ss-orange-light);
+    --sfk-magenta-dark: var(--ss-orange-dark);
+    --sfk-magenta-r: 255;
+    --sfk-magenta-g: 79;
+    --sfk-magenta-b: 0;
+    --sfk-magenta-light-r: 255;
+    --sfk-magenta-light-g: 107;
+    --sfk-magenta-light-b: 43;
+    --sfk-pink: var(--ss-orange);
+    --sfk-orange: var(--ss-orange-light);
+    --sfk-logo-orange: var(--ss-orange);
+
+    /* Minimum readable body scale — matches .ss-gestalt-frame p */
+    --ss-text-floor: 0.72em;
+
+    /* #team gestalt placeholder — oversized muted label */
+    --ss-team-intro-muted: #D0D0D0;
+
+    /* Unified section header band (pages 2–9 content slides) */
+    --ss-section-title-size: 1.76em; /* was 1.6em (+10%) → ~73.9px @ 42px base */
+    --ss-section-title-line-height: 1.2;
+    --ss-section-title-margin-bottom: 10px;
+    /* Former chapter-tag band (1.35em) folded into padding so h2 baseline stays aligned */
+    --ss-section-header-padding-top: 1.15em;
+    /* ~1.5 lines of small body text — lifts schedule page content under h2 */
+    --ss-schedule-body-lift: calc(var(--ss-text-floor) * 1.5);
+}
+
+/* ── Canvas + type ── */
+html.ss-deck-light,
+html.ss-deck-light body {
+    background: var(--ss-white) !important;
+    color: var(--ss-gray-800) !important;
+}
+
+html.ss-deck-light .reveal,
+html.ss-deck-light .reveal .viewport,
+html.ss-deck-light .reveal .slides,
+html.ss-deck-light .reveal .backgrounds,
+html.ss-deck-light .reveal .slide-background,
+html.ss-deck-light .reveal .slides section {
+    background-color: var(--ss-white) !important;
+    color: var(--ss-gray-800) !important;
+}
+
+html.ss-deck-light .reveal h1,
+html.ss-deck-light .reveal h2,
+html.ss-deck-light .reveal h3,
+html.ss-deck-light .reveal p,
+html.ss-deck-light .reveal li,
+html.ss-deck-light .reveal .slide-content-layer {
+    color: var(--ss-gray-800);
+}
+
+html.ss-deck-light .reveal .subtitle,
+html.ss-deck-light .reveal .disclaimer-note {
+    color: var(--ss-gray-500) !important;
+}
+
+html.ss-deck-light .reveal .disclaimer-note {
+    font-size: var(--ss-text-floor);
+}
+
+html.ss-deck-light .reveal .title-slide .subtitle {
+    border-top-color: var(--ss-orange) !important;
+}
+
+html.ss-deck-light .reveal .content-slide.section-opener h2 {
+    border-bottom-color: var(--ss-orange) !important;
+}
+
+html.ss-deck-light .reveal .slides section .slide-content-layer,
+html.ss-deck-light .reveal .slides section.present .slide-content-layer {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    visibility: visible !important;
+}
+
+html.ss-deck-light .reveal .slides section.present .tx-fx-overlay-root {
+    display: none !important;
+}
+
+html.ss-deck-light .reveal .slide-ss-sparse .slide-content-layer,
+html.ss-deck-light .reveal .slide-ss-experience .slide-content-layer {
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Unified section header band (pages 2–9) — h2 slot ── */
+html.ss-deck-light .reveal .content-slide.slide-ss-sparse .slide-content-layer,
+html.ss-deck-light .reveal .content-slide.slide-ss-schedule .slide-content-layer,
+html.ss-deck-light .reveal .content-slide.slide-ss-experience .slide-content-layer,
+html.ss-deck-light .reveal .content-slide.slide-ss-venue .slide-content-layer,
+html.ss-deck-light .reveal .content-slide.slide-ss-support .slide-content-layer,
+html.ss-deck-light .reveal .content-slide.slide-ss-homework .slide-content-layer,
+html.ss-deck-light .reveal .content-slide.slide-ss-tips .slide-content-layer {
+    padding-top: var(--ss-section-header-padding-top);
+    gap: 0;
+}
+
+html.ss-deck-light .reveal .content-slide.slide-ss-sparse h2,
+html.ss-deck-light .reveal .content-slide.slide-ss-schedule h2,
+html.ss-deck-light .reveal .content-slide.slide-ss-experience h2,
+html.ss-deck-light .reveal .content-slide.slide-ss-venue h2,
+html.ss-deck-light .reveal .content-slide.slide-ss-support h2,
+html.ss-deck-light .reveal .content-slide.slide-ss-homework h2,
+html.ss-deck-light .reveal .content-slide.slide-ss-tips h2 {
+    display: block;
+    align-self: flex-start;
+    width: auto;
+    max-width: none;
+    height: auto;
+    min-height: calc(var(--ss-section-title-size) * var(--ss-section-title-line-height));
+    margin: 0 0 var(--ss-section-title-margin-bottom);
+    padding: 0;
+    border-bottom: none !important;
+    font-size: var(--ss-section-title-size);
+    line-height: var(--ss-section-title-line-height);
+    font-weight: 800;
+    text-align: left;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    color: var(--ss-gray-800) !important;
+}
+
+/* ── Chrome tokens (progress bar, etc.) ── */
+html.ss-deck-light .reveal.ss-theme-light {
+    --bg-color: var(--ss-white);
+    --panel-bg: var(--ss-gray-100);
+    --text-main: var(--ss-gray-800);
+    --text-muted: var(--ss-gray-500);
+    --image-border-color: var(--ss-gray-200);
+    --deck-progress-s-mask: url("../assets/logos/S.png");
+    --deck-progress-bar-edge: var(--ss-gray-200);
+    --deck-progress-bar-mid: rgba(255, 79, 0, 0.35);
+    --deck-progress-bar-peak: var(--ss-orange);
+    --deck-progress-track: rgba(46, 46, 46, 0.12);
+    --deck-progress-track-active: rgba(46, 46, 46, 0.18);
+}
+
+html.ss-deck-light .reveal .slide-brand-logo {
+    z-index: 12;
+}
+
+html.ss-deck-light .reveal .controls .deck-nav-cluster .slide-number {
+    /* Reveal .controls uses 10px em context — use 3.024em (= 0.72 × 42px) to match slide body floor */
+    font-size: 3.024em;
+    color: var(--ss-gray-800);
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--ss-gray-200);
+}
+
+html.ss-deck-light .reveal.is-deck-progress-active .progress,
+html.ss-deck-light .reveal .progress:hover,
+html.ss-deck-light .reveal .progress.is-dragging,
+html.ss-deck-light .reveal .progress.is-snapping {
+    box-shadow:
+        0 0 12px var(--ss-orange-20),
+        0 4px 14px rgba(46, 46, 46, 0.1);
+}
+
+html.ss-deck-light .reveal .progress > .deck-progress-thumb {
+    filter: drop-shadow(0 0 8px var(--ss-orange-20));
+}
+
+html.ss-deck-light .reveal.is-deck-progress-active .progress > .deck-progress-thumb,
+html.ss-deck-light .reveal .progress:hover > .deck-progress-thumb,
+html.ss-deck-light .reveal .progress.is-dragging > .deck-progress-thumb,
+html.ss-deck-light .reveal .progress.is-snapping > .deck-progress-thumb {
+    filter: drop-shadow(0 0 12px rgba(255, 79, 0, 0.45));
+}
+
+/* ── Tabs (portal nav pill style) ── */
+html.ss-deck-light .reveal .salary-toggle-btn {
+    border-color: var(--ss-gray-200);
+    background: var(--ss-white);
+    color: var(--ss-gray-600);
+}
+
+html.ss-deck-light .reveal .salary-toggle-btn.is-active {
+    color: var(--ss-white);
+    background: var(--ss-orange);
+    border-color: var(--ss-orange);
+}
+
+html.ss-deck-light .reveal .salary-toggle-btn:hover:not(.is-active) {
+    color: var(--ss-orange);
+    background: var(--ss-orange-10);
+    border-color: var(--ss-orange);
+}
+

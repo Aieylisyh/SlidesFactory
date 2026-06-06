@@ -172,6 +172,8 @@ if (Test-Path $sourceDataDir) {
 $exclude = @(
     'contents/**',
     'deploy/**',
+    'tools/**',
+    'docs/**',
     'coscli_output/**',
     '.cursor/**',
     '.cursorrules',

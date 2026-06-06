@@ -1,7 +1,7 @@
-/**
+﻿/**
  * Deck wheel navigation — custom two-tick scroll to flip slides.
  *
- * Spec: guides/WHEEL_NAV_GUIDE.md
+ * Spec: docs/guides/WHEEL_NAV_GUIDE.md
  * Call SlideWheelNav.bind() after Reveal.initialize() resolves (see main.js).
  *
  * Interactive zones must NOT stopPropagation on "wheel" — only pointer / nav keys.

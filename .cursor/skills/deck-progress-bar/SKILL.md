@@ -1,4 +1,4 @@
----
+﻿---
 name: deck-progress-bar
 description: >-
   Implements and ports the Reveal.js deck bottom progress bar with S thumb,
@@ -17,7 +17,7 @@ description: >-
 
 ## Spec (canonical)
 
-Full token + visual spec: `guides/style_guide.md` §4.5. Component row: `guides/style_guide_extended.md`.
+Full token + visual spec: `docs/guides/style_guide.md` §4.5. Component row: `docs/guides/style_guide_extended.md`.
 
 ### Drag + snap behavior (v8+)
 

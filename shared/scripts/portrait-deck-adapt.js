@@ -1,7 +1,7 @@
-/**
+﻿/**
  * Portrait deck adapt — lightweight vertical viewport mode (scale-first).
  *
- * Spec: guides/PORTRAIT_ADAPT_GUIDE.md
+ * Spec: docs/guides/PORTRAIT_ADAPT_GUIDE.md
  * CSS:  styles/style-guide/10-portrait-adapt.css (html.deck-portrait)
  *
  * Call PortraitDeckAdapt.init() before Reveal.initialize();

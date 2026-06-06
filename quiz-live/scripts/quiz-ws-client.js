@@ -5,7 +5,7 @@
     'use strict';
 
     function QuizWsClient(options) {
-        this.url = options.url;
+        this.url = options.url || '';
         this.room = options.room;
         this.role = options.role;
         this.clientId = options.clientId || null;
@@ -17,7 +17,18 @@
         this.wasConnected = false;
         this.retryMs = 800;
         this.maxRetryMs = 8000;
-        this._connect();
+
+        var self = this;
+        var urlReady = this.url
+            ? Promise.resolve(this.url)
+            : global.QuizProtocol.resolveWsUrl();
+        urlReady.then(function (url) {
+            if (self.closed) return;
+            self.url = url;
+            self._connect();
+        }).catch(function () {
+            self.onStatus('error');
+        });
     }
 
     QuizWsClient.prototype._connect = function () {

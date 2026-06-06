@@ -1,6 +1,6 @@
-/**
+﻿/**
  * quiz-live — audience registration form config loader & renderer.
- * See guides/QUIZ_LIVE_GUIDE.md § 观众登记配置
+ * See docs/guides/QUIZ_LIVE_GUIDE.md § 观众登记配置
  */
 (function (global) {
     'use strict';

@@ -1,7 +1,7 @@
 ﻿/* ==========================================================================
    SFK Reveal Deck — 03-portfolio.css
    Portfolio planning module, mesh surround, brand logo/footer
-   Part of style_guide.css split — see guides/style_guide.md §CSS Architecture
+   Part of style_guide.css split — see docs/guides/style_guide.md §CSS Architecture
    ========================================================================== */
 
 /* --- Portfolio Planning Module --- */
@@ -896,7 +896,7 @@
     border-radius: var(--image-radius);
 }
 
-/* Slide corner logo — injected by main.js; see guides/style_guide.md §1.2 */
+/* Slide corner logo — injected by main.js; see docs/guides/style_guide.md §1.2 */
 .reveal .slides section > .slide-brand-logo {
     position: absolute;
     top: 0;

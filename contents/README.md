@@ -1,4 +1,4 @@
-# contents/ 素材目录
+﻿# contents/ 素材目录
 
 ## 命名建议
 
@@ -12,8 +12,8 @@ contents/
 
 - 本课例 PDF 抽图请**显式指定文件**（目录内可能有多份 PDF）：
   ```bash
-  python scripts/extract_pdf_images.py --pdf contents/<你的PDF文件名>.pdf --out assets/pdf-extracted
-  python scripts/extract_pdf_images.py --pdf contents/<你的PDF文件名>.pdf --page 5,7-9
+  python tools/python/extract_pdf_images.py --pdf contents/<你的PDF文件名>.pdf --out assets/pdf-extracted
+  python tools/python/extract_pdf_images.py --pdf contents/<你的PDF文件名>.pdf --page 5,7-9
   ```
 
 输出：`assets/pdf-extracted/page-NN-img-M.jpeg` 与 `page-NN.txt`。
@@ -21,9 +21,9 @@ contents/
 抽图后**必须压缩**（抽图产物常 > 80 KB）：
 
 ```bash
-python scripts/compress_web_assets.py
+python tools/python/compress_web_assets.py
 ```
 
-标准与阈值见 [`../guides/IMAGE_COMPRESSION_GUIDE.md`](../guides/IMAGE_COMPRESSION_GUIDE.md)。
+标准与阈值见 [`../docs/guides/IMAGE_COMPRESSION_GUIDE.md`](../docs/guides/IMAGE_COMPRESSION_GUIDE.md)。
 
-脚本帮助：`python scripts/extract_pdf_images.py --help`。文档索引：[`../guides/README.md`](../guides/README.md)。
+脚本帮助：`python tools/python/extract_pdf_images.py --help`。文档索引：[`../docs/guides/README.md`](../docs/guides/README.md)。

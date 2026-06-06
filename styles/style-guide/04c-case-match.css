@@ -1,0 +1,125 @@
+﻿/* ==========================================================================
+   04c-case-match.css
+   Part of 04-cases-interactive split
+   ========================================================================== */
+
+
+/* Page 8 — case-match interactive chips */
+.reveal #case-match .match-game-panel .match-chip {
+    background: #fff;
+    border-color: #ddd;
+    color: #212121;
+}
+
+.reveal #case-match .match-game-panel .match-chip.is-selected {
+    background: #fff;
+    border-color: var(--sfk-magenta);
+    color: #212121;
+    box-shadow: 0 0 0 2px rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.28);
+}
+
+.reveal #case-match .match-game-panel .match-chip.is-matched,
+.reveal #case-match .match-game-panel .match-chip-name.is-placed.is-matched,
+.reveal #case-match .match-game-panel .match-chip-target.is-matched {
+    background: var(--sfk-magenta);
+    border-color: var(--sfk-magenta-dark);
+    color: #fff;
+    opacity: 1;
+    box-shadow: 0 0 16px rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.38);
+}
+
+.reveal #case-match .match-game-panel .match-chip.is-wrong {
+    background: #fff;
+    border-color: var(--sfk-magenta);
+    color: #212121;
+}
+
+.reveal .match-chip.is-punching {
+    animation: click-fx-punch 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal .match-chip-name.is-placed {
+    cursor: default;
+    opacity: 0.65;
+    border-color: var(--sfk-magenta-dark);
+    color: var(--sfk-magenta-light);
+    background: rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.1);
+}
+
+.reveal .match-chip-target {
+    border-color: #666;
+}
+
+.reveal .match-chip-target.is-matched {
+    cursor: default;
+    border-color: var(--sfk-magenta);
+    color: var(--sfk-magenta-light);
+    background: rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.14);
+    box-shadow: 0 0 16px rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.38);
+    animation: match-success-glow 0.5s ease-out;
+}
+
+@keyframes match-success-glow {
+    0% { box-shadow: 0 0 0 0 rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.55); }
+    100% { box-shadow: 0 0 16px rgba(var(--sfk-magenta-r), var(--sfk-magenta-g), var(--sfk-magenta-b), 0.38); }
+}
+
+.reveal .match-chip-name.is-placed.is-matched {
+    animation: match-success-glow 0.5s ease-out;
+}
+
+.reveal .match-chip.is-selected {
+    border-color: #ccc;
+    color: #f0f0f0;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.14);
+    animation: click-fx-glow 0.45s ease-out;
+}
+
+.reveal .match-chip.is-wrong {
+    animation: click-fx-shake 0.42s ease;
+    border-color: #888;
+    color: #bbb;
+}
+
+.reveal .click-fx-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.32);
+    transform: scale(0);
+    pointer-events: none;
+    animation: click-fx-ripple 0.55s ease-out forwards;
+}
+
+@keyframes click-fx-punch {
+    0% { transform: scale(1); }
+    35% { transform: scale(1.1); }
+    65% { transform: scale(0.96); }
+    100% { transform: scale(1); }
+}
+
+@keyframes click-fx-glow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.35); }
+    100% { box-shadow: 0 0 14px rgba(255, 255, 255, 0.14); }
+}
+
+@keyframes click-fx-ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes click-fx-shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+
+.reveal .match-status {
+    font-size: 0.5em;
+    color: var(--text-muted);
+}
+

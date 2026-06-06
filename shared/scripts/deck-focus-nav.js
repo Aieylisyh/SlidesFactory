@@ -1,6 +1,6 @@
-/**
+﻿/**
  * Deck Focus Nav — in-iframe focus ring, spatial navigation, confirm actions.
- * Injected by presenter-bridge.js; see guides/REMOTE_FOCUS_MAP.md
+ * Injected by presenter-bridge.js; see docs/guides/REMOTE_FOCUS_MAP.md
  */
 (function (global) {
     'use strict';

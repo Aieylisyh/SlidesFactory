@@ -1,0 +1,178 @@
+﻿/* ==========================================================================
+   05b-major-closing.css
+   Part of 05-employment-major split
+   ========================================================================== */
+
+
+.reveal .major-pick-panel {
+    background: var(--panel-bg);
+    border: 1px solid #333;
+    padding: 18px 20px;
+    margin-top: 8px;
+    text-align: left;
+}
+
+.reveal .major-pick-panel h4,
+.reveal .major-pick-section-label {
+    font-size: 0.68em;
+    color: var(--sfk-magenta);
+    margin: 0 0 14px;
+}
+
+.reveal .major-pick-section-label-result {
+    margin-top: 56px;
+    margin-bottom: 12px;
+}
+
+.reveal .major-pick-pool {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.reveal .major-pick-chip {
+    position: relative;
+    overflow: hidden;
+    padding: 18px 22px;
+    font-size: 0.54em;
+    font-weight: 700;
+    text-align: center;
+    background: #1a1a1a;
+    border: 3px solid #666;
+    border-radius: 12px;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease, box-shadow 0.28s ease;
+    transform-origin: center center;
+}
+
+.reveal .major-pick-chip.is-punching {
+    animation: major-chip-punch 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal .major-pick-chip.is-selected {
+    border-width: 3px;
+    border-color: var(--chip-accent);
+    color: var(--chip-accent);
+    background: color-mix(in srgb, var(--chip-accent) 22%, #1a1a1a);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--chip-accent) 55%, transparent);
+    animation: major-chip-glow 0.45s ease-out;
+}
+
+.reveal .major-chip-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--chip-accent, #aaa) 50%, transparent);
+    transform: scale(0);
+    pointer-events: none;
+    animation: major-chip-ripple 0.55s ease-out forwards;
+}
+
+@keyframes major-chip-punch {
+    0% { transform: scale(1); }
+    35% { transform: scale(1.14); }
+    65% { transform: scale(0.94); }
+    100% { transform: scale(1); }
+}
+
+@keyframes major-chip-glow {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--chip-accent) 70%, transparent); }
+    100% { box-shadow: 0 0 18px color-mix(in srgb, var(--chip-accent) 55%, transparent); }
+}
+
+@keyframes major-chip-ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.reveal .major-pick-result {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 0;
+    min-height: 28px;
+}
+
+.reveal .major-path-tag {
+    font-size: 0.52em;
+    font-weight: 600;
+    padding: 8px 14px;
+    border: 2px solid var(--sfk-magenta-light);
+    border-radius: 8px;
+    color: var(--sfk-magenta-light);
+    transform-origin: center center;
+}
+
+.reveal .major-path-tag.is-new {
+    animation: major-path-pop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes major-path-pop {
+    0% { transform: scale(0.3) rotate(-8deg); opacity: 0; }
+    70% { transform: scale(1.08) rotate(2deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.reveal .major-pick-status {
+    font-size: 0.52em;
+    color: var(--text-muted);
+    margin: 10px 0 0;
+}
+
+.reveal .slide-major[data-major-picker="true"] .slide-content-layer {
+    gap: 12px;
+}
+
+.reveal .slide-major[data-major-picker="true"] h2 {
+    font-size: 1.12em;
+    margin-bottom: 10px;
+}
+
+.reveal .slide-major[data-major-picker="true"] .major-pick-panel h4,
+.reveal .slide-major[data-major-picker="true"] .major-pick-section-label {
+    color: #77DDFF;
+}
+
+.reveal .slide-major[data-major-picker="true"] .major-pick-pool {
+    margin-bottom: 8px;
+}
+
+.reveal .slide-major[data-major-picker="true"] .major-pick-panel h4.major-pick-section-label-result {
+    color: var(--text-main);
+}
+
+.reveal .slide-major[data-major-picker="true"] .employment-lead {
+    font-size: 0.62em;
+    line-height: 1.55;
+}
+
+.reveal .slide-major[data-major-picker="true"] .major-path-tag {
+    border: none;
+    color: var(--sfk-magenta);
+    background: transparent;
+    padding: 4px 2px;
+}
+
+.reveal .slide-major-salary .sfk-table {
+    font-size: 0.62em;
+    margin-top: 8px;
+}
+
+.reveal .slide-closing .slide-content-layer {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.reveal .slide-closing h2 {
+    border-bottom: none;
+    font-size: 1.6em;
+}
+
+.reveal .slide-closing p {
+    font-size: 0.56em;
+    max-width: 720px;
+}
+

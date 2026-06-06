@@ -5,6 +5,51 @@
     'use strict';
 
     var WS_PORT = 8082;
+    var cachedWsRelayHost = '';
+
+    function isIpv4Host(hostname) {
+        return /^\d{1,3}(\.\d{1,3}){3}$/.test(String(hostname || '').trim());
+    }
+
+    function normalizeWsRelayHost(raw) {
+        var h = String(raw || '').trim().split(/\s+/)[0];
+        if (!h) return '';
+        h = h.replace(/^wss?:\/\//i, '').replace(/\/.*$/, '').replace(/:\d+$/, '');
+        return h;
+    }
+
+    function fetchWsRelayHostFile() {
+        return fetch('data/ws-relay-host.txt', { cache: 'no-store' })
+            .then(function (res) {
+                if (!res.ok) return '';
+                return res.text();
+            })
+            .then(function (text) {
+                return normalizeWsRelayHost(text);
+            })
+            .catch(function () { return ''; });
+    }
+
+    function initWsRelayConfig() {
+        return fetchWsRelayHostFile().then(function (host) {
+            if (host) {
+                cachedWsRelayHost = host;
+                try {
+                    if (!getHostOverride()) {
+                        sessionStorage.setItem('quiz-live-public-host', host);
+                    }
+                } catch (e) { /* ignore */ }
+            }
+            return host || cachedWsRelayHost;
+        });
+    }
+
+    function resolveWsRelayHostSync() {
+        var override = normalizeWsRelayHost(getHostOverride());
+        if (override) return override;
+        if (cachedWsRelayHost) return cachedWsRelayHost;
+        return '';
+    }
 
     function randomRoomCode(len) {
         len = len || 6;
@@ -74,13 +119,22 @@
     }
 
     function getWsUrl(host) {
-        var proto = global.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        var h = host || getHostOverride();
-        if (!h && !isLocalHost(global.location.hostname)) {
+        var h = normalizeWsRelayHost(host) || resolveWsRelayHostSync();
+        if (!h) {
             h = global.location.hostname;
         }
-        if (!h) h = global.location.hostname;
-        return proto + '//' + h + ':' + WS_PORT;
+        if (isLocalHost(h) || isIpv4Host(h)) {
+            var directProto = global.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            return directProto + '//' + h + ':' + WS_PORT;
+        }
+        var wsProto = global.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        return wsProto + '//' + h;
+    }
+
+    function resolveWsUrl() {
+        return initWsRelayConfig().then(function () {
+            return getWsUrl();
+        });
     }
 
     function parseMessage(raw) {
@@ -196,7 +250,7 @@
         }
 
         var url = origin + basePath + 'answer.html?room=' + encodeURIComponent(room);
-        var wsHost = getHostOverride();
+        var wsHost = resolveWsRelayHostSync();
         if (wsHost && wsHost !== pageHostnameFromOrigin(origin)) {
             url += '&host=' + encodeURIComponent(wsHost);
         }
@@ -211,6 +265,8 @@
         resolvePublicHost: resolvePublicHost,
         buildOriginForHost: buildOriginForHost,
         getWsUrl: getWsUrl,
+        resolveWsUrl: resolveWsUrl,
+        initWsRelayConfig: initWsRelayConfig,
         parseMessage: parseMessage,
         stringifyMessage: stringifyMessage,
         makeHello: makeHello,

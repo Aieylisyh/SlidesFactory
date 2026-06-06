@@ -125,6 +125,16 @@ $uploads = @(
     }
 )
 
+$relayDir = Join-Path $RepoRoot 'quiz-live\scripts\relay'
+if (Test-Path $relayDir) {
+    Get-ChildItem -Path $relayDir -Filter '*.js' -File | ForEach-Object {
+        $uploads += @{
+            Local = $_.FullName
+            Remote = "$appDir/scripts/relay/$($_.Name)"
+        }
+    }
+}
+
 Write-Step "Target: $($envMap['RELAY_USER'])@$($envMap['RELAY_HOST']):$appDir"
 
 foreach ($item in $uploads) {
@@ -146,7 +156,7 @@ if ($DryRun) {
 }
 
 Write-Step 'Ensuring remote directories exist ...'
-Invoke-Ssh $envMap @("mkdir -p $appDir/scripts $appDir/data")
+Invoke-Ssh $envMap @("mkdir -p $appDir/scripts/relay $appDir/scripts $appDir/data")
 
 foreach ($item in $uploads) {
     Write-Step "Upload $($item.Local | Split-Path -Leaf) ..."

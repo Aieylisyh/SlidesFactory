@@ -1,4 +1,4 @@
----
+﻿---
 
 name: portrait-deck-adapt
 
@@ -10,7 +10,7 @@ description: >-
 
   fold CSS, and PortraitDeckAdapt.init/bind wiring. Use when adding mobile
 
-  vertical viewport support, portrait-deck-adapt.js/css, or guides/PORTRAIT_ADAPT_GUIDE.md.
+  vertical viewport support, portrait-deck-adapt.js/css, or docs/guides/PORTRAIT_ADAPT_GUIDE.md.
 
 ---
 
@@ -48,7 +48,7 @@ description: >-
 
 
 
-Full spec: `guides/PORTRAIT_ADAPT_GUIDE.md`.
+Full spec: `docs/guides/PORTRAIT_ADAPT_GUIDE.md`.
 
 
 
@@ -90,7 +90,7 @@ Full spec: `guides/PORTRAIT_ADAPT_GUIDE.md`.
 
 | `summerschool/portrait-deck-adapt-extension.css` | Light theme + `ss-*` layout folds (summerschool only) |
 
-| `guides/PORTRAIT_ADAPT_GUIDE.md` | Human + agent reference |
+| `docs/guides/PORTRAIT_ADAPT_GUIDE.md` | Human + agent reference |
 
 
 
@@ -160,7 +160,7 @@ Preview: `http://localhost:8080/summerschool/` via root `start-lan-server.bat`.
 
 2. **Summerschool:** `html.ss-deck-light.deck-portrait …` in `summerschool/portrait-deck-adapt-extension.css`
 
-3. Prefer layout class names from `guides/style_guide_extended.md` or `summerschool/style_extension.css`
+3. Prefer layout class names from `docs/guides/style_guide_extended.md` or `summerschool/style_extension.css`（hub → `summerschool/css/ss-*.css`）
 
 4. Optional per-slide: `data-portrait-layout="stack"` + attribute selector
 

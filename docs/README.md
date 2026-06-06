@@ -1,27 +1,31 @@
-# SFK 幻灯片工坊 — 文档索引
-
-**说明类规范**已归档至 **[guides/README.md](../guides/README.md)**。本页保留仓库级元数据入口。
+﻿# SFK 幻灯片工坊 — 文档索引
 
 ## 快速路由
 
 | 场景 | 文档 |
 |------|------|
-| **全部说明文档** | [guides/README.md](../guides/README.md) |
-| 项目结构与多站点 | [monorepo.md](monorepo.md) · [sites/README.md](../sites/README.md) |
-| 主 deck 页序（内容） | [outline.md](../outline.md) · [guides/OUTLINE_GUIDE.md](../guides/OUTLINE_GUIDE.md) |
+| **全部规范文档** | [guides/README.md](guides/README.md) |
+| 项目结构与多站点 | [monorepo.md](monorepo.md) · [sites.md](sites.md) |
+| 主 deck 页序（内容） | [config/outline.md](../config/outline.md) · [guides/OUTLINE_GUIDE.md](guides/OUTLINE_GUIDE.md) |
 | 样式 hub | [style_guide.css](../style_guide.css) · [styles/style-guide/README.md](../styles/style-guide/README.md) |
-| quiz-live | [guides/QUIZ_LIVE_GUIDE.md](../guides/QUIZ_LIVE_GUIDE.md) · `styles/style-guide/11-quiz-live.css` |
+| 主 deck JS 目录 | [scripts/README.md](../scripts/README.md) |
+| 工具脚本 | [tools/README.md](../tools/README.md) |
+| quiz-live | [guides/QUIZ_LIVE_GUIDE.md](guides/QUIZ_LIVE_GUIDE.md) |
 | Agent 规则 | [.cursorrules](../.cursorrules) |
 
-## Co-located 文档（未迁入 guides/）
+## Co-located 文档
 
 | 路径 | 用途 |
 |------|------|
 | `styles/style-guide/README.md` | CSS 分片编辑路由 |
 | `contents/README.md` | 源 PDF / 抽图 / 压缩串联 |
+| `contents/data/README.md` | 薪资等 JSON 策划入口 |
 | `shared/README.md` | 跨站点共享 JS |
-| `sites/README.md` | 各站点入口 URL |
+| `config/README.md` | 主 deck 配置说明 |
 | `summerschool/outline.md` | 夏校 deck 结构 |
+| `summerschool/css/README.md` | 夏校 CSS 分片 |
+| `quiz-live/scripts/README.md` | 暖场抢答 JS / relay 模块 |
+| `deploy/部署脚本说明.md` | 部署 BAT / PS1 中文说明 |
 
 ## 架构图
 

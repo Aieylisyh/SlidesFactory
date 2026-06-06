@@ -1,0 +1,557 @@
+﻿/* ── 日程安排 · interactive schedule grid ── */
+html.ss-deck-light .reveal .slide-ss-schedule .slide-content-layer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    min-height: 0;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule .disclaimer-note {
+    margin: 0 0 0.25em;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-online .disclaimer-note {
+    margin-top: calc(-1 * var(--ss-schedule-body-lift));
+}
+
+html.ss-deck-light .reveal .ss-schedule-root {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45em;
+    min-height: 0;
+    width: 100%;
+}
+
+html.ss-deck-light .reveal .ss-schedule-section-label {
+    margin: 0;
+    font-size: var(--ss-text-floor);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--ss-orange);
+    text-transform: none;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-online .ss-schedule-root {
+    flex: 1;
+    justify-content: flex-start;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-online .ss-schedule-online {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.35em;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-online .ss-schedule-online-strip {
+    flex: 1;
+    align-content: start;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-root {
+    flex: 1;
+    min-height: 0;
+    gap: 0.15em;
+    margin-top: calc(-1 * var(--ss-schedule-body-lift));
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-offline {
+    --ss-schedule-offline-scale: 0.63;
+    --ss-schedule-offline-row-compact: 0.85;
+    /* Course — orange-red / SFK magenta family; tier 0 = lightest (current base) */
+    --ss-schedule-course-tier-0-bg: hsla(18, 100%, 50%, 0.16);
+    --ss-schedule-course-tier-0-bg-hover: hsla(18, 100%, 48%, 0.24);
+    --ss-schedule-course-tier-0-bg-active: hsla(18, 100%, 46%, 0.30);
+    --ss-schedule-course-tier-1-bg: hsla(16, 100%, 47%, 0.22);
+    --ss-schedule-course-tier-1-bg-hover: hsla(16, 100%, 45%, 0.30);
+    --ss-schedule-course-tier-1-bg-active: hsla(16, 100%, 43%, 0.36);
+    --ss-schedule-course-tier-2-bg: hsla(14, 100%, 44%, 0.28);
+    --ss-schedule-course-tier-2-bg-hover: hsla(14, 100%, 42%, 0.36);
+    --ss-schedule-course-tier-2-bg-active: hsla(14, 100%, 40%, 0.42);
+    --ss-schedule-course-tier-3-bg: hsla(12, 100%, 40%, 0.34);
+    --ss-schedule-course-tier-3-bg-hover: hsla(12, 100%, 38%, 0.42);
+    --ss-schedule-course-tier-3-bg-active: hsla(12, 100%, 36%, 0.48);
+    --ss-schedule-course-border: var(--ss-orange);
+    --ss-schedule-course-text: var(--ss-gray-900);
+    /* Logistics — blue family; tier 0 = lightest (current base) */
+    --ss-schedule-logistics-tier-0-bg: hsla(206, 85%, 61%, 0.16);
+    --ss-schedule-logistics-tier-0-bg-hover: hsla(206, 88%, 58%, 0.26);
+    --ss-schedule-logistics-tier-0-bg-active: hsla(206, 90%, 55%, 0.32);
+    --ss-schedule-logistics-tier-1-bg: hsla(206, 88%, 57%, 0.22);
+    --ss-schedule-logistics-tier-1-bg-hover: hsla(206, 90%, 54%, 0.30);
+    --ss-schedule-logistics-tier-1-bg-active: hsla(206, 92%, 51%, 0.36);
+    --ss-schedule-logistics-tier-2-bg: hsla(206, 90%, 53%, 0.28);
+    --ss-schedule-logistics-tier-2-bg-hover: hsla(206, 92%, 50%, 0.36);
+    --ss-schedule-logistics-tier-2-bg-active: hsla(206, 94%, 47%, 0.42);
+    --ss-schedule-logistics-tier-3-bg: hsla(206, 92%, 48%, 0.34);
+    --ss-schedule-logistics-tier-3-bg-hover: hsla(206, 94%, 45%, 0.42);
+    --ss-schedule-logistics-tier-3-bg-active: hsla(206, 96%, 42%, 0.48);
+    --ss-schedule-logistics-border: var(--sfk-blue);
+    --ss-schedule-logistics-text: var(--ss-gray-900);
+    flex: 1;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-section-label {
+    margin: 0;
+    font-size: calc(var(--ss-text-floor) * var(--ss-schedule-offline-scale));
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-offline-desc {
+    margin: 0;
+    padding: 0;
+    font-size: calc(var(--ss-text-floor) * var(--ss-schedule-offline-scale));
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--ss-gray-500);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-table {
+    font-size: calc(var(--ss-text-floor) * var(--ss-schedule-offline-scale));
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-table th,
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-table td {
+    padding: calc(0.35em * var(--ss-schedule-offline-scale) * var(--ss-schedule-offline-row-compact)) calc(0.4em * var(--ss-schedule-offline-scale) * var(--ss-schedule-offline-row-compact));
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-table .ss-schedule-time-col {
+    width: calc(4.2em * var(--ss-schedule-offline-scale));
+    min-width: calc(4.2em * var(--ss-schedule-offline-scale));
+    white-space: nowrap;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-table--offline {
+    line-height: 1.15;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-table th,
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-table td {
+    font-weight: 400;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-day-date {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-day-week {
+    font-size: 0.92em;
+    font-weight: 400;
+}
+
+html.ss-deck-light .reveal .ss-schedule-online {
+    flex: 0 0 auto;
+}
+
+html.ss-deck-light .reveal .ss-schedule-offline {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    gap: 0.25em;
+}
+
+html.ss-deck-light .reveal .ss-schedule-grid-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+html.ss-deck-light .reveal .ss-schedule-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    font-size: var(--ss-text-floor);
+    line-height: 1.35;
+}
+
+html.ss-deck-light .reveal .ss-schedule-online-strip {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.35em;
+    width: 100%;
+}
+
+html.ss-deck-light .reveal .ss-schedule-online-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0.15em;
+    min-height: 3.6em;
+    padding: 0.45em 0.35em;
+    border: 1px solid var(--ss-gray-200);
+    border-radius: 6px;
+    background: var(--ss-white);
+    font: inherit;
+    text-align: center;
+}
+
+html.ss-deck-light .reveal .ss-schedule-online-card__date {
+    font-size: var(--ss-text-floor);
+    font-weight: 800;
+    color: var(--ss-gray-800);
+}
+
+html.ss-deck-light .reveal .ss-schedule-online-card__time {
+    font-size: var(--ss-text-floor);
+    color: var(--ss-gray-500);
+}
+
+html.ss-deck-light .reveal .ss-schedule-online-card__title {
+    font-size: var(--ss-text-floor);
+    font-weight: 700;
+    color: var(--ss-orange);
+    margin-top: 0.1em;
+}
+
+html.ss-deck-light .reveal .ss-schedule-table--offline {
+    height: 100%;
+}
+
+html.ss-deck-light .reveal .ss-schedule-table--offline tbody {
+    height: 100%;
+}
+
+html.ss-deck-light .reveal .ss-schedule-table--offline tbody tr {
+    height: calc(100% / 7 * var(--ss-schedule-offline-row-compact, 1));
+}
+
+html.ss-deck-light .reveal .ss-schedule-table th,
+html.ss-deck-light .reveal .ss-schedule-table td {
+    border: 1px solid var(--ss-gray-200);
+    padding: 0.35em 0.4em;
+    text-align: center;
+    vertical-align: middle;
+    word-break: break-word;
+    hyphens: auto;
+    background: var(--ss-white);
+    color: var(--ss-gray-800);
+}
+
+html.ss-deck-light .reveal .ss-schedule-table thead th {
+    background: var(--ss-gray-100);
+    font-weight: 700;
+    color: var(--ss-gray-700);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+html.ss-deck-light .reveal .ss-schedule-table .ss-schedule-time-col {
+    width: 6.5em;
+    min-width: 6.5em;
+    background: var(--ss-gray-100);
+    font-weight: 700;
+    color: var(--ss-gray-600);
+    position: sticky;
+    left: 0;
+    z-index: 1;
+}
+
+html.ss-deck-light .reveal .ss-schedule-table thead .ss-schedule-time-col {
+    z-index: 3;
+}
+
+html.ss-deck-light .reveal .ss-schedule-day-date {
+    display: block;
+    font-size: 1em;
+    font-weight: 800;
+    color: var(--ss-gray-800);
+}
+
+html.ss-deck-light .reveal .ss-schedule-day-week {
+    display: block;
+    font-size: 0.92em;
+    font-weight: 600;
+    color: var(--ss-gray-500);
+    margin-top: 0.1em;
+}
+
+html.ss-deck-light .reveal .ss-schedule-cell--empty {
+    background: var(--ss-gray-100);
+    opacity: 0.55;
+}
+
+html.ss-deck-light .reveal .ss-schedule-cell--interactive {
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        box-shadow 0.15s ease,
+        color 0.15s ease;
+}
+
+html.ss-deck-light .reveal .ss-schedule-cell--interactive:hover,
+html.ss-deck-light .reveal .ss-schedule-cell--interactive:focus-visible {
+    background: var(--ss-orange-10);
+    box-shadow: inset 0 0 0 1px var(--ss-orange);
+    color: var(--ss-gray-900);
+    outline: none;
+}
+
+html.ss-deck-light .reveal .ss-schedule-cell--interactive.is-active {
+    background: var(--ss-orange-15);
+    box-shadow: inset 0 0 0 2px var(--ss-orange);
+    font-weight: 700;
+}
+
+/* Offline grid — category + frequency tier fills + merged row/col-span cells */
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course,
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics {
+    font-weight: 400;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--interactive.is-active {
+    font-weight: 400;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course {
+    color: var(--ss-schedule-course-text);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics {
+    color: var(--ss-schedule-logistics-text);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course-tier-0 {
+    background: var(--ss-schedule-course-tier-0-bg);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course-tier-1 {
+    background: var(--ss-schedule-course-tier-1-bg);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course-tier-2 {
+    background: var(--ss-schedule-course-tier-2-bg);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course-tier-3 {
+    background: var(--ss-schedule-course-tier-3-bg);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics-tier-0 {
+    background: var(--ss-schedule-logistics-tier-0-bg);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics-tier-1 {
+    background: var(--ss-schedule-logistics-tier-1-bg);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics-tier-2 {
+    background: var(--ss-schedule-logistics-tier-2-bg);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics-tier-3 {
+    background: var(--ss-schedule-logistics-tier-3-bg);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--merged {
+    vertical-align: middle;
+    text-align: center;
+    line-height: 1.4;
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-0.ss-schedule-cell--interactive:hover,
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-0.ss-schedule-cell--interactive:focus-visible {
+    background: var(--ss-schedule-course-tier-0-bg-hover);
+    box-shadow: inset 0 0 0 1px var(--ss-schedule-course-border);
+    color: var(--ss-schedule-course-text);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-1.ss-schedule-cell--interactive:hover,
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-1.ss-schedule-cell--interactive:focus-visible {
+    background: var(--ss-schedule-course-tier-1-bg-hover);
+    box-shadow: inset 0 0 0 1px var(--ss-schedule-course-border);
+    color: var(--ss-schedule-course-text);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-2.ss-schedule-cell--interactive:hover,
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-2.ss-schedule-cell--interactive:focus-visible {
+    background: var(--ss-schedule-course-tier-2-bg-hover);
+    box-shadow: inset 0 0 0 1px var(--ss-schedule-course-border);
+    color: var(--ss-schedule-course-text);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-3.ss-schedule-cell--interactive:hover,
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-3.ss-schedule-cell--interactive:focus-visible {
+    background: var(--ss-schedule-course-tier-3-bg-hover);
+    box-shadow: inset 0 0 0 1px var(--ss-schedule-course-border);
+    color: var(--ss-schedule-course-text);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-0.ss-schedule-cell--interactive:hover,
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-0.ss-schedule-cell--interactive:focus-visible {
+    background: var(--ss-schedule-logistics-tier-0-bg-hover);
+    box-shadow: inset 0 0 0 1px var(--ss-schedule-logistics-border);
+    color: var(--ss-schedule-logistics-text);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-1.ss-schedule-cell--interactive:hover,
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-1.ss-schedule-cell--interactive:focus-visible {
+    background: var(--ss-schedule-logistics-tier-1-bg-hover);
+    box-shadow: inset 0 0 0 1px var(--ss-schedule-logistics-border);
+    color: var(--ss-schedule-logistics-text);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-2.ss-schedule-cell--interactive:hover,
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-2.ss-schedule-cell--interactive:focus-visible {
+    background: var(--ss-schedule-logistics-tier-2-bg-hover);
+    box-shadow: inset 0 0 0 1px var(--ss-schedule-logistics-border);
+    color: var(--ss-schedule-logistics-text);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-3.ss-schedule-cell--interactive:hover,
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-3.ss-schedule-cell--interactive:focus-visible {
+    background: var(--ss-schedule-logistics-tier-3-bg-hover);
+    box-shadow: inset 0 0 0 1px var(--ss-schedule-logistics-border);
+    color: var(--ss-schedule-logistics-text);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-0.ss-schedule-cell--interactive.is-active {
+    background: var(--ss-schedule-course-tier-0-bg-active);
+    box-shadow: inset 0 0 0 2px var(--ss-schedule-course-border);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-1.ss-schedule-cell--interactive.is-active {
+    background: var(--ss-schedule-course-tier-1-bg-active);
+    box-shadow: inset 0 0 0 2px var(--ss-schedule-course-border);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-2.ss-schedule-cell--interactive.is-active {
+    background: var(--ss-schedule-course-tier-2-bg-active);
+    box-shadow: inset 0 0 0 2px var(--ss-schedule-course-border);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--course.ss-schedule-cell--course-tier-3.ss-schedule-cell--interactive.is-active {
+    background: var(--ss-schedule-course-tier-3-bg-active);
+    box-shadow: inset 0 0 0 2px var(--ss-schedule-course-border);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-0.ss-schedule-cell--interactive.is-active {
+    background: var(--ss-schedule-logistics-tier-0-bg-active);
+    box-shadow: inset 0 0 0 2px var(--ss-schedule-logistics-border);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-1.ss-schedule-cell--interactive.is-active {
+    background: var(--ss-schedule-logistics-tier-1-bg-active);
+    box-shadow: inset 0 0 0 2px var(--ss-schedule-logistics-border);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-2.ss-schedule-cell--interactive.is-active {
+    background: var(--ss-schedule-logistics-tier-2-bg-active);
+    box-shadow: inset 0 0 0 2px var(--ss-schedule-logistics-border);
+}
+
+html.ss-deck-light .reveal .slide-ss-schedule-offline .ss-schedule-cell--logistics.ss-schedule-cell--logistics-tier-3.ss-schedule-cell--interactive.is-active {
+    background: var(--ss-schedule-logistics-tier-3-bg-active);
+    box-shadow: inset 0 0 0 2px var(--ss-schedule-logistics-border);
+}
+
+html.ss-deck-light .reveal .ss-schedule-error {
+    margin: 0;
+    padding: 1em;
+    font-size: var(--ss-text-floor);
+    color: var(--ss-gray-500);
+    text-align: center;
+    border: 1px dashed var(--ss-gray-300);
+    border-radius: 8px;
+}
+
+/* Schedule modal — light theme overlay (pattern: chat-lightbox + employment popover) */
+.ss-schedule-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 12000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 38px;
+    background: rgba(33, 33, 33, 0.52);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.22s ease;
+}
+
+.ss-schedule-modal.is-open {
+    opacity: 1;
+}
+
+.ss-schedule-modal[hidden] {
+    display: none !important;
+}
+
+.ss-schedule-modal__panel {
+    position: relative;
+    width: min(896px, calc(100vw - 48px));
+    max-height: min(85vh, 1024px);
+    overflow: auto;
+    padding: 2.16em 2.24em 2em;
+    background: var(--ss-white);
+    border: 1px solid var(--ss-gray-200);
+    border-radius: 10px;
+    box-shadow:
+        0 16px 48px rgba(33, 33, 33, 0.18),
+        0 0 0 1px var(--ss-orange-10);
+    cursor: default;
+    text-align: left;
+}
+
+.ss-schedule-modal__close {
+    position: absolute;
+    top: 0.55em;
+    right: 0.55em;
+    width: 2.4em;
+    height: 2.4em;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--ss-gray-500);
+    font-size: 2.16em;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ss-schedule-modal__close:hover,
+.ss-schedule-modal__close:focus-visible {
+    background: var(--ss-orange-10);
+    color: var(--ss-orange);
+    outline: none;
+}
+
+.ss-schedule-modal__title {
+    margin: 0 2em 0.85em 0;
+    font-size: 1.52em;
+    font-weight: 800;
+    line-height: 1.35;
+    color: var(--ss-orange);
+}
+
+.ss-schedule-modal__body {
+    font-size: calc(var(--ss-text-floor) * 1.6);
+    line-height: 1.65;
+    color: var(--ss-gray-800);
+}
+
+.ss-schedule-modal__body p {
+    margin: 0 0 0.55em;
+}
+
+.ss-schedule-modal__body p:last-child {
+    margin-bottom: 0;
+}
+
+body.is-ss-schedule-modal-open {
+    overflow: hidden;
+}
+

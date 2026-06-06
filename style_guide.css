@@ -1,13 +1,16 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    SFK Game Animation Design — Reveal.js Custom Theme (import hub)
-   See guides/style_guide.md §CSS Architecture for file map & edit routing.
+   See docs/guides/style_guide.md §CSS Architecture for file map & edit routing.
    ========================================================================== */
 
 @import url("styles/style-guide/01-tokens-base.css");
 @import url("styles/style-guide/02-layout-ui.css");
 @import url("styles/style-guide/03-portfolio.css");
-@import url("styles/style-guide/04-cases-interactive.css");
-@import url("styles/style-guide/05-employment-major.css");
+@import url("styles/style-guide/04a-content-header.css");
+@import url("styles/style-guide/04b-case-gallery.css");
+@import url("styles/style-guide/04c-case-match.css");
+@import url("styles/style-guide/05a-employment.css");
+@import url("styles/style-guide/05b-major-closing.css");
 @import url("styles/style-guide/06-transitions-salary.css");
 @import url("styles/style-guide/07-mesh-lightbox.css");
 @import url("styles/style-guide/08-segment-arrow-share.css");
