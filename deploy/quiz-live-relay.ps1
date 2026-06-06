@@ -116,14 +116,28 @@ $uploads = @(
         Remote = "$appDir/scripts/quiz-ws-relay.js"
     },
     @{
-        Local = Join-Path $RepoRoot 'quiz-live\data\questions.json'
-        Remote = "$appDir/data/questions.json"
-    },
-    @{
         Local = Join-Path $RepoRoot 'quiz-live\data\broadcast-config.json'
         Remote = "$appDir/data/broadcast-config.json"
     }
 )
+
+$levelsFile = Join-Path $RepoRoot 'quiz-live\data\levels.json'
+if (Test-Path $levelsFile) {
+    $uploads += @{
+        Local = $levelsFile
+        Remote = "$appDir/data/levels.json"
+    }
+}
+
+$quizDataDir = Join-Path $RepoRoot 'quiz-live\data\quiz'
+if (Test-Path $quizDataDir) {
+    Get-ChildItem -Path $quizDataDir -Filter '*.json' -File | ForEach-Object {
+        $uploads += @{
+            Local = $_.FullName
+            Remote = "$appDir/data/quiz/$($_.Name)"
+        }
+    }
+}
 
 $relayDir = Join-Path $RepoRoot 'quiz-live\scripts\relay'
 if (Test-Path $relayDir) {
@@ -156,7 +170,7 @@ if ($DryRun) {
 }
 
 Write-Step 'Ensuring remote directories exist ...'
-Invoke-Ssh $envMap @("mkdir -p $appDir/scripts/relay $appDir/scripts $appDir/data")
+Invoke-Ssh $envMap @("mkdir -p $appDir/scripts/relay $appDir/scripts $appDir/data $appDir/data/quiz")
 
 foreach ($item in $uploads) {
     Write-Step "Upload $($item.Local | Split-Path -Leaf) ..."

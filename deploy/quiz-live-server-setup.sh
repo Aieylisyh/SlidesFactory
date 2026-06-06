@@ -22,7 +22,8 @@ if [ ! -f "$APP_DIR/scripts/quiz-ws-relay.js" ]; then
   echo "!!! 请先把本机 quiz-live 目录上传到 $APP_DIR"
   echo "    OrcaTerm 点 SFTP，上传:"
   echo "      quiz-live/scripts/quiz-ws-relay.js  -> /opt/quiz-live/scripts/"
-  echo "      quiz-live/data/questions.json       -> /opt/quiz-live/data/"
+  echo "      quiz-live/data/quiz/*.json          -> /opt/quiz-live/data/quiz/"
+  echo "      quiz-live/data/levels.json          -> /opt/quiz-live/data/"
   echo "      quiz-live/data/broadcast-config.json -> /opt/quiz-live/data/"
   echo "    上传完成后重新运行: bash quiz-live-server-setup.sh"
   exit 1
