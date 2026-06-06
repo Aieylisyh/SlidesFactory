@@ -548,6 +548,76 @@ body {
     border: 1px solid rgba(244, 140, 72, 0.35);
 }
 
+/* --- Bank loading overlay --- */
+.ql-bank-loading {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(6, 6, 10, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.ql-bank-loading-card {
+    width: min(100%, 280px);
+    padding: 28px 24px 22px;
+    border-radius: var(--ql-radius);
+    border: 1px solid var(--ql-border);
+    background: var(--ql-panel);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+    text-align: center;
+}
+
+.ql-bank-loading-spinner {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 16px;
+    border: 3px solid rgba(200, 36, 100, 0.18);
+    border-top-color: var(--ql-accent-light);
+    border-radius: 50%;
+    animation: ql-bank-spin 0.85s linear infinite;
+}
+
+@keyframes ql-bank-spin {
+    to { transform: rotate(360deg); }
+}
+
+.ql-bank-loading-title {
+    margin: 0 0 18px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ql-text);
+}
+
+.ql-bank-loading-track {
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(200, 36, 100, 0.12);
+    border: 1px solid rgba(200, 36, 100, 0.22);
+    overflow: hidden;
+}
+
+.ql-bank-loading-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--ql-accent), var(--ql-accent-light));
+    box-shadow: 0 0 10px rgba(200, 36, 100, 0.45);
+    transition: width 0.08s linear;
+}
+
+.ql-bank-loading-pct {
+    margin: 10px 0 0;
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--ql-accent-light);
+}
+
 /* --- Quiz progress bar --- */
 .ql-quiz-progress {
     margin-bottom: 18px;

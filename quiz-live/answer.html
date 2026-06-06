@@ -161,6 +161,17 @@
 
         <button type="button" class="ql-float-back ql-hidden" data-float-back aria-label="返回重选题目">返回</button>
 
+        <div class="ql-bank-loading ql-hidden" data-bank-loading aria-hidden="true" role="dialog" aria-label="题库加载中" aria-modal="true">
+            <div class="ql-bank-loading-card">
+                <div class="ql-bank-loading-spinner" aria-hidden="true"></div>
+                <p class="ql-bank-loading-title">正在加载题库…</p>
+                <div class="ql-bank-loading-track">
+                    <div class="ql-bank-loading-fill" data-bank-loading-fill style="width:0%"></div>
+                </div>
+                <p class="ql-bank-loading-pct" data-bank-loading-pct>0%</p>
+            </div>
+        </div>
+
     </div>
 
 
@@ -173,9 +184,10 @@
 
     <script src="scripts/quiz-ws-client.js"></script>
 
-    <script src="scripts/quiz-answer-ws.js?v=2"></script>
-    <script src="scripts/quiz-answer-ui.js?v=2"></script>
-    <script src="scripts/quiz-answer.js?v=3"></script>
+    <script src="scripts/quiz-answer-questions.js?v=1"></script>
+    <script src="scripts/quiz-answer-ws.js?v=3"></script>
+    <script src="scripts/quiz-answer-ui.js?v=3"></script>
+    <script src="scripts/quiz-answer.js?v=4"></script>
 
 </body>
 

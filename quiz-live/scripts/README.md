@@ -8,6 +8,7 @@
 | `quiz-ws-client.js` | 重连、心跳 |
 | `quiz-register-config.js` | 观众登记表单 |
 | `quiz-broadcast.js` | 大屏广播队列 UI |
+| `quiz-answer-questions.js` | 题库预加载与缓存（question_cfg + questions_*.json） |
 | `quiz-answer-ws.js` | 观众端 WS 层（连接、登记、消息） |
 | `quiz-answer-ui.js` | 观众端 UI 层（视图、答题、排行榜） |
 | `quiz-answer.js` | 观众端入口（构造函数 + boot） |

@@ -97,16 +97,69 @@
 
         loadQuestions: function () {
             var self = this;
-            fetch('data/quiz/question_cfg.json')
-                .then(function (r) { return r.json(); })
+            if (typeof global.QuizAnswerQuestions === 'undefined') return;
+            global.QuizAnswerQuestions.fetchCfg()
                 .then(function (list) {
-                    self.questionCategories = Array.isArray(list) ? list : [];
+                    if (list.length) self.questionCategories = list;
                     self.syncHeaderTitle();
                     if (self.participantId) self.renderCategories();
-                })
-                .catch(function () {
-                    self.questionCategories = [];
                 });
+        },
+
+        waitForBankLoad: function (loadPromise) {
+            var self = this;
+            var overlay = this.els.bankLoading;
+            var fill = this.els.bankLoadingFill;
+            var pctEl = this.els.bankLoadingPct;
+
+            if (!overlay) return loadPromise;
+
+            overlay.classList.remove('ql-hidden');
+            overlay.setAttribute('aria-hidden', 'false');
+
+            var fakeMax = 90;
+            var fakeDuration = 2000;
+            var start = Date.now();
+            var tickId = setInterval(function () {
+                var elapsed = Date.now() - start;
+                var p = Math.min(fakeMax, (elapsed / fakeDuration) * fakeMax);
+                if (fill) fill.style.width = p + '%';
+                if (pctEl) pctEl.textContent = Math.round(p) + '%';
+            }, 40);
+
+            return loadPromise.then(function (result) {
+                clearInterval(tickId);
+                if (fill) fill.style.width = '100%';
+                if (pctEl) pctEl.textContent = '100%';
+                return new Promise(function (resolve) {
+                    setTimeout(function () {
+                        overlay.classList.add('ql-hidden');
+                        overlay.setAttribute('aria-hidden', 'true');
+                        if (fill) fill.style.width = '0%';
+                        if (pctEl) pctEl.textContent = '0%';
+                        resolve(result);
+                    }, 220);
+                });
+            }).catch(function (err) {
+                clearInterval(tickId);
+                overlay.classList.add('ql-hidden');
+                overlay.setAttribute('aria-hidden', 'true');
+                if (fill) fill.style.width = '0%';
+                if (pctEl) pctEl.textContent = '0%';
+                throw err;
+            });
+        },
+
+        beginCategoryQuiz: function (categoryId, questions) {
+            if (!questions || !questions.length) return;
+            this.currentCategory = categoryId;
+            this.questionQueue = global.QuizAnswerCore.pickRandomQuestions(questions);
+            this.currentIndex = 0;
+            if (this.ws) {
+                this.ws.send(global.QuizProtocol.makeRoundStart(categoryId, this.clientId));
+            }
+            this.showView('quiz');
+            this.renderCurrentQuestion();
         },
 
         applyPlayer: function (player) {
@@ -238,22 +291,21 @@
                 return;
             }
 
-            fetch('data/quiz/questions_' + categoryId + '.json')
-                .then(function (r) {
-                    if (!r.ok) throw new Error('load failed');
-                    return r.json();
-                })
-                .then(function (data) {
-                    var questions = data.questions || [];
-                    if (!questions.length) return;
-                    self.currentCategory = categoryId;
-                    self.questionQueue = global.QuizAnswerCore.pickRandomQuestions(questions);
-                    self.currentIndex = 0;
-                    if (self.ws) {
-                        self.ws.send(global.QuizProtocol.makeRoundStart(categoryId, self.clientId));
-                    }
-                    self.showView('quiz');
-                    self.renderCurrentQuestion();
+            if (typeof global.QuizAnswerQuestions === 'undefined') {
+                alert('题库加载失败，请稍后重试');
+                return;
+            }
+
+            var cached = global.QuizAnswerQuestions.getCachedBank(categoryId);
+            if (cached && cached.length) {
+                this.beginCategoryQuiz(categoryId, cached);
+                return;
+            }
+
+            var loadPromise = global.QuizAnswerQuestions.fetchBank(categoryId);
+            this.waitForBankLoad(loadPromise)
+                .then(function (questions) {
+                    self.beginCategoryQuiz(categoryId, questions);
                 })
                 .catch(function () {
                     alert('题库加载失败，请稍后重试');

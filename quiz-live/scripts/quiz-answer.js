@@ -109,7 +109,10 @@
             confirmBtn: root.querySelector('[data-confirm-btn]'),
             feedback: root.querySelector('[data-feedback]'),
             nextBtn: root.querySelector('[data-next-btn]'),
-            floatBack: root.querySelector('[data-float-back]')
+            floatBack: root.querySelector('[data-float-back]'),
+            bankLoading: root.querySelector('[data-bank-loading]'),
+            bankLoadingFill: root.querySelector('[data-bank-loading-fill]'),
+            bankLoadingPct: root.querySelector('[data-bank-loading-pct]')
         };
 
         this.broadcast = new global.QuizBroadcast(root.querySelector('[data-broadcast]'));

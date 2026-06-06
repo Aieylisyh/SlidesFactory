@@ -143,6 +143,9 @@
                 if (msg.title) this.deckTitle = msg.title;
                 if (Array.isArray(msg.questionCategories) && msg.questionCategories.length) {
                     this.questionCategories = msg.questionCategories;
+                    if (typeof global.QuizAnswerQuestions !== 'undefined') {
+                        global.QuizAnswerQuestions.prefetchBanks(msg.questionCategories);
+                    }
                 }
                 this.participants = msg.participants || [];
                 this.syncHeaderTitle();
