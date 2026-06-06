@@ -43,6 +43,8 @@ function participantFromJson(raw) {
     var player = raw.player;
     if (!player || !player.user_id) {
         player = playerData.createPlayer(raw.name || '', raw.phone || '');
+    } else {
+        playerData.normalizePlayer(player);
     }
     return {
         clientId: raw.clientId,

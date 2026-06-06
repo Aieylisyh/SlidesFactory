@@ -82,6 +82,8 @@
         this.wsWasConnected = false;
         this.activeView = 'register';
         this.participants = [];
+        this.roundExpGained = 0;
+        this.pendingRoundSummary = false;
 
         this.views = {
             register: root.querySelector('[data-view="register"]'),
@@ -112,7 +114,14 @@
             floatBack: root.querySelector('[data-float-back]'),
             bankLoading: root.querySelector('[data-bank-loading]'),
             bankLoadingFill: root.querySelector('[data-bank-loading-fill]'),
-            bankLoadingPct: root.querySelector('[data-bank-loading-pct]')
+            bankLoadingPct: root.querySelector('[data-bank-loading-pct]'),
+            roundSummary: root.querySelector('[data-round-summary]'),
+            roundSummaryScore: root.querySelector('[data-round-summary-score]'),
+            roundTotalCorrect: root.querySelector('[data-round-total-correct]'),
+            roundExpGained: root.querySelector('[data-round-exp-gained]'),
+            roundTotalExp: root.querySelector('[data-round-total-exp]'),
+            roundCategoryAccuracy: root.querySelector('[data-round-category-accuracy]'),
+            roundSummaryClose: root.querySelector('[data-round-summary-close]')
         };
 
         this.broadcast = new global.QuizBroadcast(root.querySelector('[data-broadcast]'));

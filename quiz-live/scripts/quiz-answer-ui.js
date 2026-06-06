@@ -47,6 +47,11 @@
                     self.onLeaderboardBack();
                 });
             }
+            if (this.els.roundSummaryClose) {
+                this.els.roundSummaryClose.addEventListener('click', function () {
+                    self.closeRoundSummary();
+                });
+            }
         },
 
         loadRegisterUi: function () {
@@ -155,6 +160,8 @@
             this.currentCategory = categoryId;
             this.questionQueue = global.QuizAnswerCore.pickRandomQuestions(questions);
             this.currentIndex = 0;
+            this.roundExpGained = 0;
+            this.pendingRoundSummary = false;
             if (this.ws) {
                 this.ws.send(global.QuizProtocol.makeRoundStart(categoryId, this.clientId));
             }
@@ -167,6 +174,78 @@
             this.player = player;
             this.playerLevel = Number(player.level) || 3;
             this.nickname = player.nickname || this.nickname;
+            if (this.player.total_exp == null) this.player.total_exp = 0;
+            if (this.player.total_correct == null) this.player.total_correct = 0;
+            if (!this.player.category_stats) this.player.category_stats = {};
+        },
+
+        onAnswerAck: function (msg) {
+            if (!this.player) this.player = {};
+            if (msg.total_exp != null) this.player.total_exp = msg.total_exp;
+            if (msg.total_correct != null) this.player.total_correct = msg.total_correct;
+            if (msg.categoryId && msg.categoryStats) {
+                if (!this.player.category_stats) this.player.category_stats = {};
+                this.player.category_stats[msg.categoryId] = {
+                    answered: msg.categoryStats.answered || 0,
+                    correct: msg.categoryStats.correct || 0
+                };
+            }
+            if (msg.expGained) this.roundExpGained = (this.roundExpGained || 0) + msg.expGained;
+
+            if (this.pendingRoundSummary) {
+                this.pendingRoundSummary = false;
+                this.showRoundSummary({
+                    roundCorrect: msg.roundCorrect != null ? msg.roundCorrect : 0,
+                    roundTotal: this.questionQueue.length,
+                    totalCorrect: msg.total_correct || 0,
+                    expGained: this.roundExpGained || 0,
+                    totalExp: msg.total_exp || 0,
+                    categoryId: msg.categoryId || this.currentCategory,
+                    categoryAccuracy: msg.categoryStats ? msg.categoryStats.accuracy : 0
+                });
+            }
+        },
+
+        showRoundSummary: function (data) {
+            var cat = this.questionCategories.find(function (c) {
+                return c.id === data.categoryId;
+            });
+            var catName = cat ? (cat.displayName || cat.id) : (data.categoryId || '该');
+
+            if (this.els.roundSummaryScore) {
+                this.els.roundSummaryScore.textContent =
+                    '回答正确 ' + data.roundCorrect + '/' + data.roundTotal;
+            }
+            if (this.els.roundTotalCorrect) {
+                this.els.roundTotalCorrect.textContent = String(data.totalCorrect);
+            }
+            if (this.els.roundExpGained) {
+                this.els.roundExpGained.textContent = '+' + data.expGained;
+            }
+            if (this.els.roundTotalExp) {
+                this.els.roundTotalExp.textContent = String(data.totalExp);
+            }
+            if (this.els.roundCategoryAccuracy) {
+                this.els.roundCategoryAccuracy.textContent =
+                    '您在' + catName + '类别的回答正确率为 ' + (data.categoryAccuracy || 0) + '%';
+            }
+            if (this.els.roundSummary) {
+                this.els.roundSummary.classList.remove('ql-hidden');
+                this.els.roundSummary.setAttribute('aria-hidden', 'false');
+            }
+        },
+
+        closeRoundSummary: function () {
+            if (this.els.roundSummary) {
+                this.els.roundSummary.classList.add('ql-hidden');
+                this.els.roundSummary.setAttribute('aria-hidden', 'true');
+            }
+            this.currentCategory = null;
+            this.questionQueue = [];
+            this.currentIndex = 0;
+            this.roundExpGained = 0;
+            this.pendingRoundSummary = false;
+            this.showView('category');
         },
 
         onRegister: function () {
@@ -406,10 +485,15 @@
 
             if (this.els.nextBtn) {
                 this.els.nextBtn.classList.remove('ql-hidden');
-                this.els.nextBtn.textContent = this.currentIndex >= this.questionQueue.length - 1 ? '返回' : '下一题';
+                var isLast = this.currentIndex >= this.questionQueue.length - 1;
+                this.els.nextBtn.textContent = isLast ? '返回' : '下一题';
+                if (isLast) this.els.nextBtn.classList.add('ql-hidden');
             }
 
             this.updateProgress(this.currentIndex + 1);
+
+            var isLastQuestion = this.currentIndex >= this.questionQueue.length - 1;
+            if (isLastQuestion) this.pendingRoundSummary = true;
 
             var sent = this.ws.send(global.QuizProtocol.makeSelfAnswer(
                 this.currentCategory,
@@ -419,6 +503,7 @@
             ));
             if (!sent) {
                 this.submitted = false;
+                if (isLastQuestion) this.pendingRoundSummary = false;
                 if (this.els.confirmBtn) {
                     this.els.confirmBtn.disabled = false;
                     this.els.confirmBtn.classList.remove('ql-hidden');
@@ -429,7 +514,6 @@
 
         onNext: function () {
             if (this.currentIndex >= this.questionQueue.length - 1) {
-                this.showView('category');
                 return;
             }
             this.currentIndex += 1;

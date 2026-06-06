@@ -618,6 +618,73 @@ body {
     color: var(--ql-accent-light);
 }
 
+/* --- Round summary panel --- */
+.ql-round-summary {
+    position: fixed;
+    inset: 0;
+    z-index: 2100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(6, 6, 10, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.ql-round-summary-card {
+    width: min(100%, 320px);
+    padding: 28px 24px 22px;
+    border-radius: var(--ql-radius);
+    border: 1px solid var(--ql-border);
+    background: var(--ql-panel);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+    text-align: center;
+}
+
+.ql-round-summary-title {
+    margin: 0 0 12px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--ql-text);
+}
+
+.ql-round-summary-main {
+    margin: 0 0 20px;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--ql-accent-light);
+    letter-spacing: 0.02em;
+}
+
+.ql-round-summary-stats {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+    text-align: left;
+    font-size: 0.92rem;
+    color: var(--ql-muted);
+    line-height: 1.85;
+}
+
+.ql-round-summary-stats strong {
+    color: var(--ql-text);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.ql-round-summary-accuracy {
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: rgba(200, 36, 100, 0.1);
+    border: 1px solid rgba(200, 36, 100, 0.22);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ql-accent-light);
+    line-height: 1.5;
+}
+
 /* --- Quiz progress bar --- */
 .ql-quiz-progress {
     margin-bottom: 18px;

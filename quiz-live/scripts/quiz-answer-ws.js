@@ -139,6 +139,11 @@
                 return;
             }
 
+            if (msg.type === 'answer_ack') {
+                this.onAnswerAck(msg);
+                return;
+            }
+
             if (msg.type === 'state') {
                 if (msg.title) this.deckTitle = msg.title;
                 if (Array.isArray(msg.questionCategories) && msg.questionCategories.length) {

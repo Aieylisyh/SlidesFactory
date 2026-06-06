@@ -30,6 +30,12 @@ function handleSelfAnswer(room, client, msg) {
     p.lastAnswerAt = now;
     p.answeredQuestions[qKey] = !!msg.correct;
 
+    if (!p.player) {
+        p.player = playerData.createPlayer(p.name, p.phone);
+    }
+
+    var statsUpdate = playerData.recordAnswer(p.player, msg.category, !!msg.correct);
+
     if (msg.correct) {
         p.score += 1;
         p.streak += 1;
@@ -59,9 +65,16 @@ function handleSelfAnswer(room, client, msg) {
         type: 'answer_ack',
         correct: !!msg.correct,
         streak: p.streak,
-        score: p.score
+        score: p.score,
+        categoryId: msg.category || '',
+        expGained: statsUpdate.expGained,
+        total_exp: statsUpdate.total_exp,
+        total_correct: statsUpdate.total_correct,
+        categoryStats: statsUpdate.categoryStats,
+        roundCorrect: p.roundCorrect || 0
     }));
     broadcast.broadcastState(room);
+    roomStore.scheduleSaveRooms();
 }
 
 function handleAdmin(room, msg, adminClient) {
@@ -174,6 +187,7 @@ function handleMessage(client, raw) {
             if (!existing.player) {
                 existing.player = playerData.createPlayer(nickname, phone);
             } else {
+                playerData.normalizePlayer(existing.player);
                 existing.player.nickname = nickname;
                 existing.player.phone = phone;
                 playerData.touchPlayer(existing.player);
