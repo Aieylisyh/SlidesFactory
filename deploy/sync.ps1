@@ -127,6 +127,75 @@ function Show-Cos403Help([hashtable]$Env, [string]$CosCliOutput) {
     Write-Host ''
 }
 
+function Get-LegacyRemotePruneTargets {
+    $legacyDirs = @(
+        'guides/',
+        'tools/',
+        'sites/',
+        'design/'
+    )
+    $legacyFiles = @(
+        'outline.md',
+        'share-pages.json',
+        '.cursorrules',
+        'BILIBILI_EMBED_GUIDE.md',
+        'IMAGE_COMPRESSION_GUIDE.md',
+        'OUTLINE_GUIDE.md',
+        'PORTRAIT_ADAPT_GUIDE.md',
+        'SHARE_GUIDE.md',
+        'WHEEL_NAV_GUIDE.md',
+        'transition_guide.md',
+        'segment_arrow.md',
+        'style_guide.md',
+        'style_guide_extended.md',
+        'REMOTE_GUIDE.md',
+        'QUIZ_LIVE_GUIDE.md',
+        'README.md',
+        'WORKFLOW.md',
+        'TEMPLATE_GUIDE.md'
+    )
+
+    $targets = @()
+    foreach ($dir in $legacyDirs) { $targets += $dir }
+    foreach ($file in $legacyFiles) { $targets += $file }
+
+    $newDeckToolDir = Get-ChildItem -Path $RepoRoot -Directory -ErrorAction SilentlyContinue |
+        Where-Object { $_.Name -like '*项目工具*' } |
+        Select-Object -First 1
+    if ($newDeckToolDir) {
+        $targets += ($newDeckToolDir.Name + '/')
+    }
+
+    return $targets
+}
+
+function Invoke-PruneLegacyRemote {
+    param(
+        [string]$CosCliPath,
+        [string]$ConfigPath,
+        [string]$Target,
+        [switch]$WhatIf
+    )
+
+    $base = $Target.TrimEnd('/') + '/'
+    $items = Get-LegacyRemotePruneTargets
+
+    Write-Step 'Pruning legacy remote paths (excluded from sync, not removed by coscli --delete) ...'
+    foreach ($rel in $items) {
+        $uri = $base + $rel
+        if ($WhatIf) {
+            Write-Host "  would rm: $uri" -ForegroundColor DarkGray
+            continue
+        }
+        Write-Host "  rm: $uri" -ForegroundColor DarkGray
+        if ($rel.EndsWith('/')) {
+            & $CosCliPath rm $uri -r -f --config-path $ConfigPath 2>&1 | Out-Null
+        } else {
+            & $CosCliPath rm $uri -f --config-path $ConfigPath 2>&1 | Out-Null
+        }
+    }
+}
+
 if (-not (Test-Path $EnvFile)) {
     Write-Host ''
     Write-Host 'Missing deploy/sync.env' -ForegroundColor Yellow
@@ -154,10 +223,18 @@ if ($prefix -ne '/' -and -not $prefix.EndsWith('/')) { $prefix += '/' }
 $cosTarget = "cos://site$prefix"
 $cosCli = Ensure-CosCli -CustomPath $envMap['COSCLI_PATH']
 New-Item -ItemType Directory -Force -Path $CosCliLogDir | Out-Null
+
+if ($DeleteRemote -and (Test-Path $CosSnapshotDir)) {
+    Write-Step 'DeleteRemote: clearing coscli snapshot cache for fresh remote listing ...'
+    Remove-Item -Recurse -Force $CosSnapshotDir
+}
 New-Item -ItemType Directory -Force -Path $CosSnapshotDir | Out-Null
 
 Write-Step "Local repo root: $RepoRoot"
 Write-Step "COS prefix (= site root): $cosTarget"
+if ($DeleteRemote) {
+    Write-Host '[*] DeleteRemote ON: coscli --delete + legacy prune for excluded paths (*.md, tools/, guides/, …)' -ForegroundColor Yellow
+}
 
 $runtimeDataDir = Join-Path $RepoRoot 'data'
 $sourceDataDir = Join-Path $RepoRoot 'contents\data'
@@ -169,6 +246,9 @@ if (Test-Path $sourceDataDir) {
     Write-Step 'Copied contents/data/*.json -> data/ for deploy'
 }
 
+$newDeckToolExclude = (Get-ChildItem -Path $RepoRoot -Directory -ErrorAction SilentlyContinue |
+    Where-Object { $_.Name -like '*项目工具*' } |
+    Select-Object -First 1).Name
 $exclude = @(
     'contents/**',
     'deploy/**',
@@ -181,6 +261,9 @@ $exclude = @(
     '.git/**',
     '.gitignore'
 )
+if ($newDeckToolExclude) {
+    $exclude += ($newDeckToolExclude + '/**')
+}
 
 # Sync "." from repo root so PREFIX maps 1:1 (sfkdoc/index.html, sfkdoc/summerschool/…).
 # Do NOT pass the folder path as source — coscli would create an extra wrapper (Project/, etc.).
@@ -205,9 +288,12 @@ foreach ($pattern in $exclude) {
 }
 
 if ($DryRun) {
-    Write-Host '(DryRun: run from repo root, upload contents only — no wrapper folder)' -ForegroundColor Yellow
+    Write-Host '(DryRun)' -ForegroundColor Yellow
     Write-Host "  cd `"$RepoRoot`"" -ForegroundColor DarkGray
-    Write-Host "  coscli sync . `"$cosTarget`" -r --exclude ..." -ForegroundColor DarkGray
+    Write-Host "  coscli sync . `"$cosTarget`" -r $(if ($DeleteRemote) { '--delete ' })--exclude ..." -ForegroundColor DarkGray
+    if ($DeleteRemote) {
+        Invoke-PruneLegacyRemote -CosCliPath $cosCli -ConfigPath $CosYaml -Target $cosTarget -WhatIf
+    }
     exit 0
 }
 
@@ -216,6 +302,14 @@ $accessOutput = & $cosCli ls 'cos://site/' --config-path $CosYaml 2>&1 | Out-Str
 if ($LASTEXITCODE -ne 0) {
     Show-Cos403Help $envMap $accessOutput.Trim()
     throw 'COS access denied (403). Fix credentials or CAM policy, then retry.'
+}
+
+Write-Step "Listing remote prefix (diagnostic) ..."
+$remoteList = & $cosCli ls $cosTarget -r --config-path $CosYaml 2>&1 | Out-String
+$remoteLines = ($remoteList -split "`n" | Where-Object { $_.Trim() -ne '' }).Count
+Write-Host "  coscli ls lines under prefix: $remoteLines" -ForegroundColor DarkGray
+if ($DeleteRemote -and $remoteLines -eq 0) {
+    Write-Host '  WARNING: remote prefix looks empty to coscli — confirm console path matches PREFIX in sync.env' -ForegroundColor Yellow
 }
 
 Write-Step 'Syncing repo contents (no wrapper folder) ...'
@@ -227,6 +321,10 @@ try {
     }
 } finally {
     Pop-Location
+}
+
+if ($DeleteRemote) {
+    Invoke-PruneLegacyRemote -CosCliPath $cosCli -ConfigPath $CosYaml -Target $cosTarget
 }
 
 $publicBase = Get-PublicBaseUrl $envMap $prefix
