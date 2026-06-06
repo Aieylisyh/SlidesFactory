@@ -18,6 +18,7 @@ if (portArg !== -1) PORT = parseInt(process.argv[portArg + 1], 10) || 8082;
 
 var QUESTIONS_PATH = path.join(__dirname, '..', 'data', 'questions.json');
 var BROADCAST_CONFIG_PATH = path.join(__dirname, '..', 'data', 'broadcast-config.json');
+var ROOM_STATE_PATH = path.join(__dirname, '..', 'data', 'room-state.json');
 var questionBank = { title: '趣味常识挑战', quizzes: [] };
 
 var DEFAULT_BROADCAST_CONFIG = {
@@ -126,6 +127,7 @@ function totalQuestionCount() {
 
 /** @type {Map<string, RoomState>} */
 var rooms = new Map();
+var saveRoomsTimer = null;
 
 function createRoom(roomId) {
     return {
@@ -137,13 +139,132 @@ function createRoom(roomId) {
     };
 }
 
+function participantToJson(p) {
+    return {
+        clientId: p.clientId,
+        id: p.id,
+        name: p.name,
+        phone: p.phone,
+        profile: p.profile || { name: p.name, phone: p.phone },
+        score: p.score || 0,
+        streak: p.streak || 0,
+        bestStreak: p.bestStreak || 0,
+        answeredQuestions: p.answeredQuestions || {},
+        online: false,
+        roundCorrect: p.roundCorrect || 0,
+        roundStreak: p.roundStreak || 0,
+        roundHasFirstBlood: !!p.roundHasFirstBlood,
+        roundMilestones: p.roundMilestones || {},
+        roundCategory: p.roundCategory || ''
+    };
+}
+
+function participantFromJson(raw) {
+    if (!raw || !raw.clientId) return null;
+    return {
+        clientId: raw.clientId,
+        id: raw.id || '01',
+        name: raw.name || '',
+        phone: raw.phone || '',
+        profile: raw.profile || { name: raw.name || '', phone: raw.phone || '' },
+        score: raw.score || 0,
+        streak: raw.streak || 0,
+        bestStreak: raw.bestStreak || 0,
+        answeredQuestions: raw.answeredQuestions || {},
+        online: false,
+        roundCorrect: raw.roundCorrect || 0,
+        roundStreak: raw.roundStreak || 0,
+        roundHasFirstBlood: !!raw.roundHasFirstBlood,
+        roundMilestones: raw.roundMilestones || {},
+        roundCategory: raw.roundCategory || ''
+    };
+}
+
+function roomToJson(room) {
+    var participants = [];
+    room.participants.forEach(function (p) {
+        participants.push(participantToJson(p));
+    });
+    return {
+        id: room.id,
+        nextParticipantNum: room.nextParticipantNum || 1,
+        recentBroadcasts: room.recentBroadcasts || [],
+        participants: participants
+    };
+}
+
+function roomFromJson(raw) {
+    if (!raw || !raw.id) return null;
+    var room = createRoom(String(raw.id).toUpperCase());
+    room.nextParticipantNum = raw.nextParticipantNum || 1;
+    room.recentBroadcasts = Array.isArray(raw.recentBroadcasts) ? raw.recentBroadcasts.slice(0, 3) : [];
+    (raw.participants || []).forEach(function (item) {
+        var p = participantFromJson(item);
+        if (p) room.participants.set(p.clientId, p);
+    });
+    return room;
+}
+
+function loadRoomsFromDisk() {
+    try {
+        var raw = JSON.parse(fs.readFileSync(ROOM_STATE_PATH, 'utf8'));
+        var list = Array.isArray(raw.rooms) ? raw.rooms : [];
+        list.forEach(function (item) {
+            var room = roomFromJson(item);
+            if (room) rooms.set(room.id, room);
+        });
+        console.log('[quiz-relay] room-state loaded:', rooms.size, 'room(s)');
+    } catch (e) {
+        if (e.code !== 'ENOENT') {
+            console.warn('[quiz-relay] Could not load room-state.json:', e.message);
+        }
+    }
+}
+
+function saveRoomsToDisk() {
+    try {
+        var payload = { savedAt: Date.now(), rooms: [] };
+        rooms.forEach(function (room) {
+            payload.rooms.push(roomToJson(room));
+        });
+        fs.writeFileSync(ROOM_STATE_PATH, JSON.stringify(payload, null, 2), 'utf8');
+    } catch (e) {
+        console.warn('[quiz-relay] Could not save room-state.json:', e.message);
+    }
+}
+
+function scheduleSaveRooms() {
+    if (saveRoomsTimer) clearTimeout(saveRoomsTimer);
+    saveRoomsTimer = setTimeout(function () {
+        saveRoomsTimer = null;
+        saveRoomsToDisk();
+    }, 400);
+}
+
 function getRoom(roomId) {
     if (!rooms.has(roomId)) rooms.set(roomId, createRoom(roomId));
     return rooms.get(roomId);
 }
 
+function markParticipantOnline(room, clientId, client) {
+    if (!clientId) return null;
+    var p = room.participants.get(clientId);
+    if (!p) return null;
+    p.online = true;
+    if (client) client._clientId = clientId;
+    return p;
+}
+
 function padId(n) {
     return n < 10 ? '0' + n : String(n);
+}
+
+function resetRoundBroadcastState(p, category) {
+    p.roundCorrect = 0;
+    p.roundStreak = 0;
+    p.roundHasFirstBlood = false;
+    p.roundMilestones = {};
+    p.roundCategory = category || '';
 }
 
 function sanitizeProfile(raw) {
@@ -213,6 +334,7 @@ function broadcast(room, msg, exceptWs) {
 
 function broadcastState(room) {
     broadcast(room, buildState(room));
+    scheduleSaveRooms();
 }
 
 function broadcastWinMilestone(room, participant, wins) {
@@ -299,7 +421,10 @@ function encodeTextFrame(text) {
 
 function handleSelfAnswer(room, client, msg) {
     var p = room.participants.get(msg.clientId);
-    if (!p) return;
+    if (!p) {
+        console.warn('[quiz-relay] self_answer ignored — unknown clientId in room', room.id, msg.clientId);
+        return;
+    }
 
     var now = Date.now();
     if (p.lastAnswerAt && now - p.lastAnswerAt < ANSWER_MIN_INTERVAL_MS) return;
@@ -316,15 +441,24 @@ function handleSelfAnswer(room, client, msg) {
         p.streak += 1;
         if (p.streak > p.bestStreak) p.bestStreak = p.streak;
 
-        if (!p.hasFirstBlood) {
-            p.hasFirstBlood = true;
+        p.roundCorrect = (p.roundCorrect || 0) + 1;
+        p.roundStreak = (p.roundStreak || 0) + 1;
+
+        if (!p.roundHasFirstBlood) {
+            p.roundHasFirstBlood = true;
             var fbName = p.name || '某位选手';
             broadcastRoomEvent(room, 'first_blood', fbName, formatEventMessage('firstBlood', fbName));
-        } else if (getWinTiers(getBroadcastConfig()).indexOf(p.score) !== -1) {
-            broadcastWinMilestone(room, p, p.score);
+        } else {
+            var roundWins = p.roundCorrect;
+            if (!p.roundMilestones) p.roundMilestones = {};
+            if (!p.roundMilestones[roundWins] && getWinTiers(getBroadcastConfig()).indexOf(roundWins) !== -1) {
+                p.roundMilestones[roundWins] = true;
+                broadcastWinMilestone(room, p, roundWins);
+            }
         }
     } else {
         p.streak = 0;
+        p.roundStreak = 0;
     }
 
     client.send(JSON.stringify({
@@ -351,7 +485,10 @@ function handleMessage(client, raw) {
         client._clientId = msg.clientId || null;
         if (msg.role === 'admin') room.sockets.admin = client;
         else if (msg.role === 'screen') room.sockets.screen = client;
-        else room.sockets.audience.add(client);
+        else {
+            room.sockets.audience.add(client);
+            if (msg.clientId) markParticipantOnline(room, msg.clientId, client);
+        }
         client.send(JSON.stringify(buildState(room)));
         return;
     }
@@ -376,10 +513,10 @@ function handleMessage(client, raw) {
                 score: 0,
                 streak: 0,
                 bestStreak: 0,
-                hasFirstBlood: false,
                 answeredQuestions: {},
                 online: true
             };
+            resetRoundBroadcastState(existing, '');
             room.participants.set(cid, existing);
         }
         applyRegisterPayload(existing, msg);
@@ -396,6 +533,15 @@ function handleMessage(client, raw) {
             broadcastRoomEvent(room, 'join', joinName, formatEventMessage('join', joinName));
         }
         broadcastState(room);
+        return;
+    }
+
+    if (msg.type === 'round_start') {
+        var roundPlayer = room.participants.get(msg.clientId);
+        if (roundPlayer) {
+            resetRoundBroadcastState(roundPlayer, msg.category || '');
+            scheduleSaveRooms();
+        }
         return;
     }
 
@@ -451,6 +597,7 @@ function handleAdmin(room, msg, adminClient) {
             return;
     }
     broadcast(room, buildState(room));
+    scheduleSaveRooms();
 }
 
 function WsSocket(socket) {
@@ -520,11 +667,16 @@ server.on('upgrade', function (req, socket) {
         else room.sockets.audience.delete(client);
         if (client._clientId) {
             var p = room.participants.get(client._clientId);
-            if (p) p.online = false;
+            if (p) {
+                p.online = false;
+                scheduleSaveRooms();
+            }
             broadcastState(room);
         }
     });
 });
+
+loadRoomsFromDisk();
 
 server.listen(PORT, '0.0.0.0', function () {
     console.log('[quiz-relay] WebSocket listening on ws://0.0.0.0:' + PORT);

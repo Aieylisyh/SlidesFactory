@@ -417,6 +417,7 @@
         if (status === 'connected') {
             this.wsWasConnected = true;
             this.setReconnectBanner(false);
+            this.ensureRegistered();
         } else if (this.wsWasConnected && (status === 'connecting' || status === 'disconnected' || status === 'error')) {
             this.setReconnectBanner(true);
         }
@@ -446,6 +447,43 @@
     };
 
 
+
+    QuizAnswerApp.prototype.ensureRegistered = function () {
+        if (!this.ws || typeof global.QuizRegisterConfig === 'undefined') return;
+        var cached = global.QuizRegisterConfig.loadProfileCache();
+        if (!cached || !cached.name) return;
+        var cfg = this.registerConfig || global.QuizRegisterConfig.normalize(null);
+        if (global.QuizRegisterConfig.validate(cached, cfg)) return;
+        this.ws.send(global.QuizProtocol.makeRegister(this.clientId, cached));
+    };
+
+    QuizAnswerApp.prototype.syncSelfFromParticipants = function (participants) {
+        var me = (participants || []).find(function (p) {
+            return p.clientId === this.clientId;
+        }, this);
+        if (me) {
+            this.participantId = me.id;
+            this.nickname = me.name || '';
+            if (this.els.participantBadge) {
+                this.els.participantBadge.textContent = this.nickname || ('编号 ' + me.id);
+            }
+            if (this.activeView === 'register') {
+                this.renderCategories();
+                this.showView('category');
+            }
+            this.updateContinueUi();
+            return true;
+        }
+        if (this.participantId) {
+            this.participantId = null;
+            this.nickname = '';
+            if (this.els.participantBadge) {
+                this.els.participantBadge.textContent = '未登记';
+            }
+            this.ensureRegistered();
+        }
+        return false;
+    };
 
     QuizAnswerApp.prototype.resetParticipantSession = function () {
         this.participantId = null;
@@ -519,34 +557,7 @@
                 this.renderLeaderboard(this.participants, msg.onlineCount);
             }
 
-            if (!this.participantId) {
-
-                var me = (msg.participants || []).find(function (p) {
-
-                    return p.clientId === this.clientId;
-
-                }, this);
-
-                if (me) {
-
-                    this.participantId = me.id;
-
-                    this.nickname = me.name || '';
-
-                    if (this.els.participantBadge) {
-
-                        this.els.participantBadge.textContent = this.nickname || ('编号 ' + me.id);
-
-                    }
-
-                    this.renderCategories();
-
-                    this.showView('category');
-                    this.updateContinueUi();
-
-                }
-
-            }
+            this.syncSelfFromParticipants(this.participants);
 
         }
 
@@ -605,6 +616,7 @@
 
     QuizAnswerApp.prototype.onOpenLeaderboard = function () {
         this.showView('leaderboard');
+        this.ensureRegistered();
         this.renderLeaderboard(this.participants);
         if (this.ws) {
             this.ws.send(global.QuizProtocol.makeRequestState());
@@ -682,6 +694,9 @@
         this.currentCategory = category;
         this.questionQueue = pickRandomQuestions(quiz.questions, QUIZ_DRAW_COUNT);
         this.currentIndex = 0;
+        if (this.ws) {
+            this.ws.send(global.QuizProtocol.makeRoundStart(category, this.clientId));
+        }
         this.showView('quiz');
         this.renderCurrentQuestion();
     };

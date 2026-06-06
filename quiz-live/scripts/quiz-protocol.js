@@ -123,6 +123,14 @@
         };
     }
 
+    function makeRoundStart(category, clientId) {
+        return {
+            type: 'round_start',
+            category: category,
+            clientId: clientId
+        };
+    }
+
     function makeAdminAction(action, extra) {
         var msg = { type: 'admin', action: action };
         if (extra) {
@@ -209,6 +217,7 @@
         makeRegister: makeRegister,
         makeSubmit: makeSubmit,
         makeSelfAnswer: makeSelfAnswer,
+        makeRoundStart: makeRoundStart,
         makeAdminAction: makeAdminAction,
         makeRequestState: makeRequestState,
         getRoomFromUrl: getRoomFromUrl,

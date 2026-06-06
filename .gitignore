@@ -4,6 +4,7 @@
 
 # --- Deploy secrets & COS tooling (templates *.example stay tracked) ---
 deploy/sync.env
+deploy/quiz-live-relay.env
 deploy/cos.yaml
 deploy/tools/
 coscli_output/
@@ -39,4 +40,5 @@ ehthumbs.db
 
 # --- Local logs ---
 quiz-live/data/lan-host.txt
+quiz-live/data/room-state.json
 *.log
