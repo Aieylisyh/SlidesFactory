@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ah",
+    "displayName": "艺术史",
+    "required_level": 10
+  },
+  {
+    "id": "anime",
+    "displayName": "动画",
+    "required_level": 1
+  },
+  {
+    "id": "cook",
+    "displayName": "做菜",
+    "required_level": 1
+  },
+  {
+    "id": "cpt",
+    "displayName": "计算机",
+    "required_level": 4
+  },
+  {
+    "id": "dm",
+    "displayName": "数媒",
+    "required_level": 6
+  },
+  {
+    "id": "en",
+    "displayName": "English",
+    "required_level": 7
+  },
+  {
+    "id": "fs",
+    "displayName": "时尚",
+    "required_level": 5
+  },
+  {
+    "id": "game",
+    "displayName": "游戏",
+    "required_level": 1
+  },
+  {
+    "id": "logic",
+    "displayName": "逻辑",
+    "required_level": 9
+  },
+  {
+    "id": "pets",
+    "displayName": "宠物",
+    "required_level": 3
+  },
+  {
+    "id": "psy",
+    "displayName": "心理学",
+    "required_level": 8
+  },
+  {
+    "id": "study",
+    "displayName": "留学",
+    "required_level": 2
+  }
+]

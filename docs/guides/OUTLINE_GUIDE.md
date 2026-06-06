@@ -7,7 +7,7 @@
 ## 1. 文件顶部
 
 - 一级标题：`# Outline · {演示标题}`
-- 引用块：说明本文件角色，并指向 `OUTLINE_GUIDE.md`（规范）与 `starter/`（空项目模板）
+- 引用块：说明本文件角色，并指向 [`OUTLINE_GUIDE.md`](OUTLINE_GUIDE.md)（本规范）与 [`../../tools/dev/new-deck-scaffold/config/outline.md`](../../tools/dev/new-deck-scaffold/config/outline.md)（新建 deck 最小示例）
 
 ## 2. Deck 元信息表
 
@@ -69,4 +69,5 @@
 
 ## 8. 最小可用模板
 
-见 `starter/outline.md`。
+见 [`tools/dev/new-deck-scaffold/config/outline.md`](../../tools/dev/new-deck-scaffold/config/outline.md)。  
+从 Project 复制新 deck：[`新开项目工具/新建演示说明.md`](../../新开项目工具/新建演示说明.md)。

@@ -97,18 +97,23 @@
 
         loadQuestions: function () {
             var self = this;
-            fetch('data/questions.json')
+            fetch('data/quiz/question_cfg.json')
                 .then(function (r) { return r.json(); })
-                .then(function (data) {
-                    self.quizzes = data.quizzes || [];
-                    self.categoryMeta = data.categoryMeta || {};
-                    if (data.title) self.deckTitle = data.title;
+                .then(function (list) {
+                    self.questionCategories = Array.isArray(list) ? list : [];
                     self.syncHeaderTitle();
                     if (self.participantId) self.renderCategories();
                 })
                 .catch(function () {
-                    self.quizzes = [];
+                    self.questionCategories = [];
                 });
+        },
+
+        applyPlayer: function (player) {
+            if (!player) return;
+            this.player = player;
+            this.playerLevel = Number(player.level) || 3;
+            this.nickname = player.nickname || this.nickname;
         },
 
         onRegister: function () {
@@ -163,17 +168,12 @@
             this.showView('category');
         },
 
-        getCategoryMeta: function (category) {
-            var base = { short: category, icon: '📚', theme: 'default' };
-            var fromMap = (this.categoryMeta || {})[category] || {};
-            var merged = Object.assign({}, base, fromMap);
-            var quiz = this.quizzes.find(function (q) { return q.category === category; });
-            if (quiz) {
-                if (quiz.short) merged.short = quiz.short;
-                if (quiz.icon) merged.icon = quiz.icon;
-                if (quiz.theme) merged.theme = quiz.theme;
-            }
-            return merged;
+        getCategoryMeta: function (cat) {
+            return {
+                short: cat.displayName || cat.id,
+                icon: '📚',
+                theme: cat.id || 'default'
+            };
         },
 
         renderCategories: function () {
@@ -182,19 +182,27 @@
             var self = this;
             var html = '';
             var drawCount = global.QuizAnswerCore.QUIZ_DRAW_COUNT;
+            var level = this.playerLevel || 3;
 
-            this.quizzes.forEach(function (quiz) {
-                var meta = self.getCategoryMeta(quiz.category);
-                var count = Math.min(drawCount, (quiz.questions || []).length);
-                var theme = meta.theme || 'default';
-                html += '<button type="button" class="ql-category-btn ql-category-btn--' + theme + '" data-category="' + quiz.category + '">' +
-                    '<span class="ql-category-icon-wrap">' +
-                    '<span class="ql-category-icon" aria-hidden="true">' + meta.icon + '</span></span>' +
-                    '<span class="ql-category-body">' +
-                    '<span class="ql-category-name">' + meta.short + '</span>' +
-                    '<span class="ql-category-count">随机 ' + count + ' 题</span>' +
-                    '</span></button>';
-            });
+            this.questionCategories
+                .filter(function (cat) {
+                    return (cat.required_level || 1) <= level;
+                })
+                .forEach(function (cat) {
+                    var meta = self.getCategoryMeta(cat);
+                    var theme = meta.theme || 'default';
+                    html += '<button type="button" class="ql-category-btn ql-category-btn--' + theme + '" data-category="' + cat.id + '">' +
+                        '<span class="ql-category-icon-wrap">' +
+                        '<span class="ql-category-icon" aria-hidden="true">' + meta.icon + '</span></span>' +
+                        '<span class="ql-category-body">' +
+                        '<span class="ql-category-name">' + meta.short + '</span>' +
+                        '<span class="ql-category-count">随机 ' + drawCount + ' 题 · Lv.' + (cat.required_level || 1) + '+</span>' +
+                        '</span></button>';
+                });
+
+            if (!html) {
+                html = '<p class="ql-empty-hint">当前等级暂无可用题库，请稍后再试。</p>';
+            }
 
             this.els.categoryGrid.innerHTML = html;
 
@@ -207,7 +215,8 @@
 
         getCategoryTitle: function () {
             if (!this.currentCategory) return this.deckTitle;
-            return this.getCategoryMeta(this.currentCategory).short;
+            var cat = this.questionCategories.find(function (c) { return c.id === this.currentCategory; }, this);
+            return cat ? (cat.displayName || cat.id) : this.currentCategory;
         },
 
         syncHeaderTitle: function () {
@@ -220,18 +229,35 @@
             this.els.title.textContent = inQuiz ? this.getCategoryTitle() : this.deckTitle;
         },
 
-        startCategory: function (category) {
-            var quiz = this.quizzes.find(function (q) { return q.category === category; });
-            if (!quiz || !quiz.questions.length) return;
-
-            this.currentCategory = category;
-            this.questionQueue = global.QuizAnswerCore.pickRandomQuestions(quiz.questions);
-            this.currentIndex = 0;
-            if (this.ws) {
-                this.ws.send(global.QuizProtocol.makeRoundStart(category, this.clientId));
+        startCategory: function (categoryId) {
+            var self = this;
+            var cat = this.questionCategories.find(function (c) { return c.id === categoryId; });
+            if (!cat) return;
+            if ((cat.required_level || 1) > (this.playerLevel || 3)) {
+                alert('等级不足，无法进入该题库');
+                return;
             }
-            this.showView('quiz');
-            this.renderCurrentQuestion();
+
+            fetch('data/quiz/questions_' + categoryId + '.json')
+                .then(function (r) {
+                    if (!r.ok) throw new Error('load failed');
+                    return r.json();
+                })
+                .then(function (data) {
+                    var questions = data.questions || [];
+                    if (!questions.length) return;
+                    self.currentCategory = categoryId;
+                    self.questionQueue = global.QuizAnswerCore.pickRandomQuestions(questions);
+                    self.currentIndex = 0;
+                    if (self.ws) {
+                        self.ws.send(global.QuizProtocol.makeRoundStart(categoryId, self.clientId));
+                    }
+                    self.showView('quiz');
+                    self.renderCurrentQuestion();
+                })
+                .catch(function () {
+                    alert('题库加载失败，请稍后重试');
+                });
         },
 
         updateProgress: function (completed) {

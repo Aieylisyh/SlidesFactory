@@ -56,7 +56,6 @@
     QuizAdminApp.prototype.connect = function () {
         var self = this;
         this.ws = new global.QuizWsClient({
-            url: global.QuizProtocol.getWsUrl(),
             room: this.room,
             role: 'admin',
             onMessage: function (m) { self.onMessage(m); }
@@ -208,7 +207,9 @@
             return;
         }
 
-        paintQr(global.QuizProtocol.buildAnswerUrl(self.room));
+        global.QuizProtocol.initWsRelayConfig().then(function () {
+            paintQr(global.QuizProtocol.buildAnswerUrl(self.room));
+        });
     };
 
     global.QuizAdminApp = QuizAdminApp;

@@ -3,6 +3,7 @@
 var config = require('./config');
 var roomStore = require('./room-store');
 var broadcast = require('./broadcast');
+var playerData = require('./player-data');
 
 function notifyParticipantCleared(room, clientId) {
     room.sockets.audience.forEach(function (ws) {
@@ -130,15 +131,34 @@ function handleMessage(client, raw) {
     if (msg.type === 'register') {
         var cid = msg.clientId;
         if (!cid) return;
+
+        var profile = roomStore.sanitizeProfile(msg.profile);
+        if (!profile.name && msg.name) profile.name = String(msg.name).trim().slice(0, 64);
+        if (!profile.phone && msg.phone) profile.phone = String(msg.phone).trim().slice(0, 64);
+        var nickname = (profile.name || '').trim();
+        var phone = (profile.phone || '').trim();
+
+        if (!nickname) {
+            client.send(JSON.stringify({ type: 'register_error', message: '请填写昵称' }));
+            return;
+        }
+
+        var conflict = playerData.findNicknameConflict(room, nickname, cid);
+        if (conflict) {
+            client.send(JSON.stringify({ type: 'register_error', message: '昵称已被使用，请换一个' }));
+            return;
+        }
+
         var existing = room.participants.get(cid);
         var isNew = !existing;
         if (!existing) {
             existing = {
                 clientId: cid,
                 id: roomStore.padId(room.nextParticipantNum++),
-                name: '',
-                phone: '',
-                profile: {},
+                name: nickname.slice(0, 20),
+                phone: phone.slice(0, 20),
+                profile: profile,
+                player: playerData.createPlayer(nickname, phone),
                 score: 0,
                 streak: 0,
                 bestStreak: 0,
@@ -147,21 +167,36 @@ function handleMessage(client, raw) {
             };
             roomStore.resetRoundBroadcastState(existing, '');
             room.participants.set(cid, existing);
+        } else {
+            roomStore.applyRegisterPayload(existing, msg);
+            existing.name = nickname.slice(0, 20);
+            existing.phone = phone.slice(0, 20);
+            if (!existing.player) {
+                existing.player = playerData.createPlayer(nickname, phone);
+            } else {
+                existing.player.nickname = nickname;
+                existing.player.phone = phone;
+                playerData.touchPlayer(existing.player);
+            }
         }
-        roomStore.applyRegisterPayload(existing, msg);
+
         existing.online = true;
+        playerData.touchPlayer(existing.player);
         client._clientId = cid;
+
         client.send(JSON.stringify({
             type: 'registered',
             participantId: existing.id,
             clientId: cid,
-            name: existing.name
+            name: existing.name,
+            player: playerData.playerToClientJson(existing.player)
         }));
         if (isNew) {
             var joinName = existing.name || ('选手' + existing.id);
             broadcast.broadcastRoomEvent(room, 'join', joinName, broadcast.formatEventMessage('join', joinName));
         }
         broadcast.broadcastState(room);
+        roomStore.scheduleSaveRooms();
         return;
     }
 

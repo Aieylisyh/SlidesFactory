@@ -70,8 +70,9 @@
         this.participantId = null;
         this.nickname = '';
         this.registerConfig = null;
-        this.quizzes = [];
-        this.categoryMeta = {};
+        this.questionCategories = [];
+        this.playerLevel = 3;
+        this.player = null;
         this.currentCategory = null;
         this.questionQueue = [];
         this.currentIndex = 0;

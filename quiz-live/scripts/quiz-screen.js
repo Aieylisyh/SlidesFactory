@@ -24,7 +24,6 @@
 
         var self = this;
         this.ws = new global.QuizWsClient({
-            url: global.QuizProtocol.getWsUrl(),
             room: this.room,
             role: 'screen',
             onMessage: function (m) { self.onMessage(m); }

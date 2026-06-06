@@ -1,0 +1,1805 @@
+{
+  "id": "logic",
+  "questions": [
+    {
+      "id": 1,
+      "question": "所有人都会死，苏格拉底是人，所以苏格拉底会死。这是什么？",
+      "options": [
+        "A. 三段论",
+        "B. 循环论证"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 2,
+      "question": "“如果下雨，地就会湿。”如果地没湿，可以推导出什么？",
+      "options": [
+        "A. 没下雨",
+        "B. 下了小雨"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 3,
+      "question": "一本书加一个笔记本共11元，书比笔记本贵10元，笔记本多少钱？",
+      "options": [
+        "A. 0.5元",
+        "B. 1元"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 4,
+      "question": "如果“所有鸟都会飞”是真的，那么“企鹅会飞”是真还是假？",
+      "options": [
+        "A. 真",
+        "B. 假"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 5,
+      "question": "甲说他撒谎，那么甲到底在撒谎还是讲真话？",
+      "options": [
+        "A. 逻辑悖论",
+        "B. 讲真话"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 6,
+      "question": "三个人A、B、C，A比B高，B比C高，问谁最高？",
+      "options": [
+        "A. A",
+        "B. C"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 7,
+      "question": "如果“有的猫是白的”为真，那么“所有的猫都是白的”一定为真吗？",
+      "options": [
+        "A. 不一定",
+        "B. 一定"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 8,
+      "question": "已知A=B，B=C，那么A和C的关系是？",
+      "options": [
+        "A. 相等",
+        "B. 不相等"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 9,
+      "question": "只有通过考试才能毕业，小明毕业了，说明了什么？",
+      "options": [
+        "A. 他通过了考试",
+        "B. 他作弊了"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 10,
+      "question": "“除非努力，否则不会成功。”这等价于什么？",
+      "options": [
+        "A. 努力是成功的必要条件",
+        "B. 努力就一定成功"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 11,
+      "question": "有三个盒子，只有一个放了金币，盒子上有标语，只有一个真，金币在哪？",
+      "options": [
+        "A. 逻辑推理题",
+        "B. 纯猜谜"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 12,
+      "question": "如果A推出B，且A是真的，那么B一定是真的吗？",
+      "options": [
+        "A. 是的",
+        "B. 不是"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 13,
+      "question": "“有的学生是运动员。”这逻辑上意味着什么？",
+      "options": [
+        "A. 至少有一名学生是运动员",
+        "B. 所有学生都是运动员"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 14,
+      "question": "1+2+3+...+100的和是多少？",
+      "options": [
+        "A. 5050",
+        "B. 5000"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 15,
+      "question": "如果昨天是周五，那么明天是周几？",
+      "options": [
+        "A. 周日",
+        "B. 周六"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 16,
+      "question": "“没有一种鱼是哺乳动物。”那么海豚是鱼吗？",
+      "options": [
+        "A. 不是",
+        "B. 是"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 17,
+      "question": "A、B、C三人赛跑，A没拿第一，B没拿第一，谁拿了第一？",
+      "options": [
+        "A. C",
+        "B. A"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 18,
+      "question": "否定之否定规律揭示了事物发展的什么过程？",
+      "options": [
+        "A. 螺旋式上升",
+        "B. 直线式下降"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 19,
+      "question": "所有的正方形都是矩形，这是对还是错？",
+      "options": [
+        "A. 对",
+        "B. 错"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 20,
+      "question": "如果A大于B，B大于C，那么A和C谁大？",
+      "options": [
+        "A. A大",
+        "B. C大"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 21,
+      "question": "归纳推理的特点是什么？",
+      "options": [
+        "A. 从特殊到一般",
+        "B. 从一般到特殊"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 22,
+      "question": "演绎推理的特点是什么？",
+      "options": [
+        "A. 从一般到特殊",
+        "B. 从特殊到一般"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 23,
+      "question": "如果你没有带伞，你就一定会淋雨。你带了伞，你会淋雨吗？",
+      "options": [
+        "A. 不一定",
+        "B. 一定会"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 24,
+      "question": "某人说：“我正在撒谎。”这句话是真的吗？",
+      "options": [
+        "A. 这是一个悖论",
+        "B. 是真的"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 25,
+      "question": "如果所有的狗都会叫，哈士奇是狗，哈士奇会叫吗？",
+      "options": [
+        "A. 会",
+        "B. 不会"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 26,
+      "question": "2的3次方是多少？",
+      "options": [
+        "A. 8",
+        "B. 6"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 27,
+      "question": "甲乙丙丁四人比赛，甲胜乙，乙胜丙，丙胜丁，谁最后？",
+      "options": [
+        "A. 丁",
+        "B. 甲"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 28,
+      "question": "“所有的人都是会死的。”那么“有的人不会死”是真的吗？",
+      "options": [
+        "A. 假",
+        "B. 真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 29,
+      "question": "如果你吃早餐，你就会有精力。你有精力，一定是因为吃了早餐吗？",
+      "options": [
+        "A. 不一定",
+        "B. 一定"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 30,
+      "question": "集合A={1, 2}，集合B={2, 3}，A和B的交集是？",
+      "options": [
+        "A. {2}",
+        "B. {1, 2, 3}"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 31,
+      "question": "排中律的内容是什么？",
+      "options": [
+        "A. 命题要么真要么假",
+        "B. 命题永远是真的"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 32,
+      "question": "A比B重，B比C重，谁最轻？",
+      "options": [
+        "A. C",
+        "B. A"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 33,
+      "question": "如果“有些鸟不会飞”是真的，那么“所有的鸟都会飞”是真的吗？",
+      "options": [
+        "A. 假",
+        "B. 真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 34,
+      "question": "3乘4减2等于多少？",
+      "options": [
+        "A. 10",
+        "B. 6"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 35,
+      "question": "“要么出去玩，要么在家学习。”这是什么逻辑关系？",
+      "options": [
+        "A. 不相容选言",
+        "B. 联言关系"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 36,
+      "question": "A、B、C排队，A不在第一，B不在最后，C在中间，A在哪？",
+      "options": [
+        "A. 最后",
+        "B. 第一"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 37,
+      "question": "已知所有A都是B，所有B都是C，那么所有A都是C吗？",
+      "options": [
+        "A. 是的",
+        "B. 不是"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 38,
+      "question": "如果不努力，就不会进步。努力了，就一定进步吗？",
+      "options": [
+        "A. 不一定",
+        "B. 一定"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 39,
+      "question": "5的平方是多少？",
+      "options": [
+        "A. 25",
+        "B. 20"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 40,
+      "question": "什么是必然真命题？",
+      "options": [
+        "A. 任何情况下都真",
+        "B. 偶尔为真的命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 41,
+      "question": "A说B撒谎，B说C撒谎，C说A和B都撒谎，谁真？",
+      "options": [
+        "A. B",
+        "B. A"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 42,
+      "question": "如果所有的偶数都能被2整除，4是偶数，4能被2整除吗？",
+      "options": [
+        "A. 能",
+        "B. 不能"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 43,
+      "question": "“所有天鹅都是白色的。”要证伪它，只需要找到？",
+      "options": [
+        "A. 一只黑天鹅",
+        "B. 更多的白天鹅"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 44,
+      "question": "10除以2加3等于多少？",
+      "options": [
+        "A. 8",
+        "B. 2"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 45,
+      "question": "“不是所有人都喜欢足球。”等价于什么？",
+      "options": [
+        "A. 有些人不喜欢足球",
+        "B. 所有人都不喜欢"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 46,
+      "question": "A、B、C三人年龄，A比B大，B比C大，谁最小？",
+      "options": [
+        "A. C",
+        "B. A"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 47,
+      "question": "已知某个命题为真，它的否定命题一定为假吗？",
+      "options": [
+        "A. 是的",
+        "B. 不一定"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 48,
+      "question": "如果A且B为真，那么A是真的吗？",
+      "options": [
+        "A. 是的",
+        "B. 不是"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 49,
+      "question": "如果A或B为真，那么A一定是真的吗？",
+      "options": [
+        "A. 不一定",
+        "B. 一定"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 50,
+      "question": "100的10%是多少？",
+      "options": [
+        "A. 10",
+        "B. 1"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 51,
+      "question": "无矛盾律的内容是什么？",
+      "options": [
+        "A. 命题不能同时真假",
+        "B. 命题必须同时真假"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 52,
+      "question": "A、B、C排队，A在B前，B在C前，谁在最后？",
+      "options": [
+        "A. C",
+        "B. A"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 53,
+      "question": "“没有一个学生是不爱学习的。”意味着什么？",
+      "options": [
+        "A. 所有学生都爱学习",
+        "B. 所有学生都不爱"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 54,
+      "question": "6除以0在数学上有意义吗？",
+      "options": [
+        "A. 没有",
+        "B. 有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 55,
+      "question": "“如果你今天完成任务，你就可以回家。”你没完成，能回家吗？",
+      "options": [
+        "A. 不一定",
+        "B. 不能"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 56,
+      "question": "A比B重，B比C轻，A和C谁重？",
+      "options": [
+        "A. 不一定",
+        "B. A重"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 57,
+      "question": "已知命题A为假，那么A的否定命题是什么？",
+      "options": [
+        "A. 真",
+        "B. 假"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 58,
+      "question": "如果所有的金属都能导电，铜是金属，铜导电吗？",
+      "options": [
+        "A. 导电",
+        "B. 不导电"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 59,
+      "question": "4的平方根是多少（正数）？",
+      "options": [
+        "A. 2",
+        "B. 16"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 60,
+      "question": "同一律的内容是什么？",
+      "options": [
+        "A. 概念本身应保持一致",
+        "B. 概念可以随意改变"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 61,
+      "question": "A说B撒谎，B说C撒谎，C说B真，谁在撒谎？",
+      "options": [
+        "A. A",
+        "B. B"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 62,
+      "question": "如果所有的猫都会捉老鼠，加菲猫是猫，它捉老鼠吗？",
+      "options": [
+        "A. 捉",
+        "B. 不捉"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 63,
+      "question": "“有些水果是甜的。”要证伪它，只需要？",
+      "options": [
+        "A. 找到所有水果都不甜",
+        "B. 找到一个甜的"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 64,
+      "question": "8减去2乘以3等于多少？",
+      "options": [
+        "A. 2",
+        "B. 18"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 65,
+      "question": "“不仅A而且B。”逻辑上意味着什么？",
+      "options": [
+        "A. A和B都为真",
+        "B. 只有A为真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 66,
+      "question": "A、B、C三人，A比B矮，C比B高，谁最矮？",
+      "options": [
+        "A. A",
+        "B. C"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 67,
+      "question": "已知命题A和B都为真，那么A且B为真吗？",
+      "options": [
+        "A. 是的",
+        "B. 不是"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 68,
+      "question": "如果所有鱼都生活在水里，金鱼是鱼，它生活在水里吗？",
+      "options": [
+        "A. 是",
+        "B. 否"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 69,
+      "question": "3的三次方是多少？",
+      "options": [
+        "A. 27",
+        "B. 9"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 70,
+      "question": "充足理由律的内容是什么？",
+      "options": [
+        "A. 任何判断都要有理由",
+        "B. 可以无理由判断"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 71,
+      "question": "A说C撒谎，B说A真，C说B真，谁真？",
+      "options": [
+        "A. B",
+        "B. A"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 72,
+      "question": "如果所有的鸟都会生蛋，企鹅是鸟，它生蛋吗？",
+      "options": [
+        "A. 生",
+        "B. 不生"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 73,
+      "question": "“没有一个人类是永生的。”意味着什么？",
+      "options": [
+        "A. 所有人都必死",
+        "B. 有些人永生"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 74,
+      "question": "12除以3乘2等于多少？",
+      "options": [
+        "A. 8",
+        "B. 2"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 75,
+      "question": "“要么A，要么B。”这是什么逻辑关系？",
+      "options": [
+        "A. 排他性选言",
+        "B. 合取关系"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 76,
+      "question": "A、B、C三人，A胜B，C胜A，谁最强？",
+      "options": [
+        "A. C",
+        "B. B"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 77,
+      "question": "已知命题A或B为真，且A为假，那么B为？",
+      "options": [
+        "A. 真",
+        "B. 假"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 78,
+      "question": "如果所有狗都有尾巴，它是狗，它有尾巴吗？",
+      "options": [
+        "A. 有",
+        "B. 没有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 79,
+      "question": "10的0次方是多少？",
+      "options": [
+        "A. 1",
+        "B. 0"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 80,
+      "question": "逻辑学研究的是什么？",
+      "options": [
+        "A. 思维规律",
+        "B. 纯粹的情感"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 81,
+      "question": "A说B撒谎，B说A撒谎，两人谁真？",
+      "options": [
+        "A. 无法确定",
+        "B. B真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 82,
+      "question": "如果所有的植物都需要光，它是植物，它需要光吗？",
+      "options": [
+        "A. 需要",
+        "B. 不需要"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 83,
+      "question": "“所有的人都是理性的。”这通常被认为是？",
+      "options": [
+        "A. 错误的假命题",
+        "B. 绝对真理"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 84,
+      "question": "20的20%是多少？",
+      "options": [
+        "A. 4",
+        "B. 2"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 85,
+      "question": "“除非A，否则不B。”意味着什么？",
+      "options": [
+        "A. A是B的必要条件",
+        "B. A是B的充分条件"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 86,
+      "question": "A、B、C三人，A比C重，C比B重，谁最重？",
+      "options": [
+        "A. A",
+        "B. B"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 87,
+      "question": "已知命题A且B为真，那么A为？",
+      "options": [
+        "A. 真",
+        "B. 假"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 88,
+      "question": "如果所有猫都会喵喵叫，它是猫，它会叫吗？",
+      "options": [
+        "A. 会",
+        "B. 不会"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 89,
+      "question": "2乘2乘2等于多少？",
+      "options": [
+        "A. 8",
+        "B. 4"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 90,
+      "question": "什么是假言命题？",
+      "options": [
+        "A. 如果...那么...的关系",
+        "B. 简单的陈述命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 91,
+      "question": "A说C真，B说A假，C说B假，谁在撒谎？",
+      "options": [
+        "A. A",
+        "B. C"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 92,
+      "question": "如果所有的树都有叶子，它是树，它有叶子吗？",
+      "options": [
+        "A. 有",
+        "B. 没有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 93,
+      "question": "“所有的白天鹅。”可以概括为？",
+      "options": [
+        "A. 全称肯定命题",
+        "B. 特称否定命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 94,
+      "question": "15除以5加1等于多少？",
+      "options": [
+        "A. 4",
+        "B. 2"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 95,
+      "question": "“既A又B。”这是什么逻辑关系？",
+      "options": [
+        "A. 联言关系",
+        "B. 选言关系"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 96,
+      "question": "A、B、C，A在B前，C在A前，谁在第一？",
+      "options": [
+        "A. C",
+        "B. B"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 97,
+      "question": "已知命题A或B为真，那么非A且非B为？",
+      "options": [
+        "A. 假",
+        "B. 真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 98,
+      "question": "如果所有车都有轮子，它是车，它有轮子吗？",
+      "options": [
+        "A. 有",
+        "B. 没有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 99,
+      "question": "50的50%是多少？",
+      "options": [
+        "A. 25",
+        "B. 5"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 100,
+      "question": "什么是直言命题？",
+      "options": [
+        "A. 直接陈述事物属性",
+        "B. 包含假设条件的命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 101,
+      "question": "A说B真，B说C真，C说A真，谁在撒谎？",
+      "options": [
+        "A. 无法确定",
+        "B. A"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 102,
+      "question": "如果所有水果都能吃，它是水果，它能吃吗？",
+      "options": [
+        "A. 能",
+        "B. 不能"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 103,
+      "question": "“有的人是好人。”可以概括为？",
+      "options": [
+        "A. 特称肯定命题",
+        "B. 全称否定命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 104,
+      "question": "20减去10除以2等于多少？",
+      "options": [
+        "A. 15",
+        "B. 5"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 105,
+      "question": "“若A则B。”A称为？",
+      "options": [
+        "A. 前件",
+        "B. 后件"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 106,
+      "question": "A、B、C三人，A胜C，C胜B，谁最弱？",
+      "options": [
+        "A. B",
+        "B. A"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 107,
+      "question": "已知命题A为真，那么A或B为？",
+      "options": [
+        "A. 真",
+        "B. 假"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 108,
+      "question": "如果所有狮子都吃肉，它是狮子，它吃肉吗？",
+      "options": [
+        "A. 吃",
+        "B. 不吃"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 109,
+      "question": "7的平方是多少？",
+      "options": [
+        "A. 49",
+        "B. 14"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 110,
+      "question": "逻辑推理中的前提是指什么？",
+      "options": [
+        "A. 推理的依据",
+        "B. 推理的结论"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 111,
+      "question": "A说B撒谎，B说A撒谎，两人谁在说实话？",
+      "options": [
+        "A. 无法确定",
+        "B. A"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 112,
+      "question": "如果所有鸟都有翅膀，它是鸟，它有翅膀吗？",
+      "options": [
+        "A. 有",
+        "B. 没有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 113,
+      "question": "“有些书不是红色的。”可以概括为？",
+      "options": [
+        "A. 特称否定命题",
+        "B. 全称肯定命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 114,
+      "question": "100除以4等于多少？",
+      "options": [
+        "A. 25",
+        "B. 20"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 115,
+      "question": "“若A则B。”B称为？",
+      "options": [
+        "A. 后件",
+        "B. 前件"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 116,
+      "question": "A、B、C三人，A比C高，B比A高，谁最高？",
+      "options": [
+        "A. B",
+        "B. C"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 117,
+      "question": "已知命题A且B为假，且A为真，那么B为？",
+      "options": [
+        "A. 假",
+        "B. 真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 118,
+      "question": "如果所有鱼都有鳃，它是鱼，它有鳃吗？",
+      "options": [
+        "A. 有",
+        "B. 没有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 119,
+      "question": "6的平方是多少？",
+      "options": [
+        "A. 36",
+        "B. 12"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 120,
+      "question": "推理的有效性是指什么？",
+      "options": [
+        "A. 前提真则结论必真",
+        "B. 结论必须是对的"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 121,
+      "question": "甲乙两人，甲说乙真，乙说甲真，两人状态？",
+      "options": [
+        "A. 无法确定",
+        "B. 都是真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 122,
+      "question": "如果所有花都需要水，它是花，它需要水吗？",
+      "options": [
+        "A. 需要",
+        "B. 不需要"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 123,
+      "question": "“没有一个人是完美的。”可以概括为？",
+      "options": [
+        "A. 全称否定命题",
+        "B. 特称肯定命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 124,
+      "question": "2乘5加10等于多少？",
+      "options": [
+        "A. 20",
+        "B. 15"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 125,
+      "question": "逻辑上的“真值”指的是什么？",
+      "options": [
+        "A. 真或假",
+        "B. 数字大小"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 126,
+      "question": "A、B、C三人，A胜B，C胜A，谁最强？",
+      "options": [
+        "A. C",
+        "B. B"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 127,
+      "question": "已知命题A或B为假，那么A为？",
+      "options": [
+        "A. 假",
+        "B. 真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 128,
+      "question": "如果所有云都是白色的，它是云，它是白的吗？",
+      "options": [
+        "A. 是",
+        "B. 否"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 129,
+      "question": "9的平方是多少？",
+      "options": [
+        "A. 81",
+        "B. 18"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 130,
+      "question": "什么是谓词逻辑？",
+      "options": [
+        "A. 涉及对象属性的逻辑",
+        "B. 仅研究数字的逻辑"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 131,
+      "question": "甲说乙假，乙说甲真，谁真？",
+      "options": [
+        "A. 无法确定",
+        "B. 甲"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 132,
+      "question": "如果所有蛇都没腿，它是蛇，它有腿吗？",
+      "options": [
+        "A. 没有",
+        "B. 有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 133,
+      "question": "“所有的苹果都是水果。”可以概括为？",
+      "options": [
+        "A. 全称肯定命题",
+        "B. 特称否定命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 134,
+      "question": "3乘8等于多少？",
+      "options": [
+        "A. 24",
+        "B. 21"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 135,
+      "question": "什么是命题？",
+      "options": [
+        "A. 能判断真假的陈述",
+        "B. 疑问句"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 136,
+      "question": "A、B、C，A比B矮，C比A矮，谁最矮？",
+      "options": [
+        "A. C",
+        "B. B"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 137,
+      "question": "已知命题A且B为假，且A为假，那么B为？",
+      "options": [
+        "A. 无法确定",
+        "B. 真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 138,
+      "question": "如果所有马都有蹄，它是马，它有蹄吗？",
+      "options": [
+        "A. 有",
+        "B. 没有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 139,
+      "question": "10的平方是多少？",
+      "options": [
+        "A. 100",
+        "B. 20"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 140,
+      "question": "逻辑学中的公理是指什么？",
+      "options": [
+        "A. 不证自明的真理",
+        "B. 需要证明的结论"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 141,
+      "question": "甲说乙假，乙说C真，C说甲真，谁真？",
+      "options": [
+        "A. 无法确定",
+        "B. C"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 142,
+      "question": "如果所有火都热，它是火，它热吗？",
+      "options": [
+        "A. 热",
+        "B. 不热"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 143,
+      "question": "“有些花不是红色的。”可以概括为？",
+      "options": [
+        "A. 特称否定命题",
+        "B. 全称肯定命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 144,
+      "question": "5乘9等于多少？",
+      "options": [
+        "A. 45",
+        "B. 40"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 145,
+      "question": "逻辑上的“矛盾”是指什么？",
+      "options": [
+        "A. 同时肯定又否定",
+        "B. 两者完全不同"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 146,
+      "question": "A、B、C三人，A比B轻，C比B重，谁最轻？",
+      "options": [
+        "A. A",
+        "B. C"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 147,
+      "question": "已知命题A或B为真，且A为真，那么B为？",
+      "options": [
+        "A. 无法确定",
+        "B. 真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 148,
+      "question": "如果所有球都是圆的，它是球，它是圆的吗？",
+      "options": [
+        "A. 是",
+        "B. 否"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 149,
+      "question": "8的平方是多少？",
+      "options": [
+        "A. 64",
+        "B. 16"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 150,
+      "question": "逻辑学研究的目的主要是什么？",
+      "options": [
+        "A. 正确的推理",
+        "B. 华丽的辞藻"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 151,
+      "question": "甲说乙假，乙说甲假，两人谁真？",
+      "options": [
+        "A. 无法确定",
+        "B. 甲"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 152,
+      "question": "如果所有星星都会发光，它是星星，它发光吗？",
+      "options": [
+        "A. 发光",
+        "B. 不发光"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 153,
+      "question": "“所有学生都是勤奋的。”可以概括为？",
+      "options": [
+        "A. 全称肯定命题",
+        "B. 特称否定命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 154,
+      "question": "4乘7等于多少？",
+      "options": [
+        "A. 28",
+        "B. 24"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 155,
+      "question": "逻辑错误是指什么？",
+      "options": [
+        "A. 推理过程不规范",
+        "B. 说话不好听"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 156,
+      "question": "A、B、C三人，A在C前，C在B前，谁在第一？",
+      "options": [
+        "A. A",
+        "B. B"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 157,
+      "question": "已知命题A且B为真，那么B为？",
+      "options": [
+        "A. 真",
+        "B. 假"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 158,
+      "question": "如果所有书都有页码，它是书，它有页码吗？",
+      "options": [
+        "A. 有",
+        "B. 没有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 159,
+      "question": "2的5次方是多少？",
+      "options": [
+        "A. 32",
+        "B. 10"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 160,
+      "question": "什么是逻辑推导？",
+      "options": [
+        "A. 从前提得出结论",
+        "B. 随便想一个答案"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 161,
+      "question": "甲说乙假，乙说甲假，有人真吗？",
+      "options": [
+        "A. 有可能有一个人真",
+        "B. 绝对都没真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 162,
+      "question": "如果所有杯子都能装水，它是杯子，它能装水吗？",
+      "options": [
+        "A. 能",
+        "B. 不能"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 163,
+      "question": "“有些科学家是女性。”可以概括为？",
+      "options": [
+        "A. 特称肯定命题",
+        "B. 全称否定命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 164,
+      "question": "6乘9等于多少？",
+      "options": [
+        "A. 54",
+        "B. 56"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 165,
+      "question": "逻辑上的“有效性”取决于什么？",
+      "options": [
+        "A. 推理形式",
+        "B. 结论事实"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 166,
+      "question": "A、B、C三人，A胜C，B胜A，谁最强？",
+      "options": [
+        "A. B",
+        "B. C"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 167,
+      "question": "已知命题A或B为真，且A为假，那么B为？",
+      "options": [
+        "A. 真",
+        "B. 假"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 168,
+      "question": "如果所有桌子都有腿，它是桌子，它有腿吗？",
+      "options": [
+        "A. 有",
+        "B. 没有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 169,
+      "question": "12的平方是多少？",
+      "options": [
+        "A. 144",
+        "B. 24"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 170,
+      "question": "逻辑学中的变项是什么？",
+      "options": [
+        "A. 代表对象的占位符",
+        "B. 恒定的数值"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 171,
+      "question": "甲说C假，乙说甲真，C说乙假，谁真？",
+      "options": [
+        "A. 甲",
+        "B. B"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 172,
+      "question": "如果所有车都有方向盘，它是车，它有方向盘吗？",
+      "options": [
+        "A. 有",
+        "B. 没有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 173,
+      "question": "“没有一个学生是完美的。”可以概括为？",
+      "options": [
+        "A. 全称否定命题",
+        "B. 全称肯定命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 174,
+      "question": "7乘8等于多少？",
+      "options": [
+        "A. 56",
+        "B. 54"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 175,
+      "question": "逻辑中的“前提”可以是？",
+      "options": [
+        "A. 真的或假的",
+        "B. 必须全是真的"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 176,
+      "question": "A、B、C三人，A比B矮，B比C矮，谁最矮？",
+      "options": [
+        "A. A",
+        "B. C"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 177,
+      "question": "已知命题A且B为假，且A为真，那么B为？",
+      "options": [
+        "A. 假",
+        "B. 真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 178,
+      "question": "如果所有镜子都能反射，它是镜子，它反射吗？",
+      "options": [
+        "A. 反射",
+        "B. 不反射"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 179,
+      "question": "15的平方是多少？",
+      "options": [
+        "A. 225",
+        "B. 30"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 180,
+      "question": "逻辑学研究的“形式”是指什么？",
+      "options": [
+        "A. 推理的结构",
+        "B. 推理的内容"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 181,
+      "question": "甲说乙假，乙说丙真，丙说甲假，谁在撒谎？",
+      "options": [
+        "A. 甲",
+        "B. 乙"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 182,
+      "question": "如果所有灯都有开关，它是灯，它有开关吗？",
+      "options": [
+        "A. 有",
+        "B. 没有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 183,
+      "question": "“有些人是科学家。”可以概括为？",
+      "options": [
+        "A. 特称肯定命题",
+        "B. 全称否定命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 184,
+      "question": "8乘9等于多少？",
+      "options": [
+        "A. 72",
+        "B. 64"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 185,
+      "question": "什么是逻辑常项？",
+      "options": [
+        "A. 逻辑连接词等固定项",
+        "B. 可变的变量"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 186,
+      "question": "A、B、C三人，A胜B，B胜C，谁最强？",
+      "options": [
+        "A. A",
+        "B. C"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 187,
+      "question": "已知命题A或B为真，且A为真，那么B为？",
+      "options": [
+        "A. 无法确定",
+        "B. 真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 188,
+      "question": "如果所有云朵都是水汽，它是云朵，它是水汽吗？",
+      "options": [
+        "A. 是",
+        "B. 否"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 189,
+      "question": "11的平方是多少？",
+      "options": [
+        "A. 121",
+        "B. 22"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 190,
+      "question": "逻辑中的“结论”是指什么？",
+      "options": [
+        "A. 推理出来的命题",
+        "B. 推理的依据"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 191,
+      "question": "甲说乙假，乙说甲真，两人谁在说谎？",
+      "options": [
+        "A. 乙",
+        "B. 甲"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 192,
+      "question": "如果所有树都长叶，它是树，它长叶吗？",
+      "options": [
+        "A. 长",
+        "B. 不长"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 193,
+      "question": "“有些鸟不是黑色的。”可以概括为？",
+      "options": [
+        "A. 特称否定命题",
+        "B. 特称肯定命题"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 194,
+      "question": "9乘7等于多少？",
+      "options": [
+        "A. 63",
+        "B. 56"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 195,
+      "question": "逻辑推理的目标是？",
+      "options": [
+        "A. 确保结论合理",
+        "B. 快速给出答案"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 196,
+      "question": "A、B、C三人，A比B重，C比A重，谁最重？",
+      "options": [
+        "A. C",
+        "B. B"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 197,
+      "question": "已知命题A且B为假，且B为真，那么A为？",
+      "options": [
+        "A. 假",
+        "B. 真"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 198,
+      "question": "如果所有书都有封面，它是书，它有封面吗？",
+      "options": [
+        "A. 有",
+        "B. 没有"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 199,
+      "question": "13的平方是多少？",
+      "options": [
+        "A. 169",
+        "B. 26"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 200,
+      "question": "什么是逻辑连接词？",
+      "options": [
+        "A. 连接命题的词如“且”",
+        "B. 连接名词的词"
+      ],
+      "answer": "A"
+    }
+  ]
+}

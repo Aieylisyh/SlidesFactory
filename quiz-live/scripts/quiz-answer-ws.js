@@ -8,7 +8,6 @@
         connect: function () {
             var self = this;
             this.ws = new global.QuizWsClient({
-                url: global.QuizProtocol.getWsUrl(),
                 room: this.room,
                 role: 'audience',
                 clientId: this.clientId,
@@ -68,8 +67,10 @@
             if (me) {
                 this.participantId = me.id;
                 this.nickname = me.name || '';
+                if (me.player) this.applyPlayer(me.player);
                 if (this.els.participantBadge) {
-                    this.els.participantBadge.textContent = this.nickname || ('编号 ' + me.id);
+                    var levelLabel = this.playerLevel ? (' · Lv.' + this.playerLevel) : '';
+                    this.els.participantBadge.textContent = (this.nickname || ('编号 ' + me.id)) + levelLabel;
                 }
                 if (this.activeView === 'register') {
                     this.renderCategories();
@@ -92,6 +93,8 @@
         resetParticipantSession: function () {
             this.participantId = null;
             this.nickname = '';
+            this.player = null;
+            this.playerLevel = 3;
             this.currentCategory = null;
             this.questionQueue = [];
             this.currentIndex = 0;
@@ -110,12 +113,19 @@
             if (msg.type === 'registered') {
                 this.participantId = msg.participantId;
                 this.nickname = msg.name || '';
+                if (msg.player) this.applyPlayer(msg.player);
                 if (this.els.participantBadge) {
-                    this.els.participantBadge.textContent = this.nickname || ('编号 ' + msg.participantId);
+                    var levelLabel = this.playerLevel ? (' · Lv.' + this.playerLevel) : '';
+                    this.els.participantBadge.textContent = (this.nickname || ('编号 ' + msg.participantId)) + levelLabel;
                 }
                 this.renderCategories();
                 this.showView('category');
                 this.updateContinueUi();
+                return;
+            }
+
+            if (msg.type === 'register_error') {
+                alert(msg.message || '登记失败');
                 return;
             }
 
@@ -131,6 +141,9 @@
 
             if (msg.type === 'state') {
                 if (msg.title) this.deckTitle = msg.title;
+                if (Array.isArray(msg.questionCategories) && msg.questionCategories.length) {
+                    this.questionCategories = msg.questionCategories;
+                }
                 this.participants = msg.participants || [];
                 this.syncHeaderTitle();
                 if (this.activeView === 'leaderboard') {

@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var config = require('./config');
+var playerData = require('./player-data');
 
 var rooms = new Map();
 var saveRoomsTimer = null;
@@ -23,6 +24,7 @@ function participantToJson(p) {
         name: p.name,
         phone: p.phone,
         profile: p.profile || { name: p.name, phone: p.phone },
+        player: playerData.playerToClientJson(p.player),
         score: p.score || 0,
         streak: p.streak || 0,
         bestStreak: p.bestStreak || 0,
@@ -38,12 +40,17 @@ function participantToJson(p) {
 
 function participantFromJson(raw) {
     if (!raw || !raw.clientId) return null;
+    var player = raw.player;
+    if (!player || !player.user_id) {
+        player = playerData.createPlayer(raw.name || '', raw.phone || '');
+    }
     return {
         clientId: raw.clientId,
         id: raw.id || '01',
         name: raw.name || '',
         phone: raw.phone || '',
         profile: raw.profile || { name: raw.name || '', phone: raw.phone || '' },
+        player: player,
         score: raw.score || 0,
         streak: raw.streak || 0,
         bestStreak: raw.bestStreak || 0,
@@ -172,6 +179,7 @@ function participantList(room) {
             name: p.name,
             phone: p.phone,
             profile: p.profile || { name: p.name, phone: p.phone },
+            player: playerData.playerToClientJson(p.player),
             score: p.score,
             streak: p.streak,
             bestStreak: p.bestStreak,
@@ -189,8 +197,9 @@ function buildState(room) {
     return {
         type: 'state',
         room: room.id,
-        title: config.questionBank.title || '趣味常识挑战',
-        categories: (config.questionBank.quizzes || []).map(function (q) { return q.category; }),
+        title: config.deckTitle,
+        categories: config.categoryDisplayNames(),
+        questionCategories: config.questionCategories,
         totalQuestions: config.totalQuestionCount(),
         participants: participants,
         onlineCount: participants.filter(function (p) { return p.online; }).length,
@@ -208,5 +217,6 @@ module.exports = {
     padId: padId,
     resetRoundBroadcastState: resetRoundBroadcastState,
     applyRegisterPayload: applyRegisterPayload,
+    sanitizeProfile: sanitizeProfile,
     buildState: buildState
 };

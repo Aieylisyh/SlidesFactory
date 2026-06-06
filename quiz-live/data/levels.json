@@ -1,0 +1,32 @@
+[
+  {
+    "level": 1,
+    "title": "新手学徒",
+    "icon_url": "assets/levels/level-1.png",
+    "min_exp_required": 0
+  },
+  {
+    "level": 2,
+    "title": "入门选手",
+    "icon_url": "assets/levels/level-2.png",
+    "min_exp_required": 100
+  },
+  {
+    "level": 3,
+    "title": "进阶达人",
+    "icon_url": "assets/levels/level-3.png",
+    "min_exp_required": 300
+  },
+  {
+    "level": 4,
+    "title": "知识能手",
+    "icon_url": "assets/levels/level-4.png",
+    "min_exp_required": 600
+  },
+  {
+    "level": 5,
+    "title": "博学之星",
+    "icon_url": "assets/levels/level-5.png",
+    "min_exp_required": 1000
+  }
+]
