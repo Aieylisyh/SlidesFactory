@@ -49,6 +49,24 @@ body {
     background: linear-gradient(180deg, rgba(200, 36, 100, 0.12), transparent);
 }
 
+.ql-user-bar {
+    position: relative;
+    padding-right: 28px;
+    padding-bottom: 2px;
+    min-height: 44px;
+}
+
+.ql-user-bar .ql-badge {
+    margin-bottom: 6px;
+}
+
+.ql-user-bar h1 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
 .ql-header h1 {
     margin: 0;
     font-size: 1.15rem;
@@ -60,6 +78,72 @@ body {
     margin: 6px 0 0;
     font-size: 0.82rem;
     color: var(--ql-muted);
+}
+
+.ql-conn-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: var(--ql-muted);
+}
+
+.ql-conn-icon-svg {
+    display: block;
+}
+
+.ql-conn-bar {
+    fill: currentColor;
+}
+
+.ql-conn-icon.is-online {
+    color: var(--ql-ok);
+    filter: drop-shadow(0 0 4px rgba(0, 200, 150, 0.45));
+}
+
+.ql-conn-icon.is-connecting {
+    color: var(--ql-warn);
+    animation: ql-conn-pulse 1.2s ease-in-out infinite;
+}
+
+.ql-conn-icon.is-connecting .ql-conn-bar--2,
+.ql-conn-icon.is-connecting .ql-conn-bar--3,
+.ql-conn-icon.is-connecting .ql-conn-bar--4 {
+    opacity: 0.35;
+}
+
+.ql-conn-icon.is-offline {
+    color: #ff4d4f;
+    filter: drop-shadow(0 0 4px rgba(255, 77, 79, 0.4));
+}
+
+.ql-conn-icon.is-offline .ql-conn-bar--2,
+.ql-conn-icon.is-offline .ql-conn-bar--3,
+.ql-conn-icon.is-offline .ql-conn-bar--4 {
+    opacity: 0.28;
+}
+
+.ql-conn-icon.is-offline::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    top: 50%;
+    height: 2px;
+    margin-top: -1px;
+    background: currentColor;
+    border-radius: 1px;
+    transform: rotate(-38deg);
+    box-shadow: 0 0 4px rgba(255, 77, 79, 0.5);
+}
+
+@keyframes ql-conn-pulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
 }
 
 .ql-badge {
@@ -76,8 +160,28 @@ body {
 
 .ql-main {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     padding-bottom: calc(20px + var(--ql-safe-bottom));
+}
+
+.ql-category-screen {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 0;
+}
+
+.ql-category-screen .ql-category-panel {
+    flex: 0 1 auto;
+}
+
+.ql-category-leaderboard-btn {
+    margin-top: auto;
+    width: 100%;
+    flex-shrink: 0;
 }
 
 .ql-app.is-quiz-active .ql-main {
@@ -192,7 +296,33 @@ body {
 .ql-question-text {
     font-size: 1.05rem;
     line-height: 1.55;
-    margin: 0 0 16px;
+    margin: 0;
+}
+
+/* --- Quiz layout: question top, options/actions bottom --- */
+.ql-app.is-quiz-active [data-view="quiz"] {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.ql-quiz-top {
+    flex: 0 1 auto;
+    min-height: 0;
+}
+
+.ql-quiz-bottom {
+    margin-top: auto;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
+}
+
+.ql-quiz-bottom .ql-btn {
+    margin-top: 0;
 }
 
 .ql-options {
@@ -204,8 +334,8 @@ body {
 .ql-option {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 14px;
+    gap: 8px;
+    padding: 14px 14px 14px 10px;
     border-radius: 12px;
     border: 1px solid var(--ql-border);
     background: var(--ql-panel-2);
@@ -216,8 +346,9 @@ body {
 }
 
 .ql-option.is-selected {
+    border-width: 2px;
     border-color: var(--ql-accent);
-    background: rgba(200, 36, 100, 0.15);
+    background: var(--ql-panel-2);
 }
 
 .ql-option.is-correct {
@@ -237,14 +368,17 @@ body {
 
 .ql-option-key {
     flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
+    width: 14px;
+    height: 14px;
+    margin-top: 2px;
+    border-radius: 4px;
     background: rgba(255, 255, 255, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 0.62rem;
     font-weight: 700;
+    line-height: 1;
 }
 
 .ql-result-card {
@@ -307,6 +441,92 @@ body {
 
 .ql-broadcast.is-active::before {
     animation: ql-broadcast-shine 2s ease-in-out infinite;
+}
+
+/* Idle: semi-transparent red bar + subtle radio echo (no text) */
+.ql-broadcast.is-idle {
+    background: linear-gradient(
+        90deg,
+        rgba(200, 36, 100, 0.14),
+        rgba(200, 36, 100, 0.26),
+        rgba(200, 36, 100, 0.14)
+    );
+    background-size: 200% 100%;
+    border-bottom-color: rgba(200, 36, 100, 0.38);
+    animation: ql-broadcast-idle-bg 4.5s ease-in-out infinite;
+}
+
+.ql-broadcast.is-idle::before {
+    animation: ql-broadcast-idle-scan 3.2s ease-in-out infinite;
+}
+
+.ql-broadcast.is-idle .ql-broadcast-label,
+.ql-broadcast.is-idle .ql-broadcast-track {
+    visibility: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.ql-broadcast-idle-fx {
+    display: none;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.ql-broadcast.is-idle .ql-broadcast-idle-fx {
+    display: block;
+}
+
+.ql-broadcast-echo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    margin: -9px 0 0 -9px;
+    border: 1px solid rgba(224, 86, 136, 0.45);
+    border-radius: 50%;
+    opacity: 0;
+    animation: ql-broadcast-echo 2.8s ease-out infinite;
+}
+
+.ql-broadcast-echo:nth-child(2) {
+    animation-delay: 0.93s;
+}
+
+.ql-broadcast-echo:nth-child(3) {
+    animation-delay: 1.86s;
+}
+
+@keyframes ql-broadcast-idle-bg {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes ql-broadcast-idle-scan {
+    0% { transform: translateX(-120%); opacity: 0; }
+    15% { opacity: 0.35; }
+    85% { opacity: 0.35; }
+    100% { transform: translateX(120%); opacity: 0; }
+}
+
+@keyframes ql-broadcast-echo {
+    0% {
+        transform: scale(0.35);
+        opacity: 0.55;
+    }
+    70% {
+        opacity: 0.12;
+    }
+    100% {
+        transform: scale(4.2);
+        opacity: 0;
+    }
 }
 
 .ql-broadcast[data-kind="first_blood"] {
@@ -423,6 +643,13 @@ body {
 }
 
 /* --- Category picker --- */
+.ql-category-heading {
+    margin: 0 0 20px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+}
+
 .ql-category-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -431,20 +658,19 @@ body {
 
 .ql-category-btn {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     min-width: 0;
-    min-height: 108px;
-    padding: 14px;
+    min-height: 72px;
+    padding: 16px 12px;
     border: 1px solid var(--ql-border);
     border-radius: 14px;
     background: var(--ql-panel-2);
     color: var(--ql-text);
     font: inherit;
     cursor: pointer;
-    text-align: left;
+    text-align: center;
     transition: border-color 0.15s, background 0.15s, transform 0.12s;
     box-sizing: border-box;
 }
@@ -455,47 +681,95 @@ body {
     background: rgba(200, 36, 100, 0.1);
 }
 
-.ql-category-icon-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.06);
-}
-
-.ql-category-btn--game .ql-category-icon-wrap { background: rgba(96, 120, 255, 0.18); }
-.ql-category-btn--anime .ql-category-icon-wrap { background: rgba(255, 120, 180, 0.16); }
-.ql-category-btn--study .ql-category-icon-wrap { background: rgba(80, 200, 160, 0.16); }
-.ql-category-btn--cooking .ql-category-icon-wrap { background: rgba(255, 160, 70, 0.18); }
-.ql-category-btn--art .ql-category-icon-wrap { background: rgba(180, 130, 255, 0.18); }
-
-.ql-category-icon {
-    font-size: 1.45rem;
-    line-height: 1;
-}
-
-.ql-category-body {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    width: 100%;
-}
-
 .ql-category-name {
-    font-size: 0.98rem;
+    font-size: 1.12rem;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.3;
+    text-align: center;
 }
 
-.ql-category-count {
+.ql-category-btn--locked {
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    border-style: dashed;
+    border-color: rgba(200, 36, 100, 0.28);
+    background: rgba(200, 36, 100, 0.05);
+}
+
+.ql-category-btn--locked:active {
+    transform: scale(0.98);
+    background: rgba(200, 36, 100, 0.1);
+}
+
+.ql-category-btn--locked .ql-category-name {
+    opacity: 0.42;
+    color: var(--ql-text);
+}
+
+.ql-category-lock-hint {
     font-size: 0.72rem;
-    color: var(--ql-muted);
+    font-weight: 600;
+    line-height: 1.3;
+    color: rgba(120, 24, 52, 0.92);
+    text-align: center;
 }
 
-.ql-category-leaderboard-btn {
-    margin-top: 16px;
+.ql-toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(24px + var(--ql-safe-bottom));
+    z-index: 2200;
+    max-width: min(calc(100vw - 32px), 320px);
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: rgba(28, 28, 34, 0.94);
+    border: 1px solid rgba(200, 36, 100, 0.35);
+    color: var(--ql-text);
+    font-size: 0.84rem;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+    transform: translate(-50%, 12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.ql-toast.is-visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* --- Challenge prepare --- */
+.ql-prepare-category {
+    margin: 0 0 16px;
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: center;
+    color: var(--ql-accent-light);
+}
+
+.ql-prepare-msg {
+    margin: 0 0 24px;
+    font-size: 1rem;
+    line-height: 1.65;
+    text-align: center;
+    color: var(--ql-text);
+}
+
+.ql-prepare-leaderboard-btn {
+    margin-bottom: 12px;
+}
+
+.ql-leaderboard-heading {
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.ql-leaderboard-meta.ql-hidden {
+    display: none;
 }
 
 .ql-leaderboard-meta {
@@ -528,8 +802,12 @@ body {
 }
 
 /* --- Instant feedback --- */
-.ql-feedback {
+.ql-quiz-top .ql-feedback {
     margin-top: 14px;
+    margin-bottom: 0;
+}
+
+.ql-feedback {
     padding: 12px 14px;
     border-radius: 10px;
     font-weight: 600;
@@ -797,7 +1075,7 @@ body {
 }
 
 .ql-counter {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
     font-weight: 800;
     color: var(--ql-accent-light);
 }
@@ -965,6 +1243,11 @@ body {
 
 .ql-score-table tr.is-offline td {
     opacity: 0.45;
+}
+
+.ql-participant-status.is-online {
+    color: var(--ql-ok);
+    font-weight: 600;
 }
 
 .ql-btn--xs {
