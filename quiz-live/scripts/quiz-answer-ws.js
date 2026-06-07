@@ -35,24 +35,32 @@
                 this.setReconnectBanner(true);
             }
 
-            if (!this.els.statusDot) return;
+            if (!this.els.connIcon) return;
 
-            this.els.statusDot.classList.toggle('is-online', status === 'connected');
+            var icon = this.els.connIcon;
+            icon.classList.remove('is-online', 'is-offline', 'is-connecting');
 
             var labels = {
-                connecting: '连接中…',
+                connecting: '连接中',
                 connected: '已连接',
-                disconnected: '连接断开，重试中…',
+                disconnected: '连接断开',
                 error: '连接异常'
             };
 
-            if (this.els.statusText) {
-                this.els.statusText.textContent = labels[status] || status;
+            if (status === 'connected') {
+                icon.classList.add('is-online');
+            } else if (status === 'connecting') {
+                icon.classList.add('is-connecting');
+            } else {
+                icon.classList.add('is-offline');
             }
+
+            icon.setAttribute('aria-label', labels[status] || status);
         },
 
         ensureRegistered: function () {
             if (!this.ws || typeof global.QuizRegisterConfig === 'undefined') return;
+            if (this.participantId) return;
             var cached = global.QuizRegisterConfig.loadProfileCache();
             if (!cached || !cached.name) return;
             var cfg = this.registerConfig || global.QuizRegisterConfig.normalize(null);
@@ -119,7 +127,9 @@
                     this.els.participantBadge.textContent = (this.nickname || ('编号 ' + msg.participantId)) + levelLabel;
                 }
                 this.renderCategories();
-                this.showView('category');
+                if (this.activeView === 'register') {
+                    this.showView('category');
+                }
                 this.updateContinueUi();
                 return;
             }
@@ -155,7 +165,7 @@
                 this.participants = msg.participants || [];
                 this.syncHeaderTitle();
                 if (this.activeView === 'leaderboard') {
-                    this.renderLeaderboard(this.participants, msg.onlineCount);
+                    this.refreshLeaderboardView(this.participants, msg.onlineCount);
                 }
                 this.syncSelfFromParticipants(this.participants);
             }
