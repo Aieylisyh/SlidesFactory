@@ -567,6 +567,8 @@ html.ss-deck-light .reveal .slide-ss-resource-links .ss-tips-block-icon h3 {
     width: 100%;
     margin-bottom: 0.85em;
     line-height: 1.45;
+    color: var(--ss-gray-900);
+    font-weight: 400;
 }
 
 html.ss-deck-light .reveal .slide-ss-resource-links .ss-tips-icon-entry {
