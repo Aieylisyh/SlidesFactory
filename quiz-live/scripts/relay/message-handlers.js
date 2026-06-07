@@ -106,6 +106,24 @@ function handleAdmin(room, msg, adminClient) {
             notifyParticipantCleared(room, null);
             break;
         }
+        case 'update_participant_exp': {
+            var expTargetId = msg.clientId;
+            if (!expTargetId || !room.participants.has(expTargetId)) return;
+            var expParticipant = room.participants.get(expTargetId);
+            if (!expParticipant.player) {
+                expParticipant.player = playerData.createPlayer(expParticipant.name, expParticipant.phone);
+            }
+            playerData.normalizePlayer(expParticipant.player);
+            expParticipant.player.total_exp = Math.max(0, Math.floor(Number(msg.total_exp) || 0));
+            playerData.touchPlayer(expParticipant.player);
+            if (adminClient) {
+                adminClient.send(JSON.stringify({
+                    type: 'participants_detail',
+                    participants: roomStore.getParticipantsDetail(room, [expTargetId])
+                }));
+            }
+            break;
+        }
         default:
             return;
     }
@@ -138,6 +156,20 @@ function handleMessage(client, raw) {
 
     if (msg.type === 'request_state') {
         client.send(JSON.stringify(roomStore.buildState(room)));
+        return;
+    }
+
+    if (msg.type === 'request_admin_summary' && client._quizRole === 'admin') {
+        client.send(JSON.stringify(roomStore.buildAdminSummary(room)));
+        return;
+    }
+
+    if (msg.type === 'request_participants_detail' && client._quizRole === 'admin') {
+        var detailIds = Array.isArray(msg.clientIds) ? msg.clientIds.slice(0, 20) : [];
+        client.send(JSON.stringify({
+            type: 'participants_detail',
+            participants: roomStore.getParticipantsDetail(room, detailIds)
+        }));
         return;
     }
 

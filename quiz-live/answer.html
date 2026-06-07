@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN">
+<html lang="zh-CN" class="ql-answer-page">
 
 <head>
 
@@ -14,11 +14,19 @@
 
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="css/quiz-live.css">
+    <link rel="stylesheet" href="css/quiz-live.css?v=3">
 
 </head>
 
 <body>
+
+    <div class="ql-orientation-lock ql-hidden" data-orientation-lock role="dialog" aria-modal="true" aria-label="请旋转至竖屏" aria-hidden="true">
+        <div class="ql-orientation-lock-card">
+            <div class="ql-orientation-lock-icon" aria-hidden="true"></div>
+            <p class="ql-orientation-lock-title">请旋转手机</p>
+            <p class="ql-orientation-lock-msg">答题界面仅支持竖屏浏览</p>
+        </div>
+    </div>
 
     <div class="ql-app" data-quiz-answer>
 
@@ -185,8 +193,11 @@
                         <div class="ql-quiz-progress-head">
                             <span class="ql-quiz-progress-label">答题进度</span>
                         </div>
-                        <div class="ql-quiz-progress-track">
-                            <div class="ql-quiz-progress-fill" data-progress-fill style="width:0%"></div>
+                        <div class="ql-quiz-progress-bar">
+                            <div class="ql-quiz-progress-markers" data-progress-markers aria-hidden="true"></div>
+                            <div class="ql-quiz-progress-track">
+                                <div class="ql-quiz-progress-fill" data-progress-fill style="width:0%"></div>
+                            </div>
                         </div>
                     </div>
                     <p class="ql-question-text" data-question-text></p>
@@ -234,18 +245,19 @@
 
 
 
+    <script src="scripts/quiz-answer-portrait.js?v=1"></script>
     <script src="scripts/quiz-protocol.js"></script>
 
     <script src="scripts/quiz-register-config.js"></script>
 
-    <script src="scripts/quiz-broadcast.js"></script>
+    <script src="scripts/quiz-broadcast.js?v=2"></script>
 
     <script src="scripts/quiz-ws-client.js"></script>
 
     <script src="scripts/quiz-answer-questions.js?v=1"></script>
     <script src="scripts/quiz-answer-ws.js?v=7"></script>
-    <script src="scripts/quiz-answer-ui.js?v=7"></script>
-    <script src="scripts/quiz-answer.js?v=7"></script>
+    <script src="scripts/quiz-answer-ui.js?v=10"></script>
+    <script src="scripts/quiz-answer.js?v=8"></script>
 
 </body>
 

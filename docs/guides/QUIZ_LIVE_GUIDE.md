@@ -6,7 +6,7 @@
 
 | 端 | 文件 | 职责 |
 |----|------|------|
-| 观众手机 | `quiz-live/answer.html?room=XXXX` | 昵称登记、选类别、答题、排行榜 |
+| 观众手机 | `quiz-live/answer.html?room=XXXX` | 昵称登记、选类别、答题、排行榜（**强制竖屏**，无横屏布局） |
 | 主持控台 | `quiz-live/admin.html?room=XXXX` | 房间码、二维码、得分表、清除数据、最近广播 |
 | 现场大屏 | `quiz-live/screen.html?room=XXXX` | 在线人数、参与者格、排行榜、广播条 |
 
@@ -158,6 +158,16 @@ quiz-live\start-quiz-server.bat
 
 改样式后递增 HTML 中 `quiz-live.css?v=`（若已加版本 query）。
 
+### 观众端竖屏（answer.html）
+
+| 项 | 说明 |
+|----|------|
+| 策略 | **仅竖屏布局**；横屏时全屏遮罩「请旋转手机」，不做横屏 CSS 适配 |
+| 脚本 | `quiz-answer-portrait.js`（`html.ql-answer-page` / `ql-answer-landscape`） |
+| 方向锁 | 支持时调用 `screen.orientation.lock('portrait')` |
+| 样式 | `.ql-orientation-lock`（`11-quiz-live.css`） |
+| 调试 | URL `?landscape=1` 跳过遮罩（桌面宽窗预览用） |
+
 ## 脚本文件
 
 | 文件 | 说明 |
@@ -168,6 +178,7 @@ quiz-live\start-quiz-server.bat
 | `relay/*.js` | 房间持久化、广播、消息处理、WS 帧工具 |
 | `quiz-answer-ws.js` | 观众端 WS 层 |
 | `quiz-answer-ui.js` | 观众端 UI 层 |
+| `quiz-answer-portrait.js` | 观众端竖屏锁定与横屏遮罩 |
 | `quiz-answer.js` | 观众端入口（构造函数 + boot） |
 | `quiz-admin.js` | 控台 QR、得分表、删除数据 |
 | `quiz-screen.js` | 大屏排行榜 |

@@ -178,6 +178,9 @@
             if (this.els.prepareCategory) {
                 this.els.prepareCategory.textContent = cat ? (cat.displayName || cat.id) : categoryId;
             }
+            if (this.els.categoryLeaderboardOpen) {
+                this.els.categoryLeaderboardOpen.textContent = this.getCategoryLeaderboardTitle(categoryId);
+            }
             this.showView('prepare');
         },
 
@@ -207,6 +210,7 @@
                 this.ws.send(global.QuizProtocol.makeRoundStart(categoryId, this.clientId));
             }
             this.showView('quiz');
+            this.resetProgressMarkers();
             this.renderCurrentQuestion();
         },
 
@@ -233,6 +237,10 @@
             }
             if (msg.expGained) this.roundExpGained = (this.roundExpGained || 0) + msg.expGained;
 
+            if (msg.correct && this.lastCorrectOptionKey) {
+                this.playCorrectOptionFxFromAck(msg.roundCorrect);
+            }
+
             if (this.pendingRoundSummary) {
                 this.pendingRoundSummary = false;
                 this.showRoundSummary({
@@ -245,6 +253,67 @@
                     categoryAccuracy: msg.categoryStats ? msg.categoryStats.accuracy : 0
                 });
             }
+        },
+
+        clearCorrectOptionFx: function () {
+            if (!this.els.options) return;
+            this.els.options.querySelectorAll('.ql-option-burst').forEach(function (el) {
+                el.remove();
+            });
+            this.els.options.querySelectorAll('.ql-option.has-correct-fx').forEach(function (btn) {
+                btn.classList.remove('has-correct-fx');
+            });
+        },
+
+        playCorrectOptionFx: function (choiceKey, level) {
+            if (!this.els.options || !choiceKey) return;
+            var btn = this.els.options.querySelector('[data-choice="' + choiceKey + '"]');
+            if (!btn) return;
+
+            this.clearCorrectOptionFx();
+
+            var isMilestone = level === 'milestone';
+            var ringCount = isMilestone ? 3 : 2;
+            var duration = isMilestone ? 1400 : 950;
+            btn.classList.add('has-correct-fx');
+
+            for (var i = 0; i < ringCount; i++) {
+                var burst = document.createElement('span');
+                burst.className = 'ql-option-burst' + (isMilestone ? ' ql-option-burst--milestone' : '');
+                burst.style.animationDelay = (i * 0.14) + 's';
+                btn.appendChild(burst);
+                (function (node, parent) {
+                    node.addEventListener('animationend', function () {
+                        node.remove();
+                        if (!parent.querySelector('.ql-option-burst')) {
+                            parent.classList.remove('has-correct-fx');
+                        }
+                    });
+                })(burst, btn);
+            }
+
+            clearTimeout(this._correctFxTimer);
+            this._correctFxTimer = setTimeout(function () {
+                btn.classList.remove('has-correct-fx');
+            }, duration + ringCount * 140);
+        },
+
+        playCorrectOptionFxFromAck: function (roundCorrect) {
+            var self = this;
+            var key = this.lastCorrectOptionKey;
+            if (!key) return;
+
+            if (typeof global.QuizBroadcastConfig === 'undefined') {
+                this.playCorrectOptionFx(key, 'normal');
+                return;
+            }
+
+            global.QuizBroadcastConfig.load().then(function (cfg) {
+                var isMilestone = global.QuizBroadcastConfig.isWinTier(roundCorrect, cfg);
+                self.playCorrectOptionFx(key, isMilestone ? 'milestone' : 'normal');
+            }).catch(function () {
+                self.playCorrectOptionFx(key, 'normal');
+            });
         },
 
         showRoundSummary: function (data) {
@@ -358,10 +427,9 @@
 
         renderCategoryLeaderboard: function (participants, categoryId) {
             var self = this;
-            var catName = this.getCategoryTitle(categoryId);
             this.renderLeaderboardHead('category');
             if (this.els.leaderboardTitle) {
-                this.els.leaderboardTitle.textContent = catName + ' · 排行榜';
+                this.els.leaderboardTitle.textContent = this.getCategoryLeaderboardTitle(categoryId);
             }
             if (this.els.leaderboardOnline && this.els.leaderboardOnline.parentElement) {
                 this.els.leaderboardOnline.parentElement.classList.add('ql-hidden');
@@ -506,11 +574,15 @@
             return cat ? (cat.displayName || cat.id) : id;
         },
 
+        getCategoryLeaderboardTitle: function (categoryId) {
+            return this.getCategoryTitle(categoryId) + '·排行榜';
+        },
+
         syncHeaderTitle: function () {
             if (!this.els.title) return;
             if (this.activeView === 'leaderboard') {
                 this.els.title.textContent = this.leaderboardMode === 'category'
-                    ? this.getCategoryTitle() + ' · 排行榜'
+                    ? this.getCategoryLeaderboardTitle(this.pendingCategoryId)
                     : '排行榜';
                 return;
             }
@@ -559,12 +631,31 @@
             this.els.progressFill.style.width = Math.round((done / total) * 100) + '%';
         },
 
+        resetProgressMarkers: function () {
+            if (this.els.progressMarkers) {
+                this.els.progressMarkers.innerHTML = '';
+            }
+        },
+
+        addProgressMark: function (questionIndex, correct) {
+            if (!this.els.progressMarkers) return;
+            var total = this.questionQueue.length || 1;
+            var left = ((questionIndex + 0.5) / total) * 100;
+            var mark = document.createElement('span');
+            mark.className = 'ql-progress-mark ' + (correct ? 'is-correct' : 'is-wrong');
+            mark.style.left = left + '%';
+            mark.textContent = correct ? '✓' : '✕';
+            this.els.progressMarkers.appendChild(mark);
+        },
+
         renderCurrentQuestion: function () {
             var q = this.questionQueue[this.currentIndex];
             if (!q) return;
 
             this.selectedChoice = null;
             this.submitted = false;
+            this.lastCorrectOptionKey = null;
+            this.clearCorrectOptionFx();
             var total = this.questionQueue.length;
 
             this.updateProgress(this.currentIndex);
@@ -625,6 +716,11 @@
 
             var choice = this.selectedChoice;
             var correct = choice === q.answer;
+            if (correct) {
+                this.lastCorrectOptionKey = q.answer;
+            } else {
+                this.lastCorrectOptionKey = null;
+            }
 
             this.els.options.querySelectorAll('[data-choice]').forEach(function (btn) {
                 var key = btn.getAttribute('data-choice');
@@ -644,6 +740,12 @@
                 this.els.feedback.textContent = correct ? '✓ 回答正确！' : '✗ 答错了，正确答案是 ' + q.answer;
             }
 
+            if (correct) {
+                this.playCorrectOptionFx(q.answer, 'normal');
+            } else {
+                this.clearCorrectOptionFx();
+            }
+
             if (this.els.nextBtn) {
                 this.els.nextBtn.classList.remove('ql-hidden');
                 var isLast = this.currentIndex >= this.questionQueue.length - 1;
@@ -652,6 +754,8 @@
             }
 
             this.updateProgress(this.currentIndex + 1);
+
+            this.addProgressMark(this.currentIndex, correct);
 
             var isLastQuestion = this.currentIndex >= this.questionQueue.length - 1;
             if (isLastQuestion) this.pendingRoundSummary = true;

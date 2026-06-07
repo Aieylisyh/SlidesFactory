@@ -116,6 +116,7 @@
             leaderboardBody: root.querySelector('[data-leaderboard-body]'),
             leaderboardOnline: root.querySelector('[data-leaderboard-online]'),
             progressFill: root.querySelector('[data-progress-fill]'),
+            progressMarkers: root.querySelector('[data-progress-markers]'),
             questionText: root.querySelector('[data-question-text]'),
             options: root.querySelector('[data-options]'),
             confirmBtn: root.querySelector('[data-confirm-btn]'),

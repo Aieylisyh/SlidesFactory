@@ -186,9 +186,22 @@
         this._timer = setTimeout(advanceOnce, durationSec * 1000 + 400);
     };
 
+    function getWinTiers(config) {
+        var cfg = config || cachedConfig || normalizeConfig(null);
+        return (cfg.streaks || [])
+            .map(function (item) { return Number(item.streak); })
+            .filter(function (n) { return n > 0; });
+    }
+
+    function isWinTier(wins, config) {
+        return getWinTiers(config).indexOf(Number(wins)) !== -1;
+    }
+
     global.QuizBroadcast = QuizBroadcast;
     global.QuizBroadcastConfig = {
         load: loadConfig,
-        formatWin: formatWinBroadcastMessage
+        formatWin: formatWinBroadcastMessage,
+        getWinTiers: getWinTiers,
+        isWinTier: isWinTier
     };
 })(typeof window !== 'undefined' ? window : global);

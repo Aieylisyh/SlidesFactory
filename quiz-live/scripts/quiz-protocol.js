@@ -199,6 +199,17 @@
         return { type: 'request_state' };
     }
 
+    function makeRequestAdminSummary() {
+        return { type: 'request_admin_summary' };
+    }
+
+    function makeRequestParticipantsDetail(clientIds) {
+        return {
+            type: 'request_participants_detail',
+            clientIds: Array.isArray(clientIds) ? clientIds.slice(0, 20) : []
+        };
+    }
+
     function getRoomFromUrl() {
         try {
             var params = new URLSearchParams(global.location.search);
@@ -276,6 +287,8 @@
         makeRoundStart: makeRoundStart,
         makeAdminAction: makeAdminAction,
         makeRequestState: makeRequestState,
+        makeRequestAdminSummary: makeRequestAdminSummary,
+        makeRequestParticipantsDetail: makeRequestParticipantsDetail,
         getRoomFromUrl: getRoomFromUrl,
         resolveRoomCode: resolveRoomCode,
         buildAnswerUrl: buildAnswerUrl

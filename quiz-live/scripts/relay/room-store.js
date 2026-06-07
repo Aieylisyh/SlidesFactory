@@ -209,6 +209,44 @@ function buildState(room) {
     };
 }
 
+function participantToAdminDetail(p) {
+    var json = participantToJson(p);
+    json.online = !!p.online;
+    return json;
+}
+
+function buildAdminSummary(room) {
+    var roster = [];
+    var onlineCount = 0;
+    room.participants.forEach(function (p) {
+        if (p.online) onlineCount += 1;
+        roster.push({
+            clientId: p.clientId,
+            id: p.id,
+            name: p.name || ''
+        });
+    });
+    roster.sort(function (a, b) {
+        return parseInt(a.id, 10) - parseInt(b.id, 10);
+    });
+    return {
+        type: 'admin_summary',
+        room: room.id,
+        totalCount: roster.length,
+        onlineCount: onlineCount,
+        roster: roster,
+        recentBroadcasts: (room.recentBroadcasts || []).slice(0, 3)
+    };
+}
+
+function getParticipantsDetail(room, clientIds) {
+    if (!Array.isArray(clientIds)) return [];
+    return clientIds.map(function (id) {
+        var p = room.participants.get(id);
+        return p ? participantToAdminDetail(p) : null;
+    }).filter(Boolean);
+}
+
 module.exports = {
     rooms: rooms,
     createRoom: createRoom,
@@ -220,5 +258,8 @@ module.exports = {
     resetRoundBroadcastState: resetRoundBroadcastState,
     applyRegisterPayload: applyRegisterPayload,
     sanitizeProfile: sanitizeProfile,
-    buildState: buildState
+    buildState: buildState,
+    participantToAdminDetail: participantToAdminDetail,
+    buildAdminSummary: buildAdminSummary,
+    getParticipantsDetail: getParticipantsDetail
 };
