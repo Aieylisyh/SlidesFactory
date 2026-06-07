@@ -1292,6 +1292,55 @@ html.ql-answer-page.ql-answer-landscape .ql-app {
     line-height: 1.5;
 }
 
+/* --- Internal version notice (post-login) --- */
+.ql-internal-notice {
+    position: fixed;
+    inset: 0;
+    z-index: 2200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(6, 6, 10, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.ql-internal-notice.is-visible {
+    opacity: 1;
+}
+
+.ql-internal-notice-card {
+    width: min(100%, 320px);
+    padding: 28px 24px 22px;
+    border-radius: var(--ql-radius);
+    border: 1px solid rgba(244, 140, 72, 0.35);
+    background: var(--ql-panel);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+    text-align: center;
+}
+
+.ql-internal-notice-title {
+    margin: 0 0 12px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--ql-text);
+}
+
+.ql-internal-notice-msg {
+    margin: 0 0 22px;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ql-warn);
+    font-weight: 600;
+}
+
+.ql-internal-notice-card .ql-btn {
+    width: 100%;
+}
+
 /* --- Quiz progress bar --- */
 .ql-quiz-progress {
     margin-bottom: 18px;

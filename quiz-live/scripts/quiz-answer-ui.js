@@ -67,6 +67,11 @@
                     self.closeRoundSummary();
                 });
             }
+            if (this.els.internalNoticeClose) {
+                this.els.internalNoticeClose.addEventListener('click', function () {
+                    self.closeInternalVersionNotice();
+                });
+            }
         },
 
         loadRegisterUi: function () {
@@ -429,6 +434,38 @@
             this.roundExpGained = 0;
             this.pendingRoundSummary = false;
             this.showView('category');
+        },
+
+        shouldShowInternalVersionNotice: function () {
+            if (this._internalNoticeShown) return false;
+            var host = (global.location && global.location.hostname) || '';
+            return host === 'sska.site' || host === 'www.sska.site';
+        },
+
+        maybeShowInternalVersionNotice: function () {
+            if (!this.shouldShowInternalVersionNotice()) return;
+            this._internalNoticeShown = true;
+            this.showInternalVersionNotice();
+        },
+
+        showInternalVersionNotice: function () {
+            var el = this.els.internalNotice;
+            if (!el) return;
+            el.classList.remove('ql-hidden');
+            el.setAttribute('aria-hidden', 'false');
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    el.classList.add('is-visible');
+                });
+            });
+        },
+
+        closeInternalVersionNotice: function () {
+            var el = this.els.internalNotice;
+            if (!el) return;
+            el.classList.remove('is-visible');
+            el.classList.add('ql-hidden');
+            el.setAttribute('aria-hidden', 'true');
         },
 
         onRegister: function () {

@@ -97,6 +97,7 @@
                 if (this.activeView === 'register') {
                     this.renderCategories();
                     this.showView('category');
+                    this.maybeShowInternalVersionNotice();
                 }
                 this.updateContinueUi();
                 this.tryRedeemVipShare();
@@ -142,8 +143,10 @@
                     this.els.participantBadge.textContent = (this.nickname || ('编号 ' + msg.participantId)) + levelLabel;
                 }
                 this.renderCategories();
-                if (this.activeView === 'register') {
+                var fromRegister = this.activeView === 'register';
+                if (fromRegister) {
                     this.showView('category');
+                    this.maybeShowInternalVersionNotice();
                 }
                 this.updateContinueUi();
                 this.tryRedeemVipShare();

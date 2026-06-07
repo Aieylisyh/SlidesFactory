@@ -134,6 +134,8 @@
             roundTotalExp: root.querySelector('[data-round-total-exp]'),
             roundCategoryAccuracy: root.querySelector('[data-round-category-accuracy]'),
             roundSummaryClose: root.querySelector('[data-round-summary-close]'),
+            internalNotice: root.querySelector('[data-internal-notice]'),
+            internalNoticeClose: root.querySelector('[data-internal-notice-close]'),
             toast: root.querySelector('[data-toast]')
         };
 
