@@ -6,7 +6,7 @@
   "navFile": "deck-nav-summerschool.json",
   "generatedAt": "2026-06-05T06:32:00.189Z",
   "linear": true,
-  "totalSlides": 9,
+  "totalSlides": 10,
   "chapters": [],
   "slides": [
     {
@@ -166,6 +166,23 @@
       "focusTargets": [],
       "title": "小贴士",
       "shareSlug": "tips"
+    },
+    {
+      "index": 9,
+      "h": 9,
+      "v": 0,
+      "id": "resource-links",
+      "className": "content-slide slide-ss-tips slide-ss-resource-links",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "资源链接",
+      "shareSlug": "resource-links"
     }
   ]
 }

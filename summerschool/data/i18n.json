@@ -300,6 +300,56 @@
       "ja": "電子書籍ダウンロード",
       "en": "Download e-books"
     },
+    "links.title": {
+      "zh": "资源链接",
+      "ja": "リソースリンク",
+      "en": "Resource links"
+    },
+    "links.meeting": {
+      "zh": "课程固定会议码：<strong>#腾讯会议：653-7597-9555</strong>",
+      "ja": "固定ミーティング ID：<strong>#Tencent Meeting：653-7597-9555</strong>",
+      "en": "Fixed meeting ID: <strong>#Tencent Meeting: 653-7597-9555</strong>"
+    },
+    "links.replayLabel": {
+      "zh": "课程回放查看链接：",
+      "ja": "授業録画リンク：",
+      "en": "Session replay:"
+    },
+    "links.replayUrl": {
+      "zh": "https://yk3.gokuai.com/file/j4q0cwohv80n1onrtqck0skaaesn1z1v",
+      "ja": "https://yk3.gokuai.com/file/j4q0cwohv80n1onrtqck0skaaesn1z1v",
+      "en": "https://yk3.gokuai.com/file/j4q0cwohv80n1onrtqck0skaaesn1z1v"
+    },
+    "links.col1.title": {
+      "zh": "教授课件分享",
+      "ja": "教授スライド共有",
+      "en": "Professor slides"
+    },
+    "links.col1.aria": {
+      "zh": "教授课件分享",
+      "ja": "教授スライド共有",
+      "en": "Open professor slides"
+    },
+    "links.col2.title": {
+      "zh": "USC x 游研社夏校课前作业",
+      "ja": "USC × 游研社 夏校事前課題",
+      "en": "USC × GameResearch pre-work"
+    },
+    "links.col2.aria": {
+      "zh": "USC x 游研社夏校课前作业",
+      "ja": "USC × 游研社 夏校事前課題",
+      "en": "Open pre-work sheet"
+    },
+    "links.col3.title": {
+      "zh": "课堂笔记和作业备忘",
+      "ja": "授業ノートと課題メモ",
+      "en": "Class notes & homework memo"
+    },
+    "links.col3.aria": {
+      "zh": "课堂笔记和作业备忘",
+      "ja": "授業ノートと課題メモ",
+      "en": "Open class notes doc"
+    },
     "schedule.ui.modal.aria": {
       "zh": "课程详情",
       "ja": "授業詳細",

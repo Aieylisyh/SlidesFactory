@@ -35,6 +35,10 @@
     "tips": {
       "slideId": "tips",
       "title": "小贴士"
+    },
+    "resource-links": {
+      "slideId": "resource-links",
+      "title": "资源链接"
     }
   }
 }

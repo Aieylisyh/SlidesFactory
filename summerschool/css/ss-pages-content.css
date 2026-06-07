@@ -520,3 +520,66 @@ html.ss-deck-light .reveal .slide-ss-tips .ss-tips-book-icon {
     height: 1.15em;
 }
 
+/* ── 资源链接页 · 顶栏 + 图标入口 ── */
+html.ss-deck-light .reveal .slide-ss-resource-links .ss-links-header {
+    width: 94%;
+    max-width: 100%;
+    margin: 0.35em auto 0.55em;
+    align-self: center;
+    font-size: var(--ss-text-floor);
+    line-height: 1.65;
+    color: var(--ss-gray-700);
+}
+
+html.ss-deck-light .reveal .slide-ss-resource-links .ss-links-meeting {
+    margin: 0 0 0.35em;
+}
+
+html.ss-deck-light .reveal .slide-ss-resource-links .ss-links-meeting strong {
+    color: var(--ss-gray-900);
+    font-weight: 700;
+}
+
+html.ss-deck-light .reveal .slide-ss-resource-links .ss-links-replay {
+    margin: 0;
+    word-break: break-all;
+}
+
+html.ss-deck-light .reveal .slide-ss-resource-links .ss-links-replay-url {
+    color: var(--ss-orange);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+html.ss-deck-light .reveal .slide-ss-resource-links .ss-links-replay-url:hover {
+    color: var(--ss-orange-dark);
+    text-decoration: underline;
+}
+
+html.ss-deck-light .reveal .slide-ss-resource-links .ss-tips-block-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+html.ss-deck-light .reveal .slide-ss-resource-links .ss-tips-block-icon h3 {
+    width: 100%;
+    margin-bottom: 0.85em;
+    line-height: 1.45;
+}
+
+html.ss-deck-light .reveal .slide-ss-resource-links .ss-tips-icon-entry {
+    margin: 0;
+}
+
+html.ss-deck-light .reveal .slide-ss-resource-links .ss-tips-link-icon {
+    padding: 0.4em;
+}
+
+html.ss-deck-light .reveal .slide-ss-resource-links .ss-tips-resource-icon {
+    display: block;
+    width: 2em;
+    height: 2em;
+}
+
