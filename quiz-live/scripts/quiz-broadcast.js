@@ -91,6 +91,7 @@
         this._enqueueChain = Promise.resolve();
         this._timer = null;
         this._onAnimEnd = null;
+        if (this.root) this.showIdle();
         loadConfig();
     }
 
@@ -132,13 +133,16 @@
     };
 
     QuizBroadcast.prototype.showIdle = function () {
-        if (!this.track) return;
+        if (!this.root) return;
         this.clearPlaybackTimer();
         this.root.classList.remove('is-active');
+        this.root.classList.add('is-idle');
         this.root.dataset.kind = '';
-        this.track.textContent = '等待战场广播…';
-        this.track.className = 'ql-broadcast-track ql-broadcast-idle';
-        this.track.style.animationDuration = '';
+        if (this.track) {
+            this.track.textContent = '';
+            this.track.className = 'ql-broadcast-track ql-broadcast-idle';
+            this.track.style.animationDuration = '';
+        }
     };
 
     QuizBroadcast.prototype.advanceQueue = function () {
@@ -159,6 +163,7 @@
         var kind = item.kind || 'default';
         var durationSec = Math.max(3.5, item.text.length * 0.1);
 
+        this.root.classList.remove('is-idle');
         this.root.classList.add('is-active');
         this.root.dataset.kind = kind;
         this.track.textContent = item.text;
