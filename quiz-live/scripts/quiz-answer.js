@@ -84,25 +84,35 @@
         this.participants = [];
         this.roundExpGained = 0;
         this.pendingRoundSummary = false;
+        this.pendingCategoryId = null;
+        this.pendingQuestions = null;
+        this.leaderboardMode = 'global';
+        this.leaderboardReturnView = 'category';
 
         this.views = {
             register: root.querySelector('[data-view="register"]'),
             category: root.querySelector('[data-view="category"]'),
+            prepare: root.querySelector('[data-view="prepare"]'),
             leaderboard: root.querySelector('[data-view="leaderboard"]'),
             quiz: root.querySelector('[data-view="quiz"]')
         };
 
         this.els = {
-            statusDot: root.querySelector('[data-status-dot]'),
-            statusText: root.querySelector('[data-status-text]'),
+            connIcon: root.querySelector('[data-conn-icon]'),
             participantBadge: root.querySelector('[data-participant-id]'),
             title: root.querySelector('[data-quiz-title]'),
             form: root.querySelector('[data-register-form]'),
             continueBtn: root.querySelector('[data-continue-btn]'),
             reconnectBanner: root.querySelector('[data-reconnect-banner]'),
             categoryGrid: root.querySelector('[data-category-grid]'),
+            prepareCategory: root.querySelector('[data-prepare-category]'),
+            prepareStart: root.querySelector('[data-prepare-start]'),
+            prepareBack: root.querySelector('[data-prepare-back]'),
+            categoryLeaderboardOpen: root.querySelector('[data-category-leaderboard-open]'),
             leaderboardOpen: root.querySelector('[data-leaderboard-open]'),
             leaderboardBack: root.querySelector('[data-leaderboard-back]'),
+            leaderboardTitle: root.querySelector('[data-leaderboard-title]'),
+            leaderboardHead: root.querySelector('[data-leaderboard-head]'),
             leaderboardBody: root.querySelector('[data-leaderboard-body]'),
             leaderboardOnline: root.querySelector('[data-leaderboard-online]'),
             progressFill: root.querySelector('[data-progress-fill]'),
@@ -121,7 +131,8 @@
             roundExpGained: root.querySelector('[data-round-exp-gained]'),
             roundTotalExp: root.querySelector('[data-round-total-exp]'),
             roundCategoryAccuracy: root.querySelector('[data-round-category-accuracy]'),
-            roundSummaryClose: root.querySelector('[data-round-summary-close]')
+            roundSummaryClose: root.querySelector('[data-round-summary-close]'),
+            toast: root.querySelector('[data-toast]')
         };
 
         this.broadcast = new global.QuizBroadcast(root.querySelector('[data-broadcast]'));

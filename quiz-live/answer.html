@@ -22,13 +22,19 @@
 
     <div class="ql-app" data-quiz-answer>
 
-        <div class="ql-broadcast" data-broadcast>
+        <div class="ql-broadcast is-idle" data-broadcast>
 
             <span class="ql-broadcast-label">广播</span>
 
             <div class="ql-broadcast-viewport">
 
-                <span class="ql-broadcast-track ql-broadcast-idle" data-broadcast-track>等待战场广播…</span>
+                <div class="ql-broadcast-idle-fx" aria-hidden="true">
+                    <span class="ql-broadcast-echo"></span>
+                    <span class="ql-broadcast-echo"></span>
+                    <span class="ql-broadcast-echo"></span>
+                </div>
+
+                <span class="ql-broadcast-track ql-broadcast-idle" data-broadcast-track></span>
 
             </div>
 
@@ -38,17 +44,29 @@
 
         <header class="ql-header">
 
-            <span class="ql-badge" data-participant-id>未登记</span>
+            <div class="ql-user-bar">
 
-            <h1 data-quiz-title>趣味常识挑战</h1>
+                <span class="ql-badge" data-participant-id>未登记</span>
 
-            <p>
+                <h1 data-quiz-title>趣味常识挑战</h1>
 
-                <span class="ql-status-dot" data-status-dot></span>
+                <span class="ql-conn-icon is-connecting" data-conn-icon role="status" aria-label="连接中">
 
-                <span data-status-text>连接中…</span>
+                    <svg class="ql-conn-icon-svg" viewBox="0 0 20 16" width="20" height="16" aria-hidden="true">
 
-            </p>
+                        <rect class="ql-conn-bar ql-conn-bar--1" x="1" y="11" width="3" height="4" rx="0.5"></rect>
+
+                        <rect class="ql-conn-bar ql-conn-bar--2" x="6" y="8" width="3" height="7" rx="0.5"></rect>
+
+                        <rect class="ql-conn-bar ql-conn-bar--3" x="11" y="5" width="3" height="10" rx="0.5"></rect>
+
+                        <rect class="ql-conn-bar ql-conn-bar--4" x="16" y="2" width="3" height="13" rx="0.5"></rect>
+
+                    </svg>
+
+                </span>
+
+            </div>
 
         </header>
 
@@ -78,13 +96,35 @@
 
             <!-- 2 选择类别 -->
 
-            <section class="ql-panel ql-hidden" data-view="category">
+            <div class="ql-category-screen ql-hidden" data-view="category">
 
-                <h2 style="margin:0 0 20px;font-size:1.1rem;">选择挑战类别</h2>
+                <section class="ql-panel ql-category-panel">
 
-                <div class="ql-category-grid" data-category-grid></div>
+                    <h2 class="ql-category-heading">选择挑战类别</h2>
 
-                <button type="button" class="ql-btn ql-category-leaderboard-btn" data-leaderboard-open style="margin-top:16px;">排行榜</button>
+                    <div class="ql-category-grid" data-category-grid></div>
+
+                </section>
+
+                <button type="button" class="ql-btn ql-btn--ghost ql-category-leaderboard-btn" data-leaderboard-open>总排行榜</button>
+
+            </div>
+
+
+
+            <!-- 2a 挑战准备 -->
+
+            <section class="ql-panel ql-hidden" data-view="prepare">
+
+                <h2 class="ql-prepare-category" data-prepare-category></h2>
+
+                <p class="ql-prepare-msg">即将开始连续10题挑战，准备好了吗？</p>
+
+                <button type="button" class="ql-btn ql-btn--ghost ql-prepare-leaderboard-btn" data-category-leaderboard-open>排行榜</button>
+
+                <button type="button" class="ql-btn" data-prepare-start>开始挑战</button>
+
+                <button type="button" class="ql-btn ql-btn--ghost" data-prepare-back style="margin-top:10px;">返回选题</button>
 
             </section>
 
@@ -94,7 +134,7 @@
 
             <section class="ql-panel ql-hidden" data-view="leaderboard">
 
-                <h2 style="margin:0 0 12px;font-size:1.1rem;">排行榜</h2>
+                <h2 class="ql-leaderboard-heading" data-leaderboard-title>排行榜</h2>
 
                 <p class="ql-leaderboard-meta">在线 <strong data-leaderboard-online>0</strong> 人</p>
 
@@ -102,7 +142,7 @@
 
                     <table class="ql-score-table ql-leaderboard-table">
 
-                        <thead>
+                        <thead data-leaderboard-head>
 
                             <tr>
 
@@ -139,22 +179,24 @@
 
 
             <!-- 3 答题 -->
-            <section class="ql-panel ql-hidden" data-view="quiz">
-                <div class="ql-quiz-progress">
-                    <div class="ql-quiz-progress-head">
-                        <span class="ql-quiz-progress-label">答题进度</span>
+            <section class="ql-panel ql-quiz-panel ql-hidden" data-view="quiz">
+                <div class="ql-quiz-top">
+                    <div class="ql-quiz-progress">
+                        <div class="ql-quiz-progress-head">
+                            <span class="ql-quiz-progress-label">答题进度</span>
+                        </div>
+                        <div class="ql-quiz-progress-track">
+                            <div class="ql-quiz-progress-fill" data-progress-fill style="width:0%"></div>
+                        </div>
                     </div>
-                    <div class="ql-quiz-progress-track">
-                        <div class="ql-quiz-progress-fill" data-progress-fill style="width:0%"></div>
-                    </div>
+                    <p class="ql-question-text" data-question-text></p>
+                    <div class="ql-feedback ql-hidden" data-feedback></div>
                 </div>
-                <p class="ql-question-text" data-question-text></p>
-
-                <div class="ql-options" data-options></div>
-                <button type="button" class="ql-btn" data-confirm-btn disabled style="margin-top:16px;">确定</button>
-                <div class="ql-feedback ql-hidden" data-feedback></div>
-                <button type="button" class="ql-btn ql-btn--ghost ql-hidden" data-next-btn style="margin-top:10px;">下一题</button>
-
+                <div class="ql-quiz-bottom">
+                    <div class="ql-options" data-options></div>
+                    <button type="button" class="ql-btn" data-confirm-btn disabled>确定</button>
+                    <button type="button" class="ql-btn ql-btn--ghost ql-hidden" data-next-btn>下一题</button>
+                </div>
             </section>
 
         </main>
@@ -186,6 +228,8 @@
             </div>
         </div>
 
+        <div class="ql-toast ql-hidden" data-toast role="status" aria-live="polite"></div>
+
     </div>
 
 
@@ -199,9 +243,9 @@
     <script src="scripts/quiz-ws-client.js"></script>
 
     <script src="scripts/quiz-answer-questions.js?v=1"></script>
-    <script src="scripts/quiz-answer-ws.js?v=4"></script>
-    <script src="scripts/quiz-answer-ui.js?v=4"></script>
-    <script src="scripts/quiz-answer.js?v=5"></script>
+    <script src="scripts/quiz-answer-ws.js?v=7"></script>
+    <script src="scripts/quiz-answer-ui.js?v=7"></script>
+    <script src="scripts/quiz-answer.js?v=7"></script>
 
 </body>
 

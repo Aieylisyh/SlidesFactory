@@ -47,6 +47,21 @@
                     self.onLeaderboardBack();
                 });
             }
+            if (this.els.prepareStart) {
+                this.els.prepareStart.addEventListener('click', function () {
+                    self.onPrepareStart();
+                });
+            }
+            if (this.els.prepareBack) {
+                this.els.prepareBack.addEventListener('click', function () {
+                    self.onPrepareBack();
+                });
+            }
+            if (this.els.categoryLeaderboardOpen) {
+                this.els.categoryLeaderboardOpen.addEventListener('click', function () {
+                    self.onOpenCategoryLeaderboard();
+                });
+            }
             if (this.els.roundSummaryClose) {
                 this.els.roundSummaryClose.addEventListener('click', function () {
                     self.closeRoundSummary();
@@ -153,6 +168,32 @@
                 if (pctEl) pctEl.textContent = '0%';
                 throw err;
             });
+        },
+
+        showCategoryPrepare: function (categoryId, questions) {
+            if (!questions || !questions.length) return;
+            this.pendingCategoryId = categoryId;
+            this.pendingQuestions = questions;
+            var cat = this.questionCategories.find(function (c) { return c.id === categoryId; });
+            if (this.els.prepareCategory) {
+                this.els.prepareCategory.textContent = cat ? (cat.displayName || cat.id) : categoryId;
+            }
+            this.showView('prepare');
+        },
+
+        onPrepareStart: function () {
+            if (!this.pendingCategoryId || !this.pendingQuestions) return;
+            var categoryId = this.pendingCategoryId;
+            var questions = this.pendingQuestions;
+            this.pendingCategoryId = null;
+            this.pendingQuestions = null;
+            this.beginCategoryQuiz(categoryId, questions);
+        },
+
+        onPrepareBack: function () {
+            this.pendingCategoryId = null;
+            this.pendingQuestions = null;
+            this.showView('category');
         },
 
         beginCategoryQuiz: function (categoryId, questions) {
@@ -264,7 +305,35 @@
             this.ws.send(global.QuizProtocol.makeRegister(this.clientId, profile));
         },
 
+        renderLeaderboardHead: function (mode) {
+            if (!this.els.leaderboardHead) return;
+            if (mode === 'category') {
+                this.els.leaderboardHead.innerHTML =
+                    '<tr><th>编号</th><th>昵称</th><th>答对</th><th>正确率</th></tr>';
+                return;
+            }
+            this.els.leaderboardHead.innerHTML =
+                '<tr><th>编号</th><th>昵称</th><th>得分</th><th>当前连胜</th><th>最高连胜</th><th>状态</th></tr>';
+        },
+
+        getParticipantCategoryStats: function (participant, categoryId) {
+            var stats = participant.player &&
+                participant.player.category_stats &&
+                participant.player.category_stats[categoryId];
+            var answered = (stats && stats.answered) || 0;
+            var correct = (stats && stats.correct) || 0;
+            var accuracy = answered ? Math.round((correct / answered) * 100) : 0;
+            return { answered: answered, correct: correct, accuracy: accuracy };
+        },
+
         renderLeaderboard: function (participants, onlineCount) {
+            this.renderLeaderboardHead('global');
+            if (this.els.leaderboardTitle) {
+                this.els.leaderboardTitle.textContent = '排行榜';
+            }
+            if (this.els.leaderboardOnline && this.els.leaderboardOnline.parentElement) {
+                this.els.leaderboardOnline.parentElement.classList.remove('ql-hidden');
+            }
             if (this.els.leaderboardOnline) {
                 var online = onlineCount;
                 if (online == null) {
@@ -287,7 +356,43 @@
             }).join('') || '<tr><td colspan="6">暂无参与者</td></tr>';
         },
 
+        renderCategoryLeaderboard: function (participants, categoryId) {
+            var self = this;
+            var catName = this.getCategoryTitle(categoryId);
+            this.renderLeaderboardHead('category');
+            if (this.els.leaderboardTitle) {
+                this.els.leaderboardTitle.textContent = catName + ' · 排行榜';
+            }
+            if (this.els.leaderboardOnline && this.els.leaderboardOnline.parentElement) {
+                this.els.leaderboardOnline.parentElement.classList.add('ql-hidden');
+            }
+            if (!this.els.leaderboardBody) return;
+            var rows = (participants || []).slice().sort(function (a, b) {
+                var sa = self.getParticipantCategoryStats(a, categoryId);
+                var sb = self.getParticipantCategoryStats(b, categoryId);
+                return sb.correct - sa.correct || sb.accuracy - sa.accuracy;
+            });
+            this.els.leaderboardBody.innerHTML = rows.map(function (p) {
+                var s = self.getParticipantCategoryStats(p, categoryId);
+                return '<tr>' +
+                    '<td>' + p.id + '</td>' +
+                    '<td>' + (p.name || '—') + '</td>' +
+                    '<td>' + s.correct + '</td>' +
+                    '<td>' + (s.answered ? s.accuracy + '%' : '—') + '</td></tr>';
+            }).join('') || '<tr><td colspan="4">暂无参与者</td></tr>';
+        },
+
+        refreshLeaderboardView: function (participants, onlineCount) {
+            if (this.leaderboardMode === 'category' && this.pendingCategoryId) {
+                this.renderCategoryLeaderboard(participants, this.pendingCategoryId);
+                return;
+            }
+            this.renderLeaderboard(participants, onlineCount);
+        },
+
         onOpenLeaderboard: function () {
+            this.leaderboardMode = 'global';
+            this.leaderboardReturnView = 'category';
             this.showView('leaderboard');
             this.ensureRegistered();
             this.renderLeaderboard(this.participants);
@@ -296,16 +401,60 @@
             }
         },
 
+        onOpenCategoryLeaderboard: function () {
+            if (!this.pendingCategoryId) return;
+            this.leaderboardMode = 'category';
+            this.leaderboardReturnView = 'prepare';
+            this.showView('leaderboard');
+            this.renderCategoryLeaderboard(this.participants, this.pendingCategoryId);
+            if (this.ws) {
+                this.ws.send(global.QuizProtocol.makeRequestState());
+            }
+        },
+
         onLeaderboardBack: function () {
-            this.showView('category');
+            this.showView(this.leaderboardReturnView || 'category');
         },
 
         getCategoryMeta: function (cat) {
             return {
                 short: cat.displayName || cat.id,
-                icon: '📚',
                 theme: cat.id || 'default'
             };
+        },
+
+        findNextLockedCategory: function (level) {
+            var locked = (this.questionCategories || []).filter(function (cat) {
+                return (cat.required_level || 1) > level;
+            });
+            if (!locked.length) return null;
+            locked.sort(function (a, b) {
+                return (a.required_level || 1) - (b.required_level || 1);
+            });
+            return locked[0];
+        },
+
+        buildLockedCategoryButton: function (cat) {
+            var meta = this.getCategoryMeta(cat);
+            var reqLevel = cat.required_level || 1;
+            return '<button type="button" class="ql-category-btn ql-category-btn--locked ql-category-btn--' +
+                (meta.theme || 'default') + '" data-category-locked="' + cat.id + '">' +
+                '<span class="ql-category-name">' + meta.short + '</span>' +
+                '<span class="ql-category-lock-hint">需要等级 ' + reqLevel + '</span></button>';
+        },
+
+        showToast: function (message) {
+            var toast = this.els.toast;
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.remove('ql-hidden');
+            toast.classList.add('is-visible');
+            clearTimeout(this._toastTimer);
+            var self = this;
+            this._toastTimer = setTimeout(function () {
+                toast.classList.remove('is-visible');
+                toast.classList.add('ql-hidden');
+            }, 2200);
         },
 
         renderCategories: function () {
@@ -313,7 +462,6 @@
 
             var self = this;
             var html = '';
-            var drawCount = global.QuizAnswerCore.QUIZ_DRAW_COUNT;
             var level = this.playerLevel || 3;
 
             this.questionCategories
@@ -324,13 +472,13 @@
                     var meta = self.getCategoryMeta(cat);
                     var theme = meta.theme || 'default';
                     html += '<button type="button" class="ql-category-btn ql-category-btn--' + theme + '" data-category="' + cat.id + '">' +
-                        '<span class="ql-category-icon-wrap">' +
-                        '<span class="ql-category-icon" aria-hidden="true">' + meta.icon + '</span></span>' +
-                        '<span class="ql-category-body">' +
-                        '<span class="ql-category-name">' + meta.short + '</span>' +
-                        '<span class="ql-category-count">随机 ' + drawCount + ' 题 · Lv.' + (cat.required_level || 1) + '+</span>' +
-                        '</span></button>';
+                        '<span class="ql-category-name">' + meta.short + '</span></button>';
                 });
+
+            var nextLocked = this.findNextLockedCategory(level);
+            if (nextLocked) {
+                html += this.buildLockedCategoryButton(nextLocked);
+            }
 
             if (!html) {
                 html = '<p class="ql-empty-hint">当前等级暂无可用题库，请稍后再试。</p>';
@@ -343,18 +491,31 @@
                     self.startCategory(btn.getAttribute('data-category'));
                 });
             });
+
+            this.els.categoryGrid.querySelectorAll('[data-category-locked]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    self.showToast('当前等级不够，无法解锁');
+                });
+            });
         },
 
-        getCategoryTitle: function () {
-            if (!this.currentCategory) return this.deckTitle;
-            var cat = this.questionCategories.find(function (c) { return c.id === this.currentCategory; }, this);
-            return cat ? (cat.displayName || cat.id) : this.currentCategory;
+        getCategoryTitle: function (categoryId) {
+            var id = categoryId || this.currentCategory || this.pendingCategoryId;
+            if (!id) return this.deckTitle;
+            var cat = this.questionCategories.find(function (c) { return c.id === id; }, this);
+            return cat ? (cat.displayName || cat.id) : id;
         },
 
         syncHeaderTitle: function () {
             if (!this.els.title) return;
             if (this.activeView === 'leaderboard') {
-                this.els.title.textContent = '排行榜';
+                this.els.title.textContent = this.leaderboardMode === 'category'
+                    ? this.getCategoryTitle() + ' · 排行榜'
+                    : '排行榜';
+                return;
+            }
+            if (this.activeView === 'prepare' && this.pendingCategoryId) {
+                this.els.title.textContent = this.getCategoryTitle();
                 return;
             }
             var inQuiz = this.activeView === 'quiz' && this.currentCategory;
@@ -377,14 +538,14 @@
 
             var cached = global.QuizAnswerQuestions.getCachedBank(categoryId);
             if (cached && cached.length) {
-                this.beginCategoryQuiz(categoryId, cached);
+                this.showCategoryPrepare(categoryId, cached);
                 return;
             }
 
             var loadPromise = global.QuizAnswerQuestions.fetchBank(categoryId);
             this.waitForBankLoad(loadPromise)
                 .then(function (questions) {
-                    self.beginCategoryQuiz(categoryId, questions);
+                    self.showCategoryPrepare(categoryId, questions);
                 })
                 .catch(function () {
                     alert('题库加载失败，请稍后重试');
@@ -523,6 +684,8 @@
         onFloatBack: function () {
             if (!confirm('确定返回重选类别？当前答题进度将丢失。')) return;
             this.currentCategory = null;
+            this.pendingCategoryId = null;
+            this.pendingQuestions = null;
             this.questionQueue = [];
             this.currentIndex = 0;
             this.showView('category');
