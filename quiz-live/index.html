@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AI 安全趣味抢答 · 入口</title>
+    <title>趣味常识挑战 · 入口（封存）</title>
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css/quiz-live.css">
 </head>
 <body>
     <div class="ql-main" style="max-width:640px;margin:0 auto;">
+        <div class="ql-panel" style="margin-bottom:12px;border-color:rgba(244,140,72,0.45);">
+            <p style="margin:0;font-size:0.88rem;line-height:1.55;color:var(--ql-warn);">
+                <strong>模块已封存（2026-06-07）</strong> — 本 Monorepo 内 quiz-live 停止新功能开发，代码保留供运维。
+                活跃产品线：<code>D:\SFK\SuperTool\QuizOnlineGame</code>。
+                详见 <a href="ARCHIVED.md" style="color:var(--ql-accent-light);">ARCHIVED.md</a>。
+            </p>
+        </div>
         <div class="ql-panel">
-            <h1 style="margin:0 0 8px;">AI 安全趣味抢答</h1>
+            <h1 style="margin:0 0 8px;">趣味常识挑战</h1>
             <p style="margin:0 0 20px;color:var(--ql-muted);">
-                独立暖场答题系统 · 扫码登记 · 大屏同步 · 进度格计分
+                暖场答题 · 扫码登记 · 大屏同步 · 分类题库
             </p>
             <ul style="line-height:2;padding-left:1.2em;color:var(--ql-muted);">
-                <li><a href="admin.html" style="color:var(--ql-accent-light);">主持控台</a> — 生成房间码与二维码</li>
+                <li><a href="admin.html" style="color:var(--ql-accent-light);">主持控台</a> — 房间码、二维码、用户管理</li>
                 <li><a href="screen.html?room=DEMO" style="color:var(--ql-accent-light);">大屏展示</a> — 需与控台相同 room</li>
                 <li><a href="answer.html?room=DEMO" style="color:var(--ql-accent-light);">观众答题</a> — 手机扫码入口</li>
             </ul>
             <p style="margin-top:20px;font-size:0.85rem;color:var(--ql-muted);">
-                启动方式见 <code>quiz-live/start-quiz-server.bat</code><br>
-                观众登记表字段见 <code>data/register-config.json</code>（详见 <code>docs/guides/QUIZ_LIVE_GUIDE.md</code>）
+                本地启动：<code>quiz-live/start-quiz-server.bat</code><br>
+                文档：<code>docs/guides/QUIZ_LIVE_GUIDE.md</code> · <code>quiz-live/ARCHIVED.md</code>
             </p>
         </div>
     </div>

@@ -22,16 +22,20 @@
 | 脚本 | `../shared/scripts/*` + `summerschool/scripts/*` |
 | 数据 | `summerschool/data/` |
 
-## 暖场抢答 — quiz-live
+## 暖场抢答 — quiz-live（已封存）
+
+> **2026-06-07 起停止在本 Monorepo 内开发**；活跃产品线为 **Quiz Online Game**（`D:\SFK\SuperTool\QuizOnlineGame`）。  
+> 封存说明：[`quiz-live/ARCHIVED.md`](../quiz-live/ARCHIVED.md)
 
 | 项 | 值 |
 |----|-----|
+| 状态 | 保留代码与部署路径，仅运维 / 紧急修复 |
 | 入口 | `/quiz-live/admin.html`（控台） |
 | 观众 | `/quiz-live/answer.html?room=房间码` |
 | 大屏 | `/quiz-live/screen.html?room=房间码` |
 | 样式 | `quiz-live/css/quiz-live.css` → [`styles/style-guide/11-quiz-live.css`](../styles/style-guide/11-quiz-live.css) |
 | 脚本 | `quiz-live/scripts/*`（见 [`quiz-live/scripts/README.md`](../quiz-live/scripts/README.md)） |
-| 题库 | `quiz-live/data/questions.json` |
+| 题库 | `quiz-live/data/quiz/question_cfg.json` + `questions_*.json` |
 | 广播 | `quiz-live/data/broadcast-config.json` |
 | 登记 | `quiz-live/data/register-config.json` |
 | 中继 | `node quiz-live/scripts/quiz-ws-relay.js`（端口 8082） |

@@ -392,7 +392,7 @@ Reveal 内置 `.progress` 轨道 + 独立模块 `shared/scripts/slide-progress.j
 | `styles/style-guide/08-segment-arrow-share.css` | 分段箭头、议程/成长性箭头布局、share lock |
 | `styles/style-guide/09-deck-light-extension.css` | 主 deck 浅色主题（`html.deck-light`） |
 | `styles/style-guide/10-portrait-adapt.css` | 竖屏通用覆盖（`html.deck-portrait`）、横屏提示条 |
-| `styles/style-guide/11-quiz-live.css` | **quiz-live 独立站点**（`.ql-*` / `--ql-*`）；经 `quiz-live/css/quiz-live.css` 加载，**不** import 入主 deck hub |
+| `styles/style-guide/11-quiz-live.css` | **quiz-live 独立站点**（`.ql-*` / `--ql-*`）；**已封存 2026-06-07**，活跃样式见 QuizOnlineGame |
 
 **夏校 CSS 分片**：[`summerschool/style_extension.css`](../../summerschool/style_extension.css) → `summerschool/css/ss-*.css`（见 [`summerschool/css/README.md`](../../summerschool/css/README.md)）。
 

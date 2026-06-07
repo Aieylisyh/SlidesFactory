@@ -1,6 +1,7 @@
 ﻿/* ==========================================================================
    quiz-live — 暖场自答抢答系统样式（独立站点，非 Reveal deck）
-   规范：docs/guides/QUIZ_LIVE_GUIDE.md § 样式与 token
+   【封存 2026-06-07】本 Monorepo 内停止编辑；活跃样式见 QuizOnlineGame/styles/
+   规范：docs/guides/QUIZ_LIVE_GUIDE.md · quiz-live/ARCHIVED.md
    站点入口：quiz-live/css/quiz-live.css（@import 本文件）
    前缀：.ql-*  ·  token：--ql-*
    ========================================================================== */

@@ -17,7 +17,7 @@
 | `08-segment-arrow-share.css` | ~650 | 分段箭头（`.segment-arrow-*`）、议程/成长性布局、`share-locked` |
 | `09-deck-light-extension.css` | ~190 | 主 deck 浅色主题（`html.deck-light`） |
 | `10-portrait-adapt.css` | ~270 | 竖屏通用覆盖（`html.deck-portrait`）、横屏提示条 |
-| `11-quiz-live.css` | ~910 | **quiz-live 暖场自答**（`.ql-*`）；站点 hub `quiz-live/css/quiz-live.css` |
+| `11-quiz-live.css` | ~1980 | **quiz-live 暖场自答**（`.ql-*`）；**已封存**，活跃编辑见 QuizOnlineGame |
 
 **夏校**独立 hub：[`summerschool/style_extension.css`](../../summerschool/style_extension.css) → `summerschool/css/ss-*.css`
 
@@ -39,7 +39,7 @@
 | `.segment-arrow-*` | `08-segment-arrow-share.css` |
 | `html.deck-light` 浅色覆盖 | `09-deck-light-extension.css` |
 | `html.deck-portrait`、`.deck-portrait-hint` | `10-portrait-adapt.css` |
-| `--ql-accent`、`.ql-category-btn`、`.ql-broadcast` | `11-quiz-live.css`（quiz-live 站点） |
+| `--ql-accent`、`.ql-category-btn`、`.ql-broadcast` | `11-quiz-live.css`（quiz-live，**已封存**） |
 
 ## 维护
 

@@ -1,5 +1,9 @@
 # quiz-live 趣味常识挑战
 
+> **封存（2026-06-07）**：本 Monorepo 内 `quiz-live/` **停止新功能开发**，代码保留供运维与历史对照。  
+> 活跃开发已迁至独立产品线 **Quiz Online Game**（`D:\SFK\SuperTool\QuizOnlineGame`）。  
+> 详见 [`quiz-live/ARCHIVED.md`](../../quiz-live/ARCHIVED.md)。
+
 独立于 Reveal 主 deck 的现场自答抢答系统。观众扫码登记、自选类别、随机 10 题自答；主持端实时看分与广播；大屏展示排行榜与滚屏广播。
 
 ## 三端架构
@@ -238,3 +242,9 @@ quiz-live\start-quiz-server.bat
 | 类别显示 undefined | 确认 `questions.json` 含 `categoryMeta`，且 `getCategoryMeta` 未用空字段覆盖 |
 | 广播文案未更新 | 保存 `broadcast-config.json` 后触发一次答题；仍异常则重启 relay |
 | 改 CSS 不生效 | 编辑 `11-quiz-live.css`，清缓存或 bump `?v=` |
+
+---
+
+## 封存说明
+
+本 Monorepo 内 quiz-live **已于 2026-06-07 停止新功能开发**。代码与部署路径保留；新功能、样式与 relay 演进请在 **Quiz Online Game**（`D:\SFK\SuperTool\QuizOnlineGame`）进行。详见 [`quiz-live/ARCHIVED.md`](../../quiz-live/ARCHIVED.md)。

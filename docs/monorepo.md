@@ -22,7 +22,7 @@
 |------|------|------|
 | **主 deck（就业）** | [`index.html`](../index.html) | 数字娱乐技术就业主题，完整交互 |
 | **夏校** | [`summerschool/index.html`](../summerschool/index.html) | USC × 游研社说明会，独立 outline 与橙白主题 |
-| **暖场抢答** | [`quiz-live/`](../quiz-live/) | 观众/控台/大屏 + WebSocket relay |
+| **暖场抢答** | [`quiz-live/`](../quiz-live/) | 观众/控台/大屏 + relay（**已封存**，见 [`ARCHIVED.md`](../quiz-live/ARCHIVED.md)） |
 | **远程翻页** | [`remoteNavigator/`](../remoteNavigator/) | Presenter + Remote 双端 WebSocket 控制 |
 
 详见 [`sites.md`](sites.md)。
@@ -45,7 +45,7 @@ Project/
 ├── docs/                   # 文档索引 + guides 规范
 ├── deploy/                 # COS / relay 部署
 ├── summerschool/           # 夏校站点
-├── quiz-live/              # 暖场抢答站点
+├── quiz-live/              # 暖场抢答（已封存，活跃开发见 QuizOnlineGame）
 └── remoteNavigator/        # 远程翻页
 ```
 
@@ -73,7 +73,7 @@ Project/
 | `chrome/` | 转场 FX、分段箭头、分享锁、点击 VFX |
 | `major/` | 专业方向 picker |
 
-**quiz-live** 脚本见 [`quiz-live/scripts/README.md`](../quiz-live/scripts/README.md)（含 `relay/` WebSocket 模块）。
+**quiz-live** 脚本见 [`quiz-live/scripts/README.md`](../quiz-live/scripts/README.md)（含 `relay/` WebSocket 模块；**已封存**，活跃开发见 QuizOnlineGame）。
 
 ## 样式管线
 

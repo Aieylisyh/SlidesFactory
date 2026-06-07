@@ -23,7 +23,7 @@
 | [SHARE_GUIDE.md](SHARE_GUIDE.md) | 分享锁与 `config/share-pages.json` |
 | [BILIBILI_EMBED_GUIDE.md](BILIBILI_EMBED_GUIDE.md) | B 站站外播放器嵌入 |
 | [IMAGE_COMPRESSION_GUIDE.md](IMAGE_COMPRESSION_GUIDE.md) | 图片压缩标准与脚本 |
-| [QUIZ_LIVE_GUIDE.md](QUIZ_LIVE_GUIDE.md) | quiz-live 暖场自答抢答（三端 + 配置 + 样式） |
+| [QUIZ_LIVE_GUIDE.md](QUIZ_LIVE_GUIDE.md) | quiz-live 暖场抢答（**已封存 2026-06-07**，活跃开发见 QuizOnlineGame） |
 
 ## 远程翻页
 
@@ -50,7 +50,8 @@
 | [`styles/style-guide/README.md`](../styles/style-guide/README.md) | CSS 分片地图 |
 | [`scripts/README.md`](../scripts/README.md) | 主 deck JS 子目录 |
 | [`summerschool/css/README.md`](../summerschool/css/README.md) | 夏校 CSS 分片 |
-| [`quiz-live/scripts/README.md`](../quiz-live/scripts/README.md) | quiz-live / relay 脚本 |
+| [`quiz-live/ARCHIVED.md`](../quiz-live/ARCHIVED.md) | quiz-live 封存说明 |
+| [`quiz-live/scripts/README.md`](../quiz-live/scripts/README.md) | quiz-live / relay 脚本（封存） |
 | [`deploy/部署脚本说明.md`](../deploy/部署脚本说明.md) | 部署脚本说明 |
 | [`contents/README.md`](../contents/README.md) | 源素材与抽图流程 |
 | [`.cursorrules`](../.cursorrules) | Agent 路由规则 |

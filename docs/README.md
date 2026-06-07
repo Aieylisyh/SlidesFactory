@@ -10,7 +10,7 @@
 | 样式 hub | [style_guide.css](../style_guide.css) · [styles/style-guide/README.md](../styles/style-guide/README.md) |
 | 主 deck JS 目录 | [scripts/README.md](../scripts/README.md) |
 | 工具脚本 | [tools/README.md](../tools/README.md) |
-| quiz-live | [guides/QUIZ_LIVE_GUIDE.md](guides/QUIZ_LIVE_GUIDE.md) |
+| quiz-live（已封存） | [guides/QUIZ_LIVE_GUIDE.md](guides/QUIZ_LIVE_GUIDE.md) · [quiz-live/ARCHIVED.md](../quiz-live/ARCHIVED.md) |
 | Agent 规则 | [.cursorrules](../.cursorrules) |
 
 ## Co-located 文档
@@ -24,7 +24,8 @@
 | `config/README.md` | 主 deck 配置说明 |
 | `summerschool/outline.md` | 夏校 deck 结构 |
 | `summerschool/css/README.md` | 夏校 CSS 分片 |
-| `quiz-live/scripts/README.md` | 暖场抢答 JS / relay 模块 |
+| `quiz-live/scripts/README.md` | 暖场抢答 JS / relay（**已封存**） |
+| `quiz-live/ARCHIVED.md` | quiz-live 封存说明与迁移指引 |
 | `deploy/部署脚本说明.md` | 部署 BAT / PS1 中文说明 |
 
 ## 架构图
