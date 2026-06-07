@@ -375,6 +375,58 @@ function getParticipantsDetail(room, clientIds) {
     }).filter(Boolean);
 }
 
+function buildGlobalLeaderboardPayload(room) {
+    var rows = [];
+    room.participants.forEach(function (p) {
+        rows.push({
+            name: p.name || '',
+            score: p.score || 0,
+            streak: p.streak || 0,
+            bestStreak: p.bestStreak || 0,
+            online: !!p.online
+        });
+    });
+    rows.sort(function (a, b) {
+        return b.score - a.score || (b.bestStreak || 0) - (a.bestStreak || 0);
+    });
+    return {
+        type: 'leaderboard',
+        mode: 'global',
+        room: room.id,
+        rows: rows
+    };
+}
+
+function buildCategoryLeaderboardPayload(room, categoryId) {
+    var catId = String(categoryId || '').trim();
+    var cat = getCategoryMeta(catId);
+    var rows = [];
+    room.participants.forEach(function (p) {
+        var stats = p.player
+            ? playerData.getCategoryStats(p.player, catId)
+            : { answered: 0, correct: 0 };
+        var answered = stats.answered || 0;
+        var correct = stats.correct || 0;
+        rows.push({
+            name: p.name || '',
+            correct: correct,
+            answered: answered,
+            accuracy: answered ? Math.round((correct / answered) * 100) : 0
+        });
+    });
+    rows.sort(function (a, b) {
+        return b.correct - a.correct || b.accuracy - a.accuracy;
+    });
+    return {
+        type: 'leaderboard',
+        mode: 'category',
+        room: room.id,
+        categoryId: catId,
+        categoryName: cat ? (cat.displayName || cat.id) : catId,
+        rows: rows
+    };
+}
+
 module.exports = {
     rooms: rooms,
     createRoom: createRoom,
@@ -395,5 +447,8 @@ module.exports = {
     listVipShares: listVipShares,
     clearVipShares: clearVipShares,
     participantHasCategoryAccess: participantHasCategoryAccess,
-    getCategoryMeta: getCategoryMeta
+    getCategoryMeta: getCategoryMeta,
+    isValidCategoryId: isValidCategoryId,
+    buildGlobalLeaderboardPayload: buildGlobalLeaderboardPayload,
+    buildCategoryLeaderboardPayload: buildCategoryLeaderboardPayload
 };

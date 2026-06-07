@@ -88,6 +88,7 @@
         this.track = root ? root.querySelector('[data-broadcast-track]') : null;
         this.queue = [];
         this.playing = false;
+        this._playbackId = 0;
         this._enqueueChain = Promise.resolve();
         this._timer = null;
         this._onAnimEnd = null;
@@ -117,8 +118,14 @@
                 text: text,
                 kind: resolveKind(payload)
             });
-            if (!self.playing) self.playNext();
+            self.schedulePlay();
         }).catch(function () { /* keep chain alive */ });
+    };
+
+    QuizBroadcast.prototype.schedulePlay = function () {
+        if (!this.playing && this.queue.length) {
+            this.playNext();
+        }
     };
 
     QuizBroadcast.prototype.clearPlaybackTimer = function () {
@@ -141,14 +148,13 @@
         if (this.track) {
             this.track.textContent = '';
             this.track.className = 'ql-broadcast-track ql-broadcast-idle';
-            this.track.style.animationDuration = '';
+            this.track.style.removeProperty('--ql-marquee-duration');
         }
     };
 
     QuizBroadcast.prototype.advanceQueue = function () {
-        var self = this;
-        self.clearPlaybackTimer();
-        self.playNext();
+        this.clearPlaybackTimer();
+        this.playNext();
     };
 
     QuizBroadcast.prototype.playNext = function () {
@@ -158,7 +164,12 @@
             this.showIdle();
             return;
         }
+
+        this.clearPlaybackTimer();
         this.playing = true;
+        this._playbackId += 1;
+        var playbackId = this._playbackId;
+
         var item = this.queue.shift();
         var kind = item.kind || 'default';
         var durationSec = Math.max(3.5, item.text.length * 0.1);
@@ -167,18 +178,22 @@
         this.root.classList.add('is-active');
         this.root.dataset.kind = kind;
         this.track.textContent = item.text;
-        this.track.className = 'ql-broadcast-track is-animating is-kind-' + kind;
+        this.track.classList.remove('is-animating');
+        this.track.style.removeProperty('--ql-marquee-duration');
         void this.track.offsetWidth;
-        this.track.style.animationDuration = durationSec + 's';
+        this.track.className = 'ql-broadcast-track is-animating is-kind-' + kind;
+        this.track.style.setProperty('--ql-marquee-duration', durationSec + 's');
 
         var advanced = false;
         function advanceOnce() {
+            if (playbackId !== self._playbackId) return;
             if (advanced) return;
             advanced = true;
             self.advanceQueue();
         }
 
         this._onAnimEnd = function (e) {
+            if (playbackId !== self._playbackId) return;
             if (e.target !== self.track || e.animationName !== 'ql-marquee') return;
             advanceOnce();
         };

@@ -190,6 +190,13 @@
                 return;
             }
 
+            if (msg.type === 'leaderboard') {
+                if (this.activeView === 'leaderboard') {
+                    this.applyLeaderboardPayload(msg);
+                }
+                return;
+            }
+
             if (msg.type === 'state') {
                 if (msg.title) this.deckTitle = msg.title;
                 if (Array.isArray(msg.questionCategories) && msg.questionCategories.length) {
@@ -200,10 +207,9 @@
                 }
                 this.participants = msg.participants || [];
                 this.syncHeaderTitle();
-                if (this.activeView === 'leaderboard') {
-                    this.refreshLeaderboardView(this.participants, msg.onlineCount);
+                if (this.activeView !== 'leaderboard') {
+                    this.syncSelfFromParticipants(this.participants);
                 }
-                this.syncSelfFromParticipants(this.participants);
             }
         }
     };

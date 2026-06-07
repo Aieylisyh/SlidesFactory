@@ -14,7 +14,7 @@
 
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="css/quiz-live.css?v=11">
+    <link rel="stylesheet" href="css/quiz-live.css?v=12">
 
 </head>
 
@@ -136,15 +136,15 @@
 
                     <button type="button" class="ql-btn" data-prepare-start>开始挑战</button>
 
-                    <div class="ql-prepare-footer">
-
-                        <button type="button" class="ql-btn ql-btn--ghost ql-prepare-leaderboard-btn" data-category-leaderboard-open>排行榜</button>
-
-                        <button type="button" class="ql-btn ql-btn--ghost" data-prepare-back>返回选题</button>
-
-                    </div>
-
                 </section>
+
+                <div class="ql-prepare-footer">
+
+                    <button type="button" class="ql-btn ql-btn--ghost ql-prepare-leaderboard-btn" data-category-leaderboard-open>排行榜</button>
+
+                    <button type="button" class="ql-btn ql-btn--ghost" data-prepare-back>返回选题</button>
+
+                </div>
 
             </div>
 
@@ -152,49 +152,49 @@
 
             <!-- 2b 排行榜 -->
 
-            <section class="ql-panel ql-hidden" data-view="leaderboard">
+            <div class="ql-leaderboard-screen ql-hidden" data-view="leaderboard">
 
-                <h2 class="ql-leaderboard-heading" data-leaderboard-title>排行榜</h2>
+                <section class="ql-panel ql-leaderboard-frame">
 
-                <p class="ql-leaderboard-meta">在线 <strong data-leaderboard-online>0</strong> 人</p>
+                    <h2 class="ql-leaderboard-heading" data-leaderboard-title>排行榜</h2>
 
-                <div class="ql-leaderboard-scroll">
+                    <div class="ql-leaderboard-scroll">
 
-                    <table class="ql-score-table ql-leaderboard-table">
+                        <table class="ql-score-table ql-leaderboard-table">
 
-                        <thead data-leaderboard-head>
+                            <thead data-leaderboard-head>
 
-                            <tr>
+                                <tr>
 
-                                <th>编号</th>
+                                    <th>昵称</th>
 
-                                <th>昵称</th>
+                                    <th>得分</th>
 
-                                <th>得分</th>
+                                    <th>当前连胜</th>
 
-                                <th>当前连胜</th>
+                                    <th>最高连胜</th>
 
-                                <th>最高连胜</th>
+                                    <th>状态</th>
 
-                                <th>状态</th>
+                                </tr>
 
-                            </tr>
+                            </thead>
 
-                        </thead>
+                            <tbody data-leaderboard-body>
 
-                        <tbody data-leaderboard-body>
+                                <tr><td colspan="5">加载中…</td></tr>
 
-                            <tr><td colspan="6">加载中…</td></tr>
+                            </tbody>
 
-                        </tbody>
+                        </table>
 
-                    </table>
+                    </div>
 
-                </div>
+                </section>
 
-                <button type="button" class="ql-btn ql-btn--ghost" data-leaderboard-back style="margin-top:16px;">返回选题</button>
+                <button type="button" class="ql-btn ql-btn--ghost ql-leaderboard-back-btn" data-leaderboard-back>返回选题</button>
 
-            </section>
+            </div>
 
 
 
@@ -262,7 +262,7 @@
 
     <script src="scripts/quiz-register-config.js"></script>
 
-    <script src="scripts/quiz-broadcast.js?v=2"></script>
+    <script src="scripts/quiz-broadcast.js?v=3"></script>
 
     <script src="scripts/quiz-ws-client.js"></script>
 

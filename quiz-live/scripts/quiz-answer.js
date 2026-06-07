@@ -116,7 +116,6 @@
             leaderboardTitle: root.querySelector('[data-leaderboard-title]'),
             leaderboardHead: root.querySelector('[data-leaderboard-head]'),
             leaderboardBody: root.querySelector('[data-leaderboard-body]'),
-            leaderboardOnline: root.querySelector('[data-leaderboard-online]'),
             progressFill: root.querySelector('[data-progress-fill]'),
             progressMarkers: root.querySelector('[data-progress-markers]'),
             questionText: root.querySelector('[data-question-text]'),

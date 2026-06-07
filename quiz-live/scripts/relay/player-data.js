@@ -179,6 +179,7 @@ module.exports = {
     createPlayer: createPlayer,
     normalizePlayer: normalizePlayer,
     recordAnswer: recordAnswer,
+    getCategoryStats: getCategoryStats,
     categoryAccuracyPercent: categoryAccuracyPercent,
     touchPlayer: touchPlayer,
     playerToClientJson: playerToClientJson,

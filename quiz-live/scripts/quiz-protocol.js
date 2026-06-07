@@ -210,6 +210,17 @@
         };
     }
 
+    function makeRequestLeaderboard(mode, categoryId) {
+        var msg = {
+            type: 'request_leaderboard',
+            mode: mode === 'category' ? 'category' : 'global'
+        };
+        if (msg.mode === 'category' && categoryId) {
+            msg.categoryId = String(categoryId);
+        }
+        return msg;
+    }
+
     function getRoomFromUrl() {
         try {
             var params = new URLSearchParams(global.location.search);
@@ -318,6 +329,7 @@
         makeRequestState: makeRequestState,
         makeRequestAdminSummary: makeRequestAdminSummary,
         makeRequestParticipantsDetail: makeRequestParticipantsDetail,
+        makeRequestLeaderboard: makeRequestLeaderboard,
         getRoomFromUrl: getRoomFromUrl,
         resolveRoomCode: resolveRoomCode,
         buildAnswerUrl: buildAnswerUrl,

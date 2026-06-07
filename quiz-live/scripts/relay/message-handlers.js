@@ -4,6 +4,7 @@ var config = require('./config');
 var roomStore = require('./room-store');
 var broadcast = require('./broadcast');
 var playerData = require('./player-data');
+var leaderboardCache = require('./leaderboard-cache');
 
 function notifyParticipantCleared(room, clientId) {
     room.sockets.audience.forEach(function (ws) {
@@ -90,6 +91,7 @@ function handleAdmin(room, msg, adminClient) {
             var audience = room.sockets.audience;
             roomStore.rooms.set(room.id, roomStore.createRoom(room.id));
             room = roomStore.getRoom(room.id);
+            leaderboardCache.invalidateRoom(room.id);
             room.sockets.admin = adminWs;
             room.sockets.screen = screenWs;
             audience.forEach(function (ws) {
@@ -109,6 +111,7 @@ function handleAdmin(room, msg, adminClient) {
             room.nextParticipantNum = 1;
             room.recentBroadcasts = [];
             roomStore.clearVipShares(room);
+            leaderboardCache.invalidateRoom(room.id);
             notifyParticipantCleared(room, null);
             break;
         }
@@ -188,6 +191,21 @@ function handleMessage(client, raw) {
             type: 'participants_detail',
             participants: roomStore.getParticipantsDetail(room, detailIds)
         }));
+        return;
+    }
+
+    if (msg.type === 'request_leaderboard') {
+        var lbMode = msg.mode === 'category' ? 'category' : 'global';
+        var lbCategoryId = lbMode === 'category' ? String(msg.categoryId || '').trim() : '';
+        if (lbMode === 'category' && !roomStore.isValidCategoryId(lbCategoryId)) return;
+
+        var lbPayload = leaderboardCache.getOrBuild(room, lbMode, lbCategoryId, function (r, catId) {
+            if (lbMode === 'category') {
+                return roomStore.buildCategoryLeaderboardPayload(r, catId);
+            }
+            return roomStore.buildGlobalLeaderboardPayload(r);
+        });
+        client.send(JSON.stringify(lbPayload));
         return;
     }
 

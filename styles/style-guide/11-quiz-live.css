@@ -809,7 +809,9 @@ html.ql-answer-page.ql-answer-landscape .ql-app {
 }
 
 .ql-broadcast-track.is-animating {
-    animation: ql-marquee 3.5s linear forwards, ql-broadcast-text-pulse 1.2s ease-in-out infinite;
+    animation:
+        ql-marquee var(--ql-marquee-duration, 3.5s) linear forwards,
+        ql-broadcast-text-pulse 1.2s ease-in-out infinite;
 }
 
 .ql-broadcast-track.is-kind-first_blood {
@@ -994,14 +996,17 @@ html.ql-answer-page.ql-answer-landscape .ql-app {
     display: flex;
     flex: 1;
     flex-direction: column;
-    justify-content: flex-end;
+    gap: 16px;
     min-height: 0;
 }
 
 .ql-prepare-panel {
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
+    min-height: 0;
 }
 
 .ql-prepare-body {
@@ -1010,18 +1015,20 @@ html.ql-answer-page.ql-answer-landscape .ql-app {
 
 .ql-prepare-panel > .ql-btn[data-prepare-start] {
     margin-top: 8px;
+    flex-shrink: 0;
 }
 
 .ql-prepare-footer {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 16px;
+    flex-shrink: 0;
+    width: 100%;
 }
 
 .ql-prepare-category {
     margin: 0 0 16px;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 800;
     text-align: center;
     color: var(--ql-accent-light);
@@ -1039,10 +1046,35 @@ html.ql-answer-page.ql-answer-landscape .ql-app {
     margin-bottom: 0;
 }
 
+/* --- Leaderboard --- */
+.ql-leaderboard-screen {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 0;
+}
+
+.ql-leaderboard-frame {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    border: 3px solid var(--ql-accent);
+    box-shadow: 0 0 0 1px rgba(200, 36, 100, 0.2);
+}
+
+.ql-leaderboard-back-btn {
+    flex-shrink: 0;
+    width: 100%;
+}
+
 .ql-leaderboard-heading {
     margin: 0 0 12px;
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: center;
+    color: var(--ql-accent-light);
 }
 
 .ql-leaderboard-meta.ql-hidden {
@@ -1061,14 +1093,16 @@ html.ql-answer-page.ql-answer-landscape .ql-app {
 }
 
 .ql-leaderboard-scroll {
-    overflow-x: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
     -webkit-overflow-scrolling: touch;
     margin: 0 -4px;
     padding: 0 4px;
 }
 
 .ql-leaderboard-table {
-    min-width: 520px;
+    min-width: 420px;
     font-size: 0.82rem;
 }
 
@@ -1851,9 +1885,19 @@ html.ql-answer-page.ql-answer-landscape .ql-app {
     padding: 8px 10px;
     border-radius: 8px;
     border: 1px solid var(--ql-border);
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--ql-panel-2);
     color: var(--ql-text);
     font-size: 0.82rem;
+}
+
+.ql-admin-vip-field select.ql-input option {
+    color: #141418;
+    background-color: #ffffff;
+}
+
+.ql-admin-users-toolbar select.ql-input option {
+    color: #141418;
+    background-color: #ffffff;
 }
 
 .ql-admin-vip [data-vip-generate],

@@ -451,11 +451,11 @@
             if (!this.els.leaderboardHead) return;
             if (mode === 'category') {
                 this.els.leaderboardHead.innerHTML =
-                    '<tr><th>编号</th><th>昵称</th><th>答对</th><th>正确率</th></tr>';
+                    '<tr><th>昵称</th><th>答对</th><th>正确率</th></tr>';
                 return;
             }
             this.els.leaderboardHead.innerHTML =
-                '<tr><th>编号</th><th>昵称</th><th>得分</th><th>当前连胜</th><th>最高连胜</th><th>状态</th></tr>';
+                '<tr><th>昵称</th><th>得分</th><th>当前连胜</th><th>最高连胜</th><th>状态</th></tr>';
         },
 
         getParticipantCategoryStats: function (participant, categoryId) {
@@ -468,34 +468,29 @@
             return { answered: answered, correct: correct, accuracy: accuracy };
         },
 
-        renderLeaderboard: function (participants, onlineCount) {
+        renderLeaderboard: function (participants) {
+            if (!participants) return;
             this.renderLeaderboardHead('global');
             if (this.els.leaderboardTitle) {
                 this.els.leaderboardTitle.textContent = '排行榜';
             }
-            if (this.els.leaderboardOnline && this.els.leaderboardOnline.parentElement) {
-                this.els.leaderboardOnline.parentElement.classList.remove('ql-hidden');
-            }
-            if (this.els.leaderboardOnline) {
-                var online = onlineCount;
-                if (online == null) {
-                    online = (participants || []).filter(function (p) { return p.online; }).length;
-                }
-                this.els.leaderboardOnline.textContent = String(online);
-            }
             if (!this.els.leaderboardBody) return;
-            var rows = (participants || []).slice().sort(function (a, b) {
+            var rows = participants.slice().sort(function (a, b) {
                 return b.score - a.score || (b.bestStreak || 0) - (a.bestStreak || 0);
             });
-            this.els.leaderboardBody.innerHTML = rows.map(function (p) {
+            this.renderGlobalLeaderboardRows(rows);
+        },
+
+        renderGlobalLeaderboardRows: function (rows) {
+            if (!this.els.leaderboardBody) return;
+            this.els.leaderboardBody.innerHTML = (rows || []).map(function (p) {
                 return '<tr class="' + (p.online ? '' : 'is-offline') + '">' +
-                    '<td>' + p.id + '</td>' +
                     '<td>' + (p.name || '—') + '</td>' +
                     '<td>' + (p.score || 0) + '</td>' +
                     '<td>' + (p.streak || 0) + '</td>' +
                     '<td>' + (p.bestStreak || 0) + '</td>' +
                     '<td>' + (p.online ? '在线' : '离线') + '</td></tr>';
-            }).join('') || '<tr><td colspan="6">暂无参与者</td></tr>';
+            }).join('') || '<tr><td colspan="5">暂无参与者</td></tr>';
         },
 
         renderCategoryLeaderboard: function (participants, categoryId) {
@@ -504,53 +499,97 @@
             if (this.els.leaderboardTitle) {
                 this.els.leaderboardTitle.textContent = this.getCategoryLeaderboardTitle(categoryId);
             }
-            if (this.els.leaderboardOnline && this.els.leaderboardOnline.parentElement) {
-                this.els.leaderboardOnline.parentElement.classList.add('ql-hidden');
-            }
             if (!this.els.leaderboardBody) return;
             var rows = (participants || []).slice().sort(function (a, b) {
                 var sa = self.getParticipantCategoryStats(a, categoryId);
                 var sb = self.getParticipantCategoryStats(b, categoryId);
                 return sb.correct - sa.correct || sb.accuracy - sa.accuracy;
-            });
-            this.els.leaderboardBody.innerHTML = rows.map(function (p) {
+            }).map(function (p) {
                 var s = self.getParticipantCategoryStats(p, categoryId);
-                return '<tr>' +
-                    '<td>' + p.id + '</td>' +
-                    '<td>' + (p.name || '—') + '</td>' +
-                    '<td>' + s.correct + '</td>' +
-                    '<td>' + (s.answered ? s.accuracy + '%' : '—') + '</td></tr>';
-            }).join('') || '<tr><td colspan="4">暂无参与者</td></tr>';
+                return {
+                    name: p.name || '',
+                    correct: s.correct,
+                    answered: s.answered,
+                    accuracy: s.accuracy
+                };
+            });
+            this.renderCategoryLeaderboardRows(rows);
         },
 
-        refreshLeaderboardView: function (participants, onlineCount) {
-            if (this.leaderboardMode === 'category' && this.pendingCategoryId) {
-                this.renderCategoryLeaderboard(participants, this.pendingCategoryId);
+        renderCategoryLeaderboardRows: function (rows) {
+            if (!this.els.leaderboardBody) return;
+            this.els.leaderboardBody.innerHTML = (rows || []).map(function (r) {
+                return '<tr>' +
+                    '<td>' + (r.name || '—') + '</td>' +
+                    '<td>' + (r.correct || 0) + '</td>' +
+                    '<td>' + (r.answered ? r.accuracy + '%' : '—') + '</td></tr>';
+            }).join('') || '<tr><td colspan="3">暂无参与者</td></tr>';
+        },
+
+        applyLeaderboardPayload: function (msg) {
+            if (!msg || msg.type !== 'leaderboard') return;
+            if (msg.mode === 'category') {
+                this.leaderboardMode = 'category';
+                this.renderLeaderboardHead('category');
+                if (this.els.leaderboardTitle) {
+                    this.els.leaderboardTitle.textContent = msg.categoryName
+                        ? (msg.categoryName + '·排行榜')
+                        : this.getCategoryLeaderboardTitle(msg.categoryId);
+                }
+                this.renderCategoryLeaderboardRows(msg.rows || []);
                 return;
             }
-            this.renderLeaderboard(participants, onlineCount);
+            this.leaderboardMode = 'global';
+            this.renderLeaderboardHead('global');
+            if (this.els.leaderboardTitle) {
+                this.els.leaderboardTitle.textContent = '排行榜';
+            }
+            this.renderGlobalLeaderboardRows(msg.rows || []);
+        },
+
+        showLeaderboardLoading: function () {
+            if (!this.els.leaderboardBody) return;
+            var cols = this.leaderboardMode === 'category' ? 3 : 5;
+            this.els.leaderboardBody.innerHTML = '<tr><td colspan="' + cols + '">加载中…</td></tr>';
+        },
+
+        refreshLeaderboardView: function () {
+            if (this.leaderboardMode === 'category' && this.pendingCategoryId) {
+                this.requestCategoryLeaderboard(this.pendingCategoryId);
+                return;
+            }
+            this.requestGlobalLeaderboard();
+        },
+
+        requestGlobalLeaderboard: function () {
+            this.leaderboardMode = 'global';
+            this.showLeaderboardLoading();
+            if (this.ws) {
+                this.ws.send(global.QuizProtocol.makeRequestLeaderboard('global'));
+            }
+        },
+
+        requestCategoryLeaderboard: function (categoryId) {
+            if (!categoryId) return;
+            this.leaderboardMode = 'category';
+            this.showLeaderboardLoading();
+            if (this.ws) {
+                this.ws.send(global.QuizProtocol.makeRequestLeaderboard('category', categoryId));
+            }
         },
 
         onOpenLeaderboard: function () {
-            this.leaderboardMode = 'global';
             this.leaderboardReturnView = 'category';
             this.showView('leaderboard');
             this.ensureRegistered();
-            this.renderLeaderboard(this.participants);
-            if (this.ws) {
-                this.ws.send(global.QuizProtocol.makeRequestState());
-            }
+            this.requestGlobalLeaderboard();
         },
 
         onOpenCategoryLeaderboard: function () {
             if (!this.pendingCategoryId) return;
-            this.leaderboardMode = 'category';
             this.leaderboardReturnView = 'prepare';
             this.showView('leaderboard');
-            this.renderCategoryLeaderboard(this.participants, this.pendingCategoryId);
-            if (this.ws) {
-                this.ws.send(global.QuizProtocol.makeRequestState());
-            }
+            this.requestCategoryLeaderboard(this.pendingCategoryId);
         },
 
         onLeaderboardBack: function () {
