@@ -60,12 +60,26 @@
 
         ensureRegistered: function () {
             if (!this.ws || typeof global.QuizRegisterConfig === 'undefined') return;
-            if (this.participantId) return;
+            if (this.participantId) {
+                this.tryRedeemVipShare();
+                return;
+            }
             var cached = global.QuizRegisterConfig.loadProfileCache();
             if (!cached || !cached.name) return;
             var cfg = this.registerConfig || global.QuizRegisterConfig.normalize(null);
             if (global.QuizRegisterConfig.validate(cached, cfg)) return;
             this.ws.send(global.QuizProtocol.makeRegister(this.clientId, cached));
+        },
+
+        tryRedeemVipShare: function () {
+            if (!this.vipSharePending || !this.participantId || !this.ws) return;
+            if (this.vipShareRedeemSent) return;
+            this.vipShareRedeemSent = true;
+            this.ws.send(global.QuizProtocol.makeRedeemVipShare(
+                this.clientId,
+                this.vipSharePending.categoryId,
+                this.vipSharePending.token
+            ));
         },
 
         syncSelfFromParticipants: function (participants) {
@@ -85,6 +99,7 @@
                     this.showView('category');
                 }
                 this.updateContinueUi();
+                this.tryRedeemVipShare();
                 return true;
             }
             if (this.participantId) {
@@ -131,6 +146,27 @@
                     this.showView('category');
                 }
                 this.updateContinueUi();
+                this.tryRedeemVipShare();
+                return;
+            }
+
+            if (msg.type === 'vip_share_redeemed') {
+                if (msg.player) this.applyPlayer(msg.player);
+                this.renderCategories();
+                var vipName = msg.categoryName || msg.categoryId || '题库';
+                this.showToast('已永久解锁「' + vipName + '」');
+                this.vipSharePending = null;
+                return;
+            }
+
+            if (msg.type === 'vip_share_error') {
+                this.showToast(msg.message || 'VIP 链接无法使用');
+                this.vipSharePending = null;
+                return;
+            }
+
+            if (msg.type === 'category_locked') {
+                this.showToast('当前无法进入该题库');
                 return;
             }
 

@@ -20,6 +20,26 @@
                 <div class="ql-admin-actions">
                     <button type="button" class="ql-btn ql-btn--sm ql-btn--ghost" data-admin-action="clear_all_data">清除全部数据</button>
                 </div>
+
+                <div class="ql-admin-vip">
+                    <h3 class="ql-admin-vip-title">VIP 参赛分享</h3>
+                    <p class="ql-admin-vip-desc">生成单次有效链接，首位完成登记的用户永久解锁指定题库。</p>
+                    <label class="ql-admin-vip-field">
+                        <span>题库</span>
+                        <select class="ql-input" data-vip-category>
+                            <option value="">加载中…</option>
+                        </select>
+                    </label>
+                    <button type="button" class="ql-btn ql-btn--sm" data-vip-generate>生成分享链接</button>
+                    <label class="ql-admin-vip-field">
+                        <span>链接</span>
+                        <input type="text" class="ql-input" data-vip-link readonly placeholder="生成后显示在此">
+                    </label>
+                    <button type="button" class="ql-btn ql-btn--sm ql-btn--ghost" data-vip-copy disabled>复制链接</button>
+                    <ul class="ql-admin-vip-list" data-vip-list>
+                        <li class="ql-admin-vip-list-empty">暂无分享记录</li>
+                    </ul>
+                </div>
             </div>
         </aside>
 

@@ -24,6 +24,9 @@
         this.detailByClientId = Object.create(null);
         this.searchTimer = null;
         this.pendingDetailIds = null;
+        this.questionCategories = [];
+        this.vipShares = [];
+        this.lanPageHost = null;
 
         this.els = {
             roomCode: root.querySelector('[data-room-code]'),
@@ -38,7 +41,12 @@
             userList: root.querySelector('[data-user-list]'),
             pagePrev: root.querySelector('[data-page-prev]'),
             pageNext: root.querySelector('[data-page-next]'),
-            pageInfo: root.querySelector('[data-page-info]')
+            pageInfo: root.querySelector('[data-page-info]'),
+            vipCategory: root.querySelector('[data-vip-category]'),
+            vipGenerate: root.querySelector('[data-vip-generate]'),
+            vipLink: root.querySelector('[data-vip-link]'),
+            vipCopy: root.querySelector('[data-vip-copy]'),
+            vipList: root.querySelector('[data-vip-list]')
         };
 
         this.bind();
@@ -66,11 +74,13 @@
         var self = this;
         if (global.QuizProtocol.isLocalHost(global.location.hostname)) {
             global.QuizProtocol.resolvePublicHost().then(function (host) {
+                self.lanPageHost = host;
                 var answerUrl = global.QuizProtocol.buildAnswerUrl(self.room, host);
                 if (self.els.answerUrl) self.els.answerUrl.textContent = answerUrl;
             });
             return;
         }
+        self.lanPageHost = null;
         var answerUrl = global.QuizProtocol.buildAnswerUrl(this.room);
         if (this.els.answerUrl) this.els.answerUrl.textContent = answerUrl;
     };
@@ -95,6 +105,12 @@
                 var action = btn.getAttribute('data-admin-action');
                 if (action === 'clear_all_data') {
                     if (!confirm('确定清除本房间全部选手数据？此操作不可撤销。')) return;
+                    self.onAction(action);
+                    self.vipShares = [];
+                    self.renderVipShareList();
+                    if (self.els.vipLink) self.els.vipLink.value = '';
+                    if (self.els.vipCopy) self.els.vipCopy.disabled = true;
+                    return;
                 }
                 self.onAction(action);
             });
@@ -148,6 +164,112 @@
                     self.onSaveExp(saveBtn.getAttribute('data-save-exp'));
                 }
             });
+        }
+
+        if (this.els.vipGenerate) {
+            this.els.vipGenerate.addEventListener('click', function () {
+                self.onGenerateVipShare();
+            });
+        }
+
+        if (this.els.vipCopy) {
+            this.els.vipCopy.addEventListener('click', function () {
+                self.onCopyVipLink();
+            });
+        }
+    };
+
+    QuizAdminApp.prototype.onGenerateVipShare = function () {
+        if (!this.els.vipCategory) return;
+        var categoryId = this.els.vipCategory.value;
+        if (!categoryId) {
+            alert('请先选择题库');
+            return;
+        }
+        this.onAction('create_vip_share', { categoryId: categoryId });
+    };
+
+    QuizAdminApp.prototype.onCopyVipLink = function () {
+        var link = this.els.vipLink ? this.els.vipLink.value : '';
+        if (!link) return;
+        var self = this;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).then(function () {
+                alert('链接已复制');
+            }).catch(function () {
+                self.fallbackCopyVipLink(link);
+            });
+            return;
+        }
+        this.fallbackCopyVipLink(link);
+    };
+
+    QuizAdminApp.prototype.fallbackCopyVipLink = function (link) {
+        if (!this.els.vipLink) return;
+        this.els.vipLink.value = link;
+        this.els.vipLink.select();
+        try {
+            if (document.execCommand('copy')) alert('链接已复制');
+        } catch (e) { /* ignore */ }
+    };
+
+    QuizAdminApp.prototype.buildVipShareUrl = function (categoryId, token) {
+        return global.QuizProtocol.buildVipShareUrl(
+            this.room,
+            categoryId,
+            token,
+            this.lanPageHost
+        );
+    };
+
+    QuizAdminApp.prototype.renderVipCategorySelect = function () {
+        if (!this.els.vipCategory) return;
+        var cats = this.questionCategories || [];
+        if (!cats.length) {
+            this.els.vipCategory.innerHTML = '<option value="">暂无题库</option>';
+            return;
+        }
+        this.els.vipCategory.innerHTML = cats.map(function (cat) {
+            var label = (cat.displayName || cat.id) + ' (' + cat.id + ', Lv.' + (cat.required_level || 1) + ')';
+            return '<option value="' + escapeHtml(cat.id) + '">' + escapeHtml(label) + '</option>';
+        }).join('');
+    };
+
+    QuizAdminApp.prototype.getCategoryLabel = function (categoryId) {
+        var cat = (this.questionCategories || []).find(function (c) { return c.id === categoryId; });
+        return cat ? (cat.displayName || cat.id) : categoryId;
+    };
+
+    QuizAdminApp.prototype.renderVipShareList = function () {
+        if (!this.els.vipList) return;
+        var items = this.vipShares || [];
+        if (!items.length) {
+            this.els.vipList.innerHTML = '<li class="ql-admin-vip-list-empty">暂无分享记录</li>';
+            return;
+        }
+        this.els.vipList.innerHTML = items.map(function (item) {
+            var status = item.redeemedAt
+                ? ('已使用 · ' + escapeHtml(item.redeemedByName || '未知用户'))
+                : '待使用';
+            var time = item.createdAt
+                ? new Date(item.createdAt).toLocaleString('zh-CN', { hour12: false })
+                : '';
+            return '<li class="ql-admin-vip-list-item">' +
+                '<span class="ql-admin-vip-list-cat">' + escapeHtml(item.categoryId) + '</span>' +
+                '<span class="ql-admin-vip-list-status' + (item.redeemedAt ? ' is-used' : ' is-pending') + '">' +
+                status + '</span>' +
+                '<span class="ql-admin-vip-list-time">' + escapeHtml(time) + '</span></li>';
+        }).join('');
+    };
+
+    QuizAdminApp.prototype.applyVipAdminPayload = function (msg) {
+        if (Array.isArray(msg.questionCategories) && msg.questionCategories.length) {
+            this.questionCategories = msg.questionCategories;
+            this.renderVipCategorySelect();
+        }
+        if (Array.isArray(msg.vipShares)) {
+            this.vipShares = msg.vipShares;
+            this.renderVipShareList();
         }
     };
 
@@ -231,10 +353,22 @@
             this.updateUserStats(msg.totalCount, msg.onlineCount);
             this.renderOnlineCount(msg.onlineCount);
             if (msg.recentBroadcasts) this.renderRecentBroadcasts(msg.recentBroadcasts);
+            this.applyVipAdminPayload(msg);
             this.renderPagination();
             if (this.pendingDetailIds) {
                 this.pendingDetailIds = null;
                 this.renderUserPage();
+            }
+            return;
+        }
+
+        if (msg.type === 'vip_share_created') {
+            if (msg.share) {
+                this.vipShares = [msg.share].concat(this.vipShares || []).slice(0, 12);
+                this.renderVipShareList();
+                var url = this.buildVipShareUrl(msg.share.categoryId, msg.share.token);
+                if (this.els.vipLink) this.els.vipLink.value = url;
+                if (this.els.vipCopy) this.els.vipCopy.disabled = !url;
             }
             return;
         }
@@ -252,6 +386,7 @@
         this.state = msg;
         this.renderOnlineCount(msg.onlineCount);
         this.renderRecentBroadcasts(msg.recentBroadcasts || []);
+        this.applyVipAdminPayload(msg);
         if (!msg.participants || !msg.participants.length) {
             if (this.roster.length) {
                 this.roster = [];

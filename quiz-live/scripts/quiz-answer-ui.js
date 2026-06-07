@@ -222,6 +222,7 @@
             if (this.player.total_exp == null) this.player.total_exp = 0;
             if (this.player.total_correct == null) this.player.total_correct = 0;
             if (!this.player.category_stats) this.player.category_stats = {};
+            if (!Array.isArray(this.player.unlocked_categories)) this.player.unlocked_categories = [];
         },
 
         onAnswerAck: function (msg) {
@@ -257,12 +258,67 @@
 
         clearCorrectOptionFx: function () {
             if (!this.els.options) return;
-            this.els.options.querySelectorAll('.ql-option-burst').forEach(function (el) {
+            this.els.options.querySelectorAll('.ql-option-edge-vfx').forEach(function (el) {
                 el.remove();
             });
             this.els.options.querySelectorAll('.ql-option.has-correct-fx').forEach(function (btn) {
                 btn.classList.remove('has-correct-fx');
             });
+        },
+
+        buildEdgeRays: function (vfx, btn, count, isMilestone, delayBase) {
+            var w = btn.offsetWidth;
+            var h = btn.offsetHeight;
+            if (!w || !h || !count) return;
+
+            var perimeter = 2 * (w + h);
+            var rayLen = isMilestone ? 44 : 30;
+            var stagger = isMilestone ? 14 : 22;
+            var base = delayBase || 0;
+            var i;
+            var t;
+            var dist;
+            var x;
+            var y;
+            var transform;
+            var ray;
+            var beam;
+
+            for (i = 0; i < count; i++) {
+                t = (i + 0.5) / count;
+                dist = t * perimeter;
+
+                if (dist < w) {
+                    x = dist;
+                    y = 0;
+                    transform = 'translate(-50%, 0) rotate(-90deg)';
+                } else if (dist < w + h) {
+                    x = w;
+                    y = dist - w;
+                    transform = 'translate(0, -50%) rotate(0deg)';
+                } else if (dist < 2 * w + h) {
+                    x = w - (dist - w - h);
+                    y = h;
+                    transform = 'translate(-50%, 0) rotate(90deg)';
+                } else {
+                    x = 0;
+                    y = h - (dist - 2 * w - h);
+                    transform = 'translate(0, -50%) rotate(180deg)';
+                }
+
+                ray = document.createElement('span');
+                ray.className = 'ql-option-edge-ray';
+                ray.style.left = x + 'px';
+                ray.style.top = y + 'px';
+                ray.style.transform = transform;
+                ray.style.setProperty('--ray-len', rayLen + 'px');
+
+                beam = document.createElement('span');
+                beam.className = 'ql-option-edge-ray-beam';
+                beam.style.animationDelay = (base + i * stagger) + 'ms';
+                ray.appendChild(beam);
+                vfx.appendChild(ray);
+            }
         },
 
         playCorrectOptionFx: function (choiceKey, level) {
@@ -273,29 +329,32 @@
             this.clearCorrectOptionFx();
 
             var isMilestone = level === 'milestone';
-            var ringCount = isMilestone ? 3 : 2;
-            var duration = isMilestone ? 1400 : 950;
+            var rayCount = isMilestone ? 28 : 18;
+            var duration = isMilestone ? 1350 : 920;
+            var self = this;
+            var vfx;
+
             btn.classList.add('has-correct-fx');
 
-            for (var i = 0; i < ringCount; i++) {
-                var burst = document.createElement('span');
-                burst.className = 'ql-option-burst' + (isMilestone ? ' ql-option-burst--milestone' : '');
-                burst.style.animationDelay = (i * 0.14) + 's';
-                btn.appendChild(burst);
-                (function (node, parent) {
-                    node.addEventListener('animationend', function () {
-                        node.remove();
-                        if (!parent.querySelector('.ql-option-burst')) {
-                            parent.classList.remove('has-correct-fx');
-                        }
-                    });
-                })(burst, btn);
-            }
+            vfx = document.createElement('span');
+            vfx.className = 'ql-option-edge-vfx' + (isMilestone ? ' is-milestone' : '');
+            vfx.setAttribute('aria-hidden', 'true');
+            btn.appendChild(vfx);
+
+            requestAnimationFrame(function () {
+                self.buildEdgeRays(vfx, btn, rayCount, isMilestone, 0);
+                if (isMilestone) {
+                    setTimeout(function () {
+                        self.buildEdgeRays(vfx, btn, 16, isMilestone, 120);
+                    }, 170);
+                }
+            });
 
             clearTimeout(this._correctFxTimer);
             this._correctFxTimer = setTimeout(function () {
+                if (vfx.parentNode) vfx.remove();
                 btn.classList.remove('has-correct-fx');
-            }, duration + ringCount * 140);
+            }, duration);
         },
 
         playCorrectOptionFxFromAck: function (roundCorrect) {
@@ -340,13 +399,27 @@
                     '您在' + catName + '类别的回答正确率为 ' + (data.categoryAccuracy || 0) + '%';
             }
             if (this.els.roundSummary) {
-                this.els.roundSummary.classList.remove('ql-hidden');
+                var self = this;
+                clearTimeout(this._roundSummaryConfirmTimer);
+                this.els.roundSummary.classList.remove('ql-hidden', 'is-visible', 'is-confirm-ready');
                 this.els.roundSummary.setAttribute('aria-hidden', 'false');
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                        self.els.roundSummary.classList.add('is-visible');
+                    });
+                });
+                this._roundSummaryConfirmTimer = setTimeout(function () {
+                    if (self.els.roundSummary) {
+                        self.els.roundSummary.classList.add('is-confirm-ready');
+                    }
+                }, 2500);
             }
         },
 
         closeRoundSummary: function () {
+            clearTimeout(this._roundSummaryConfirmTimer);
             if (this.els.roundSummary) {
+                this.els.roundSummary.classList.remove('is-visible', 'is-confirm-ready');
                 this.els.roundSummary.classList.add('ql-hidden');
                 this.els.roundSummary.setAttribute('aria-hidden', 'true');
             }
@@ -492,14 +565,26 @@
         },
 
         findNextLockedCategory: function (level) {
+            var self = this;
             var locked = (this.questionCategories || []).filter(function (cat) {
-                return (cat.required_level || 1) > level;
+                return !self.isCategoryAccessible(cat);
             });
             if (!locked.length) return null;
             locked.sort(function (a, b) {
                 return (a.required_level || 1) - (b.required_level || 1);
             });
             return locked[0];
+        },
+
+        isCategoryUnlockedByVip: function (categoryId) {
+            return !!(this.player &&
+                Array.isArray(this.player.unlocked_categories) &&
+                this.player.unlocked_categories.indexOf(categoryId) !== -1);
+        },
+
+        isCategoryAccessible: function (cat) {
+            var level = this.playerLevel || 3;
+            return (cat.required_level || 1) <= level || this.isCategoryUnlockedByVip(cat.id);
         },
 
         buildLockedCategoryButton: function (cat) {
@@ -509,6 +594,16 @@
                 (meta.theme || 'default') + '" data-category-locked="' + cat.id + '">' +
                 '<span class="ql-category-name">' + meta.short + '</span>' +
                 '<span class="ql-category-lock-hint">需要等级 ' + reqLevel + '</span></button>';
+        },
+
+        buildUnlockedCategoryButton: function (cat) {
+            var meta = this.getCategoryMeta(cat);
+            var theme = meta.theme || 'default';
+            var vipBadge = this.isCategoryUnlockedByVip(cat.id)
+                ? '<span class="ql-category-vip-badge">VIP</span>'
+                : '';
+            return '<button type="button" class="ql-category-btn ql-category-btn--' + theme + '" data-category="' + cat.id + '">' +
+                '<span class="ql-category-name">' + meta.short + '</span>' + vipBadge + '</button>';
         },
 
         showToast: function (message) {
@@ -530,20 +625,16 @@
 
             var self = this;
             var html = '';
-            var level = this.playerLevel || 3;
 
             this.questionCategories
                 .filter(function (cat) {
-                    return (cat.required_level || 1) <= level;
+                    return self.isCategoryAccessible(cat);
                 })
                 .forEach(function (cat) {
-                    var meta = self.getCategoryMeta(cat);
-                    var theme = meta.theme || 'default';
-                    html += '<button type="button" class="ql-category-btn ql-category-btn--' + theme + '" data-category="' + cat.id + '">' +
-                        '<span class="ql-category-name">' + meta.short + '</span></button>';
+                    html += self.buildUnlockedCategoryButton(cat);
                 });
 
-            var nextLocked = this.findNextLockedCategory(level);
+            var nextLocked = this.findNextLockedCategory();
             if (nextLocked) {
                 html += this.buildLockedCategoryButton(nextLocked);
             }
@@ -598,7 +689,7 @@
             var self = this;
             var cat = this.questionCategories.find(function (c) { return c.id === categoryId; });
             if (!cat) return;
-            if ((cat.required_level || 1) > (this.playerLevel || 3)) {
+            if (!this.isCategoryAccessible(cat)) {
                 alert('等级不足，无法进入该题库');
                 return;
             }
@@ -631,6 +722,15 @@
             this.els.progressFill.style.width = Math.round((done / total) * 100) + '%';
         },
 
+        getProgressMarkPosition: function (questionIndex, total) {
+            var pct = ((questionIndex + 1) / total) * 100;
+            var atEnd = questionIndex >= total - 1;
+            return {
+                left: pct + '%',
+                transform: atEnd ? 'translateX(-100%)' : 'translateX(-50%)'
+            };
+        },
+
         resetProgressMarkers: function () {
             if (this.els.progressMarkers) {
                 this.els.progressMarkers.innerHTML = '';
@@ -638,13 +738,15 @@
         },
 
         addProgressMark: function (questionIndex, correct) {
-            if (!this.els.progressMarkers) return;
+            if (!this.els.progressMarkers || correct) return;
             var total = this.questionQueue.length || 1;
-            var left = ((questionIndex + 0.5) / total) * 100;
+            var pos = this.getProgressMarkPosition(questionIndex, total);
             var mark = document.createElement('span');
-            mark.className = 'ql-progress-mark ' + (correct ? 'is-correct' : 'is-wrong');
-            mark.style.left = left + '%';
-            mark.textContent = correct ? '✓' : '✕';
+            mark.className = 'ql-progress-mark is-wrong';
+            mark.style.left = pos.left;
+            mark.style.transform = pos.transform;
+            mark.textContent = '✕';
+            mark.setAttribute('aria-label', '第 ' + (questionIndex + 1) + ' 题答错');
             this.els.progressMarkers.appendChild(mark);
         },
 

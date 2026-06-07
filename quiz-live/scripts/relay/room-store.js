@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var crypto = require('crypto');
 var config = require('./config');
 var playerData = require('./player-data');
 
@@ -11,10 +12,119 @@ function createRoom(roomId) {
     return {
         id: roomId,
         participants: new Map(),
+        vipShares: new Map(),
         sockets: { admin: null, screen: null, audience: new Set() },
         nextParticipantNum: 1,
         recentBroadcasts: []
     };
+}
+
+function vipShareToJson(share) {
+    return {
+        token: share.token,
+        categoryId: share.categoryId,
+        createdAt: share.createdAt,
+        redeemedAt: share.redeemedAt || null,
+        redeemedByClientId: share.redeemedByClientId || null,
+        redeemedByName: share.redeemedByName || null
+    };
+}
+
+function randomVipToken() {
+    return crypto.randomBytes(9).toString('base64url');
+}
+
+function isValidCategoryId(categoryId) {
+    var id = String(categoryId || '').trim();
+    if (!id) return false;
+    return config.questionCategories.some(function (cat) { return cat.id === id; });
+}
+
+function getCategoryMeta(categoryId) {
+    var id = String(categoryId || '').trim();
+    return config.questionCategories.find(function (cat) { return cat.id === id; }) || null;
+}
+
+function createVipShare(room, categoryId) {
+    if (!isValidCategoryId(categoryId)) return null;
+    var token = randomVipToken();
+    while (room.vipShares.has(token)) {
+        token = randomVipToken();
+    }
+    var share = {
+        token: token,
+        categoryId: String(categoryId).trim(),
+        createdAt: new Date().toISOString(),
+        redeemedAt: null,
+        redeemedByClientId: null,
+        redeemedByName: null
+    };
+    room.vipShares.set(token, share);
+    return vipShareToJson(share);
+}
+
+function redeemVipShare(room, clientId, categoryId, token) {
+    var shareToken = String(token || '').trim();
+    var catId = String(categoryId || '').trim();
+    if (!shareToken || !catId || !clientId) {
+        return { ok: false, message: 'VIP 链接参数无效' };
+    }
+
+    var share = room.vipShares.get(shareToken);
+    if (!share) {
+        return { ok: false, message: 'VIP 链接无效或已失效' };
+    }
+    if (share.categoryId !== catId) {
+        return { ok: false, message: 'VIP 链接与题库不匹配' };
+    }
+    if (share.redeemedAt) {
+        return { ok: false, message: '此 VIP 分享链接已被使用' };
+    }
+
+    var participant = room.participants.get(clientId);
+    if (!participant) {
+        return { ok: false, message: '请先完成昵称登记' };
+    }
+    if (!participant.player) {
+        participant.player = playerData.createPlayer(participant.name, participant.phone);
+    }
+
+    playerData.grantCategoryUnlock(participant.player, catId);
+    share.redeemedAt = new Date().toISOString();
+    share.redeemedByClientId = clientId;
+    share.redeemedByName = participant.name || '';
+
+    var cat = getCategoryMeta(catId);
+    return {
+        ok: true,
+        categoryId: catId,
+        categoryName: cat ? (cat.displayName || cat.id) : catId,
+        player: participant.player
+    };
+}
+
+function listVipShares(room, limit) {
+    var max = Math.max(1, Math.min(limit || 20, 50));
+    var list = [];
+    room.vipShares.forEach(function (share) {
+        list.push(vipShareToJson(share));
+    });
+    list.sort(function (a, b) {
+        return String(b.createdAt).localeCompare(String(a.createdAt));
+    });
+    return list.slice(0, max);
+}
+
+function clearVipShares(room) {
+    room.vipShares.clear();
+}
+
+function participantHasCategoryAccess(participant, categoryId) {
+    if (!participant) return false;
+    var cat = getCategoryMeta(categoryId);
+    if (!cat) return false;
+    if (!participant.player) return (cat.required_level || 1) <= playerData.TEST_FIXED_LEVEL;
+    return playerData.isCategoryUnlocked(participant.player, cat.id, cat.required_level);
 }
 
 function participantToJson(p) {
@@ -71,10 +181,15 @@ function roomToJson(room) {
     room.participants.forEach(function (p) {
         participants.push(participantToJson(p));
     });
+    var vipShares = [];
+    room.vipShares.forEach(function (share) {
+        vipShares.push(vipShareToJson(share));
+    });
     return {
         id: room.id,
         nextParticipantNum: room.nextParticipantNum || 1,
         recentBroadcasts: room.recentBroadcasts || [],
+        vipShares: vipShares,
         participants: participants
     };
 }
@@ -84,6 +199,17 @@ function roomFromJson(raw) {
     var room = createRoom(String(raw.id).toUpperCase());
     room.nextParticipantNum = raw.nextParticipantNum || 1;
     room.recentBroadcasts = Array.isArray(raw.recentBroadcasts) ? raw.recentBroadcasts.slice(0, 3) : [];
+    (raw.vipShares || []).forEach(function (item) {
+        if (!item || !item.token) return;
+        room.vipShares.set(item.token, {
+            token: item.token,
+            categoryId: item.categoryId || '',
+            createdAt: item.createdAt || '',
+            redeemedAt: item.redeemedAt || null,
+            redeemedByClientId: item.redeemedByClientId || null,
+            redeemedByName: item.redeemedByName || null
+        });
+    });
     (raw.participants || []).forEach(function (item) {
         var p = participantFromJson(item);
         if (p) room.participants.set(p.clientId, p);
@@ -235,6 +361,8 @@ function buildAdminSummary(room) {
         totalCount: roster.length,
         onlineCount: onlineCount,
         roster: roster,
+        questionCategories: config.questionCategories,
+        vipShares: listVipShares(room, 12),
         recentBroadcasts: (room.recentBroadcasts || []).slice(0, 3)
     };
 }
@@ -261,5 +389,11 @@ module.exports = {
     buildState: buildState,
     participantToAdminDetail: participantToAdminDetail,
     buildAdminSummary: buildAdminSummary,
-    getParticipantsDetail: getParticipantsDetail
+    getParticipantsDetail: getParticipantsDetail,
+    createVipShare: createVipShare,
+    redeemVipShare: redeemVipShare,
+    listVipShares: listVipShares,
+    clearVipShares: clearVipShares,
+    participantHasCategoryAccess: participantHasCategoryAccess,
+    getCategoryMeta: getCategoryMeta
 };

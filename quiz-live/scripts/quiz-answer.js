@@ -88,6 +88,8 @@
         this.pendingQuestions = null;
         this.leaderboardMode = 'global';
         this.leaderboardReturnView = 'category';
+        this.vipSharePending = global.QuizProtocol.parseVipShareFromUrl();
+        this.vipShareRedeemSent = false;
 
         this.views = {
             register: root.querySelector('[data-view="register"]'),

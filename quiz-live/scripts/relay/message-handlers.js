@@ -20,6 +20,11 @@ function handleSelfAnswer(room, client, msg) {
         return;
     }
 
+    if (!roomStore.participantHasCategoryAccess(p, msg.category)) {
+        client.send(JSON.stringify({ type: 'category_locked', categoryId: msg.category || '' }));
+        return;
+    }
+
     var now = Date.now();
     if (p.lastAnswerAt && now - p.lastAnswerAt < config.ANSWER_MIN_INTERVAL_MS) return;
 
@@ -103,8 +108,21 @@ function handleAdmin(room, msg, adminClient) {
             room.participants.clear();
             room.nextParticipantNum = 1;
             room.recentBroadcasts = [];
+            roomStore.clearVipShares(room);
             notifyParticipantCleared(room, null);
             break;
+        }
+        case 'create_vip_share': {
+            var share = roomStore.createVipShare(room, msg.categoryId);
+            if (!share || !adminClient) return;
+            var catMeta = roomStore.getCategoryMeta(share.categoryId);
+            adminClient.send(JSON.stringify({
+                type: 'vip_share_created',
+                share: share,
+                categoryName: catMeta ? (catMeta.displayName || catMeta.id) : share.categoryId
+            }));
+            roomStore.scheduleSaveRooms();
+            return;
         }
         case 'update_participant_exp': {
             var expTargetId = msg.clientId;
@@ -249,8 +267,32 @@ function handleMessage(client, raw) {
     if (msg.type === 'round_start') {
         var roundPlayer = room.participants.get(msg.clientId);
         if (roundPlayer) {
+            if (!roomStore.participantHasCategoryAccess(roundPlayer, msg.category)) {
+                client.send(JSON.stringify({ type: 'category_locked', categoryId: msg.category || '' }));
+                return;
+            }
             roomStore.resetRoundBroadcastState(roundPlayer, msg.category || '');
             roomStore.scheduleSaveRooms();
+        }
+        return;
+    }
+
+    if (msg.type === 'redeem_vip_share') {
+        var redeemResult = roomStore.redeemVipShare(room, msg.clientId, msg.categoryId, msg.token);
+        if (redeemResult.ok) {
+            client.send(JSON.stringify({
+                type: 'vip_share_redeemed',
+                categoryId: redeemResult.categoryId,
+                categoryName: redeemResult.categoryName,
+                player: playerData.playerToClientJson(redeemResult.player)
+            }));
+            broadcast.broadcastState(room);
+            roomStore.scheduleSaveRooms();
+        } else {
+            client.send(JSON.stringify({
+                type: 'vip_share_error',
+                message: redeemResult.message || 'VIP 链接无法使用'
+            }));
         }
         return;
     }

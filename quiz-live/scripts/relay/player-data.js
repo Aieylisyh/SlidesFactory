@@ -53,6 +53,7 @@ function createPlayer(nickname, phone) {
         total_exp: 0,
         total_correct: 0,
         category_stats: {},
+        unlocked_categories: [],
         created_at: now,
         last_active: now,
         level: TEST_FIXED_LEVEL
@@ -65,6 +66,9 @@ function normalizePlayer(player) {
     if (player.total_correct == null) player.total_correct = 0;
     if (!player.category_stats || typeof player.category_stats !== 'object') {
         player.category_stats = {};
+    }
+    if (!Array.isArray(player.unlocked_categories)) {
+        player.unlocked_categories = [];
     }
     if (player.level == null) player.level = TEST_FIXED_LEVEL;
     return player;
@@ -125,11 +129,33 @@ function playerToClientJson(player) {
         total_exp: player.total_exp || 0,
         total_correct: player.total_correct || 0,
         category_stats: player.category_stats || {},
+        unlocked_categories: player.unlocked_categories.slice(),
         created_at: player.created_at,
         last_active: player.last_active,
         level: player.level || TEST_FIXED_LEVEL,
         levelInfo: getLevelInfo(player.level)
     };
+}
+
+function grantCategoryUnlock(player, categoryId) {
+    normalizePlayer(player);
+    var id = String(categoryId || '').trim();
+    if (!id) return false;
+    if (player.unlocked_categories.indexOf(id) === -1) {
+        player.unlocked_categories.push(id);
+    }
+    touchPlayer(player);
+    return true;
+}
+
+function isCategoryUnlocked(player, categoryId, requiredLevel) {
+    normalizePlayer(player);
+    var id = String(categoryId || '').trim();
+    if (!id) return false;
+    if (player.unlocked_categories.indexOf(id) !== -1) return true;
+    var req = Number(requiredLevel) || 1;
+    var level = Number(player.level) || TEST_FIXED_LEVEL;
+    return req <= level;
 }
 
 function findNicknameConflict(room, nickname, clientId) {
@@ -156,5 +182,7 @@ module.exports = {
     categoryAccuracyPercent: categoryAccuracyPercent,
     touchPlayer: touchPlayer,
     playerToClientJson: playerToClientJson,
+    grantCategoryUnlock: grantCategoryUnlock,
+    isCategoryUnlocked: isCategoryUnlocked,
     findNicknameConflict: findNicknameConflict
 };

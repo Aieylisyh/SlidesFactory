@@ -268,6 +268,35 @@
         return url;
     }
 
+    function parseVipShareFromUrl() {
+        try {
+            var params = new URLSearchParams(global.location.search);
+            var categoryId = (params.get('vip_cat') || '').trim();
+            var token = (params.get('vip_token') || '').trim();
+            if (!categoryId || !token) return null;
+            return { categoryId: categoryId, token: token };
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function buildVipShareUrl(room, categoryId, token, lanPageHost) {
+        var base = buildAnswerUrl(room, lanPageHost);
+        if (!base) return '';
+        return base +
+            '&vip_cat=' + encodeURIComponent(categoryId) +
+            '&vip_token=' + encodeURIComponent(token);
+    }
+
+    function makeRedeemVipShare(clientId, categoryId, token) {
+        return {
+            type: 'redeem_vip_share',
+            clientId: clientId,
+            categoryId: categoryId,
+            token: token
+        };
+    }
+
     global.QuizProtocol = {
         WS_PORT: WS_PORT,
         randomRoomCode: randomRoomCode,
@@ -291,6 +320,9 @@
         makeRequestParticipantsDetail: makeRequestParticipantsDetail,
         getRoomFromUrl: getRoomFromUrl,
         resolveRoomCode: resolveRoomCode,
-        buildAnswerUrl: buildAnswerUrl
+        buildAnswerUrl: buildAnswerUrl,
+        parseVipShareFromUrl: parseVipShareFromUrl,
+        buildVipShareUrl: buildVipShareUrl,
+        makeRedeemVipShare: makeRedeemVipShare
     };
 })(typeof window !== 'undefined' ? window : global);
