@@ -18,13 +18,19 @@
 
 <body>
 
-    <div class="ql-broadcast" data-broadcast>
+    <div class="ql-broadcast is-idle" data-broadcast>
 
         <span class="ql-broadcast-label">广播</span>
 
         <div class="ql-broadcast-viewport">
 
-            <span class="ql-broadcast-track ql-broadcast-idle" data-broadcast-track>等待战场广播…</span>
+            <div class="ql-broadcast-idle-fx" aria-hidden="true">
+                <span class="ql-broadcast-echo"></span>
+                <span class="ql-broadcast-echo"></span>
+                <span class="ql-broadcast-echo"></span>
+            </div>
+
+            <span class="ql-broadcast-track ql-broadcast-idle" data-broadcast-track></span>
 
         </div>
 
@@ -47,8 +53,6 @@
                 <h3 style="margin:0 0 8px;">在线人数</h3>
 
                 <div class="ql-counter" data-online-counter>0 / 0</div>
-
-                <div class="ql-participant-grid" data-roster-grid></div>
 
             </div>
 

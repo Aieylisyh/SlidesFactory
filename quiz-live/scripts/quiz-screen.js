@@ -1,5 +1,5 @@
 /**
- * Big-screen: roster, leaderboard, streak broadcast ticker.
+ * Big-screen: online count, leaderboard, streak broadcast ticker.
  */
 (function (global) {
     'use strict';
@@ -11,7 +11,6 @@
             title: root.querySelector('[data-screen-title]'),
             sub: root.querySelector('[data-screen-sub]'),
             counter: root.querySelector('[data-online-counter]'),
-            roster: root.querySelector('[data-roster-grid]'),
             leaderboard: root.querySelector('[data-leaderboard-body]')
         };
 
@@ -49,19 +48,7 @@
             this.els.counter.textContent = online.length + ' / ' + participants.length;
         }
 
-        this.renderRoster(participants);
         this.renderLeaderboard(participants);
-    };
-
-    QuizScreenApp.prototype.renderRoster = function (participants) {
-        if (!this.els.roster) return;
-        var html = participants.map(function (p) {
-            var label = p.name || p.id;
-            return '<div class="ql-participant-chip' + (p.online ? ' is-online' : '') + '" title="' +
-                label + ' · 得分 ' + p.score + '">' +
-                (p.name ? p.name.slice(0, 2) : p.id) + '</div>';
-        }).join('');
-        this.els.roster.innerHTML = html || '<span class="ql-muted">等待观众扫码加入…</span>';
     };
 
     QuizScreenApp.prototype.renderLeaderboard = function (participants) {

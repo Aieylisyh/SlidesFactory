@@ -152,13 +152,14 @@
             return b.score - a.score || (b.bestStreak || 0) - (a.bestStreak || 0);
         });
         this.els.scoreBody.innerHTML = rows.map(function (p) {
-            return '<tr class="' + (p.online ? '' : 'is-offline') + '">' +
+            return '<tr>' +
                 '<td>' + p.id + '</td>' +
                 '<td>' + (p.name || '—') + '</td>' +
                 '<td>' + (p.score || 0) + '</td>' +
                 '<td>' + (p.streak || 0) + '</td>' +
                 '<td>' + (p.bestStreak || 0) + '</td>' +
-                '<td>' + (p.online ? '在线' : '离线') + '</td>' +
+                '<td><span class="ql-participant-status' + (p.online ? ' is-online' : '') + '">' +
+                (p.online ? '在线' : '离线') + '</span></td>' +
                 '<td><button type="button" class="ql-btn ql-btn--xs ql-btn--danger" data-delete-participant="' +
                 (p.clientId || '') + '">删除</button></td></tr>';
         }).join('') || '<tr><td colspan="7">暂无参与者</td></tr>';
