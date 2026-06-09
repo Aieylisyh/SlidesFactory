@@ -133,3 +133,19 @@ html.ss-deck-light.deck-portrait .reveal .ss-support-list,
 html.ss-deck-light.deck-portrait .reveal .ss-tips-list {
     font-size: max(var(--ss-text-floor), 13px);
 }
+
+/* --- Main visual (dark cyber slide) --- */
+html.ss-deck-light.deck-portrait .reveal .slide-ss-main-visual h2.ss-mv-nav-title {
+    position: relative;
+    top: auto;
+    left: auto;
+    padding: 0 4%;
+}
+
+html.ss-deck-light.deck-portrait .reveal .ss-mv-logo-sfk img {
+    height: 40px;
+}
+
+html.ss-deck-light.deck-portrait .reveal .ss-mv-deco-svg {
+    display: none;
+}

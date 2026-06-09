@@ -6,7 +6,7 @@
   "navFile": "deck-nav-summerschool.json",
   "generatedAt": "2026-06-05T06:32:00.189Z",
   "linear": true,
-  "totalSlides": 10,
+  "totalSlides": 11,
   "chapters": [],
   "slides": [
     {
@@ -183,6 +183,23 @@
       "focusTargets": [],
       "title": "资源链接",
       "shareSlug": "resource-links"
+    },
+    {
+      "index": 10,
+      "h": 10,
+      "v": 0,
+      "id": "main-visual",
+      "className": "content-slide slide-ss-main-visual",
+      "attrs": {
+        "data-background-color": "#1A1A1A",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "夏校主视觉",
+      "shareSlug": "main-visual"
     }
   ]
 }

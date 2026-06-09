@@ -350,6 +350,191 @@
       "ja": "授業ノートと課題メモ",
       "en": "Open class notes doc"
     },
+    "mainVisual.navTitle": {
+      "zh": "夏校主视觉",
+      "ja": "サマースクール主ビジュアル",
+      "en": "Summer School Key Visual"
+    },
+    "mainVisual.partner.gmc": {
+      "zh": "<strong>GMC</strong> 中国音数协游戏博物馆",
+      "ja": "<strong>GMC</strong> 中国音数協ゲーム博物館",
+      "en": "<strong>GMC</strong> China Game Museum"
+    },
+    "mainVisual.partner.gamepress": {
+      "zh": "游研社",
+      "ja": "游研社",
+      "en": "GameResearch"
+    },
+    "mainVisual.demo.label": {
+      "zh": "Demo Day",
+      "ja": "Demo Day",
+      "en": "Demo Day"
+    },
+    "mainVisual.demo.date": {
+      "zh": "2026.07.24",
+      "ja": "2026.07.24",
+      "en": "2026.07.24"
+    },
+    "mainVisual.demo.venue": {
+      "zh": "馆内西侧 LED 巨幕 · 观摩展览",
+      "ja": "館内西側 LED 巨幕 · 内部展示",
+      "en": "West LED screen · Internal showcase"
+    },
+    "mainVisual.tag.cyber": {
+      "zh": "Cyber-Pixel",
+      "ja": "Cyber-Pixel",
+      "en": "Cyber-Pixel"
+    },
+    "mainVisual.tag.retro": {
+      "zh": "Retro-Futurism",
+      "ja": "Retro-Futurism",
+      "en": "Retro-Futurism"
+    },
+    "mainVisual.tag.vibe": {
+      "zh": "Vibe Coding",
+      "ja": "Vibe Coding",
+      "en": "Vibe Coding"
+    },
+    "mainVisual.img.arcade.alt": {
+      "zh": "霓虹街机厅氛围",
+      "ja": "ネオンゲームセンター",
+      "en": "Neon arcade atmosphere"
+    },
+    "mainVisual.img.arcade.label": {
+      "zh": "ARCADE",
+      "ja": "ARCADE",
+      "en": "ARCADE"
+    },
+    "mainVisual.img.museum.alt": {
+      "zh": "博物馆展陈空间",
+      "ja": "博物館展示空間",
+      "en": "Museum exhibition space"
+    },
+    "mainVisual.img.museum.label": {
+      "zh": "MUSEUM",
+      "ja": "MUSEUM",
+      "en": "MUSEUM"
+    },
+    "mainVisual.img.code.alt": {
+      "zh": "代码与 AI 编程界面",
+      "ja": "コードと AI プログラミング",
+      "en": "Code and AI programming"
+    },
+    "mainVisual.img.code.label": {
+      "zh": "VIBE CODE",
+      "ja": "VIBE CODE",
+      "en": "VIBE CODE"
+    },
+    "mainVisual.img.workshop.alt": {
+      "zh": "小组协作 Workshop",
+      "ja": "チーム Workshop",
+      "en": "Team workshop collaboration"
+    },
+    "mainVisual.img.workshop.label": {
+      "zh": "WORKSHOP",
+      "ja": "WORKSHOP",
+      "en": "WORKSHOP"
+    },
+    "mainVisual.img.retro.alt": {
+      "zh": "复古游戏手柄与像素情怀",
+      "ja": "レトロゲームのノスタルジア",
+      "en": "Retro gaming nostalgia"
+    },
+    "mainVisual.img.retro.label": {
+      "zh": "8-BIT ERA",
+      "ja": "8-BIT ERA",
+      "en": "8-BIT ERA"
+    },
+    "mainVisual.img.exhibit.alt": {
+      "zh": "电竞与展览现场",
+      "ja": "展示・イベント現場",
+      "en": "Exhibition and event scene"
+    },
+    "mainVisual.img.exhibit.label": {
+      "zh": "EXHIBIT",
+      "ja": "EXHIBIT",
+      "en": "EXHIBIT"
+    },
+    "mainVisual.img.wide.alt": {
+      "zh": "沉浸式游戏科技场景",
+      "ja": "没入型ゲームテック空間",
+      "en": "Immersive game-tech scene"
+    },
+    "mainVisual.img.wide.label": {
+      "zh": "DEMO DAY PREVIEW",
+      "ja": "DEMO DAY PREVIEW",
+      "en": "DEMO DAY PREVIEW"
+    },
+    "mainVisual.kicker": {
+      "zh": "GMC · 2026 Summer School",
+      "ja": "GMC · 2026 Summer School",
+      "en": "GMC · 2026 Summer School"
+    },
+    "mainVisual.title": {
+      "zh": "USC × 游研社 SFK 2026 Summer School",
+      "ja": "USC × 游研社 SFK 2026 Summer School",
+      "en": "USC × GameResearch SFK 2026 Summer School"
+    },
+    "mainVisual.subtitle": {
+      "zh": "USC 游戏设计夏校 × 游研社",
+      "ja": "USC ゲームデザイン夏校 × 游研社",
+      "en": "USC Game Design Summer School × GameResearch"
+    },
+    "mainVisual.slogan": {
+      "zh": "9 天 Workshop，博物馆里见作品",
+      "ja": "9日間 Workshop、博物館で作品を",
+      "en": "9-day Workshop — see your work at the museum"
+    },
+    "mainVisual.aux": {
+      "zh": "复古玩法解构 × 零基础 Vibe Coding",
+      "ja": "レトロ玩法解构 × ゼロから Vibe Coding",
+      "en": "Retro gameplay deconstruction × zero-base Vibe Coding"
+    },
+    "mainVisual.concept1.title": {
+      "zh": "复古解构",
+      "ja": "レトロ解构",
+      "en": "Retro deconstruction"
+    },
+    "mainVisual.concept1.body": {
+      "zh": "1990–2005 黄金年代经典玩法的创意重组",
+      "ja": "1990–2005 黄金時代の经典玩法を创意重组",
+      "en": "Creative remix of 1990–2005 golden-era gameplay"
+    },
+    "mainVisual.concept2.title": {
+      "zh": "前沿编程",
+      "ja": "最先端プログラミング",
+      "en": "Cutting-edge coding"
+    },
+    "mainVisual.concept2.body": {
+      "zh": "自然语言指挥 AI · Vibe Coding 零基础入门",
+      "ja": "自然言語で AI を指揮 · Vibe Coding 入門",
+      "en": "Natural language AI · intro to Vibe Coding"
+    },
+    "mainVisual.terminal": {
+      "zh": "build_summer_school --mode=workshop --venue=gmc_museum --days=9",
+      "ja": "build_summer_school --mode=workshop --venue=gmc_museum --days=9",
+      "en": "build_summer_school --mode=workshop --venue=gmc_museum --days=9"
+    },
+    "mainVisual.footer.cyber": {
+      "zh": "赛博像素",
+      "ja": "サイバーピクセル",
+      "en": "Cyber-Pixel"
+    },
+    "mainVisual.footer.retro": {
+      "zh": "复古未来主义",
+      "ja": "レトロフューチャー",
+      "en": "Retro-Futurism"
+    },
+    "mainVisual.footer.gmc": {
+      "zh": "GMC 灰调水泥 × 霓虹电子管",
+      "ja": "GMC コンクリート × ネオン",
+      "en": "GMC concrete × neon tubes"
+    },
+    "mainVisual.footer.pixel": {
+      "zh": "90s 像素 × 低模元素",
+      "ja": "90s ピクセル × ローポリ",
+      "en": "90s pixels × low-poly"
+    },
     "schedule.ui.modal.aria": {
       "zh": "课程详情",
       "ja": "授業詳細",

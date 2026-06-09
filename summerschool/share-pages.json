@@ -39,6 +39,10 @@
     "resource-links": {
       "slideId": "resource-links",
       "title": "资源链接"
+    },
+    "main-visual": {
+      "slideId": "main-visual",
+      "title": "夏校主视觉"
     }
   }
 }
