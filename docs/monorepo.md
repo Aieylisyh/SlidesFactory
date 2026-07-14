@@ -14,7 +14,7 @@
 |------|------|----------------|
 | 站点 | `index.html`、`summerschool/`、`quiz-live/`、`remoteNavigator/`、`assets/`、`data/` | ✅ |
 | 包 | `styles/`、`shared/`、`scripts/`、`style_guide.css`、`config/share-pages.json` | ✅（`*.md` 除外） |
-| 工程 | `tools/`、`docs/`、`contents/`、`deploy/`、`config/outline.md` | ❌ |
+| 工程 | `tools/`、`docs/`、`contents/`、`deploy/`、`AGENTS.md`、`.codex/`、`.cursor/`、`config/outline.md` | ❌ |
 
 ## 站点一览
 
@@ -44,6 +44,9 @@ Project/
 ├── tools/                  # Python 脚本、本地 dev server、设计预览
 ├── docs/                   # 文档索引 + guides 规范
 ├── deploy/                 # COS / relay 部署
+├── AGENTS.md               # Agent 工作入口
+├── .codex/                 # Codex rules / skills（不部署）
+├── .codexignore            # Codex 上下文忽略清单
 ├── summerschool/           # 夏校站点
 ├── quiz-live/              # 暖场抢答（已封存，活跃开发见 QuizOnlineGame）
 └── remoteNavigator/        # 远程翻页
@@ -106,7 +109,7 @@ HTML **只链一条** `style_guide.css`。Hub 按序 `@import` 01–10（其中 
 
 ## 部署
 
-`deploy/sync.ps1` 将 **仓库根目录** 1:1 上传到 COS 前缀（见 `deploy/sync.env.example` 的 `PREFIX`）。排除 `tools/`、`docs/`、`contents/`、`deploy/`。
+`deploy/sync.ps1` 将 **仓库根目录** 1:1 上传到 COS 前缀（见 `deploy/sync.env.example` 的 `PREFIX`）。排除 `tools/`、`docs/`、`contents/`、`deploy/`、`.codex/`、`.cursor/` 与根目录 Agent 配置。
 
 - 本地预览：根目录 `start-lan-server.bat`（转发至 `tools/dev/`）
 - 远程翻页：`remoteNavigator/start-remote-server.bat`

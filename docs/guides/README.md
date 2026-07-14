@@ -55,4 +55,6 @@
 | [`quiz-live/scripts/README.md`](../quiz-live/scripts/README.md) | quiz-live / relay 脚本（封存） |
 | [`deploy/部署脚本说明.md`](../deploy/部署脚本说明.md) | 部署脚本说明 |
 | [`contents/README.md`](../contents/README.md) | 源素材与抽图流程 |
-| [`.cursorrules`](../.cursorrules) | Agent 路由规则 |
+| [`AGENTS.md`](../../AGENTS.md) | Agent 工作入口 |
+| [`.codex/rules/project-rules.md`](../../.codex/rules/project-rules.md) | Codex 项目规则 |
+| [`.cursorrules`](../../.cursorrules) | Agent 路由规则 |

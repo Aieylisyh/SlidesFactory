@@ -74,7 +74,7 @@
 | 字段 | 值 |
 |------|-----|
 | `id` | `case-studies` |
-| `pages` | 9–12（按学员展开） |
+| `pages` | 10–13（按学员展开） |
 | `opener` | `section-opener` · `data-transition-tier="key"` |
 | `frozen` | **yes** — 勿改 HTML/文案/版式，除非用户明确要求 |
 
@@ -82,7 +82,7 @@
 
 | 字段 | 值 |
 |------|-----|
-| `pages` | 9–12 |
+| `pages` | 10–13 |
 | `assets` | `contents/*.pdf` → `python tools/python/extract_pdf_images.py --pdf contents/<file>.pdf --out assets/pdf-extracted` → `python tools/python/compress_web_assets.py` |
 | `interactive` | 可选 `data-match-game` · `scripts/cases/case-match.js` |
 
@@ -93,6 +93,7 @@
 | 崔同学 | 项目展示 + TFE 视频页 + 微信截图页 |
 | 黄同学 | 同上 |
 | 李同学 | 同上 |
+| 刘同学 | 伦艺 → 腾讯小项目组 → 网易大项目组 |
 | 卢同学 | 同上 |
 | 马同学 | 同上 |
 

@@ -350,6 +350,36 @@
       "ja": "授業ノートと課題メモ",
       "en": "Open class notes doc"
     },
+    "links.col4.title": {
+      "zh": "【Google Drive】课堂 Slides",
+      "ja": "【Google Drive】授業 Slides",
+      "en": "Google Drive · Class slides"
+    },
+    "links.col4.aria": {
+      "zh": "打开 Google Drive 课堂 Slides",
+      "ja": "Google Drive の授業 Slides を開く",
+      "en": "Open Google Drive class slides"
+    },
+    "links.col5.title": {
+      "zh": "【Google Drive】Assignment 提交处",
+      "ja": "【Google Drive】Assignment 提出先",
+      "en": "Google Drive · Assignment submission"
+    },
+    "links.col5.aria": {
+      "zh": "打开 Google Drive Assignment 提交处",
+      "ja": "Google Drive の Assignment 提出先を開く",
+      "en": "Open Google Drive assignment submission"
+    },
+    "links.col6.title": {
+      "zh": "【腾讯文档】夏校 Assignment 备份方案",
+      "ja": "【Tencent Docs】Assignment バックアップ",
+      "en": "Tencent Docs · Assignment backup"
+    },
+    "links.col6.aria": {
+      "zh": "打开腾讯文档夏校 Assignment 备份方案",
+      "ja": "Tencent Docs の Assignment バックアップを開く",
+      "en": "Open Tencent Docs assignment backup"
+    },
     "mainVisual.navTitle": {
       "zh": "夏校主视觉",
       "ja": "サマースクール主ビジュアル",
@@ -625,9 +655,9 @@
       },
       "session-5": {
         "body": {
-          "zh": "Module 1 · 线上课 · Day 5（7/4）\n\nUSC 核心课收官 · 协作理论与 Module 2 衔接：协作沟通与试玩反馈礼仪；制作三要素（3 C's）；关键术语回顾与答疑。\n\n巩固 Module 1 全部游戏设计理论与学习方法论，说明 Module 2 线下 9 天 workshop 集训与博物馆展的预期——线上课完成理论准备，线下课进入高强度实作与团队制作。",
-          "ja": "Module 1 · オンライン · Day 5（7/4）\n\nUSC コア総括 · 協働理論と Module 2 接続：協働コミュニケーションとプレイテストフィードバック；3 C's；用語の総復習と Q&A。\n\nModule 1 の理論を固め、Module 2 の 9 日間 workshop と博物館展の期待を説明——オンラインで理論準備、オフラインで集中制作へ。",
-          "en": "Module 1 · Online · Day 5 (7/4)\n\nUSC core wrap-up · Collaboration and Module 2 bridge: team communication and playtest feedback etiquette; the 3 C's; key terms review and Q&A.\n\nConsolidate Module 1 theory and set expectations for Module 2's 9-day workshop and museum show—online prep, then intensive team production onsite."
+          "zh": "Module 1 · 线上课 · Day 5（7/5）\n\nUSC 核心课收官 · 协作理论与 Module 2 衔接：协作沟通与试玩反馈礼仪；制作三要素（3 C's）；关键术语回顾与答疑。\n\n巩固 Module 1 全部游戏设计理论与学习方法论，说明 Module 2 线下 9 天 workshop 集训与博物馆展的预期——线上课完成理论准备，线下课进入高强度实作与团队制作。",
+          "ja": "Module 1 · オンライン · Day 5（7/5）\n\nUSC コア総括 · 協働理論と Module 2 接続：協働コミュニケーションとプレイテストフィードバック；3 C's；用語の総復習と Q&A。\n\nModule 1 の理論を固め、Module 2 の 9 日間 workshop と博物館展の期待を説明——オンラインで理論準備、オフラインで集中制作へ。",
+          "en": "Module 1 · Online · Day 5 (7/5)\n\nUSC core wrap-up · Collaboration and Module 2 bridge: team communication and playtest feedback etiquette; the 3 C's; key terms review and Q&A.\n\nConsolidate Module 1 theory and set expectations for Module 2's 9-day workshop and museum show—online prep, then intensive team production onsite."
         }
       },
       "arrival": {

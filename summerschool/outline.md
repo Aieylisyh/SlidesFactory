@@ -64,7 +64,7 @@
 
 | 11 | 夏校主视觉 | `main-visual` | GMC 2026 夏校视觉方案 | 赛博像素 / 复古未来主义 |
 
-| 12 | 破冰活动 | `ice-break` | `summerschool/ice-break/` | 3000×1200 原比例任务图；D 显示骰子，空格投掷 |
+| 12 | 破冰活动 | `ice-break` | `summerschool/modules/ice-break/` | 3000×1200 原比例任务图；D 显示骰子，空格投掷 |
 
 
 

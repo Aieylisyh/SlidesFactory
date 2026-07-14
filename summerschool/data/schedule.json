@@ -17,7 +17,7 @@
       "body": "Module 1 · 线上课 · Day 4（6/28）\n\n学习方法论 · 制作流程与迭代思维：游戏制作管线概览；宏观设计结构；同心圆式开发（Concentric Development）与试玩迭代（Playtesting）的理论框架。\n\n讲授 USC 核心方法论中「如何分阶段验证核心乐趣、如何排序优先级」，为 Module 2 线下 workshop 实作建立认知基础；本课以理论讲解为主，不在线上进行制作实作。"
     },
     "session-5": {
-      "body": "Module 1 · 线上课 · Day 5（7/4）\n\nUSC 核心课收官 · 协作理论与 Module 2 衔接：协作沟通与试玩反馈礼仪；制作三要素（3 C's）；关键术语回顾与答疑。\n\n巩固 Module 1 全部游戏设计理论与学习方法论，说明 Module 2 线下 9 天 workshop 集训与博物馆展的预期——线上课完成理论准备，线下课进入高强度实作与团队制作。"
+      "body": "Module 1 · 线上课 · Day 5（7/5）\n\nUSC 核心课收官 · 协作理论与 Module 2 衔接：协作沟通与试玩反馈礼仪；制作三要素（3 C's）；关键术语回顾与答疑。\n\n巩固 Module 1 全部游戏设计理论与学习方法论，说明 Module 2 线下 9 天 workshop 集训与博物馆展的预期——线上课完成理论准备，线下课进入高强度实作与团队制作。"
     },
     "arrival": {
       "body": "Module 2 首日：学员抵达上海冬校基地，办理入住与场地熟悉。为后续 9 天集训与小组协作做准备。"
@@ -68,7 +68,7 @@
     { "id": "online-2", "date": "06/14", "time": "10:00-12:00", "title": "Session 2", "syllabusKey": "session-2" },
     { "id": "online-3", "date": "06/21", "time": "10:00-12:00", "title": "Session 3", "syllabusKey": "session-3" },
     { "id": "online-4", "date": "06/28", "time": "10:00-12:00", "title": "Session 4", "syllabusKey": "session-4" },
-    { "id": "online-5", "date": "07/04", "time": "10:00-12:00", "title": "Session 5", "syllabusKey": "session-5" }
+    { "id": "online-5", "date": "07/05", "time": "10:00-12:00", "title": "Session 5", "syllabusKey": "session-5" }
   ],
   "offline": {
     "dayHeaders": [

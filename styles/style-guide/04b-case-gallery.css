@@ -556,6 +556,24 @@
     object-fit: contain;
 }
 
+.reveal .chat-evidence-grid.chat-evidence-grid-trio {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.reveal .chat-evidence-grid.chat-evidence-grid-trio .tech-image-container:first-child {
+    grid-row: span 2;
+}
+
+.reveal .chat-evidence-grid.chat-evidence-grid-trio .tech-image-container img {
+    max-height: min(40vh, 430px);
+}
+
+.reveal .chat-evidence-grid.chat-evidence-grid-trio .tech-image-container:first-child img {
+    max-height: min(82vh, 900px);
+}
+
 .reveal .wechat-gallery {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -699,6 +717,10 @@
 
 .reveal .slide-li-intro .chat-evidence-grid .tech-image-container.chat-shot img {
     max-height: min(78vh, 900px);
+}
+
+.reveal .slide-liu-intro .slide-layout-split {
+    grid-template-columns: 0.9fr 1.1fr;
 }
 
 .reveal .slide-ma-progress .wechat-gallery-large .tech-image-container.chat-shot img {
@@ -1091,4 +1113,3 @@
         min-height: 150px;
     }
 }
-

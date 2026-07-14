@@ -140,7 +140,7 @@ button {
 
 .dice-aura::before {
   z-index: 0;
-  background: url("../../../assets/summerschool/ice-break/dice/bg.webp") center / cover no-repeat;
+  background: url("../assets/dice/bg.webp") center / cover no-repeat;
   opacity: 0.34;
   transform: scale(1.04);
 }

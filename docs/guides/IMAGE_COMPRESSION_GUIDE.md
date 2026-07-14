@@ -116,7 +116,7 @@ assets/ 引用到 index.html    （?v= 按需递增）
 
 | 文件 | 关系 |
 |------|------|
-| `.cursorrules` §2 | AI 必须遵守的压缩强制项 |
+| `AGENTS.md` / `.codex/rules/project-rules.md` / `.cursorrules` | AI 必须遵守的压缩强制项 |
 | [`../contents/README.md`](../contents/README.md) | 抽图 → 压缩串联说明 |
 | [`README.md`](README.md) | 说明文档索引 |
 | [`OUTLINE_GUIDE.md`](OUTLINE_GUIDE.md) | `assets` 字段应注明是否需压缩 |

@@ -4,7 +4,7 @@
 (function (global) {
     'use strict';
 
-    var DATA_URL = 'data/schedule.json?v=12';
+    var DATA_URL = 'data/schedule.json?v=13';
     var cachedData = null;
     var overlay = null;
     var overlayTitle = null;

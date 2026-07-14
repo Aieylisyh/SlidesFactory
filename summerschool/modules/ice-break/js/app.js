@@ -1,5 +1,5 @@
-import { DICE_IMAGE_PATHS, DICE_ROLL_INTERVAL_MS } from "./config.js";
-import { DiceController } from "./dice-controller.js";
+import { DICE_IMAGE_PATHS } from "./config.js?v=2";
+import { DiceController } from "./dice-controller.js?v=2";
 import { FullscreenController } from "./fullscreen-controller.js";
 import { InputController } from "./input-controller.js";
 
@@ -7,7 +7,6 @@ const diceController = new DiceController({
   layer: document.querySelector("#diceLayer"),
   image: document.querySelector("#diceImage"),
   imagePaths: DICE_IMAGE_PATHS,
-  rollIntervalMs: DICE_ROLL_INTERVAL_MS,
   onStatusChange(message) {
     document.querySelector("#statusMessage").textContent = message;
   },

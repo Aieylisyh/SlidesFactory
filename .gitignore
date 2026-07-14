@@ -42,3 +42,12 @@ ehthumbs.db
 quiz-live/data/lan-host.txt
 quiz-live/data/room-state.json
 *.log
+
+# --- Codex local scratch (tracked .codex skills/rules stay in repo) ---
+.codex/tmp/
+.codex/workspace/
+.codex/logs/
+.codex/*.local.*
+
+# --- Local content drafts ---
+docs/content draft/

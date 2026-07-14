@@ -301,7 +301,7 @@ Reveal 内置 `.progress` 轨道 + 独立模块 `shared/scripts/slide-progress.j
 | 横屏提示 | 底部条「横屏体验更佳」；`sessionStorage` 记住「不再提示」 |
 | 禁用竖屏模式 | URL `?portrait=0` |
 | 滚轮翻页 | 竖屏时 `SlideWheelNav` `ignoreWhen` → `PortraitDeckAdapt.isPortrait()` |
-| Agent skill | `.cursor/skills/portrait-deck-adapt/SKILL.md` |
+| Agent skill | `.codex/skills/portrait-deck-adapt/SKILL.md` · `.cursor/skills/portrait-deck-adapt/SKILL.md` |
 
 **勿**在策略 A 下修改 `getSlideDimensions()` 为 1080×1920（属方案 B，未默认启用）。
 
@@ -355,7 +355,7 @@ Reveal 内置 `.progress` 轨道 + 独立模块 `shared/scripts/slide-progress.j
 
 - `#global-bg-canvas`：全局网格变形，opacity ≈ 0.22  
 - `.slide-bg-canvas-host`：单页 Canvas（章节开篇等）  
-- 非必要不加重 Canvas / iframe（见 `.cursorrules`）
+- 非必要不加重 Canvas / iframe（见 `AGENTS.md`、`.codex/rules/project-rules.md` 与 `.cursorrules`）
 
 ---
 
@@ -407,9 +407,9 @@ Reveal 内置 `.progress` 轨道 + 独立模块 `shared/scripts/slide-progress.j
 3. 新增可复用类 → 写入**对应** `styles/style-guide/*.css` + 更新 `style_guide_extended.md`（必要时更新 `styles/style-guide/README.md`）  
 4. 新增设计 token → 写入 `01-tokens-base.css` 的 `:root` 并同步本文 §2–§4  
 5. 修改 `scripts/` 子目录、`shared/scripts/` 或任一分片后递增 HTML 中的 `style_guide.css?v=` 与脚本 `?v=`（目录见 [`../scripts/README.md`](../scripts/README.md)）  
-6. 修改内容页标题 token 或 `fitSlidePageTitles()` 逻辑时，同步更新本文 §4.4 与 `.cursorrules` §1 / §5  
-7. 修改进度条 token、`shared/scripts/slide-progress.js` 或 **bar 渐变**（`--deck-progress-bar-*` / `--deck-progress-thumb-pct`）时，同步更新本文 §4.5 与 `.cursorrules` §1  
-8. 修改翻页条布局或 `bindDeckNavCluster()` 时，同步更新本文 §4.3 与 `.cursorrules` §1  
+6. 修改内容页标题 token 或 `fitSlidePageTitles()` 逻辑时，同步更新本文 §4.4、`AGENTS.md` / `.codex/rules/project-rules.md` 与 `.cursorrules`
+7. 修改进度条 token、`shared/scripts/slide-progress.js` 或 **bar 渐变**（`--deck-progress-bar-*` / `--deck-progress-thumb-pct`）时，同步更新本文 §4.5、`.codex/skills/deck-progress-bar/SKILL.md` 与 `.cursorrules`
+8. 修改翻页条布局或 `bindDeckNavCluster()` 时，同步更新本文 §4.3、`AGENTS.md` / `.codex/rules/project-rules.md` 与 `.cursorrules`
 9. PDF 图片提取：`tools/python/extract_pdf_images.py`（含方向修正）— 多 PDF 时用 `--pdf` / `--out` / `--page`（见 [`../contents/README.md`](../contents/README.md)）；抽图后运行 `tools/python/compress_web_assets.py`
 10. 网页图片压缩：[`IMAGE_COMPRESSION_GUIDE.md`](IMAGE_COMPRESSION_GUIDE.md) — 新增/替换 `assets/` 大图（≥ 80 KB 或长边 > 1920px）必须先压缩再引用
 11. Deck 结构：先改 [`../config/outline.md`](../config/outline.md)（规范见 [`OUTLINE_GUIDE.md`](OUTLINE_GUIDE.md)），再改 `../index.html`

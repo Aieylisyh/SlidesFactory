@@ -11,7 +11,7 @@
 | 主 deck JS 目录 | [scripts/README.md](../scripts/README.md) |
 | 工具脚本 | [tools/README.md](../tools/README.md) |
 | quiz-live（已封存） | [guides/QUIZ_LIVE_GUIDE.md](guides/QUIZ_LIVE_GUIDE.md) · [quiz-live/ARCHIVED.md](../quiz-live/ARCHIVED.md) |
-| Agent 规则 | [.cursorrules](../.cursorrules) |
+| Agent 规则 | [AGENTS.md](../AGENTS.md) · [.codex/rules/project-rules.md](../.codex/rules/project-rules.md) · [.cursorrules](../.cursorrules) |
 
 ## Co-located 文档
 
@@ -34,12 +34,15 @@
 |------|------|
 | [deck-architecture.mermaid](deck-architecture.mermaid) | 主 deck 四模块流程 |
 
-## Cursor Agent Skills
+## Agent Skills
 
 | Skill | 路径 |
 |-------|------|
-| Deck 进度条 | [.cursor/skills/deck-progress-bar/SKILL.md](../.cursor/skills/deck-progress-bar/SKILL.md) |
-| 竖屏适配 | [.cursor/skills/portrait-deck-adapt/SKILL.md](../.cursor/skills/portrait-deck-adapt/SKILL.md) |
+| SFK Reveal 多站点工作流 | [.codex/skills/sfk-reveal-deck-workflow/SKILL.md](../.codex/skills/sfk-reveal-deck-workflow/SKILL.md) |
+| Deck 进度条（Codex） | [.codex/skills/deck-progress-bar/SKILL.md](../.codex/skills/deck-progress-bar/SKILL.md) |
+| 竖屏适配（Codex） | [.codex/skills/portrait-deck-adapt/SKILL.md](../.codex/skills/portrait-deck-adapt/SKILL.md) |
+| Deck 进度条（Cursor） | [.cursor/skills/deck-progress-bar/SKILL.md](../.cursor/skills/deck-progress-bar/SKILL.md) |
+| 竖屏适配（Cursor） | [.cursor/skills/portrait-deck-adapt/SKILL.md](../.cursor/skills/portrait-deck-adapt/SKILL.md) |
 
 ## 部署
 

@@ -1,15 +1,15 @@
 export class DiceController {
-  constructor({ layer, image, imagePaths, rollIntervalMs, onStatusChange }) {
+  constructor({ layer, image, imagePaths, onStatusChange }) {
     this.layer = layer;
     this.image = image;
     this.imagePaths = imagePaths;
-    this.rollIntervalMs = rollIntervalMs;
     this.onStatusChange = onStatusChange;
 
     this.isVisible = false;
     this.isRolling = false;
     this.currentFaceIndex = 0;
-    this.rollTimer = null;
+    this.facePool = [];
+    this.rollAnimationFrameId = null;
 
     this.preloadImages();
     this.renderFace();
@@ -70,16 +70,15 @@ export class DiceController {
     this.layer.classList.remove("has-result");
     this.layer.classList.add("is-rolling");
     this.showNextRandomFace();
-    this.rollTimer = window.setInterval(
-      () => this.showNextRandomFace(),
-      this.rollIntervalMs,
-    );
+    this.scheduleNextFrame();
     this.reportStatus("骰子正在投掷");
   }
 
   stopRolling() {
-    window.clearInterval(this.rollTimer);
-    this.rollTimer = null;
+    if (this.rollAnimationFrameId !== null) {
+      window.cancelAnimationFrame(this.rollAnimationFrameId);
+      this.rollAnimationFrameId = null;
+    }
     this.isRolling = false;
     this.layer.classList.remove("is-rolling");
     this.layer.classList.add("has-result");
@@ -87,17 +86,43 @@ export class DiceController {
     this.reportStatus(`投掷结果为 ${this.currentFaceIndex + 1}`);
   }
 
+  scheduleNextFrame() {
+    this.rollAnimationFrameId = window.requestAnimationFrame(() => {
+      if (!this.isRolling) {
+        return;
+      }
+
+      this.showNextRandomFace();
+      this.scheduleNextFrame();
+    });
+  }
+
+  refillFacePool() {
+    this.facePool = Array.from(
+      { length: this.imagePaths.length },
+      (_, index) => index,
+    );
+  }
+
   showNextRandomFace() {
-    if (this.imagePaths.length < 2) {
+    if (this.imagePaths.length === 0) {
       return;
     }
 
-    let nextFaceIndex = this.currentFaceIndex;
-    while (nextFaceIndex === this.currentFaceIndex) {
-      nextFaceIndex = Math.floor(Math.random() * this.imagePaths.length);
+    if (this.facePool.length === 0) {
+      this.refillFacePool();
     }
 
-    this.currentFaceIndex = nextFaceIndex;
+    const candidatePoolIndices = this.facePool
+      .map((faceIndex, poolIndex) => ({ faceIndex, poolIndex }))
+      .filter(({ faceIndex }) => faceIndex !== this.currentFaceIndex);
+    const candidates = candidatePoolIndices.length > 0
+      ? candidatePoolIndices
+      : this.facePool.map((faceIndex, poolIndex) => ({ faceIndex, poolIndex }));
+    const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+
+    this.currentFaceIndex = chosen.faceIndex;
+    this.facePool.splice(chosen.poolIndex, 1);
     this.renderFace();
   }
 

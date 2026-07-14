@@ -45,8 +45,6 @@ if ($prefix) {
 $relativeFiles = @(
     'summerschool/index.html',
     'summerschool/style_extension.css',
-    'summerschool/css/ss-ice-break.css',
-    'summerschool/scripts/ss-ice-break.js',
     'summerschool/share-pages.json',
     'shared/scripts/deck-focus-nav.js',
     'remoteNavigator/deck-nav-summerschool.json',
@@ -65,8 +63,7 @@ $relativeFiles = @(
 )
 
 $relativeDirs = @(
-    'summerschool/ice-break',
-    'assets/summerschool/ice-break'
+    'summerschool/modules/ice-break'
 )
 
 $files = [System.Collections.Generic.List[System.IO.FileInfo]]::new()

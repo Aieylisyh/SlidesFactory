@@ -132,11 +132,14 @@ function Get-LegacyRemotePruneTargets {
         'guides/',
         'tools/',
         'sites/',
-        'design/'
+        'design/',
+        '.codex/'
     )
     $legacyFiles = @(
         'outline.md',
         'share-pages.json',
+        'AGENTS.md',
+        '.codexignore',
         '.cursorrules',
         'BILIBILI_EMBED_GUIDE.md',
         'IMAGE_COMPRESSION_GUIDE.md',
@@ -167,6 +170,36 @@ function Get-LegacyRemotePruneTargets {
     }
 
     return $targets
+}
+
+function Invoke-ForceEntryUploads {
+    param(
+        [string]$CosCliPath,
+        [string]$ConfigPath,
+        [string]$Target,
+        [string]$LocalRepoRoot
+    )
+
+    $entries = @(
+        'index.html',
+        'summerschool/index.html',
+        'quiz-live/index.html'
+    )
+
+    Write-Step 'Force-uploading site entry index files (bypass coscli snapshot skip) ...'
+    foreach ($rel in $entries) {
+        $local = Join-Path $LocalRepoRoot ($rel -replace '/', '\')
+        if (-not (Test-Path $local)) {
+            Write-Host "  skip (missing): $rel" -ForegroundColor DarkGray
+            continue
+        }
+        $uri = $Target.TrimEnd('/') + '/' + ($rel -replace '\\', '/')
+        Write-Host "  cp: $rel" -ForegroundColor DarkGray
+        & $CosCliPath cp $local $uri --config-path $ConfigPath
+        if ($LASTEXITCODE -ne 0) {
+            throw "coscli cp failed for $rel (exit $LASTEXITCODE)"
+        }
+    }
 }
 
 function Invoke-PruneLegacyRemote {
@@ -256,8 +289,11 @@ $exclude = @(
     'docs/**',
     'remoteNavigator/tests/**',
     'coscli_output/**',
+    '.codex/**',
+    '.codexignore',
     '.cursor/**',
     '.cursorrules',
+    'AGENTS.md',
     '*.md',
     '.git/**',
     '.gitignore'
@@ -327,6 +363,8 @@ try {
 if ($DeleteRemote) {
     Invoke-PruneLegacyRemote -CosCliPath $cosCli -ConfigPath $CosYaml -Target $cosTarget
 }
+
+Invoke-ForceEntryUploads -CosCliPath $cosCli -ConfigPath $CosYaml -Target $cosTarget -LocalRepoRoot $RepoRoot
 
 $publicBase = Get-PublicBaseUrl $envMap $prefix
 

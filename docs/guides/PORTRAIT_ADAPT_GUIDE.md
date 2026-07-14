@@ -2,7 +2,7 @@
 
 > 实现：`shared/scripts/portrait-deck-adapt.js` · 样式：`styles/style-guide/10-portrait-adapt.css`（经 `style_guide.css` hub 加载）  
 > 策略：**A（scale-first）** — 保持 `main.js` 逻辑画布 1920×1080/1200，Reveal 整体缩放；竖屏仅加类名、通用 CSS 折叠与「横屏体验更佳」提示。  
-> Agent skill：`.cursor/skills/portrait-deck-adapt/SKILL.md`
+> Agent skill：`.codex/skills/portrait-deck-adapt/SKILL.md` · `.cursor/skills/portrait-deck-adapt/SKILL.md`
 
 ## 行为摘要
 
@@ -77,7 +77,7 @@ PortraitDeckAdapt.update()         // 手动刷新检测
 2. 按上表接入 `index.html` + `main.js`
 3. 浅色/特殊布局：新增 `{deck}/portrait-deck-adapt-extension.css`
 4. 按目标 deck 的 grid 类名增补 extension 或 `10-portrait-adapt.css` 选择器
-5. 阅读 `.cursor/skills/portrait-deck-adapt/SKILL.md`
+5. 阅读 `.codex/skills/portrait-deck-adapt/SKILL.md`（Cursor 里同步参考 `.cursor/skills/portrait-deck-adapt/SKILL.md`）
 
 ## 调试
 
@@ -90,5 +90,4 @@ PortraitDeckAdapt.update()         // 手动刷新检测
 
 - 缩放后字号仍可能偏小；提示横屏是产品预期。
 - 极特殊版式可能需 `data-portrait-*` 或额外 CSS。
-- 微信内置浏览器以 `innerWidth/innerHeight` 为准，勿单独依赖 `orientation` API。
-
+- 微信内置浏览器以 `innerWidth/innerHeight` 为准，勿单独依赖 `orientation` API。

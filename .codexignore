@@ -1,0 +1,37 @@
+# Codex context ignore for SFK SlidesFactory
+
+# VCS / editor
+.git/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local secrets and generated deployment config
+deploy/sync.env
+deploy/quiz-live-relay.env
+deploy/cos.yaml
+deploy/tools/
+coscli_output/
+
+# Runtime state / logs
+quiz-live/data/lan-host.txt
+quiz-live/data/room-state.json
+*.log
+
+# Python / local env
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Generated or debug assets
+assets/test-*
+assets/debug-*
+assets/pdf-page-*-preview*
+assets/summerschool/_extracted/
+
+# Large source documents are referenced through docs/README and opened only when needed.
+contents/**/*.pdf
+contents/**/*.pptx
+contents/**/*.docx

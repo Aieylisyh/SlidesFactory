@@ -128,4 +128,4 @@
 ## 6. 与演示稿的关系
 
 - 本表为**课程体系说明**，与 `config/outline.md` 四议程无冲突；插入 deck 时建议放在「如何选专业方向」 opener 之前或作为附录页
-- 不加 `assets` 图片；符合 `.cursorrules` 零外链图原则
+- 不加 `assets` 图片；符合 `AGENTS.md` / `.codex/rules/project-rules.md` / `.cursorrules` 的零外链图原则
