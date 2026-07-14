@@ -121,6 +121,60 @@ html, body {
     color: #fff;
 }
 
+.dice-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid rgba(0, 240, 255, 0.28);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(0, 240, 255, 0.08), rgba(255, 0, 127, 0.08));
+}
+
+.dice-heading {
+    margin: 0;
+    color: var(--rn-text);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.dice-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.dice-btn {
+    min-height: 72px;
+    padding: 10px;
+    border-radius: 14px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.08s ease, opacity 0.15s ease;
+}
+
+.dice-btn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.dice-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.dice-btn-secondary {
+    border: 1px solid rgba(0, 240, 255, 0.42);
+    background: var(--rn-surface-2);
+}
+
+.dice-btn-primary {
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, #ff007f, #b72d76);
+}
+
 .focus-section {
     display: flex;
     flex-direction: column;

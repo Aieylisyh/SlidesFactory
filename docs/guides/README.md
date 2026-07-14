@@ -30,6 +30,7 @@
 | 文档 | 用途 |
 |------|------|
 | [REMOTE_GUIDE.md](REMOTE_GUIDE.md) | Presenter / Remote 技术说明 |
+| [REMOTE_PUBLIC_DEPLOY.md](REMOTE_PUBLIC_DEPLOY.md) | COS + Ubuntu + WSS 公网部署与环境检查 |
 | [REMOTE_FOCUS_MAP.md](REMOTE_FOCUS_MAP.md) | 翻页笔互动焦点分布图（D-pad + 确认） |
 | [remote-navigator-ops-zh.md](remote-navigator-ops-zh.md) | 现场操作步骤（中文） |
 | [remote-navigator-local-ops-zh.md](remote-navigator-local-ops-zh.md) | 本地远程翻页操作（原 remoteNavigator 目录） |

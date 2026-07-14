@@ -30,15 +30,16 @@
             <canvas id="qr-canvas" width="180" height="180" aria-label="遥控链接二维码"></canvas>
             <p id="qr-warning" class="qr-warning" hidden></p>
             <a id="remote-url" class="remote-url" href="#" target="_blank" rel="noopener">—</a>
-            <p class="qr-hint">手机与电脑需在同一 WiFi；先运行 <code>start-remote-server.bat</code></p>
+            <p class="qr-hint">局域网模式需同一 WiFi；配置公网 WSS 后可使用不同网络</p>
         </div>
     </aside>
 
     <iframe id="deck-frame" class="deck-frame" title="演示文稿" allowfullscreen></iframe>
 
     <script src="scripts/vendor/qrcode.min.js?v=1"></script>
-    <script src="scripts/protocol.js?v=5"></script>
-    <script src="scripts/ws-client.js?v=5"></script>
-    <script src="scripts/presenter-bridge.js?v=7"></script>
+    <script src="remote-config.js?v=2"></script>
+    <script src="scripts/protocol.js?v=7"></script>
+    <script src="scripts/ws-client.js?v=6"></script>
+    <script src="scripts/presenter-bridge.js?v=9"></script>
 </body>
 </html>

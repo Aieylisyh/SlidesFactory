@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 /**
  * Generate deck-nav.json from index.html + config/share-pages.json + config/outline.md agenda.
  * Usage: node remoteNavigator/scripts/generate-deck-nav.js [--deck ../index.html]

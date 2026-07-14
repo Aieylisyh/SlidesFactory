@@ -254,6 +254,7 @@ $exclude = @(
     'deploy/**',
     'tools/**',
     'docs/**',
+    'remoteNavigator/tests/**',
     'coscli_output/**',
     '.cursor/**',
     '.cursorrules',

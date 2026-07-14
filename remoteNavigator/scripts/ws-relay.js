@@ -3,7 +3,7 @@
  * LAN WebSocket relay for deck remote control.
  * Forwards JSON messages between presenter and remote clients in the same room.
  *
- * Usage: node remoteNavigator/scripts/ws-relay.js [--port 8081]
+ * Usage: node remoteNavigator/scripts/ws-relay.js [--host 0.0.0.0] [--port 8081]
  */
 'use strict';
 
@@ -11,10 +11,14 @@ var http = require('http');
 var crypto = require('crypto');
 
 var PORT = 8081;
+var HOST = '0.0.0.0';
+var MAX_MESSAGE_BYTES = 16 * 1024;
 var portArg = process.argv.indexOf('--port');
 if (portArg !== -1) PORT = parseInt(process.argv[portArg + 1], 10) || 8081;
+var hostArg = process.argv.indexOf('--host');
+if (hostArg !== -1 && process.argv[hostArg + 1]) HOST = process.argv[hostArg + 1];
 
-/** @type {Map<string, { presenter: WebSocket|null, remotes: Set<WebSocket> }>} */
+/** @type {Map<string, { presenter: WsSocket|null, remote: WsSocket|null, token: string|null, deckId: string|null }>} */
 var rooms = new Map();
 
 function sha1Base64(str) {
@@ -81,6 +85,7 @@ function WsSocket(socket) {
     this.role = null;
     this.room = null;
     this.deckId = null;
+    this.clientId = null;
 }
 
 WsSocket.prototype.send = function (text) {
@@ -97,17 +102,16 @@ WsSocket.prototype.close = function () {
 
 function getRoom(room) {
     if (!rooms.has(room)) {
-        rooms.set(room, { presenter: null, remotes: new Set() });
+        rooms.set(room, { presenter: null, remote: null, token: null, deckId: null });
     }
     return rooms.get(room);
 }
 
-function broadcastToRemotes(roomId, text, except) {
+function sendToRemote(roomId, text) {
     var room = rooms.get(roomId);
-    if (!room) return;
-    room.remotes.forEach(function (client) {
-        if (client !== except && client.open) client.send(text);
-    });
+    if (room && room.remote && room.remote.open) {
+        room.remote.send(text);
+    }
 }
 
 function sendToPresenter(roomId, text) {
@@ -124,11 +128,101 @@ function removeClient(client) {
     if (client.role === 'presenter' && room.presenter === client) {
         room.presenter = null;
     }
-    if (client.role === 'remote') {
-        room.remotes.delete(client);
+    if (client.role === 'remote' && room.remote === client) {
+        room.remote = null;
     }
-    if (!room.presenter && room.remotes.size === 0) {
+    if (!room.presenter && !room.remote) {
         rooms.delete(client.room);
+    }
+}
+
+function sendError(client, code, message) {
+    client.send(JSON.stringify({ type: 'error', code: code, message: message }));
+}
+
+function isValidRoom(room) {
+    return /^[A-Z0-9]{4,8}$/.test(room);
+}
+
+function isValidToken(token) {
+    return typeof token === 'string' && /^[A-Za-z0-9_-]{32,128}$/.test(token);
+}
+
+function isValidClientId(clientId) {
+    return typeof clientId === 'string' && /^[A-Za-z0-9_-]{12,128}$/.test(clientId);
+}
+
+function handleHello(client, msg) {
+    if (client.role) {
+        sendError(client, 'already_joined', 'Client already joined a room');
+        return;
+    }
+
+    var role = msg.role;
+    var roomId = (msg.room || '').toUpperCase();
+    var token = msg.token || '';
+
+    if ((role !== 'presenter' && role !== 'remote') || !isValidRoom(roomId) || !isValidToken(token)) {
+        sendError(client, 'invalid_hello', 'Invalid role, room, or token');
+        return;
+    }
+
+    var room = rooms.get(roomId);
+
+    if (role === 'remote' && !room) {
+        sendError(client, 'presenter_offline', 'Presenter is not connected');
+        return;
+    }
+
+    if (!room) room = getRoom(roomId);
+
+    if (role === 'presenter') {
+        if (room.token && room.token !== token) {
+            sendError(client, 'unauthorized', 'Room token mismatch');
+            return;
+        }
+        if (room.presenter && room.presenter !== client) {
+            room.presenter.close();
+        }
+        room.token = token;
+        room.deckId = msg.deckId || null;
+        room.presenter = client;
+    } else {
+        if (!room.presenter || !room.presenter.open) {
+            sendError(client, 'presenter_offline', 'Presenter is not connected');
+            return;
+        }
+        if (room.token !== token) {
+            sendError(client, 'unauthorized', 'Room token mismatch');
+            return;
+        }
+        if (room.deckId && msg.deckId && room.deckId !== msg.deckId) {
+            sendError(client, 'deck_mismatch', 'Remote deck does not match presenter deck');
+            return;
+        }
+        if (!isValidClientId(msg.clientId)) {
+            sendError(client, 'invalid_client', 'Remote client ID is missing');
+            return;
+        }
+        if (room.remote && room.remote !== client) {
+            if (room.remote.clientId === msg.clientId) {
+                room.remote.close();
+            } else {
+                sendError(client, 'room_busy', 'A remote controller is already connected');
+                return;
+            }
+        }
+        room.remote = client;
+    }
+
+    client.role = role;
+    client.room = roomId;
+    client.deckId = msg.deckId || null;
+    client.clientId = msg.clientId || null;
+    client.send(JSON.stringify({ type: 'joined', role: role, room: roomId }));
+
+    if (role === 'remote') {
+        sendToPresenter(roomId, JSON.stringify({ type: 'remote_joined' }));
     }
 }
 
@@ -141,41 +235,23 @@ function handleMessage(client, raw) {
     }
 
     if (msg.type === 'hello') {
-        client.role = msg.role;
-        client.room = (msg.room || '').toUpperCase();
-        client.deckId = msg.deckId || null;
-
-        if (!client.room) return;
-
-        var room = getRoom(client.room);
-
-        if (client.role === 'presenter') {
-            if (room.presenter && room.presenter !== client) {
-                room.presenter.close();
-            }
-            room.presenter = client;
-            client.send(JSON.stringify({ type: 'joined', role: 'presenter', room: client.room }));
-        } else if (client.role === 'remote') {
-            room.remotes.add(client);
-            client.send(JSON.stringify({ type: 'joined', role: 'remote', room: client.room }));
-            sendToPresenter(client.room, JSON.stringify({ type: 'remote_joined' }));
-        }
+        handleHello(client, msg);
         return;
     }
 
     if (!client.room) return;
 
-    if (msg.type === 'state' || msg.type === 'ack') {
-        broadcastToRemotes(client.room, raw);
+    if ((msg.type === 'state' || msg.type === 'ack') && client.role === 'presenter') {
+        sendToRemote(client.room, raw);
         return;
     }
 
-    if (msg.type === 'cmd') {
+    if (msg.type === 'cmd' && client.role === 'remote') {
         sendToPresenter(client.room, raw);
         return;
     }
 
-    if (msg.type === 'request_state') {
+    if (msg.type === 'request_state' && client.role === 'remote') {
         sendToPresenter(client.room, raw);
         return;
     }
@@ -210,6 +286,11 @@ server.on('upgrade', function (req, socket) {
 
     socket.on('data', function (chunk) {
         client.buffer = Buffer.concat([client.buffer, chunk]);
+        if (client.buffer.length > MAX_MESSAGE_BYTES) {
+            sendError(client, 'message_too_large', 'Message exceeds size limit');
+            client.close();
+            return;
+        }
         while (client.buffer.length >= 2) {
             var opcode = client.buffer[0] & 0x0f;
             if (opcode === 0x8) {
@@ -236,6 +317,6 @@ server.on('upgrade', function (req, socket) {
     });
 });
 
-server.listen(PORT, '0.0.0.0', function () {
-    console.log('[ws-relay] listening on ws://0.0.0.0:' + PORT);
+server.listen(PORT, HOST, function () {
+    console.log('[ws-relay] listening on ws://' + HOST + ':' + PORT);
 });

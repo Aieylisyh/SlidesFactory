@@ -4,9 +4,9 @@
   "deckTitle": "USC × 游研社 · 夏校课程说明会",
   "deckPath": "summerschool/index.html",
   "navFile": "deck-nav-summerschool.json",
-  "generatedAt": "2026-06-05T06:32:00.189Z",
+  "generatedAt": "2026-07-14T16:43:14.675Z",
   "linear": true,
-  "totalSlides": 11,
+  "totalSlides": 12,
   "chapters": [],
   "slides": [
     {
@@ -200,6 +200,23 @@
       "focusTargets": [],
       "title": "夏校主视觉",
       "shareSlug": "main-visual"
+    },
+    {
+      "index": 11,
+      "h": 11,
+      "v": 0,
+      "id": "ice-break",
+      "className": "content-slide slide-ss-ice-break interactive-zone",
+      "attrs": {
+        "data-background-color": "#25100D",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "新人村破冰任务图",
+      "shareSlug": "ice-break"
     }
   ]
 }

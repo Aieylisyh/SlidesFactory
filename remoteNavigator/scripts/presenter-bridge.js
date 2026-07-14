@@ -12,6 +12,7 @@
     var pollTimer = null;
     var lastStateKey = '';
     var lastFocusKey = '';
+    var lastInteractionKey = '';
     var focusNavReady = false;
     var runtimeParams = null;
 
@@ -36,17 +37,29 @@
         return FocusNav.getState();
     }
 
+    function getInteractionSnapshot(slide) {
+        if (!slide || slide.id !== 'ice-break' || !deckFrame || !deckFrame.contentWindow) return null;
+        var api = deckFrame.contentWindow.SummerIceBreakRemote;
+        if (!api || !api.getState) {
+            return { kind: 'ice-break', ready: false, visible: false, rolling: false };
+        }
+        return api.getState();
+    }
+
     function broadcastState(force) {
         if (!ws || !navData) return;
         var slide = getCurrentSlideMeta();
         if (!slide) return;
         var focus = getFocusSnapshot();
         var focusKey = focus ? JSON.stringify(focus) : '';
+        var interaction = getInteractionSnapshot(slide);
+        var interactionKey = interaction ? JSON.stringify(interaction) : '';
         var key = slide.index + ':' + slide.h + ':' + slide.v;
-        if (!force && key === lastStateKey && focusKey === lastFocusKey) return;
+        if (!force && key === lastStateKey && focusKey === lastFocusKey && interactionKey === lastInteractionKey) return;
         lastStateKey = key;
         lastFocusKey = focusKey;
-        ws.send(DeckRemoteProtocol.makeState(slide, focus));
+        lastInteractionKey = interactionKey;
+        ws.send(DeckRemoteProtocol.makeState(slide, focus, interaction));
         updatePresenterUI(slide, focus);
     }
 
@@ -71,8 +84,10 @@
             if (slide && ws) {
                 lastStateKey = '';
                 lastFocusKey = '';
+                lastInteractionKey = '';
                 var focus = getFocusSnapshot();
-                ws.send(DeckRemoteProtocol.makeAck(slide, focus));
+                var interaction = getInteractionSnapshot(slide);
+                ws.send(DeckRemoteProtocol.makeAck(slide, focus, interaction));
                 broadcastState(true);
             }
         }, 80);
@@ -93,8 +108,17 @@
         setTimeout(function () {
             lastStateKey = '';
             lastFocusKey = '';
+            lastInteractionKey = '';
             broadcastState(true);
         }, 40);
+    }
+
+    function executeIceBreakCmd(msg) {
+        var slide = getCurrentSlideMeta();
+        if (!slide || slide.id !== 'ice-break') return;
+        var api = deckFrame && deckFrame.contentWindow && deckFrame.contentWindow.SummerIceBreakRemote;
+        if (!api || !api.execute || !api.execute(msg.action)) return;
+        afterDeckCmd();
     }
 
     function executeCmd(msg) {
@@ -103,6 +127,11 @@
 
         if (msg.action === 'focus_mode' || msg.action === 'focus_move' || msg.action === 'focus_confirm') {
             executeFocusCmd(msg);
+            return;
+        }
+
+        if (/^dice_(show|hide|roll_start|roll_stop)$/.test(msg.action || '')) {
+            executeIceBreakCmd(msg);
             return;
         }
 
@@ -143,14 +172,15 @@
 
         var script = doc.createElement('script');
         script.setAttribute('data-deck-focus-nav', '1');
-        script.src = '/shared/scripts/deck-focus-nav.js?v=2';
+        script.src = new URL('../shared/scripts/deck-focus-nav.js?v=2', window.location.href).toString();
         script.onload = function () {
             if (!win.DeckFocusNav) return;
             win.DeckFocusNav.init({
-                navDataUrl: '/remoteNavigator/' + (runtimeParams && runtimeParams.nav ? runtimeParams.nav : 'deck-nav.json'),
+                navDataUrl: new URL(runtimeParams && runtimeParams.nav ? runtimeParams.nav : 'deck-nav.json', window.location.href).toString(),
                 onStateChange: function () {
                     lastStateKey = '';
                     lastFocusKey = '';
+                    lastInteractionKey = '';
                     broadcastState(true);
                 }
             }).then(function () {
@@ -158,6 +188,7 @@
                 focusNavReady = true;
                 lastStateKey = '';
                 lastFocusKey = '';
+                lastInteractionKey = '';
                 broadcastState(true);
             });
         };
@@ -176,6 +207,7 @@
         Reveal.on('slidechanged', function () {
             lastStateKey = '';
             lastFocusKey = '';
+            lastInteractionKey = '';
             broadcastState(true);
         });
 
@@ -193,22 +225,30 @@
         return 'deck-nav.json';
     }
 
-    function resolveRemoteRoomPrefix(deck) {
-        if (/summerschool/i.test(deck)) return '/summerschool/r/';
-        return '/r/';
+    function getPresenterToken(code) {
+        var key = 'deckRemotePresenterToken:' + code;
+        var token = '';
+        try {
+            token = sessionStorage.getItem(key) || '';
+        } catch (e) { /* ignore */ }
+        if (!/^[A-Za-z0-9_-]{32,128}$/.test(token)) {
+            token = DeckRemoteProtocol.randomToken(24);
+            try {
+                sessionStorage.setItem(key, token);
+            } catch (e) { /* ignore */ }
+        }
+        return token;
     }
 
     function normalizeDeckPath(deck) {
-        if (!deck) return '/index.html';
+        if (!deck) return '../index.html';
         if (deck.charAt(0) === '/') return deck;
-        if (deck.indexOf('summerschool') !== -1) return '/summerschool/index.html';
-        if (deck.indexOf('index.html') !== -1) return '/index.html';
         return deck;
     }
 
     function getParams() {
         var p = new URLSearchParams(window.location.search);
-        var deck = normalizeDeckPath(p.get('deck') || '/index.html');
+        var deck = normalizeDeckPath(p.get('deck') || '../index.html');
         var nav = p.get('nav') || resolveNavFile(deck);
         return {
             room: (p.get('room') || '').toUpperCase(),
@@ -264,7 +304,7 @@
         }, 300);
     }
 
-    function buildRemoteUrl(code) {
+    function buildRemoteUrl(code, token) {
         var host = window.location.hostname;
         var port = window.location.port || (window.location.protocol === 'https:' ? '443' : '80');
         if (host === 'localhost' || host === '127.0.0.1') {
@@ -272,8 +312,27 @@
             if (lanHost) host = lanHost;
         }
         var origin = window.location.protocol + '//' + host + (port ? ':' + port : '');
-        var prefix = resolveRemoteRoomPrefix(runtimeParams ? runtimeParams.deck : '');
-        return origin + prefix + encodeURIComponent(code);
+        var config = window.DeckRemoteConfig || {};
+        var runtimeRemoteUrl = DeckRemoteProtocol.getRuntimeParam('remote');
+        var remoteBase;
+        if (runtimeRemoteUrl) {
+            remoteBase = new URL(runtimeRemoteUrl, origin);
+        } else if (window.location.protocol === 'https:' && config.remoteUrl) {
+            remoteBase = new URL(config.remoteUrl, origin);
+        } else if (window.location.protocol === 'https:') {
+            remoteBase = new URL('remote.html', window.location.href);
+        } else {
+            remoteBase = new URL('remote.html', window.location.href);
+        }
+
+        var hash = new URLSearchParams();
+        hash.set('room', code);
+        hash.set('token', token);
+        hash.set('nav', runtimeParams && runtimeParams.nav ? runtimeParams.nav : 'deck-nav.json');
+        var wsUrl = DeckRemoteProtocol.getRuntimeParam('ws') || config.wsUrl || '';
+        if (wsUrl) hash.set('ws', wsUrl);
+        remoteBase.hash = hash.toString();
+        return remoteBase.toString();
     }
 
     function setRemoteLink(url) {
@@ -325,7 +384,7 @@
         if (panel) panel.classList.add('is-open');
     }
 
-    function initWs(code) {
+    function initWs(code, token) {
         room = code;
         var roomLabel = $('#room-code');
         if (roomLabel) roomLabel.textContent = code;
@@ -335,6 +394,7 @@
             room: code,
             role: 'presenter',
             deckId: navData.deckId,
+            token: token,
             onStatus: function (status) {
                 if (status === 'connected') setStatus('已连接中继 · 等待手机', 'ok');
                 if (status === 'connecting') setStatus('正在连接中继…', 'pending');
@@ -346,10 +406,14 @@
                 if (msg.type === 'remote_joined') {
                     broadcastState(true);
                 }
+                if (msg.type === 'error') {
+                    setStatus('中继拒绝连接 · ' + (msg.message || msg.code), 'error');
+                    ws.close();
+                }
             }
         });
 
-        renderQr(buildRemoteUrl(code));
+        renderQr(buildRemoteUrl(code, token));
         openQrPanel();
     }
 
@@ -365,6 +429,7 @@
         runtimeParams = getParams();
         var params = runtimeParams;
         room = params.room || DeckRemoteProtocol.randomRoomCode(6);
+        var token = getPresenterToken(room);
 
         if (!params.room) {
             var u = new URL(window.location.href);
@@ -387,7 +452,7 @@
             document.title = '翻页笔 · ' + data.deckTitle;
             var deckTitle = $('#deck-title');
             if (deckTitle) deckTitle.textContent = data.deckTitle;
-            initWs(room);
+            initWs(room, token);
         }).catch(function (err) {
             console.error(err);
             setStatus(params.nav + ' 加载失败，请先运行 generate-deck-nav.js --deck …', 'error');

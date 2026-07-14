@@ -58,6 +58,7 @@ Project\remoteNavigator\start-remote-server.bat
 | 笔记本键盘方向键翻页 | 手机页码同步更新 |
 | 手机点 **章节跳转** | 跳转到对应章节开头 |
 | **互动模式** + 方向键 + **✓** | 页内焦点移动并模拟点击（见 [`REMOTE_FOCUS_MAP.md`](REMOTE_FOCUS_MAP.md)） |
+| Ice Break 页的两个大按钮 | 显示/隐藏骰子；开始投掷/停止并结算 |
 | 主讲页点 **全屏** | iframe 全屏（也可在 deck 内按 F11） |
 
 ---
@@ -87,7 +88,7 @@ Project\remoteNavigator\start-remote-server.bat
 | 现象 | 处理 |
 |------|------|
 | 手机一直显示「连接中」 | 确认手机与电脑同一 WiFi；命令行窗口仍在运行；关闭 VPN 后重试 |
-| 扫 QR 打不开 | 查看 bat 窗口中的局域网 IP，手机浏览器手动访问：`http://192.168.x.x:8080/remoteNavigator/remote.html?room=房间码`（房间码见主讲页 QR 面板） |
+| 扫 QR 打不开 | 不要只手输房间码；二维码还包含安全令牌。请用手机系统相机或浏览器重新扫描主讲端 QR |
 | 已连接但翻页无反应 | 等待 iframe 内幻灯片加载完成；刷新主讲页后重新扫码 |
 | 页码与内容不一致 | 运行 `node remoteNavigator/scripts/generate-deck-nav.js` 重新生成导航文件 |
 

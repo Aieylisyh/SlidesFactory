@@ -9,9 +9,12 @@
         this.room = options.room;
         this.role = options.role;
         this.deckId = options.deckId || null;
+        this.token = options.token || null;
+        this.clientId = options.clientId || null;
         this.onMessage = options.onMessage || function () {};
         this.onStatus = options.onStatus || function () {};
         this.ws = null;
+        this.pingTimer = null;
         this.closed = false;
         this.retryMs = 800;
         this.maxRetryMs = 8000;
@@ -33,7 +36,14 @@
         self.ws.onopen = function () {
             self.retryMs = 800;
             self.onStatus('connected');
-            self.send(global.DeckRemoteProtocol.makeHello(self.role, self.room, self.deckId));
+            self.send(global.DeckRemoteProtocol.makeHello(
+                self.role,
+                self.room,
+                self.deckId,
+                self.token,
+                self.clientId
+            ));
+            self._startHeartbeat();
         };
 
         self.ws.onmessage = function (evt) {
@@ -42,6 +52,8 @@
         };
 
         self.ws.onclose = function () {
+            self._stopHeartbeat();
+            if (self.closed) return;
             self.onStatus('disconnected');
             self._scheduleReconnect();
         };
@@ -49,6 +61,20 @@
         self.ws.onerror = function () {
             self.onStatus('error');
         };
+    };
+
+    DeckRemoteWs.prototype._startHeartbeat = function () {
+        var self = this;
+        self._stopHeartbeat();
+        self.pingTimer = setInterval(function () {
+            self.send({ type: 'ping' });
+        }, 20000);
+    };
+
+    DeckRemoteWs.prototype._stopHeartbeat = function () {
+        if (!this.pingTimer) return;
+        clearInterval(this.pingTimer);
+        this.pingTimer = null;
     };
 
     DeckRemoteWs.prototype._scheduleReconnect = function () {
@@ -68,6 +94,7 @@
 
     DeckRemoteWs.prototype.close = function () {
         this.closed = true;
+        this._stopHeartbeat();
         if (this.ws) this.ws.close();
     };
 

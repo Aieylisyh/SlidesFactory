@@ -43,6 +43,10 @@
     "main-visual": {
       "slideId": "main-visual",
       "title": "夏校主视觉"
+    },
+    "ice-break": {
+      "slideId": "ice-break",
+      "title": "新人村破冰任务图"
     }
   }
 }

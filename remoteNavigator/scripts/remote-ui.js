@@ -18,11 +18,17 @@
 
     var currentFocus = null;
 
+    var currentInteraction = null;
+
     var focusModeEnabled = false;
 
     var cmdCooldown = false;
 
     var booted = false;
+
+    var accessToken = '';
+
+    var clientId = '';
 
 
 
@@ -42,11 +48,37 @@
 
 
 
+    function getHashParams() {
+
+        var hash = (window.location.hash || '').replace(/^#/, '').trim();
+
+        try {
+
+            return new URLSearchParams(hash);
+
+        } catch (e) {
+
+            return new URLSearchParams();
+
+        }
+
+    }
+
+
+
     function resolveNavUrl() {
+
+        function fromRemoteDirectory(file) {
+
+            var value = String(file || '').replace(/^\/remoteNavigator\//, '');
+
+            return new URL(value, window.location.href).toString();
+
+        }
 
         if (typeof window.__REMOTE_NAV === 'string' && window.__REMOTE_NAV) {
 
-            return '/remoteNavigator/' + window.__REMOTE_NAV;
+            return fromRemoteDirectory(window.__REMOTE_NAV);
 
         }
 
@@ -54,17 +86,19 @@
 
         var nav = p.get('nav');
 
-        if (nav) return '/remoteNavigator/' + nav;
+        if (!nav) nav = getHashParams().get('nav');
+
+        if (nav) return fromRemoteDirectory(nav);
 
         var path = window.location.pathname || '';
 
         if (/\/summerschool\/r\//i.test(path)) {
 
-            return '/remoteNavigator/deck-nav-summerschool.json';
+            return fromRemoteDirectory('deck-nav-summerschool.json');
 
         }
 
-        return '/remoteNavigator/deck-nav.json';
+        return fromRemoteDirectory('deck-nav.json');
 
     }
 
@@ -90,7 +124,7 @@
 
         try {
 
-            return (new URLSearchParams(hash).get('room') || '').toUpperCase();
+            return (getHashParams().get('room') || '').toUpperCase();
 
         } catch (e) {
 
@@ -127,6 +161,92 @@
         } catch (e) { /* ignore */ }
 
         window.__REMOTE_ROOM = code;
+
+    }
+
+
+
+    function readStoredToken(code) {
+
+        if (!code) return '';
+
+        try {
+
+            return sessionStorage.getItem('deckRemoteToken:' + code) || '';
+
+        } catch (e) {
+
+            return '';
+
+        }
+
+    }
+
+
+
+    function storeAccess(code, token) {
+
+        storeRoom(code);
+
+        if (!token) return;
+
+        try {
+
+            sessionStorage.setItem('deckRemoteToken:' + code, token);
+
+        } catch (e) { /* ignore */ }
+
+    }
+
+
+
+    function resolveToken(code) {
+
+        var injected = (typeof window.__REMOTE_TOKEN === 'string' && window.__REMOTE_TOKEN) || '';
+
+        var query = new URLSearchParams(window.location.search);
+
+        var token = injected || query.get('token') || getHashParams().get('token') || readStoredToken(code);
+
+        token = (token || '').trim();
+
+        if (/^[A-Za-z0-9_-]{32,128}$/.test(token)) {
+
+            storeAccess(code, token);
+
+            return token;
+
+        }
+
+        return '';
+
+    }
+
+
+
+    function getClientId() {
+
+        var value = '';
+
+        try {
+
+            value = sessionStorage.getItem('deckRemoteClientId') || '';
+
+        } catch (e) { /* ignore */ }
+
+        if (!/^[A-Za-z0-9_-]{12,128}$/.test(value)) {
+
+            value = DeckRemoteProtocol.randomToken(12);
+
+            try {
+
+                sessionStorage.setItem('deckRemoteClientId', value);
+
+            } catch (e) { /* ignore */ }
+
+        }
+
+        return value;
 
     }
 
@@ -240,6 +360,8 @@
 
         updateFocusUI(msgFocus !== undefined ? msgFocus : null, slide);
 
+        updateDiceUI(currentInteraction, slide);
+
     }
 
 
@@ -312,6 +434,46 @@
 
 
 
+    function updateDiceUI(interaction, slide) {
+
+        var section = $('#dice-section');
+
+        var visibilityBtn = $('#btn-dice-visibility');
+
+        var rollBtn = $('#btn-dice-roll');
+
+        var isIceBreak = !!(slide && slide.id === 'ice-break');
+
+        if (section) section.hidden = !isIceBreak;
+
+        if (!isIceBreak) return;
+
+        var ready = !!(interaction && interaction.kind === 'ice-break' && interaction.ready);
+
+        var visible = !!(ready && interaction.visible);
+
+        var rolling = !!(ready && interaction.rolling);
+
+        if (visibilityBtn) {
+
+            visibilityBtn.textContent = visible ? '隐藏骰子' : '显示骰子';
+
+            visibilityBtn.disabled = !ready;
+
+        }
+
+        if (rollBtn) {
+
+            rollBtn.textContent = rolling ? '停止并结算' : '开始投掷';
+
+            rollBtn.disabled = !ready || !visible;
+
+        }
+
+    }
+
+
+
     function updateFocusUI(focus, slide) {
 
         var section = $('#focus-section');
@@ -325,6 +487,18 @@
         var confirmBtn = $('#btn-focus-confirm');
 
         var hasProfile = slideHasFocusProfile(slide);
+
+        if (slide && slide.id === 'ice-break') {
+
+            if (section) section.hidden = true;
+
+            focusModeEnabled = false;
+
+            currentFocus = null;
+
+            return;
+
+        }
 
         var totalTargets = focus && typeof focus.totalTargets === 'number' ? focus.totalTargets : 0;
 
@@ -518,13 +692,15 @@
 
         }
 
+        currentInteraction = msg.interaction || null;
+
         renderPosition(slide, msg.focus !== undefined ? msg.focus : null);
 
     }
 
 
 
-    function initWs(room, deckId) {
+    function initWs(room, deckId, token) {
 
         if (ws) {
 
@@ -543,6 +719,10 @@
             role: 'remote',
 
             deckId: deckId,
+
+            token: token,
+
+            clientId: clientId,
 
             onStatus: function (status) {
 
@@ -568,6 +748,26 @@
 
                 if (msg.type === 'state' || msg.type === 'ack') handleState(msg);
 
+                if (msg.type === 'error') {
+
+                    var labels = {
+
+                        unauthorized: '授权无效，请重新扫描二维码',
+
+                        room_busy: '已有一台主持人手机连接',
+
+                        presenter_offline: '主讲端尚未连接',
+
+                        deck_mismatch: '手机与主讲端的演示文稿不一致'
+
+                    };
+
+                    setConnectionStatus(labels[msg.code] || msg.message || '连接被拒绝', 'error');
+
+                    ws.close();
+
+                }
+
             }
 
         });
@@ -591,6 +791,36 @@
         if (nextBtn) {
 
             nextBtn.addEventListener('click', function () { sendCmd('next'); });
+
+        }
+
+
+
+        var diceVisibilityBtn = $('#btn-dice-visibility');
+
+        var diceRollBtn = $('#btn-dice-roll');
+
+        if (diceVisibilityBtn) {
+
+            diceVisibilityBtn.addEventListener('click', function () {
+
+                var visible = !!(currentInteraction && currentInteraction.visible);
+
+                sendCmd(visible ? 'dice_hide' : 'dice_show');
+
+            });
+
+        }
+
+        if (diceRollBtn) {
+
+            diceRollBtn.addEventListener('click', function () {
+
+                var rolling = !!(currentInteraction && currentInteraction.rolling);
+
+                sendCmd(rolling ? 'dice_roll_stop' : 'dice_roll_start');
+
+            });
 
         }
 
@@ -694,7 +924,7 @@
 
 
 
-    function bootRemote(room) {
+    function bootRemote(room, token) {
 
         if (booted) return;
 
@@ -730,7 +960,7 @@
 
                 buildChapterList();
 
-                initWs(room, data.deckId);
+                initWs(room, data.deckId, token);
 
             })
 
@@ -754,9 +984,19 @@
 
         if (!/^[A-Z0-9]{4,8}$/.test(code)) return;
 
-        storeRoom(code);
+        var token = resolveToken(code);
 
-        bootRemote(code);
+        if (!token) {
+
+            showRoomPrompt('安全令牌缺失，请重新扫描主讲端二维码');
+
+            return;
+
+        }
+
+        storeAccess(code, token);
+
+        bootRemote(code, token);
 
     }
 
@@ -820,9 +1060,13 @@
 
         var room = resolveRoom();
 
-        if (!room) {
+        accessToken = resolveToken(room);
 
-            showRoomPrompt('扫码后若仍在此页，请直接输入主讲端显示的房间码');
+        clientId = getClientId();
+
+        if (!room || !accessToken) {
+
+            showRoomPrompt(room ? '安全令牌缺失，请重新扫描主讲端二维码' : '请扫描主讲端显示的二维码');
 
             return;
 
@@ -830,7 +1074,7 @@
 
 
 
-        bootRemote(room);
+        bootRemote(room, accessToken);
 
     }
 

@@ -34,13 +34,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
 
+    <meta name="referrer" content="no-referrer">
+
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <meta name="mobile-web-app-capable" content="yes">
 
     <title>翻页笔</title>
 
-    <link rel="stylesheet" href="/remoteNavigator/remote.css?v=9">
+    <link rel="stylesheet" href="remote.css?v=10">
 
 </head>
 
@@ -50,11 +52,11 @@
 
         <h1>连接翻页笔</h1>
 
-        <p id="room-hint">请从主讲端扫码；若扫码后仍在此页，请直接输入房间码</p>
+        <p id="room-hint">请从主讲端扫码；安全连接需要二维码中的会话令牌</p>
 
         <form id="room-form" class="room-form">
 
-            <label class="room-form-label" for="room-input">房间码（主讲页 QR 面板中显示）</label>
+            <label class="room-form-label" for="room-input">房间码（仅供本机已扫码后的重连）</label>
 
             <input id="room-input" class="room-input" type="text" inputmode="text" autocapitalize="characters"
 
@@ -93,6 +95,20 @@
             <button type="button" id="btn-next" class="nav-btn nav-btn-next">下一页</button>
 
         </div>
+
+        <section id="dice-section" class="dice-section" hidden>
+
+            <p class="dice-heading">Ice Break · 投骰子</p>
+
+            <div class="dice-controls">
+
+                <button type="button" id="btn-dice-visibility" class="dice-btn dice-btn-secondary">显示骰子</button>
+
+                <button type="button" id="btn-dice-roll" class="dice-btn dice-btn-primary" disabled>开始投掷</button>
+
+            </div>
+
+        </section>
 
 
 
@@ -136,11 +152,13 @@
 
 
 
-    <script src="/remoteNavigator/scripts/protocol.js?v=5"></script>
+    <script src="remote-config.js?v=2"></script>
 
-    <script src="/remoteNavigator/scripts/ws-client.js?v=5"></script>
+    <script src="scripts/protocol.js?v=7"></script>
 
-    <script src="/remoteNavigator/scripts/remote-ui.js?v=7"></script>
+    <script src="scripts/ws-client.js?v=6"></script>
+
+    <script src="scripts/remote-ui.js?v=9"></script>
 
 </body>
 
