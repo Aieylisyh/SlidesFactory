@@ -2,7 +2,7 @@
 
 本目录集中存放 SFK 幻灯片工坊的**规范与说明**类 Markdown。运行时入口（`index.html`、`config/outline.md`）与 co-located README（`contents/`、`styles/style-guide/` 等）仍保留在原目录。
 
-上级索引：[docs/README.md](../docs/README.md) · 架构：[docs/monorepo.md](../docs/monorepo.md)
+上级索引：[docs/README.md](../README.md) · 架构：[docs/monorepo.md](../monorepo.md)
 
 ## 核心规范
 
@@ -10,7 +10,7 @@
 |------|------|
 | [style_guide.md](style_guide.md) | 设计 token、Reveal 主题、进度条、导航簇、标题自适应 |
 | [style_guide_extended.md](style_guide_extended.md) | 组件类名目录与布局模式 |
-| [OUTLINE_GUIDE.md](OUTLINE_GUIDE.md) | 根目录 [`config/outline.md`](../config/outline.md) 编写约定 |
+| [OUTLINE_GUIDE.md](OUTLINE_GUIDE.md) | 根目录 [`config/outline.md`](../../config/outline.md) 编写约定 |
 | [transition_guide.md](transition_guide.md) | 入场转场 FX（`SlideTransitionFX`） |
 | [segment_arrow.md](segment_arrow.md) | 分段横向箭头（议程页等） |
 
@@ -23,13 +23,14 @@
 | [SHARE_GUIDE.md](SHARE_GUIDE.md) | 分享锁与 `config/share-pages.json` |
 | [BILIBILI_EMBED_GUIDE.md](BILIBILI_EMBED_GUIDE.md) | B 站站外播放器嵌入 |
 | [IMAGE_COMPRESSION_GUIDE.md](IMAGE_COMPRESSION_GUIDE.md) | 图片压缩标准与脚本 |
+| [`summerschool/modules/ice-break/README.md`](../../summerschool/modules/ice-break/README.md) | Ice Break 唯一运行时模块、键盘操作与维护边界 |
 | [QUIZ_LIVE_GUIDE.md](QUIZ_LIVE_GUIDE.md) | quiz-live 暖场抢答（**已封存 2026-06-07**，活跃开发见 QuizOnlineGame） |
 
 ## 远程翻页
 
 | 文档 | 用途 |
 |------|------|
-| [REMOTE_GUIDE.md](REMOTE_GUIDE.md) | Presenter / Remote 技术说明 |
+| [REMOTE_GUIDE.md](REMOTE_GUIDE.md) | Presenter / Remote 技术说明，含 Ice Break 骰子控制 |
 | [REMOTE_PUBLIC_DEPLOY.md](REMOTE_PUBLIC_DEPLOY.md) | COS + Ubuntu + WSS 公网部署与环境检查 |
 | [REMOTE_FOCUS_MAP.md](REMOTE_FOCUS_MAP.md) | 翻页笔互动焦点分布图（D-pad + 确认） |
 | [remote-navigator-ops-zh.md](remote-navigator-ops-zh.md) | 现场操作步骤（中文） |
@@ -46,15 +47,15 @@
 
 | 路径 | 用途 |
 |------|------|
-| [`config/outline.md`](../config/outline.md) | 主 deck 页序与结构（内容源，非纯说明） |
-| [`summerschool/outline.md`](../summerschool/outline.md) | 夏校 deck 结构 |
-| [`styles/style-guide/README.md`](../styles/style-guide/README.md) | CSS 分片地图 |
-| [`scripts/README.md`](../scripts/README.md) | 主 deck JS 子目录 |
-| [`summerschool/css/README.md`](../summerschool/css/README.md) | 夏校 CSS 分片 |
-| [`quiz-live/ARCHIVED.md`](../quiz-live/ARCHIVED.md) | quiz-live 封存说明 |
-| [`quiz-live/scripts/README.md`](../quiz-live/scripts/README.md) | quiz-live / relay 脚本（封存） |
-| [`deploy/部署脚本说明.md`](../deploy/部署脚本说明.md) | 部署脚本说明 |
-| [`contents/README.md`](../contents/README.md) | 源素材与抽图流程 |
+| [`config/outline.md`](../../config/outline.md) | 主 deck 页序与结构（内容源，非纯说明） |
+| [`summerschool/outline.md`](../../summerschool/outline.md) | 夏校 deck 结构 |
+| [`styles/style-guide/README.md`](../../styles/style-guide/README.md) | CSS 分片地图 |
+| [`scripts/README.md`](../../scripts/README.md) | 主 deck JS 子目录 |
+| [`summerschool/css/README.md`](../../summerschool/css/README.md) | 夏校 CSS 分片 |
+| [`quiz-live/ARCHIVED.md`](../../quiz-live/ARCHIVED.md) | quiz-live 封存说明 |
+| [`quiz-live/scripts/README.md`](../../quiz-live/scripts/README.md) | quiz-live / relay 脚本（封存） |
+| [`deploy/部署脚本说明.md`](../../deploy/部署脚本说明.md) | 部署脚本说明 |
+| [`contents/README.md`](../../contents/README.md) | 源素材与抽图流程 |
 | [`AGENTS.md`](../../AGENTS.md) | Agent 工作入口 |
 | [`.codex/rules/project-rules.md`](../../.codex/rules/project-rules.md) | Codex 项目规则 |
 | [`.cursorrules`](../../.cursorrules) | Agent 路由规则 |

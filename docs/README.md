@@ -7,6 +7,8 @@
 | **全部规范文档** | [guides/README.md](guides/README.md) |
 | 项目结构与多站点 | [monorepo.md](monorepo.md) · [sites.md](sites.md) |
 | 主 deck 页序（内容） | [config/outline.md](../config/outline.md) · [guides/OUTLINE_GUIDE.md](guides/OUTLINE_GUIDE.md) |
+| 夏校结构与 Ice Break | [summerschool/outline.md](../summerschool/outline.md) · [Ice Break README](../summerschool/modules/ice-break/README.md) |
+| 手机远程翻页 / 投骰子 | [guides/REMOTE_GUIDE.md](guides/REMOTE_GUIDE.md) · [guides/REMOTE_PUBLIC_DEPLOY.md](guides/REMOTE_PUBLIC_DEPLOY.md) |
 | 样式 hub | [style_guide.css](../style_guide.css) · [styles/style-guide/README.md](../styles/style-guide/README.md) |
 | 主 deck JS 目录 | [scripts/README.md](../scripts/README.md) |
 | 工具脚本 | [tools/README.md](../tools/README.md) |
@@ -24,6 +26,7 @@
 | `config/README.md` | 主 deck 配置说明 |
 | `summerschool/outline.md` | 夏校 deck 结构 |
 | `summerschool/css/README.md` | 夏校 CSS 分片 |
+| `summerschool/modules/ice-break/README.md` | 夏校末页 Ice Break 唯一运行时模块与维护入口 |
 | `quiz-live/scripts/README.md` | 暖场抢答 JS / relay（**已封存**） |
 | `quiz-live/ARCHIVED.md` | quiz-live 封存说明与迁移指引 |
 | `deploy/部署脚本说明.md` | 部署 BAT / PS1 中文说明 |

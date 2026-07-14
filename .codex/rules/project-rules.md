@@ -14,6 +14,7 @@
 | 夏校结构 | `summerschool/outline.md` + `summerschool/index.html` |
 | 主 deck CSS | `styles/style-guide/*.css`，不要直接堆到 hub |
 | 夏校 CSS | `summerschool/css/ss-*.css`，hub 是 `summerschool/style_extension.css` |
+| 夏校自包含互动模块 | `summerschool/modules/<module>/`；宿主样式与桥接也收在模块内 |
 | 跨站点 JS | `shared/scripts/` |
 | 主 deck 专用 JS | `scripts/` |
 | 夏校专用 JS | `summerschool/scripts/` |
@@ -40,10 +41,12 @@
 - 夏校入口是 `summerschool/index.html`，结构源是 `summerschool/outline.md`。
 - 夏校样式加载链：`../style_guide.css` + `style_extension.css` + `portrait-deck-adapt-extension.css`。
 - 夏校 CSS 分片说明在 `summerschool/css/README.md`。
+- Ice Break 唯一运行时实现是 `summerschool/modules/ice-break/`；入口由 `summerschool/index.html` iframe 加载，手机控制协议由 `remoteNavigator/` 提供。不要维护第二份网页或代码副本。
 - 夏校共享 `shared/scripts/slide-progress.js`、`slide-wheel-nav.js`、`portrait-deck-adapt.js`；改共享脚本时检查主 deck 是否受影响。
 
 ## 验证
 
 - 本地预览优先用根目录 `start-lan-server.bat`，访问 `http://localhost:8080/` 或 `/summerschool/`。
 - 对 UI / 交互改动，至少检查桌面视口；涉及竖屏时检查手机竖屏和 `?portrait=0`。
+- 改 Ice Break 或远程骰子控制后运行 `node --test remoteNavigator/tests/dice-controller.test.mjs remoteNavigator/tests/ws-relay.test.mjs`。
 - 部署前可用 `deploy/sync.bat -DryRun` 预览上传范围。

@@ -21,7 +21,7 @@
 | 站点 | 入口 | 说明 |
 |------|------|------|
 | **主 deck（就业）** | [`index.html`](../index.html) | 数字娱乐技术就业主题，完整交互 |
-| **夏校** | [`summerschool/index.html`](../summerschool/index.html) | USC × 游研社说明会，独立 outline 与橙白主题 |
+| **夏校** | [`summerschool/index.html`](../summerschool/index.html) | USC × 游研社说明会；末页加载自包含 Ice Break 模块 |
 | **暖场抢答** | [`quiz-live/`](../quiz-live/) | 观众/控台/大屏 + relay（**已封存**，见 [`ARCHIVED.md`](../quiz-live/ARCHIVED.md)） |
 | **远程翻页** | [`remoteNavigator/`](../remoteNavigator/) | Presenter + Remote 双端 WebSocket 控制 |
 
@@ -48,6 +48,7 @@ Project/
 ├── .codex/                 # Codex rules / skills（不部署）
 ├── .codexignore            # Codex 上下文忽略清单
 ├── summerschool/           # 夏校站点
+│   └── modules/ice-break/  # 末页唯一运行时模块（页面、逻辑、宿主桥接、素材）
 ├── quiz-live/              # 暖场抢答（已封存，活跃开发见 QuizOnlineGame）
 └── remoteNavigator/        # 远程翻页
 ```
@@ -82,7 +83,7 @@ Project/
 
 HTML **只链一条** `style_guide.css`。Hub 按序 `@import` 01–10（其中 04→04a–04c、05→05a–05b）；quiz-live 独立加载 11。
 
-**夏校**额外加载 `summerschool/style_extension.css`（hub → `summerschool/css/ss-*.css`）+ `portrait-deck-adapt-extension.css`。
+**夏校**额外加载 `summerschool/style_extension.css`（hub → `summerschool/css/ss-*.css`）+ `portrait-deck-adapt-extension.css`。自包含互动模块放在 `summerschool/modules/`；Ice Break 的宿主 CSS 由 `style_extension.css` 引入模块内 `host.css`。
 
 ## 配置（`config/`）
 
@@ -121,5 +122,6 @@ HTML **只链一条** `style_guide.css`。Hub 按序 `@import` 01–10（其中 
 3. **改主 deck 交互**：编辑 `scripts/` 对应子目录，递增 `index.html` 脚本 `?v=`。
 4. **改 deck 结构**：先改 `config/outline.md`，再改 `index.html`。
 5. **新站点**：复用 `style_guide.css` + `shared/scripts/`，站点目录放自有 `index.html` 与扩展 CSS/JS。
+6. **夏校互动模块**：只维护 `summerschool/modules/<module>/` 的单一实现；对应测试可放在共享控制端（Ice Break 为 `remoteNavigator/tests/`）。
 
 完整文档索引：[docs/README.md](README.md) · 规范文档：[docs/guides/README.md](guides/README.md)。

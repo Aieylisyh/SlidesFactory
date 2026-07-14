@@ -19,8 +19,9 @@
 | 入口 | `/summerschool/index.html` |
 | Outline | [`summerschool/outline.md`](../summerschool/outline.md) |
 | 样式 | `../style_guide.css` + `style_extension.css`（hub → `css/ss-*.css`）+ `portrait-deck-adapt-extension.css` |
-| 脚本 | `../shared/scripts/*` + `summerschool/scripts/*` |
+| 脚本 | `../shared/scripts/*` + `summerschool/scripts/*` + 自包含 `summerschool/modules/*` |
 | 数据 | `summerschool/data/` |
+| Ice Break | [`summerschool/modules/ice-break/`](../summerschool/modules/ice-break/)；末页唯一页面、逻辑与生产素材来源 |
 
 ## 暖场抢答 — quiz-live（已封存）
 
@@ -53,5 +54,6 @@
 | 生成导航 | `node remoteNavigator/scripts/generate-deck-nav.js --deck index.html` |
 | 夏校导航 | `node remoteNavigator/scripts/generate-deck-nav.js --deck summerschool/index.html` |
 | 夏校局域网启动 | `summerschool/start-remote-server.bat` |
+| Ice Break 控制 | 单主持人手机显示/隐藏骰子、开始投掷、停止结算；运行时见 [`summerschool/modules/ice-break/README.md`](../summerschool/modules/ice-break/README.md) |
 
 架构说明：[docs/monorepo.md](../docs/monorepo.md)

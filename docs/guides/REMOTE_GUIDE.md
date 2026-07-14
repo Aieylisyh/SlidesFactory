@@ -20,7 +20,8 @@ remoteNavigator/
 │   ├── focus-profiles.js      # Focus Profile 检测与静态 target 模板
 │   └── remote-ui.js           # 手机 UI
 └── tests/
-    └── ws-relay.test.mjs      # 令牌、单手机与消息路由测试
+    ├── ws-relay.test.mjs      # 令牌、单手机与消息路由测试
+    └── dice-controller.test.mjs # 骰子抽取池与逐帧切换测试
 ```
 
 说明文档：[`docs/guides/REMOTE_GUIDE.md`](REMOTE_GUIDE.md) · 互动焦点：[`docs/guides/REMOTE_FOCUS_MAP.md`](REMOTE_FOCUS_MAP.md)
@@ -67,6 +68,13 @@ python -m http.server 8080 --bind 0.0.0.0
 5. **互动模式**：方向键在页内焦点间移动，**✓** 模拟点击（见 [`REMOTE_FOCUS_MAP.md`](REMOTE_FOCUS_MAP.md)）
 6. 到 `ice-break` 页后，手机自动显示 **显示/隐藏骰子** 与 **开始投掷/停止并结算** 两个按钮
 
+## Ice Break 运行时边界
+
+- 唯一页面与代码实现：[`summerschool/modules/ice-break/`](../../summerschool/modules/ice-break/)；模块说明见其 [`README.md`](../../summerschool/modules/ice-break/README.md)。
+- `summerschool/index.html` 通过 iframe 加载模块，`host-bridge.js` 与 `js/embed-bridge.js` 转发 Reveal 导航、键盘和骰子状态。
+- 生产素材与代码一起收在模块目录，不再维护 `assets/summerschool/ice-break/`、`summerschool/ice-break/` 或外部 runtime 代码副本。
+- 修改骰子或 relay 后运行：`node --test remoteNavigator/tests/dice-controller.test.mjs remoteNavigator/tests/ws-relay.test.mjs`。
+
 ## 导航文件 `deck-nav.json`
 
 | 字段 | 说明 |
@@ -75,7 +83,7 @@ python -m http.server 8080 --bind 0.0.0.0
 | `slides[].h`, `v` | Reveal 坐标 |
 | `slides[].id` | `<section id>` |
 | `slides[].title` | 来自 `config/share-pages.json` |
-| `chapters[]` | 来自 [`../config/outline.md`](../config/outline.md) 议程表 |
+| `chapters[]` | 来自 [`config/outline.md`](../../config/outline.md) 议程表 |
 
 ## URL 参数
 

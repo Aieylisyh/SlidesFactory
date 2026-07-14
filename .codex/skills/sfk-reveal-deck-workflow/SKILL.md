@@ -28,9 +28,10 @@ description: >-
 | Summerschool slide structure | `summerschool/outline.md` | `summerschool/index.html` |
 | Main deck CSS | `styles/style-guide/README.md` | `styles/style-guide/NN-*.css` |
 | Summerschool CSS | `summerschool/css/README.md` | `summerschool/css/ss-*.css` |
+| Summerschool self-contained module | module README + current HTML includes | `summerschool/modules/<module>/` |
 | Shared progress / wheel / portrait JS | relevant skill or guide | `shared/scripts/` |
 | Main deck module JS | `scripts/README.md` | `scripts/<module>/` |
-| Summerschool module JS | current HTML script includes | `summerschool/scripts/` |
+| Summerschool page JS | current HTML script includes | `summerschool/scripts/` |
 | Deployment behavior | `deploy/部署脚本说明.md` | `deploy/sync.ps1` or related docs |
 
 ## Editing rules
@@ -41,6 +42,7 @@ description: >-
 - Preserve the existing Reveal linear navigation model.
 - For interactive zones, stop pointer and necessary keyboard events, but leave `wheel` alone.
 - When adding a new visual pattern, update the relevant guide or README so the next agent can find it.
+- Keep Ice Break canonical in `summerschool/modules/ice-break/`; do not recreate copies under `assets/summerschool/`, `summerschool/scripts/`, or an external runtime folder.
 
 ## Assets
 

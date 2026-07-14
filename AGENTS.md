@@ -8,6 +8,7 @@
 |------|------|--------|------|
 | 主 deck | `index.html` | `config/outline.md` | 数字娱乐技术就业主题 |
 | 夏校 | `summerschool/index.html` | `summerschool/outline.md` | USC x 游研社说明会，当前重点子项目 |
+| Ice Break | `summerschool/modules/ice-break/` | `summerschool/modules/ice-break/README.md` | 夏校末页唯一运行时实现，含骰子与宿主桥接 |
 | quiz-live | `quiz-live/` | `docs/guides/QUIZ_LIVE_GUIDE.md` | 已封存，仅运维或紧急修复 |
 | 远程翻页 | `remoteNavigator/` | `docs/guides/REMOTE_GUIDE.md` | 主 deck 与夏校均会使用 |
 
@@ -22,6 +23,7 @@
    - 主 deck：`styles/style-guide/README.md`
    - 夏校：`summerschool/css/README.md`
 4. 涉及专项模块时读 `docs/guides/` 下的对应指南。
+   - Ice Break：读 `summerschool/modules/ice-break/README.md` 与 `docs/guides/REMOTE_GUIDE.md`。
 
 ## Codex 本地规范
 
@@ -38,6 +40,7 @@
 
 - HTML 不写 inline style；新增样式放入对应 CSS 分片，并递增 HTML 中相关 `?v=`。
 - 跨站点 JS 放 `shared/scripts/`；主 deck 专用放 `scripts/`；夏校专用放 `summerschool/scripts/`。
+- 夏校自包含互动模块放 `summerschool/modules/<module>/`；页面、逻辑、宿主桥接与生产素材就近维护。Ice Break 只维护 `summerschool/modules/ice-break/`，不要再复制到 `assets/summerschool/`、`summerschool/scripts/` 或外部 runtime 目录。
 - 新增或替换图片前遵守 `docs/guides/IMAGE_COMPRESSION_GUIDE.md`，生产资源不要提交多 MB 原图。
 - 本地预览优先使用根目录 `start-lan-server.bat`；不要直接用 `file://` 打开 Reveal deck。
 - 部署由 `deploy/sync.ps1` 负责；工程文档、Agent 配置与工具目录不应上传到静态站。
