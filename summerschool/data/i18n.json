@@ -793,6 +793,13 @@
           "en": "SFK mentor / self-study / Q&A: flexible time to keep building, ask mentors, or collaborate in teams."
         }
       },
+      "self-study": {
+        "body": {
+          "zh": "自习：学员自主推进项目制作、试玩迭代与文档整理，或进行小组内协作。",
+          "ja": "自習：受講生が自主的にプロジェクト制作、プレイテスト反復、ドキュメント整理を進め、チーム内協働を行います。",
+          "en": "Self-study: students independently advance project building, playtesting iteration, and documentation, or collaborate within teams."
+        }
+      },
       "dinner-rest": {
         "body": {
           "zh": "晚餐与休息。晚间固定休整，为晚自习与次日课程储备精力。",
@@ -895,6 +902,9 @@
           "ja": "SFKメンター/自習/Q&A",
           "en": "SFK mentor / study / Q&A"
         }
+      },
+      "self-study": {
+        "label": { "zh": "自习", "ja": "自習", "en": "Self-study" }
       },
       "dinner-rest": {
         "label": { "zh": "晚餐/休息", "ja": "夕食/休息", "en": "Dinner / rest" }

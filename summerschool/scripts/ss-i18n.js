@@ -4,7 +4,7 @@
 (function (global) {
     'use strict';
 
-    var DATA_URL = 'data/i18n.json?v=6';
+    var DATA_URL = 'data/i18n.json?v=7';
     var STORAGE_KEY = 'ss-deck-locale';
     var LOCALES = ['zh', 'ja', 'en'];
     var DEFAULT_LOCALE = 'zh';
