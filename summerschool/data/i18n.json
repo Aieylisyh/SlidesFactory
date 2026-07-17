@@ -371,14 +371,14 @@
       "en": "Open Google Drive assignment submission"
     },
     "links.col6.title": {
-      "zh": "【腾讯文档】夏校 Assignment 备份方案",
-      "ja": "【Tencent Docs】Assignment バックアップ",
-      "en": "Tencent Docs · Assignment backup"
+      "zh": "【Google Drive】夏校 Assignment 备份方案",
+      "ja": "【Google Drive】Assignment バックアップ",
+      "en": "Google Drive · Assignment backup"
     },
     "links.col6.aria": {
-      "zh": "打开腾讯文档夏校 Assignment 备份方案",
-      "ja": "Tencent Docs の Assignment バックアップを開く",
-      "en": "Open Tencent Docs assignment backup"
+      "zh": "打开 Google Drive 夏校 Assignment 备份方案",
+      "ja": "Google Drive の Assignment バックアップを開く",
+      "en": "Open Google Drive assignment backup"
     },
     "mainVisual.navTitle": {
       "zh": "夏校主视觉",
