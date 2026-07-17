@@ -695,6 +695,62 @@
           "en": "Module 2 · Visiting professor sessions\n\nFramed on Richard Lemarchand's Playful Production Process—lectures, workshops, and hands-on work in parallel. Teams advance playable prototypes and document design–playtest–evaluate–iterate cycles."
         }
       },
+      "module2-day2-am": {
+        "body": {
+          "zh": "前期制作阶段以想法优先，理解有限、封闭与阈值三类有界世界，并体验中文版 AI 工具。",
+          "ja": "プリプロダクションでは発想を優先し、有限・閉鎖・しきい値という有界世界と中国語版 AI ツールを学びます。",
+          "en": "Prioritize ideas in preproduction; explore finite, closed, and threshold worlds with the Chinese AI tutor."
+        }
+      },
+      "module2-day2-pm": {
+        "body": {
+          "zh": "从“世界作为在场”出发构建想象世界，并为小组项目明确可验证的体验目标。",
+          "ja": "「存在としての世界」から想像世界を組み立て、チーム制作で検証できる体験目標を定めます。",
+          "en": "Build an imaginary world as a felt presence, then define testable experience goals for the team project."
+        }
+      },
+      "module2-day3-am": {
+        "body": {
+          "zh": "学习制作阶段的核心原则与标准工作流程，把概念逐步转化为可执行的团队任务。",
+          "ja": "制作の基本原則と標準ワークフローを学び、構想を実行可能なチーム作業へ落とし込みます。",
+          "en": "Learn production principles and workflow, turning concepts into clear, executable tasks for the team."
+        }
+      },
+      "module2-day3-pm": {
+        "body": {
+          "zh": "整理项目文档并完成垂直切片，以最小可玩版本验证玩法、节奏与制作方向。",
+          "ja": "制作資料と垂直スライスを整え、最小限のプレイ可能版で遊び・テンポ・制作方針を検証します。",
+          "en": "Create production documentation and a vertical slice to test gameplay, pacing, and production direction."
+        }
+      },
+      "module2-day4-am": {
+        "body": {
+          "zh": "继续完善制作文档，统一规则、分工和素材要求，为团队协作建立清晰依据。",
+          "ja": "制作資料を更新し、ルール・役割分担・素材要件をそろえて、チーム作業の共通基準を作ります。",
+          "en": "Refine production docs, aligning rules, responsibilities, and asset requirements for coordinated teamwork."
+        }
+      },
+      "module2-day4-pm": {
+        "body": {
+          "zh": "基于试玩反馈更新制作文档，记录关键决策、修改原因与下一轮迭代重点。",
+          "ja": "プレイテスト結果から制作資料を改訂し、重要な判断・変更理由・次の反復課題を記録します。",
+          "en": "Update production docs from playtest feedback, recording decisions, reasons for change, and next priorities."
+        }
+      },
+      "module2-day5-am": {
+        "body": {
+          "zh": "进入后期制作，集中打磨操作、表现与稳定性，并整理可交付的最终版本。",
+          "ja": "後期制作で操作感・表現・安定性を磨き、提出可能な最終ビルドへまとめます。",
+          "en": "Polish controls, presentation, and stability in postproduction, then prepare the final deliverable build."
+        }
+      },
+      "module2-day5-pm": {
+        "body": {
+          "zh": "制作项目视频文档，清楚呈现玩法、体验亮点、制作过程与最终成果。",
+          "ja": "遊び方・体験の見どころ・制作過程・最終成果が伝わる映像資料を制作します。",
+          "en": "Produce a video document that clearly presents gameplay, experience highlights, process, and final result."
+        }
+      },
       "industry-guest": {
         "body": {
           "zh": "行业嘉宾分享：邀请游戏行业从业者分享项目经验、岗位路径与创作实践，帮助学员将课堂方法对接真实生产环境。",
@@ -796,6 +852,30 @@
       },
       "professor-course": {
         "label": { "zh": "海外教授课程", "ja": "海外教授授業", "en": "Professor sessions" }
+      },
+      "module2-day2-am": {
+        "label": { "zh": "海外教授课程\n前期·有界世界", "ja": "海外教授授業\nプリプロ·有界世界", "en": "Professor sessions\nPreprod. · Worlds" }
+      },
+      "module2-day2-pm": {
+        "label": { "zh": "海外教授课程\n世界构建·体验", "ja": "海外教授授業\n世界構築·体験", "en": "Professor sessions\nWorldbuilding · Goals" }
+      },
+      "module2-day3-am": {
+        "label": { "zh": "海外教授课程\n核心原则·流程", "ja": "海外教授授業\n基本原則·工程", "en": "Professor sessions\nPrinciples · Workflow" }
+      },
+      "module2-day3-pm": {
+        "label": { "zh": "海外教授课程\n文档·垂直切片", "ja": "海外教授授業\n文書·垂直スライス", "en": "Professor sessions\nDocs · Vertical Slice" }
+      },
+      "module2-day4-am": {
+        "label": { "zh": "海外教授课程\n制作·文档Ⅰ", "ja": "海外教授授業\n制作文書 I", "en": "Professor sessions\nProduction Docs I" }
+      },
+      "module2-day4-pm": {
+        "label": { "zh": "海外教授课程\n制作·文档Ⅱ", "ja": "海外教授授業\n制作文書 II", "en": "Professor sessions\nProduction Docs II" }
+      },
+      "module2-day5-am": {
+        "label": { "zh": "海外教授课程\n打磨·交付", "ja": "海外教授授業\n仕上げ·納品", "en": "Professor sessions\nPolish · Delivery" }
+      },
+      "module2-day5-pm": {
+        "label": { "zh": "海外教授课程\n视频·记录", "ja": "海外教授授業\n映像·記録", "en": "Professor sessions\nVideo Docs" }
       },
       "industry-guest": {
         "label": { "zh": "行业嘉宾分享", "ja": "業界ゲスト", "en": "Industry guest" }

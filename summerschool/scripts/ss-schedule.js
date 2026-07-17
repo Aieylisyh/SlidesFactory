@@ -4,7 +4,7 @@
 (function (global) {
     'use strict';
 
-    var DATA_URL = 'data/schedule.json?v=13';
+    var DATA_URL = 'data/schedule.json?v=15';
     var cachedData = null;
     var overlay = null;
     var overlayTitle = null;
@@ -264,6 +264,29 @@
         }
     }
 
+    function setOfflineCellContent(el, text, cell) {
+        var isModule2Professor = cell && /^module2-day[2-5]-(am|pm)$/.test(cell.syllabusKey || '');
+        var lines = String(text || '').split('\n').map(function (line) {
+            return line.trim();
+        }).filter(Boolean);
+
+        if (!isModule2Professor || lines.length < 2) {
+            setCellContent(el, text);
+            return;
+        }
+
+        var title = document.createElement('span');
+        title.className = 'ss-schedule-cell__title';
+        title.textContent = lines[0];
+
+        var subtitle = document.createElement('span');
+        subtitle.className = 'ss-schedule-cell__subtitle';
+        subtitle.textContent = lines.slice(1).join(' ');
+
+        el.appendChild(title);
+        el.appendChild(subtitle);
+    }
+
     function buildRowSpanCoverage(rows) {
         var covered = {};
         rows.forEach(function (row, rowIdx) {
@@ -494,7 +517,7 @@
                 td.className = 'ss-schedule-cell';
                 if (cell && cell.text) {
                     var displayText = getCellDisplayText(cell);
-                    setCellContent(td, displayText);
+                    setOfflineCellContent(td, displayText, cell);
                     applyOfflineCellClasses(td, cell, tierData.tierMaps);
                     var body = getSyllabusBody(data, cell.syllabusKey);
                     var cellTitle = formatCellLabel(displayText);

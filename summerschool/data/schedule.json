@@ -34,6 +34,30 @@
     "professor-course": {
       "body": "Module 2 · 海外教授课程\n\n以 Richard Lemarchand《Playful Production Process》为框架，聚焦游戏制作：讲座、工坊与实作练习并行。学员在小组中推进可玩原型，并记录设计—试玩—评估—迭代过程。"
     },
+    "module2-day2-am": {
+      "body": "前期制作阶段以想法优先，理解有限、封闭与阈值三类有界世界，并体验中文版 AI 工具。"
+    },
+    "module2-day2-pm": {
+      "body": "从“世界作为在场”出发构建想象世界，并为小组项目明确可验证的体验目标。"
+    },
+    "module2-day3-am": {
+      "body": "学习制作阶段的核心原则与标准工作流程，把概念逐步转化为可执行的团队任务。"
+    },
+    "module2-day3-pm": {
+      "body": "整理项目文档并完成垂直切片，以最小可玩版本验证玩法、节奏与制作方向。"
+    },
+    "module2-day4-am": {
+      "body": "继续完善制作文档，统一规则、分工和素材要求，为团队协作建立清晰依据。"
+    },
+    "module2-day4-pm": {
+      "body": "基于试玩反馈更新制作文档，记录关键决策、修改原因与下一轮迭代重点。"
+    },
+    "module2-day5-am": {
+      "body": "进入后期制作，集中打磨操作、表现与稳定性，并整理可交付的最终版本。"
+    },
+    "module2-day5-pm": {
+      "body": "制作项目视频文档，清楚呈现玩法、体验亮点、制作过程与最终成果。"
+    },
     "industry-guest": {
       "body": "行业嘉宾分享：邀请游戏行业从业者分享项目经验、岗位路径与创作实践，帮助学员将课堂方法对接真实生产环境。"
     },
@@ -99,12 +123,12 @@
         "cells": [
           { "id": "off-1-0", "text": "抵达冬校基地", "syllabusKey": "arrival", "category": "logistics", "rowSpan": 4 },
           { "id": "off-1-1", "text": "游研社 / 参观\n上课", "syllabusKey": "gamepress-visit", "category": "course" },
-          { "id": "off-1-2", "text": "海外教授课程", "syllabusKey": "professor-course", "category": "course" },
+          { "id": "off-1-2", "text": "海外教授课程\n前期·有界世界", "syllabusKey": "module2-day2-am", "category": "course" },
           { "id": "off-1-3", "text": "行业嘉宾分享", "syllabusKey": "industry-guest", "category": "course" },
           { "id": "off-1-4", "text": "行业嘉宾分享", "syllabusKey": "industry-guest", "category": "course" },
-          { "id": "off-1-5", "text": "海外教授课程", "syllabusKey": "professor-course", "category": "course" },
-          { "id": "off-1-6", "text": "海外教授课程", "syllabusKey": "professor-course", "category": "course" },
-          { "id": "off-1-7", "text": "海外教授课程", "syllabusKey": "professor-course", "category": "course" },
+          { "id": "off-1-5", "text": "海外教授课程\n核心原则·流程", "syllabusKey": "module2-day3-am", "category": "course" },
+          { "id": "off-1-6", "text": "海外教授课程\n制作·文档Ⅰ", "syllabusKey": "module2-day4-am", "category": "course" },
+          { "id": "off-1-7", "text": "海外教授课程\n打磨·交付", "syllabusKey": "module2-day5-am", "category": "course" },
           { "id": "off-1-8", "text": "SFK导师辅导", "syllabusKey": "sfk-tutor", "category": "course" },
           { "id": "off-1-9", "text": "博物馆 / 展览", "syllabusKey": "museum-exhibition", "category": "course", "rowSpan": 4 },
           null
@@ -124,12 +148,12 @@
         "cells": [
           null,
           { "id": "off-3-1", "text": "游研社 / 参观\n上课", "syllabusKey": "gamepress-visit", "category": "course" },
-          { "id": "off-3-2", "text": "海外教授课程", "syllabusKey": "professor-course", "category": "course" },
+          { "id": "off-3-2", "text": "海外教授课程\n世界构建·体验", "syllabusKey": "module2-day2-pm", "category": "course" },
           { "id": "off-3-3", "text": "行业嘉宾分享", "syllabusKey": "industry-guest", "category": "course" },
           { "id": "off-3-4", "text": "SFK导师辅导", "syllabusKey": "sfk-tutor", "category": "course" },
-          { "id": "off-3-5", "text": "海外教授课程", "syllabusKey": "professor-course", "category": "course" },
-          { "id": "off-3-6", "text": "海外教授课程", "syllabusKey": "professor-course", "category": "course" },
-          { "id": "off-3-7", "text": "海外教授课程", "syllabusKey": "professor-course", "category": "course" },
+          { "id": "off-3-5", "text": "海外教授课程\n文档·垂直切片", "syllabusKey": "module2-day3-pm", "category": "course" },
+          { "id": "off-3-6", "text": "海外教授课程\n制作·文档Ⅱ", "syllabusKey": "module2-day4-pm", "category": "course" },
+          { "id": "off-3-7", "text": "海外教授课程\n视频·记录", "syllabusKey": "module2-day5-pm", "category": "course" },
           { "id": "off-3-8", "text": "SFK导师辅导", "syllabusKey": "sfk-tutor", "category": "course" },
           null, null
         ]

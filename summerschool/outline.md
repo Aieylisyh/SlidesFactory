@@ -48,7 +48,7 @@
 
 | 03 | 日程安排 | `schedule` | PDF p7–8 + Excel + Syllabus | 线上 Module 1 卡片表 |
 
-| 04 | 日程安排 | `schedule-offline` | Excel + Syllabus | 线下 Module 2–3 网格表（紧凑 70%） |
+| 04 | 日程安排 | `schedule-offline` | Excel + 最新 Syllabus · Module 2 | 8 节教授课三语摘要 + 英文原版 / Module 2 中文译本下载 |
 
 | 05 | 核心体验 | `experience` | PDF p9–13 | 稀疏页 |
 
