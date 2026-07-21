@@ -613,7 +613,7 @@ html.ss-deck-light .reveal .slide-ss-final-itinerary .slide-content-layer {
 }
 
 html.ss-deck-light .reveal .slide-ss-final-itinerary .disclaimer-note {
-    margin: 0 0 0.35em;
+    margin: 0 0 0.6em;
 }
 
 html.ss-deck-light .reveal .slide-ss-final-itinerary .disclaimer-note a {
@@ -631,7 +631,9 @@ html.ss-deck-light .reveal .ss-final-itinerary-wrapper {
     min-height: 0;
     overflow: auto;
     width: 100%;
-    margin-top: calc(-1 * var(--ss-schedule-body-lift));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 html.ss-deck-light .reveal .ss-final-itinerary-table {
@@ -652,7 +654,7 @@ html.ss-deck-light .reveal .ss-final-itinerary-table thead th {
     background: var(--ss-gray-100);
     border: 1px solid var(--ss-gray-200);
     font-weight: 700;
-    font-size: 0.95em;
+    font-size: calc(0.95em * 0.8);
     color: var(--ss-gray-700);
     text-align: center;
 }
