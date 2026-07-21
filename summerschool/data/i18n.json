@@ -614,7 +614,136 @@
       "zh": "课表加载失败，请刷新页面。",
       "ja": "スケジュールの読み込みに失敗しました。ページを更新してください。",
       "en": "Failed to load schedule. Please refresh the page."
+    },
+    "finalItinerary.title": {
+      "zh": "结课周事务安排",
+      "ja": "最終週アジェンダ",
+      "en": "Final Week Itinerary"
+    },
+    "finalItinerary.disclaimer": {
+      "zh": "所有教学计划以 <a href=\"https://docs.google.com/document/d/1Q37JymbdCchYJ2XXPjOwfXdR4RlJb-VFbxXwW24QF7g/edit?usp=drive_link\" target=\"_blank\" rel=\"noopener noreferrer\">Syllabus</a> 为权威参考",
+      "ja": "授業内容は <a href=\"https://docs.google.com/document/d/1Q37JymbdCchYJ2XXPjOwfXdR4RlJb-VFbxXwW24QF7g/edit?usp=drive_link\" target=\"_blank\" rel=\"noopener noreferrer\">Syllabus</a> を公式参照先としてください",
+      "en": "All academic content is subject to the <a href=\"https://docs.google.com/document/d/1Q37JymbdCchYJ2XXPjOwfXdR4RlJb-VFbxXwW24QF7g/edit?usp=drive_link\" target=\"_blank\" rel=\"noopener noreferrer\">Syllabus</a> as the authoritative reference"
+    },
+    "finalItinerary.header.date": {
+      "zh": "日期",
+      "ja": "日付",
+      "en": "Date"
+    },
+    "finalItinerary.header.morning": {
+      "zh": "上午",
+      "ja": "午前",
+      "en": "Morning"
+    },
+    "finalItinerary.header.afternoon": {
+      "zh": "下午",
+      "ja": "午後",
+      "en": "Afternoon"
+    },
+    "finalItinerary.header.evening": {
+      "zh": "晚上",
+      "ja": "夜",
+      "en": "Evening"
     }
+  },
+  "finalItinerary": {
+    "days": [
+      {
+        "date": "7/21",
+        "weekday": { "zh": "周二", "ja": "火曜", "en": "Tue" },
+        "morning": {
+          "type": "course",
+          "title": { "zh": "教授巡回小组 critique", "ja": "教授巡回クリティーク", "en": "Prof. rotating team critique" },
+          "sub": { "zh": "版本迭代", "ja": "バージョン反復", "en": "Iterate builds" }
+        },
+        "afternoon": {
+          "type": "work",
+          "title": { "zh": "继续开发", "ja": "開発継続", "en": "Continue development" },
+          "sub": { "zh": "有条件试玩的小组开始「互相试玩 / 点评」，记录反馈并制定方案", "ja": "プレイ可能なチームは「相互プレイテスト・レビュー」開始、フィードバックを記録し改善案を作成", "en": "Playable teams start peer playtest / review; document feedback and plan improvements" }
+        },
+        "evening": {
+          "type": "work",
+          "title": { "zh": "全力迭代版本", "ja": "全力でバージョンアップ", "en": "Full-speed iteration" }
+        }
+      },
+      {
+        "date": "7/22",
+        "weekday": { "zh": "周三", "ja": "水曜", "en": "Wed" },
+        "morning": {
+          "type": "course",
+          "title": { "zh": "教授巡回小组 critique", "ja": "教授巡回クリティーク", "en": "Prof. rotating team critique" },
+          "sub": { "zh": "版本迭代", "ja": "バージョン反復", "en": "Iterate builds" }
+        },
+        "afternoon": {
+          "type": "work",
+          "title": { "zh": "其余小组开始「互相试玩 / 点评」", "ja": "残りのチームも「相互プレイテスト・レビュー」開始", "en": "Remaining teams start peer playtest / review" },
+          "sub": { "zh": "记录反馈并制定方案", "ja": "フィードバックを記録し改善案を作成", "en": "Document feedback and plan improvements" }
+        },
+        "evening": {
+          "type": "work",
+          "title": { "zh": "全力迭代版本", "ja": "全力でバージョンアップ", "en": "Full-speed iteration" }
+        }
+      },
+      {
+        "date": "7/23",
+        "weekday": { "zh": "周四", "ja": "木曜", "en": "Thu" },
+        "morning": {
+          "type": "polish",
+          "title": { "zh": "Build 版本", "ja": "ビルド作成", "en": "Build final version" },
+          "sub": { "zh": "最终 polish 打磨和 juicy 优化", "ja": "最終仕上げと juicy チューン", "en": "Final polish and juicy tuning" }
+        },
+        "afternoon": {
+          "type": "showcase",
+          "title": { "zh": "巨幕投屏项目展示", "ja": "巨大スクリーンでプロジェクト展示", "en": "Showcase on giant screen" },
+          "sub": { "zh": "公开试玩和点评", "ja": "公開プレイテストとレビュー", "en": "Public playtest and review" }
+        },
+        "evening": {
+          "type": "ceremony",
+          "title": { "zh": "教授颁发结业证书", "ja": "修了証書授与", "en": "Certificate ceremony" },
+          "sub": { "zh": "大合照", "ja": "集合写真", "en": "Group photo" }
+        }
+      },
+      {
+        "date": "7/24",
+        "weekday": { "zh": "周五 · 结业展", "ja": "金曜 · 修了展", "en": "Fri · Graduation Show" },
+        "morning": {
+          "type": "prep",
+          "title": { "zh": "彩排结业展", "ja": "修了展リハーサル", "en": "Graduation show rehearsal" },
+          "sub": { "zh": "约 12:50 乘大巴前往游戏博物馆", "ja": "12:50頃 バスでゲーム博物館へ移動", "en": "~12:50 Bus to Game Museum" }
+        },
+        "afternoon": {
+          "type": "exhibit",
+          "title": { "zh": "博物馆结业展", "ja": "博物館修了展", "en": "Museum graduation show" },
+          "items": [
+            { "zh": "13:40 – 15:00 布展", "ja": "13:40 – 15:00 設営", "en": "13:40 – 15:00 Setup" },
+            { "zh": "15:00 博物馆大合照", "ja": "15:00 博物館集合写真", "en": "15:00 Museum group photo" },
+            { "zh": "15:00 – 18:00 开放参观", "ja": "15:00 – 18:00 一般公開", "en": "15:00 – 18:00 Open to public" }
+          ],
+          "note": { "zh": "每组始终留 1–2 人维护摊位，配合直播与来宾沟通", "ja": "各チーム常時 1–2 名がブース対応、配信と来場者対応に協力", "en": "1–2 people per team at booth at all times; support streaming and visitor communication" }
+        },
+        "evening": {
+          "type": "social",
+          "title": { "zh": "约 18:10 乘大巴集体返回", "ja": "18:10頃 バスで集合帰還", "en": "~18:10 Bus ride back" },
+          "sub": { "zh": "教室开放玩桌游", "ja": "教室でボードゲーム自由", "en": "Board game room open" }
+        }
+      },
+      {
+        "date": "7/25",
+        "weekday": { "zh": "周六", "ja": "土曜", "en": "Sat" },
+        "morningAfternoon": {
+          "type": "free",
+          "title": { "zh": "无安排 · 自由活动", "ja": "フリー・自由行動", "en": "No schedule · Free time" },
+          "items": [
+            { "zh": "教室开放玩桌游", "ja": "教室でボードゲーム自由", "en": "Board game room open" },
+            { "zh": "游戏博物馆教育展继续展出部分游戏，欢迎参加", "ja": "ゲーム博物館教育展で一部作品が継続展示中、参加歓迎", "en": "Game Museum education exhibit continues with selected games — welcome to visit" }
+          ]
+        },
+        "evening": {
+          "type": "return",
+          "title": { "zh": "自行返程", "ja": "各自帰宅", "en": "Make your own way back" }
+        }
+      }
+    ]
   },
   "schedule": {
     "syllabus": {

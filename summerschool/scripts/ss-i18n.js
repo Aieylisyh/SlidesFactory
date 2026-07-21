@@ -4,7 +4,7 @@
 (function (global) {
     'use strict';
 
-    var DATA_URL = 'data/i18n.json?v=7';
+    var DATA_URL = 'data/i18n.json?v=8';
     var STORAGE_KEY = 'ss-deck-locale';
     var LOCALES = ['zh', 'ja', 'en'];
     var DEFAULT_LOCALE = 'zh';
@@ -115,6 +115,11 @@
 
     function weekdayLabel(key) {
         return scheduleLookup('weekdays', key, 'label') || '';
+    }
+
+    function finalItineraryDays() {
+        if (!data || !data.finalItinerary || !data.finalItinerary.days) return [];
+        return data.finalItinerary.days;
     }
 
     function applyElement(el) {
@@ -331,6 +336,7 @@
         cellLabel: cellLabel,
         onlineTitle: onlineTitle,
         weekdayLabel: weekdayLabel,
+        finalItineraryDays: finalItineraryDays,
         LOCALES: LOCALES
     };
 })(window);
