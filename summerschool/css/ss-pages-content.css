@@ -1,4 +1,4 @@
-﻿/* ── Sparse / Gestalt placeholder pages ── */
+/* ── Sparse / Gestalt placeholder pages ── */
 html.ss-deck-light .reveal .slide-ss-sparse .slide-content-layer {
     display: flex;
     flex-direction: column;
@@ -601,4 +601,166 @@ html.ss-deck-light .reveal .slide-ss-resource-links .ss-tips-resource-icon {
     display: block;
     width: 0.95em;
     height: 0.95em;
+}
+
+/* ── 结课周事务安排 · final itinerary table ── */
+html.ss-deck-light .reveal .slide-ss-final-itinerary .slide-content-layer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    min-height: 0;
+}
+
+html.ss-deck-light .reveal .slide-ss-final-itinerary .disclaimer-note {
+    margin: 0 0 0.35em;
+}
+
+html.ss-deck-light .reveal .slide-ss-final-itinerary .disclaimer-note a {
+    color: var(--ss-orange);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+html.ss-deck-light .reveal .slide-ss-final-itinerary .disclaimer-note a:hover {
+    color: var(--ss-orange-dark);
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-wrapper {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    width: 100%;
+    margin-top: calc(-1 * var(--ss-schedule-body-lift));
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    font-size: calc(var(--ss-text-floor) * 0.92);
+    line-height: 1.4;
+    color: var(--ss-gray-800);
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 0.5em 0.6em;
+    background: var(--ss-gray-100);
+    border: 1px solid var(--ss-gray-200);
+    font-weight: 700;
+    font-size: 0.95em;
+    color: var(--ss-gray-700);
+    text-align: center;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table tbody td {
+    padding: 0.5em 0.6em;
+    border: 1px solid var(--ss-gray-200);
+    background: var(--ss-white);
+    vertical-align: top;
+    text-align: left;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-col-date {
+    width: 12%;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-col-morning,
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-col-afternoon,
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-col-evening {
+    width: 29.33%;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-date-cell {
+    background: var(--ss-gray-100);
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 700;
+    color: var(--ss-gray-700);
+    position: sticky;
+    left: 0;
+    z-index: 1;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-day {
+    display: block;
+    font-size: 1.15em;
+    color: var(--ss-orange);
+    font-weight: 800;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-day-tag {
+    display: block;
+    font-size: 0.82em;
+    color: var(--ss-gray-500);
+    margin-top: 0.15em;
+    font-weight: 600;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell p {
+    margin: 0;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell p + p {
+    margin-top: 0.25em;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell-sub {
+    font-size: 0.82em !important;
+    color: var(--ss-gray-600);
+    line-height: 1.45;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell-strong {
+    font-weight: 800;
+    font-size: 1em !important;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-note {
+    color: var(--ss-orange-dark) !important;
+    font-weight: 600;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--course {
+    background: hsla(18, 100%, 50%, 0.12);
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--work {
+    background: hsla(206, 85%, 61%, 0.10);
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--polish {
+    background: hsla(270, 70%, 60%, 0.12);
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--showcase {
+    background: hsla(180, 80%, 45%, 0.12);
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--ceremony {
+    background: hsla(45, 100%, 50%, 0.14);
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--prep {
+    background: hsla(210, 80%, 55%, 0.10);
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--exhibit {
+    background: hsla(130, 65%, 45%, 0.12);
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--social {
+    background: hsla(330, 80%, 60%, 0.10);
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--free {
+    background: var(--ss-gray-50);
+    text-align: center;
+    vertical-align: middle;
 }

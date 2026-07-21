@@ -26,7 +26,7 @@
 
 | `linear` | yes（仅横向翻页） |
 
-| `pages` | 12 |
+| `pages` | 13 |
 
 
 
@@ -65,6 +65,7 @@
 | 11 | 夏校主视觉 | `main-visual` | GMC 2026 夏校视觉方案 | 赛博像素 / 复古未来主义 |
 
 | 12 | 破冰活动 | `ice-break` | `summerschool/modules/ice-break/` | 3000×1200 原比例任务图；D 显示骰子，空格投掷 |
+| 13 | 结课周事务安排 | `final-itinerary` | 用户提供的 7/21–7/25 日程 | 表格：日期 × 上午/下午/晚上，Syllabus 外链 |
 
 
 
