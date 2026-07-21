@@ -639,7 +639,7 @@ html.ss-deck-light .reveal .ss-final-itinerary-table {
     border-collapse: separate;
     border-spacing: 0;
     table-layout: fixed;
-    font-size: calc(var(--ss-text-floor) * 0.92);
+    font-size: calc(var(--ss-text-floor) * 0.92 * 0.75);
     line-height: 1.4;
     color: var(--ss-gray-800);
 }
@@ -669,10 +669,13 @@ html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-col-date {
     width: 12%;
 }
 
-html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-col-morning,
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-col-morning {
+    width: 23.46%;
+}
+
 html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-col-afternoon,
 html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-col-evening {
-    width: 29.33%;
+    width: 32.27%;
 }
 
 html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-date-cell {
@@ -761,6 +764,12 @@ html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--social {
 
 html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--free {
     background: var(--ss-gray-50);
+    text-align: center;
+    vertical-align: middle;
+}
+
+html.ss-deck-light .reveal .ss-final-itinerary-table .ss-fi-cell--return {
+    background: hsla(25, 100%, 50%, 0.10);
     text-align: center;
     vertical-align: middle;
 }
