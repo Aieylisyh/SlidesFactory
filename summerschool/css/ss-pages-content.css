@@ -1161,6 +1161,148 @@ html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
     background: linear-gradient(90deg, transparent, #3d6b22, transparent);
 }
 
+.ss-boar {
+    position: absolute;
+    bottom: 18%;
+    left: 0;
+    width: 70px;
+    height: 45px;
+    animation: ssBoarWalk 12s ease-in-out infinite;
+    z-index: 3;
+}
+
+@keyframes ssBoarWalk {
+    0% { left: -80px; transform: scaleX(1); }
+    45% { left: calc(100% + 10px); transform: scaleX(1); }
+    50% { left: calc(100% + 10px); transform: scaleX(-1); }
+    95% { left: -80px; transform: scaleX(-1); }
+    100% { left: -80px; transform: scaleX(1); }
+}
+
+.ss-boar__body {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 50px;
+    height: 28px;
+    background: linear-gradient(180deg, #5a3d2b 0%, #3d2914 100%);
+    border-radius: 50% 40% 35% 50% / 60% 50% 50% 60%;
+    box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.ss-boar__head {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    width: 28px;
+    height: 24px;
+    background: linear-gradient(180deg, #6b4a35 0%, #4a3320 100%);
+    border-radius: 50% 30% 40% 50% / 50% 40% 50% 50%;
+}
+
+.ss-boar__ear {
+    position: absolute;
+    top: -4px;
+    width: 8px;
+    height: 10px;
+    background: #4a3320;
+    border-radius: 50% 50% 0 50%;
+}
+
+.ss-boar__ear--left {
+    left: 4px;
+    transform: rotate(-15deg);
+}
+
+.ss-boar__ear--right {
+    left: 14px;
+    transform: rotate(10deg);
+}
+
+.ss-boar__eye {
+    position: absolute;
+    top: 8px;
+    left: 14px;
+    width: 3px;
+    height: 3px;
+    background: #1a0f05;
+    border-radius: 50%;
+}
+
+.ss-boar__snout {
+    position: absolute;
+    bottom: 4px;
+    left: -4px;
+    width: 12px;
+    height: 9px;
+    background: linear-gradient(180deg, #8b6b52 0%, #6b4a35 100%);
+    border-radius: 50%;
+}
+
+.ss-boar__snout::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 2px;
+    width: 2px;
+    height: 2px;
+    background: #2a1d0d;
+    border-radius: 50%;
+    box-shadow: 4px 0 0 #2a1d0d;
+}
+
+.ss-boar__tusk {
+    position: absolute;
+    bottom: 3px;
+    width: 3px;
+    height: 6px;
+    background: #f5f0e6;
+    border-radius: 0 0 50% 50%;
+}
+
+.ss-boar__tusk--left {
+    left: -1px;
+    transform: rotate(-20deg);
+}
+
+.ss-boar__tusk--right {
+    left: 5px;
+    transform: rotate(15deg);
+}
+
+.ss-boar__leg {
+    position: absolute;
+    bottom: 0;
+    width: 5px;
+    height: 10px;
+    background: linear-gradient(180deg, #4a3320 0%, #2a1d0d 100%);
+    border-radius: 0 0 2px 2px;
+    animation: ssBoarLeg 0.4s ease-in-out infinite;
+}
+
+.ss-boar__leg--fl { left: 12px; animation-delay: 0s; }
+.ss-boar__leg--fr { left: 22px; animation-delay: 0.2s; }
+.ss-boar__leg--bl { left: 42px; animation-delay: 0.2s; }
+.ss-boar__leg--br { left: 52px; animation-delay: 0s; }
+
+@keyframes ssBoarLeg {
+    0%, 100% { transform: rotate(-8deg); }
+    50% { transform: rotate(8deg); }
+}
+
+.ss-boar__tail {
+    position: absolute;
+    top: 10px;
+    right: 2px;
+    width: 4px;
+    height: 10px;
+    border: 2px solid #4a3320;
+    border-left: none;
+    border-bottom: none;
+    border-radius: 0 50% 0 0;
+    transform: rotate(30deg);
+}
+
 .ss-tree-hole__bubbles {
     position: absolute;
     top: 0;
