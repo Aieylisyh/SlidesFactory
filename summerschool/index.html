@@ -22,7 +22,7 @@
 
     <link rel="stylesheet" href="../style_guide.css?v=153">
 
-    <link rel="stylesheet" href="style_extension.css?v=69">
+    <link rel="stylesheet" href="style_extension.css?v=70">
 
     <link rel="stylesheet" href="portrait-deck-adapt-extension.css?v=5">
 
@@ -1011,34 +1011,59 @@
             </section>
 
 
-            <!-- ── 15. 留言板 ─────────────────────────────────────────── -->
+            <!-- ── 15. 树洞留言板 ─────────────────────────────────────────── -->
             <section class="slide-ss-message-board" data-background-color="var(--ss-bg-canvas)">
 
                 <div class="slide-content-layer">
 
-                    <h2>留言板</h2>
+                    <h2>夏校树洞</h2>
 
-                    <p class="ss-mb-subtitle">写下你想说的话，上墙展示！</p>
+                    <p class="ss-mb-subtitle">有些话不好意思当面说？写进树洞里吧。只有老师能看到。</p>
 
                     <div class="ss-mb-container">
 
                         <div class="ss-mb-left">
                             <a href="https://fcnjeo30vnyd.feishu.cn/share/base/form/shrcnG27QTv3rTnH46XrU2habzg" target="_blank" rel="noopener noreferrer" class="ss-mb-post-btn">
-                                <span class="ss-mb-post-btn__icon">✎</span>
-                                <span class="ss-mb-post-btn__text">点我写留言</span>
+                                <span class="ss-mb-post-btn__icon">🕳️</span>
+                                <span class="ss-mb-post-btn__text">点我写悄悄话</span>
                             </a>
-                            <p class="ss-mb-hint">提交后约 10 秒自动上墙<br>点下方按钮手动刷新</p>
-                            <button class="ss-mb-refresh-btn" onclick="if(window.SummerMessageBoard)window.SummerMessageBoard.refresh()">
-                                <span>↻</span> 刷新留言
-                            </button>
+
+                            <div class="ss-mb-features">
+                                <div class="ss-mb-feature">
+                                    <span class="ss-mb-feature__icon">🔒</span>
+                                    <span class="ss-mb-feature__text">完全匿名</span>
+                                </div>
+                                <div class="ss-mb-feature">
+                                    <span class="ss-mb-feature__icon">👀</span>
+                                    <span class="ss-mb-feature__text">仅老师可见</span>
+                                </div>
+                                <div class="ss-mb-feature">
+                                    <span class="ss-mb-feature__icon">💬</span>
+                                    <span class="ss-mb-feature__text">想说啥都行</span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="ss-mb-right">
-                            <div class="ss-mb-board" id="ssMessageBoard">
-                                <iframe id="ssMbIframe" src="https://fcnjeo30vnyd.feishu.cn/base/XlLsbeB9zakQAssJWPUcpddjn0g" frameborder="0" allowfullscreen></iframe>
-                                <div class="ss-mb-placeholder">
-                                    <p>💬 留言板待接入</p>
-                                    <p class="ss-mb-placeholder-sub">配置飞书公开视图后即可展示留言</p>
+                            <div class="ss-tree-hole">
+                                <div class="ss-tree-hole__scene">
+                                    <div class="ss-tree-hole__moon">🌙</div>
+                                    <div class="ss-tree-hole__stars">
+                                        <span>✦</span><span>✧</span><span>✦</span>
+                                        <span>✧</span><span>✦</span><span>✧</span>
+                                        <span>✦</span><span>✧</span>
+                                    </div>
+                                    <div class="ss-tree-hole__tree">
+                                        <div class="ss-tree-hole__hole">
+                                            <div class="ss-tree-hole__glow"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ss-tree-hole__ground"></div>
+                                    <div class="ss-tree-hole__bubbles">
+                                        <div class="ss-bubble ss-bubble--1">你今天过得怎么样？</div>
+                                        <div class="ss-bubble ss-bubble--2">有什么想吐槽的？</div>
+                                        <div class="ss-bubble ss-bubble--3">对课程有什么建议？</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1049,7 +1074,7 @@
 
                 <aside class="notes">
 
-                    留言板：学生通过飞书表单提交留言，右侧嵌入飞书多维表格公开视图实时展示。
+                    夏校树洞：学生匿名提交留言，仅老师在飞书后台可见。右侧为装饰性树洞插画。
 
                 </aside>
 
