@@ -902,3 +902,191 @@ html.ss-deck-light .reveal .slide-ss-game-upload .ss-upload-subtitle {
 .ss-upload-btn--4:hover { box-shadow: 0 8px 24px rgba(239, 68, 68, 0.35); }
 .ss-upload-btn--5:hover { box-shadow: 0 8px 24px rgba(14, 165, 233, 0.35); }
 .ss-upload-btn--6:hover { box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35); }
+
+/* ── 留言板 · message board ── */
+html.ss-deck-light .reveal .slide-ss-message-board .slide-content-layer {
+    padding-top: var(--ss-section-header-padding-top);
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    min-height: 0;
+}
+
+html.ss-deck-light .reveal .slide-ss-message-board h2 {
+    display: block;
+    align-self: flex-start;
+    width: auto;
+    max-width: none;
+    height: auto;
+    min-height: calc(var(--ss-section-title-size) * var(--ss-section-title-line-height));
+    margin: 0 0 var(--ss-section-title-margin-bottom);
+    padding: 0;
+    border-bottom: none !important;
+    font-size: var(--ss-section-title-size);
+    line-height: var(--ss-section-title-line-height);
+    font-weight: 800;
+    text-align: left;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    color: var(--ss-gray-800) !important;
+}
+
+html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
+    margin: 0 0 1em;
+    font-size: calc(var(--ss-body-size) * 1.05);
+    color: var(--ss-gray-500);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.ss-mb-container {
+    display: flex;
+    gap: 1.5em;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+
+.ss-mb-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    width: 22%;
+    flex-shrink: 0;
+}
+
+.ss-mb-post-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4em;
+    width: 100%;
+    padding: 1.6em 1em;
+    border-radius: var(--ss-card-radius);
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--ss-accent-primary) 0%, var(--ss-accent-secondary) 100%);
+    color: white !important;
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.ss-mb-post-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(255, 107, 53, 0.4);
+    color: white !important;
+}
+
+.ss-mb-post-btn__icon {
+    font-size: calc(var(--ss-h2-size) * 0.9);
+    line-height: 1;
+    font-weight: 700;
+}
+
+.ss-mb-post-btn__text {
+    font-size: calc(var(--ss-h3-size) * 0.75);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+}
+
+.ss-mb-hint {
+    font-size: calc(var(--ss-body-size) * 0.8);
+    color: var(--ss-gray-400);
+    text-align: center;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.ss-mb-refresh-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4em;
+    width: 100%;
+    padding: 0.7em 1em;
+    border: 2px solid var(--ss-gray-200);
+    border-radius: calc(var(--ss-card-radius) * 0.7);
+    background: white;
+    color: var(--ss-gray-600);
+    font-size: calc(var(--ss-body-size) * 0.85);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.ss-mb-refresh-btn:hover {
+    border-color: var(--ss-accent-primary);
+    color: var(--ss-accent-primary);
+    background: hsla(16, 100%, 60%, 0.05);
+}
+
+.ss-mb-refresh-btn span {
+    font-size: 1.2em;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+.ss-mb-refresh-btn:active span {
+    transform: rotate(180deg);
+}
+
+.ss-mb-right {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+}
+
+.ss-mb-board {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--ss-card-radius);
+    background: var(--ss-gray-50);
+    border: 2px solid var(--ss-gray-100);
+    overflow: hidden;
+    min-height: 400px;
+}
+
+.ss-mb-board iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none;
+}
+
+.ss-mb-board iframe.ss-mb-loaded {
+    display: block;
+}
+
+.ss-mb-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--ss-gray-400);
+    width: 100%;
+    padding: 2em;
+}
+
+.ss-mb-placeholder p {
+    margin: 0;
+    font-size: calc(var(--ss-body-size) * 1.2);
+    font-weight: 500;
+}
+
+.ss-mb-placeholder-sub {
+    margin-top: 0.6em !important;
+    font-size: calc(var(--ss-body-size) * 0.85) !important;
+    font-weight: 400 !important;
+    color: var(--ss-gray-300);
+}
