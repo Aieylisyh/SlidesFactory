@@ -5,8 +5,8 @@
     'use strict';
 
     var CONFIG = {
-        formUrl: '',
-        viewUrl: ''
+        formUrl: 'https://fcnjeo30vnyd.feishu.cn/share/base/form/shrcnG27QTv3rTnH46XrU2habzg',
+        viewUrl: 'https://fcnjeo30vnyd.feishu.cn/base/XlLsbeB9zakQAssJWPUcpddjn0g'
     };
 
     function init() {
