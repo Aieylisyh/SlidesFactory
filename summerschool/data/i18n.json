@@ -709,7 +709,10 @@
         "morning": {
           "type": "prep",
           "title": { "zh": "彩排结业展", "ja": "修了展リハーサル", "en": "Graduation show rehearsal" },
-          "sub": { "zh": "约 12:50 乘大巴前往游戏博物馆", "ja": "12:50頃 バスでゲーム博物館へ移動", "en": "~12:50 Bus to Game Museum" }
+          "items": [
+            { "zh": "收拾教室个人物品，带回酒店", "ja": "教室の私物を片付けてホテルへ持ち帰り", "en": "Pack up personal belongings from classroom, bring back to hotel" },
+            { "zh": "约 12:50 从酒店乘大巴前往游戏博物馆", "ja": "12:50頃 ホテルからバスでゲーム博物館へ移動", "en": "~12:50 Bus departs from hotel to Game Museum" }
+          ]
         },
         "afternoon": {
           "type": "exhibit",
@@ -724,23 +727,23 @@
         "evening": {
           "type": "social",
           "title": { "zh": "约 18:10 乘大巴集体返回", "ja": "18:10頃 バスで集合帰還", "en": "~18:10 Bus ride back" },
-          "sub": { "zh": "教室开放玩桌游", "ja": "教室でボードゲーム自由", "en": "Board game room open" }
+          "sub": { "zh": "休息，教室晚上不开放", "ja": "休憩、夜間は教室閉鎖", "en": "Rest; classroom closed at night" }
         }
       },
       {
         "date": "7/25",
         "weekday": { "zh": "周六", "ja": "土曜", "en": "Sat" },
         "morningAfternoon": {
-          "type": "free",
-          "title": { "zh": "无安排 · 自由活动", "ja": "フリー・自由行動", "en": "No schedule · Free time" },
+          "type": "return",
+          "title": { "zh": "自行返程", "ja": "各自帰宅", "en": "Make your own way back" },
           "items": [
-            { "zh": "教室开放玩桌游", "ja": "教室でボードゲーム自由", "en": "Board game room open" },
+            { "zh": "教室是否开放自习待定", "ja": "自習開放は未定", "en": "Study room availability TBD" },
             { "zh": "游戏博物馆教育展继续展出部分游戏，欢迎参加", "ja": "ゲーム博物館教育展で一部作品が継続展示中、参加歓迎", "en": "Game Museum education exhibit continues with selected games — welcome to visit" }
           ]
         },
         "evening": {
-          "type": "return",
-          "title": { "zh": "自行返程", "ja": "各自帰宅", "en": "Make your own way back" }
+          "type": "free",
+          "title": { "zh": "", "ja": "", "en": "" }
         }
       }
     ]
