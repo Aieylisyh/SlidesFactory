@@ -605,11 +605,33 @@ html.ss-deck-light .reveal .slide-ss-resource-links .ss-tips-resource-icon {
 
 /* ── 结课周事务安排 · final itinerary table ── */
 html.ss-deck-light .reveal .slide-ss-final-itinerary .slide-content-layer {
+    padding-top: var(--ss-section-header-padding-top);
+    gap: 0;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
     min-height: 0;
+}
+
+html.ss-deck-light .reveal .slide-ss-final-itinerary h2 {
+    display: block;
+    align-self: flex-start;
+    width: auto;
+    max-width: none;
+    height: auto;
+    min-height: calc(var(--ss-section-title-size) * var(--ss-section-title-line-height));
+    margin: 0 0 var(--ss-section-title-margin-bottom);
+    padding: 0;
+    border-bottom: none !important;
+    font-size: var(--ss-section-title-size);
+    line-height: var(--ss-section-title-line-height);
+    font-weight: 800;
+    text-align: left;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    color: var(--ss-gray-800) !important;
 }
 
 html.ss-deck-light .reveal .slide-ss-final-itinerary .disclaimer-note {
