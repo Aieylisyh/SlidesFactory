@@ -21,6 +21,14 @@
     var fullscreenBtn = null;
     var fullscreenLabel = null;
 
+    var ctrlToggleBtn = null;
+    var ctrlResetBtn = null;
+    var ctrlCycleBtn = null;
+    var ctrlStartBtn = null;
+    var ctrlToggleLabel = null;
+    var ctrlCycleLabel = null;
+    var ctrlStartLabel = null;
+
     function $(sel) { return document.querySelector(sel); }
 
     function formatTime(totalSec) {
@@ -46,6 +54,27 @@
         timerEl.classList.toggle('is-visible', visible);
         timerEl.classList.toggle('is-running', running);
         timerEl.classList.toggle('is-finished', finished);
+
+        updateControls();
+    }
+
+    function updateControls() {
+        if (ctrlToggleBtn) {
+            ctrlToggleBtn.disabled = false;
+            if (ctrlToggleLabel) ctrlToggleLabel.textContent = visible ? 'HIDE' : 'SHOW';
+        }
+        if (ctrlResetBtn) {
+            ctrlResetBtn.disabled = !visible;
+        }
+        if (ctrlCycleBtn) {
+            ctrlCycleBtn.disabled = !visible || running;
+            if (ctrlCycleLabel) ctrlCycleLabel.textContent = durations[durationIndex] + ' MIN';
+        }
+        if (ctrlStartBtn) {
+            ctrlStartBtn.disabled = !visible || remainingSeconds <= 0;
+            ctrlStartBtn.classList.toggle('is-paused', running);
+            if (ctrlStartLabel) ctrlStartLabel.textContent = running ? 'PAUSE' : 'START';
+        }
     }
 
     function getState() {
@@ -253,6 +282,35 @@
             document.addEventListener('fullscreenchange', updateFsLabel);
             document.addEventListener('webkitfullscreenchange', updateFsLabel);
             document.addEventListener('msfullscreenchange', updateFsLabel);
+        }
+
+        ctrlToggleBtn = $('#playtestCtrlToggle');
+        ctrlResetBtn = $('#playtestCtrlReset');
+        ctrlCycleBtn = $('#playtestCtrlCycle');
+        ctrlStartBtn = $('#playtestCtrlStart');
+        ctrlToggleLabel = ctrlToggleBtn ? ctrlToggleBtn.querySelector('.ss-playtest-ctrl__label') : null;
+        ctrlCycleLabel = ctrlCycleBtn ? ctrlCycleBtn.querySelector('.ss-playtest-ctrl__label') : null;
+        ctrlStartLabel = ctrlStartBtn ? ctrlStartBtn.querySelector('.ss-playtest-ctrl__label') : null;
+
+        if (ctrlToggleBtn) {
+            ctrlToggleBtn.addEventListener('click', function () {
+                if (visible) hide(); else show();
+            });
+        }
+        if (ctrlResetBtn) {
+            ctrlResetBtn.addEventListener('click', function () {
+                reset();
+            });
+        }
+        if (ctrlCycleBtn) {
+            ctrlCycleBtn.addEventListener('click', function () {
+                resetAndCycle();
+            });
+        }
+        if (ctrlStartBtn) {
+            ctrlStartBtn.addEventListener('click', function () {
+                if (running) pause(); else start();
+            });
         }
 
         render();
