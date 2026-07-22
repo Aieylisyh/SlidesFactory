@@ -1383,6 +1383,19 @@ html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #000;
+}
+
+.ss-playtest-layer.is-fullscreen {
+    width: 100vw;
+    height: 100vh;
+}
+
+.ss-playtest-layer.is-fullscreen .ss-playtest-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
 }
 
 .ss-playtest-img {
@@ -1391,6 +1404,7 @@ html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
     object-fit: contain;
     user-select: none;
     -webkit-user-drag: none;
+    pointer-events: none;
 }
 
 .ss-playtest-fullscreen-btn {
@@ -1411,7 +1425,7 @@ html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s ease, transform 0.2s ease;
-    z-index: 10;
+    z-index: 20;
 }
 
 .ss-playtest-fullscreen-btn:hover {
@@ -1435,7 +1449,7 @@ html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
     position: absolute;
     top: 8%;
     left: 6%;
-    z-index: 5;
+    z-index: 15;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -1586,7 +1600,7 @@ html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
     transform: translateX(-50%);
     display: flex;
     gap: 16px;
-    z-index: 5;
+    z-index: 15;
 }
 
 .ss-playtest-ctrl {

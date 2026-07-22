@@ -218,8 +218,8 @@
     }
 
     function toggleFullscreen() {
-        var slide = document.getElementById('playtest');
-        if (!slide) return;
+        var layer = document.querySelector('.ss-playtest-layer');
+        if (!layer) return;
 
         var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
         if (isFs) {
@@ -227,9 +227,9 @@
             else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
             else if (document.msExitFullscreen) document.msExitFullscreen();
         } else {
-            if (slide.requestFullscreen) slide.requestFullscreen();
-            else if (slide.webkitRequestFullscreen) slide.webkitRequestFullscreen();
-            else if (slide.msRequestFullscreen) slide.msRequestFullscreen();
+            if (layer.requestFullscreen) layer.requestFullscreen();
+            else if (layer.webkitRequestFullscreen) layer.webkitRequestFullscreen();
+            else if (layer.msRequestFullscreen) layer.msRequestFullscreen();
         }
     }
 
@@ -237,6 +237,10 @@
         if (!fullscreenLabel) return;
         var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
         fullscreenLabel.textContent = isFs ? '退出全屏' : '全屏';
+        var layer = document.querySelector('.ss-playtest-layer');
+        if (layer) {
+            layer.classList.toggle('is-fullscreen', isFs);
+        }
     }
 
     function execute(action) {
@@ -314,6 +318,7 @@
         }
 
         render();
+        updateFsLabel();
     }
 
     if (document.readyState === 'loading') {
