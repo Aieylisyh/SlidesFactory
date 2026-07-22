@@ -4,9 +4,9 @@
   "deckTitle": "USC × 游研社 · 夏校课程说明会",
   "deckPath": "summerschool/index.html",
   "navFile": "deck-nav-summerschool.json",
-  "generatedAt": "2026-07-14T16:43:14.675Z",
+  "generatedAt": "2026-07-22T06:34:26.269Z",
   "linear": true,
-  "totalSlides": 12,
+  "totalSlides": 14,
   "chapters": [],
   "slides": [
     {
@@ -217,6 +217,38 @@
       "focusTargets": [],
       "title": "新人村破冰任务图",
       "shareSlug": "ice-break"
+    },
+    {
+      "index": 12,
+      "h": 12,
+      "v": 0,
+      "id": "final-itinerary",
+      "className": "content-slide slide-ss-final-itinerary",
+      "attrs": {
+        "data-background-color": "#fff",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "final-itinerary"
+    },
+    {
+      "index": 13,
+      "h": 13,
+      "v": 0,
+      "id": "playtest",
+      "className": "content-slide slide-ss-playtest interactive-zone",
+      "attrs": {
+        "data-background-color": "#000000",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "playtest"
     }
   ]
 }
