@@ -3,10 +3,10 @@
   "deckId": "summerschool",
   "deckTitle": "USC × 游研社 · 夏校课程说明会",
   "deckPath": "summerschool/index.html",
-  "navFile": "deck-nav-summerschool.json",
-  "generatedAt": "2026-07-22T06:34:26.269Z",
+  "navFile": "remoteNavigator/deck-nav-summerschool.json",
+  "generatedAt": "2026-07-22T07:44:19.231Z",
   "linear": true,
-  "totalSlides": 14,
+  "totalSlides": 16,
   "chapters": [],
   "slides": [
     {
@@ -237,6 +237,38 @@
     {
       "index": 13,
       "h": 13,
+      "v": 0,
+      "id": "game-upload",
+      "className": "content-slide slide-ss-game-upload",
+      "attrs": {
+        "data-background-color": "var(--ss-bg-canvas)",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "game-upload"
+    },
+    {
+      "index": 14,
+      "h": 14,
+      "v": 0,
+      "id": "tree-hole",
+      "className": "content-slide slide-ss-message-board",
+      "attrs": {
+        "data-background-color": "var(--ss-bg-canvas)",
+        "data-transition-skip": ""
+      },
+      "kind": "content",
+      "chapterId": null,
+      "focusProfile": null,
+      "focusTargets": [],
+      "title": "tree-hole"
+    },
+    {
+      "index": 15,
+      "h": 15,
       "v": 0,
       "id": "playtest",
       "className": "content-slide slide-ss-playtest interactive-zone",

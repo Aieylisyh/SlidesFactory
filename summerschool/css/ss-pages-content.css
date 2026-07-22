@@ -1432,12 +1432,14 @@ html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
 
 .ss-playtest-countdown {
     position: absolute;
-    top: 8%;
-    left: 6%;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 15;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
+    font-size: clamp(24px, 5vmin, 80px);
 }
 
 .ss-playtest-countdown.is-visible {
@@ -1458,7 +1460,6 @@ html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
         0 0 20px rgba(0, 255, 136, 0.4),
         inset 0 0 15px rgba(0, 255, 136, 0.2);
     font-family: 'Courier New', 'Consolas', monospace;
-    font-size: calc(var(--ss-h2-size) * 1.8);
     font-weight: 700;
     color: #00ff88;
     letter-spacing: 0.05em;

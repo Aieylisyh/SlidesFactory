@@ -196,6 +196,7 @@ html, body {
 }
 
 .timer-display {
+    display: none;
     font-family: 'Courier New', 'Consolas', monospace;
     font-size: 44px;
     font-weight: 700;
