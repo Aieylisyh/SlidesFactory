@@ -1091,6 +1091,17 @@
 
                     <img class="ss-playtest-img" src="assets/playtest.png" alt="Playtest 海报" draggable="false">
 
+                    <div class="ss-playtest-countdown" id="playtestCountdown" aria-live="polite">
+                        <div class="ss-playtest-countdown__display">
+                            <span class="ss-playtest-countdown__digit ss-playtest-countdown__min-tens">0</span>
+                            <span class="ss-playtest-countdown__digit ss-playtest-countdown__min-ones">0</span>
+                            <span class="ss-playtest-countdown__colon">:</span>
+                            <span class="ss-playtest-countdown__digit ss-playtest-countdown__sec-tens">0</span>
+                            <span class="ss-playtest-countdown__digit ss-playtest-countdown__sec-ones">0</span>
+                        </div>
+                        <div class="ss-playtest-countdown__lightning" aria-hidden="true"></div>
+                    </div>
+
                     <button class="ss-playtest-fullscreen-btn" type="button" id="playtestFullscreenBtn">
                         <svg class="ss-playtest-fullscreen-icon" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

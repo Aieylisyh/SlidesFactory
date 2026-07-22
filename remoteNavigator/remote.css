@@ -175,6 +175,89 @@ html, body {
     background: linear-gradient(135deg, #ff007f, #b72d76);
 }
 
+/* ===== Timer Section ===== */
+
+.timer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid rgba(0, 255, 136, 0.28);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(0, 255, 136, 0.08), rgba(0, 180, 255, 0.08));
+}
+
+.timer-heading {
+    margin: 0;
+    color: var(--rn-text);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.timer-display {
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 44px;
+    font-weight: 700;
+    text-align: center;
+    color: #00ff88;
+    text-shadow: 0 0 12px rgba(0, 255, 136, 0.6);
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 12px;
+    letter-spacing: 0.08em;
+    user-select: none;
+}
+
+.timer-display.is-finished {
+    color: #ff4444;
+    border-color: rgba(255, 68, 68, 0.5);
+    text-shadow: 0 0 12px rgba(255, 68, 68, 0.7);
+    animation: remoteTimerFlash 0.2s ease-in-out infinite;
+}
+
+@keyframes remoteTimerFlash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.timer-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.timer-btn {
+    min-height: 64px;
+    padding: 10px;
+    border-radius: 14px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.08s ease, opacity 0.15s ease;
+    border: 1px solid transparent;
+}
+
+.timer-btn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.timer-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.timer-btn-secondary {
+    border-color: rgba(0, 255, 136, 0.42);
+    background: var(--rn-surface-2);
+}
+
+.timer-btn-primary {
+    background: linear-gradient(135deg, #00c278, #0088ff);
+}
+
 .focus-section {
     display: flex;
     flex-direction: column;

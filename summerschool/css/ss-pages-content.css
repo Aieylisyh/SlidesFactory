@@ -1428,3 +1428,151 @@ html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
     height: 1.2em;
     stroke: currentColor;
 }
+
+/* ===== Countdown Timer ===== */
+
+.ss-playtest-countdown {
+    position: absolute;
+    top: 8%;
+    left: 6%;
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.ss-playtest-countdown.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.ss-playtest-countdown__display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.08em;
+    padding: 0.3em 0.6em;
+    background: rgba(0, 0, 0, 0.85);
+    border: 2px solid #00ff88;
+    border-radius: 8px;
+    box-shadow:
+        0 0 20px rgba(0, 255, 136, 0.4),
+        inset 0 0 15px rgba(0, 255, 136, 0.2);
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: calc(var(--ss-h2-size) * 1.8);
+    font-weight: 700;
+    color: #00ff88;
+    letter-spacing: 0.05em;
+    text-shadow:
+        0 0 8px rgba(0, 255, 136, 0.8),
+        0 0 20px rgba(0, 255, 136, 0.5);
+    user-select: none;
+}
+
+.ss-playtest-countdown__digit {
+    display: inline-block;
+    min-width: 0.7em;
+    text-align: center;
+    position: relative;
+}
+
+.ss-playtest-countdown__digit::after {
+    content: '8';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: rgba(0, 255, 136, 0.15);
+    text-shadow: none;
+}
+
+.ss-playtest-countdown__colon {
+    animation: ssCountdownColonBlink 1s steps(2, end) infinite;
+}
+
+@keyframes ssCountdownColonBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+}
+
+.ss-playtest-countdown.is-running {
+    animation: none;
+}
+
+.ss-playtest-countdown.is-finished {
+    animation: ssCountdownShake 0.08s ease-in-out infinite;
+}
+
+@keyframes ssCountdownShake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-2px, 1px) rotate(-0.5deg); }
+    50% { transform: translate(2px, -1px) rotate(0.5deg); }
+    75% { transform: translate(-1px, 2px) rotate(-0.3deg); }
+}
+
+.ss-playtest-countdown.is-finished .ss-playtest-countdown__display {
+    border-color: #ff3333;
+    color: #ff4444;
+    box-shadow:
+        0 0 30px rgba(255, 51, 51, 0.6),
+        inset 0 0 20px rgba(255, 51, 51, 0.3);
+    text-shadow:
+        0 0 10px rgba(255, 68, 68, 0.9),
+        0 0 25px rgba(255, 51, 51, 0.6);
+}
+
+.ss-playtest-countdown.is-finished .ss-playtest-countdown__digit::after {
+    color: rgba(255, 51, 51, 0.15);
+}
+
+/* Lightning rays */
+
+.ss-playtest-countdown__lightning {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.ss-playtest-countdown__lightning.is-active {
+    opacity: 1;
+}
+
+.ss-playtest-countdown__bolt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: var(--bolt-length);
+    background: linear-gradient(180deg, #fff 0%, #00ffff 40%, #0088ff 100%);
+    transform-origin: top center;
+    transform: rotate(var(--bolt-angle)) translateY(-50%);
+    opacity: 0;
+    animation: ssLightningBolt 0.6s ease-out forwards;
+    animation-delay: var(--bolt-delay);
+    box-shadow:
+        0 0 8px #00ffff,
+        0 0 20px #0088ff;
+    clip-path: polygon(
+        30% 0%, 70% 0%,
+        60% 35%, 85% 35%,
+        45% 70%, 65% 70%,
+        50% 100%, 20% 60%,
+        40% 60%, 15% 25%,
+        35% 25%
+    );
+}
+
+@keyframes ssLightningBolt {
+    0% { opacity: 0; filter: brightness(1); }
+    10% { opacity: 1; filter: brightness(2); }
+    20% { opacity: 0.6; filter: brightness(1.5); }
+    35% { opacity: 1; filter: brightness(2.5); }
+    55% { opacity: 0.4; filter: brightness(1.2); }
+    70% { opacity: 0.8; filter: brightness(1.8); }
+    100% { opacity: 0; filter: brightness(1); }
+}

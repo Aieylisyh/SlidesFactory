@@ -38,12 +38,25 @@
     }
 
     function getInteractionSnapshot(slide) {
-        if (!slide || slide.id !== 'ice-break' || !deckFrame || !deckFrame.contentWindow) return null;
-        var api = deckFrame.contentWindow.SummerIceBreakRemote;
-        if (!api || !api.getState) {
-            return { kind: 'ice-break', ready: false, visible: false, rolling: false };
+        if (!slide || !deckFrame || !deckFrame.contentWindow) return null;
+
+        if (slide.id === 'ice-break') {
+            var api = deckFrame.contentWindow.SummerIceBreakRemote;
+            if (!api || !api.getState) {
+                return { kind: 'ice-break', ready: false, visible: false, rolling: false };
+            }
+            return api.getState();
         }
-        return api.getState();
+
+        if (slide.id === 'playtest') {
+            var api2 = deckFrame.contentWindow.PlaytestTimerRemote;
+            if (!api2 || !api2.getState) {
+                return { kind: 'playtest', ready: false, timer: { visible: false, running: false, finished: false, remainingSeconds: 0, totalSeconds: 0, durationMinutes: 10, durationIndex: 1 } };
+            }
+            return api2.getState();
+        }
+
+        return null;
     }
 
     function broadcastState(force) {
@@ -121,6 +134,14 @@
         afterDeckCmd();
     }
 
+    function executePlaytestCmd(msg) {
+        var slide = getCurrentSlideMeta();
+        if (!slide || slide.id !== 'playtest') return;
+        var api = deckFrame && deckFrame.contentWindow && deckFrame.contentWindow.PlaytestTimerRemote;
+        if (!api || !api.execute || !api.execute(msg.action)) return;
+        afterDeckCmd();
+    }
+
     function executeCmd(msg) {
         var Reveal = getReveal();
         if (!Reveal || !Reveal.isReady() || !navData) return;
@@ -132,6 +153,11 @@
 
         if (/^dice_(show|hide|roll_start|roll_stop)$/.test(msg.action || '')) {
             executeIceBreakCmd(msg);
+            return;
+        }
+
+        if (/^timer_(show|hide|reset|cycle|start|pause)$/.test(msg.action || '')) {
+            executePlaytestCmd(msg);
             return;
         }
 

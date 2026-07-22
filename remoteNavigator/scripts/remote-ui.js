@@ -362,6 +362,8 @@
 
         updateDiceUI(currentInteraction, slide);
 
+        updateTimerUI(currentInteraction, slide);
+
     }
 
 
@@ -468,6 +470,66 @@
 
             rollBtn.disabled = !ready || !visible;
 
+        }
+
+    }
+
+    function formatTime(totalSec) {
+        totalSec = Math.max(0, Math.floor(totalSec));
+        var mins = Math.floor(totalSec / 60);
+        var secs = totalSec % 60;
+        return String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+    }
+
+    function updateTimerUI(interaction, slide) {
+
+        var section = $('#timer-section');
+
+        var display = $('#timer-display');
+
+        var visibilityBtn = $('#btn-timer-visibility');
+
+        var resetBtn = $('#btn-timer-reset');
+
+        var cycleBtn = $('#btn-timer-cycle');
+
+        var startBtn = $('#btn-timer-start');
+
+        var isPlaytest = !!(slide && slide.id === 'playtest');
+
+        if (section) section.hidden = !isPlaytest;
+
+        if (!isPlaytest) return;
+
+        var timer = interaction && interaction.kind === 'playtest' && interaction.timer ? interaction.timer : null;
+        var ready = !!(timer && interaction.ready);
+        var visible = !!(ready && timer.visible);
+        var running = !!(ready && timer.running);
+        var remaining = ready && timer.remainingSeconds >= 0 ? timer.remainingSeconds : (timer && timer.totalSeconds || 600);
+
+        if (display) {
+            display.textContent = formatTime(remaining);
+            display.classList.toggle('is-running', running);
+            display.classList.toggle('is-finished', !!(ready && timer.finished));
+        }
+
+        if (visibilityBtn) {
+            visibilityBtn.textContent = visible ? '隐藏计时器' : '显示计时器';
+            visibilityBtn.disabled = !ready;
+        }
+
+        if (resetBtn) {
+            resetBtn.disabled = !ready || !visible;
+        }
+
+        if (cycleBtn) {
+            cycleBtn.disabled = !ready || !visible || running;
+            cycleBtn.textContent = ready && timer.durationMinutes ? '时长 ' + timer.durationMinutes + '分钟' : '切换时长';
+        }
+
+        if (startBtn) {
+            startBtn.textContent = running ? '暂停' : '开始';
+            startBtn.disabled = !ready || !visible || remaining <= 0;
         }
 
     }
@@ -822,6 +884,39 @@
 
             });
 
+        }
+
+        var timerVisibilityBtn = $('#btn-timer-visibility');
+        var timerResetBtn = $('#btn-timer-reset');
+        var timerCycleBtn = $('#btn-timer-cycle');
+        var timerStartBtn = $('#btn-timer-start');
+
+        if (timerVisibilityBtn) {
+            timerVisibilityBtn.addEventListener('click', function () {
+                var timer = currentInteraction && currentInteraction.timer ? currentInteraction.timer : null;
+                var visible = !!(timer && timer.visible);
+                sendCmd(visible ? 'timer_hide' : 'timer_show');
+            });
+        }
+
+        if (timerResetBtn) {
+            timerResetBtn.addEventListener('click', function () {
+                sendCmd('timer_reset');
+            });
+        }
+
+        if (timerCycleBtn) {
+            timerCycleBtn.addEventListener('click', function () {
+                sendCmd('timer_cycle');
+            });
+        }
+
+        if (timerStartBtn) {
+            timerStartBtn.addEventListener('click', function () {
+                var timer = currentInteraction && currentInteraction.timer ? currentInteraction.timer : null;
+                var running = !!(timer && timer.running);
+                sendCmd(running ? 'timer_pause' : 'timer_start');
+            });
         }
 
 
