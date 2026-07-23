@@ -935,8 +935,8 @@ html.ss-deck-light .reveal .slide-ss-message-board h2 {
 }
 
 html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
-    margin: 0 0 1em;
-    font-size: calc(var(--ss-body-size) * 1.05);
+    margin: 0 0 0.6em;
+    font-size: calc(var(--ss-body-size) * 1);
     color: var(--ss-gray-500);
     font-weight: 400;
     line-height: 1.5;
@@ -945,12 +945,12 @@ html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
 .ss-mb-container {
     display: flex;
     flex-direction: column;
-    gap: 1.2em;
+    gap: 0.8em;
     flex: 1;
     min-height: 0;
     width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .ss-mb-left {
@@ -967,30 +967,39 @@ html.ss-deck-light .reveal .slide-ss-message-board .ss-mb-subtitle {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 0.5em;
+    gap: 0.4em;
     width: auto;
-    padding: 0.7em 1.6em;
+    padding: 0.55em 1.3em;
     border-radius: 999px;
     text-decoration: none;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white !important;
-    box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+    box-shadow:
+        0 6px 18px rgba(102, 126, 234, 0.45),
+        0 2px 6px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
     cursor: pointer;
     text-align: center;
-    font-size: calc(var(--ss-body-size) * 0.95);
+    font-size: calc(var(--ss-body-size) * 0.85);
 }
 
 .ss-mb-post-btn:hover {
     transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.55);
+    box-shadow:
+        0 10px 28px rgba(102, 126, 234, 0.55),
+        0 4px 10px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
     color: white !important;
     opacity: 0.95;
 }
 
 .ss-mb-post-btn:active {
     transform: translateY(0) scale(0.98);
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    box-shadow:
+        0 3px 10px rgba(102, 126, 234, 0.35),
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .ss-mb-post-btn__icon {
